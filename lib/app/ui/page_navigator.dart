@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
 import 'package:skkumap/app/ui/bus_data_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 class PageNavigator extends StatefulWidget {
   const PageNavigator({Key? key}) : super(key: key);
@@ -24,6 +27,14 @@ class _PageNavigatorState extends State<PageNavigator> {
     setState(() {
       _selectedIndex = index;
     });
+
+    FirebaseAnalytics.instance.logEvent(
+      name: 'select_content',
+      parameters: <String, dynamic>{
+        'content_type': 'screen',
+        'item_id': 'screen_$index',
+      },
+    );
   }
 
   @override

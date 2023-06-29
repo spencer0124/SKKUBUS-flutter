@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "860907914636",
-    "project_id": "skkubus",
-    "storage_bucket": "skkubus.appspot.com"
+    "project_number": "1088195043891",
+    "project_id": "skku-bus",
+    "storage_bucket": "skku-bus.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:860907914636:android:2a0f9672e4293e8d4d02a9",
+        "mobilesdk_app_id": "1:1088195043891:android:29a8c679e41276deb5b946",
         "android_client_info": {
           "package_name": "com.example.skkumap"
         }
       },
       "oauth_client": [
         {
-          "client_id": "860907914636-2fsn1vg2rccq93oh7orvvf9ssoclm2cd.apps.googleusercontent.com",
+          "client_id": "1088195043891-ugj6dhdch3q7ahtk7m5vv0ma1940nhqs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBKFyNIH-FwnSd00x9lP-xgXW8qWU22fg"
+          "current_key": "AIzaSyB8OOH_K4zTAQsFWcEZGAg9KXKrbvs-Lbs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "860907914636-2fsn1vg2rccq93oh7orvvf9ssoclm2cd.apps.googleusercontent.com",
+              "client_id": "1088195043891-ugj6dhdch3q7ahtk7m5vv0ma1940nhqs.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "860907914636-g15lg4vv4aar4igd1cksd6v13ffbm1j6.apps.googleusercontent.com",
+              "client_id": "1088195043891-comffciue47fvb02usvtrkqpki34cf5n.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.skkumap"

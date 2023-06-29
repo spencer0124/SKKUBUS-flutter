@@ -18,20 +18,32 @@ import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:skkumap/app/controller/bus_data_detail_controller.dart';
 import 'package:skkumap/app/data/provider/bus_data_detail_provider.dart';
 import 'package:skkumap/app/data/repository/bus_data_detail_repository.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:ui';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  await Firebase.initializeApp(
+      name: "skku-bus", options: DefaultFirebaseOptions.currentPlatform);
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   MobileAds.instance.initialize();
 
