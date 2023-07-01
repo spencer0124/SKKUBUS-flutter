@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1088195043891:android:29a8c679e41276deb5b946",
         "android_client_info": {
-          "package_name": "com.example.skkumap"
+          "package_name": "com.zoyoong.skkubus"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "1088195043891-comffciue47fvb02usvtrkqpki34cf5n.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.skkumap"
+                "bundle_id": "com.zoyoong.skkubus"
               }
             }
           ]
