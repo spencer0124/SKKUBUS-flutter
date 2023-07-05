@@ -1,13 +1,15 @@
 class BusDetail {
   final String season;
-  final String station;
+  final String stationTypeA;
+  final String stationTypeB;
   final Fee fee;
   final Time time;
   final String extra;
 
   BusDetail({
     this.season = "",
-    this.station = "",
+    this.stationTypeA = "",
+    this.stationTypeB = "",
     this.fee =
         const Fee(amount: 0, paymentMethods: [], nonAcceptablePayments: []),
     this.time = const Time(
@@ -21,7 +23,8 @@ class BusDetail {
   factory BusDetail.fromJson(Map<String, dynamic> json) {
     return BusDetail(
       season: json['season'],
-      station: json['station'],
+      stationTypeA: json['stationTypeA'],
+      stationTypeB: json['stationTypeB'],
       fee: Fee.fromJson(json['fee']),
       time: Time.fromJson(json['time']),
       extra: json['extra'],

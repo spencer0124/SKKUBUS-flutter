@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+final controller = Get.find<BusDetailController>();
+
 Map<String, String> UNIT_ID = kReleaseMode
     ? {
         'ios': dotenv.env['AdmobTestIos']!,
@@ -27,7 +29,9 @@ class BusDataScreenDetail extends StatelessWidget {
 
     BannerAd banner = BannerAd(
       listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {},
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          controller.adLoad.value = false;
+        },
         onAdLoaded: (_) {},
       ),
       size: AdSize.banner,
@@ -35,7 +39,6 @@ class BusDataScreenDetail extends StatelessWidget {
       request: const AdRequest(),
     )..load();
 
-    final controller = Get.find<BusDetailController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -48,18 +51,32 @@ class BusDataScreenDetail extends StatelessWidget {
       ),
       body: Column(
         children: [
-          TextButton(
-            onPressed: () => throw Exception(),
-            child: const Text("Throw Test Exception"),
-          ),
-          Container(
-            width: double.infinity,
-            height: 61,
-            alignment: Alignment.center,
-            child: AdWidget(
-              ad: banner,
-            ),
-          ),
+          // TextButton(
+          //   onPressed: () => throw Exception(),
+          //   child: const Text("Throw Test Exception"),
+          // ),
+          controller.adLoad.value
+              ? Container(
+                  width: double.infinity,
+                  height: 61,
+                  alignment: Alignment.center,
+                  child: AdWidget(
+                    ad: banner,
+                  ),
+                )
+              : Container(
+                  padding: const EdgeInsets.fromLTRB(0, 14, 0, 0),
+                  width: double.infinity,
+                  height: 61,
+                  alignment: Alignment.topCenter,
+                  color: AppColors.green_main,
+                  child: const Text('운행 정보',
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.white,
+                        fontFamily: 'NotoSansBold',
+                      )),
+                ),
           Flexible(
             child: Scrollbar(
               child: Obx(() {
@@ -94,15 +111,61 @@ class BusDataScreenDetail extends StatelessWidget {
                           ),
                           Row(
                             children: const [
-                              Icon(
-                                Icons.location_on,
-                                color: AppColors.green_main,
-                              ),
+                              // Icon(
+                              //   Icons.location_on,
+                              //   color: AppColors.green_main,
+                              // ),
                               SizedBox(
-                                width: 7,
+                                width: 5,
                               ),
                               Text(
-                                '정류장',
+                                '[혜화역 → 학교]',
+                                style: TextStyle(
+                                  color: AppColors.green_main,
+                                  fontFamily: 'NotoSansBold',
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
+                            child: Text(
+                              busInfo.stationTypeA,
+                              style: TextStyle(
+                                  color: Colors.grey[900],
+                                  fontFamily: 'NotoSansRegular',
+                                  fontSize: 13),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                            child: Divider(
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                          Row(
+                            children: const [
+                              // Icon(
+                              //   Icons.location_on,
+                              //   color: AppColors.green_main,
+                              // ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                '[학교 → 혜화역]',
                                 style: TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
@@ -117,7 +180,7 @@ class BusDataScreenDetail extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Text(
-                              busInfo.station,
+                              busInfo.stationTypeB,
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontFamily: 'NotoSansRegular',
@@ -140,12 +203,12 @@ class BusDataScreenDetail extends StatelessWidget {
                         children: [
                           Row(
                             children: const [
-                              Icon(
-                                Icons.credit_card,
-                                color: AppColors.green_main,
-                              ),
+                              // Icon(
+                              //   Icons.credit_card,
+                              //   color: AppColors.green_main,
+                              // ),
                               SizedBox(
-                                width: 7,
+                                width: 5,
                               ),
                               Text(
                                 '요금 및 결제수단',
@@ -187,12 +250,12 @@ class BusDataScreenDetail extends StatelessWidget {
                         children: [
                           Row(
                             children: const [
-                              Icon(
-                                Icons.timelapse_rounded,
-                                color: AppColors.green_main,
-                              ),
+                              // Icon(
+                              //   Icons.timelapse_rounded,
+                              //   color: AppColors.green_main,
+                              // ),
                               SizedBox(
-                                width: 7,
+                                width: 5,
                               ),
                               Text(
                                 '운행시간',
@@ -234,16 +297,16 @@ class BusDataScreenDetail extends StatelessWidget {
                         children: [
                           Row(
                             children: const [
-                              Icon(
-                                Icons.call,
-                                color: AppColors.green_main,
-                                size: 20,
-                              ),
+                              // Icon(
+                              //   Icons.call,
+                              //   color: AppColors.green_main,
+                              //   size: 20,
+                              // ),
                               SizedBox(
-                                width: 7,
+                                width: 5,
                               ),
                               Text(
-                                '연락처',
+                                '연락처 (클릭시 전화연결)',
                                 style: TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
@@ -281,8 +344,8 @@ class BusDataScreenDetail extends StatelessWidget {
                                         }
                                       },
                                       child: Row(
-                                        children: [
-                                          const Text(
+                                        children: const [
+                                          Text(
                                             '02-760-1073',
                                             style: TextStyle(
                                                 color: AppColors.green_main,
@@ -290,14 +353,14 @@ class BusDataScreenDetail extends StatelessWidget {
                                                 fontSize: 13),
                                             textAlign: TextAlign.start,
                                           ),
-                                          Text(
-                                            ' (클릭시 전화연결)',
-                                            style: TextStyle(
-                                                color: Colors.grey[900],
-                                                fontFamily: 'NotoSansRegular',
-                                                fontSize: 13),
-                                            textAlign: TextAlign.start,
-                                          ),
+                                          // Text(
+                                          //   ' (클릭시 전화연결)',
+                                          //   style: TextStyle(
+                                          //       color: Colors.grey[900],
+                                          //       fontFamily: 'NotoSansRegular',
+                                          //       fontSize: 13),
+                                          //   textAlign: TextAlign.start,
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -332,8 +395,8 @@ class BusDataScreenDetail extends StatelessWidget {
                                         }
                                       },
                                       child: Row(
-                                        children: [
-                                          const Text(
+                                        children: const [
+                                          Text(
                                             '02-760-0110',
                                             style: TextStyle(
                                                 color: AppColors.green_main,
@@ -341,14 +404,14 @@ class BusDataScreenDetail extends StatelessWidget {
                                                 fontSize: 13),
                                             textAlign: TextAlign.start,
                                           ),
-                                          Text(
-                                            ' (클릭시 전화연결)',
-                                            style: TextStyle(
-                                                color: Colors.grey[900],
-                                                fontFamily: 'NotoSansRegular',
-                                                fontSize: 13),
-                                            textAlign: TextAlign.start,
-                                          ),
+                                          // Text(
+                                          //   ' (클릭시 전화연결)',
+                                          //   style: TextStyle(
+                                          //       color: Colors.grey[900],
+                                          //       fontFamily: 'NotoSansRegular',
+                                          //       fontSize: 13),
+                                          //   textAlign: TextAlign.start,
+                                          // ),
                                         ],
                                       ),
                                     ),

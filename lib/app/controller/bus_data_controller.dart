@@ -7,13 +7,41 @@ import 'dart:async';
 class BusDataController extends GetxController {
   final BusDataRepository repository;
   final currentTime = ''.obs;
+
   final activeBusCount = 0.obs;
+  var adLoad = true.obs;
   var busDataList = <BusData>[].obs;
   var refreshTime = 15.obs;
+
+  final stations = [
+    '정차소(인문.농구장)',
+    '학생회관(인문)',
+    '정문(인문-하교)',
+    '혜화로터리(하차지점)',
+    '혜화역U턴지점',
+    '혜화역(승차장)',
+    '혜화로터리(경유)',
+    '맥도날드 건너편',
+    '정문(인문-등교)',
+    '600주년 기념관'
+  ];
 
   Timer? updateTimer;
 
   BusDataController({required this.repository});
+
+  String getStationMessage(int index) {
+    var currentStation = busDataList[index].stationName;
+    var currentIndex = stations.indexOf(currentStation);
+
+    for (var i = currentIndex - 1; i >= 0; i--) {
+      if (busDataList[i].carNumber.isNotEmpty) {
+        return '${currentIndex - i}개 정거장 남음';
+      }
+    }
+
+    return '도착 정보 없음';
+  }
 
   String timeDifference(String eventDate) {
     DateFormat format = DateFormat('yyyy-MM-dd HH:mm:ss');
@@ -31,11 +59,9 @@ class BusDataController extends GetxController {
 
     if (duration.inSeconds < 10) {
       return '도착 혹은 출발';
-    }
-    // else if (duration.inDays > 1) {
-    //   return '하루 이상 전 도착!';
-    // }
-    else {
+    } else if (duration.inDays > 1) {
+      return '하루 이상 전 정류장 떠남';
+    } else {
       return '${duration.inMinutes}분 ${duration.inSeconds % 60}초 전 정류장 떠남';
     }
   }
@@ -43,6 +69,7 @@ class BusDataController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    refreshData();
     fetchBusData();
     startUpdateTimer();
   }

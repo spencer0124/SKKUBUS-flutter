@@ -254,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  flutter_native_splash:
+    dependency: "direct main"
+    description:
+      name: flutter_native_splash
+      sha256: "6d686a39e5bd5d4f246924fd76c6ca9eabaa75095efb35898cfc07dcb8ce9379"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
   flutter_phone_direct_caller:
     dependency: "direct main"
     description:
