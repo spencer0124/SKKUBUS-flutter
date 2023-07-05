@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-5619947536545679~2937646499</string>
+	<string>ca-app-pub-5619947536545679~7068085893</string>
 	<key>LSApplicationQueriesSchemes</key>
   <array>
     <string>https</string>
@@ -11,6 +11,8 @@
 	<string>sms</string>
   	<string>tel</string>
   </array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
   	<key>NSLocationWhenInUseUsageDescription</key>
     <string>캠퍼스, 정류장 위치 확인 및 경로 안내를 위해 위치 권한이 필요합니다</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -20,7 +22,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.example.skkumap</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

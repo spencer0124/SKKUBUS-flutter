@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>937317772707-20efkavl2hlfnugjjgv60smlab8gigeg.apps.googleusercontent.com</string>
+	<string>1043119106953-p31il7fepiu2a48g1be9e6fn5aa12cv8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.937317772707-20efkavl2hlfnugjjgv60smlab8gigeg</string>
+	<string>com.googleusercontent.apps.1043119106953-p31il7fepiu2a48g1be9e6fn5aa12cv8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBX4V0oAVCQ6_K67BLm_faLuU16om-E8f8</string>
+	<string>AIzaSyC7Qv6HgqGUVkjeKDPHNISMxi15AeGZEqE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>937317772707</string>
+	<string>1043119106953</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.skkumap</string>
 	<key>PROJECT_ID</key>
-	<string>skkupass</string>
+	<string>skkubus-95723</string>
 	<key>STORAGE_BUCKET</key>
-	<string>skkupass.appspot.com</string>
+	<string>skkubus-95723.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:937317772707:ios:28462517f706f3d34b7e16</string>
+	<string>1:1043119106953:ios:fbf7bb97c08cbc959b0f58</string>
 </dict>
 </plist>
