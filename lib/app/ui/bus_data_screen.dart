@@ -20,6 +20,27 @@ Map<String, String> UNIT_ID = kReleaseMode
         'android': dotenv.env['AdmobAnd']!,
       };
 
+class ArrowShape extends CustomPainter {
+  final Paint _paint = Paint()
+    ..color = AppColors.green_main; // Set your color here
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path();
+    path.lineTo(size.width - 5, 0);
+    path.lineTo(size.width, size.height / 2);
+    path.lineTo(size.width - 5, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+
+    // Fill the shape with color
+    canvas.drawPath(path, _paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
 final double dheight =
     MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
 final double dwidth =
@@ -121,8 +142,8 @@ class BusDataScreen extends GetView<BusDataController> {
                                 Stack(
                                   children: [
                                     Positioned(
-                                      left: dwidth *
-                                          0.137, // Positioned to match the center of the icon
+                                      // 세로 초록선
+                                      left: dwidth * 0.2834,
                                       top: 0,
                                       bottom: 0,
                                       child: Container(
@@ -131,17 +152,57 @@ class BusDataScreen extends GetView<BusDataController> {
                                             .green_main, // Change color as you need
                                       ),
                                     ),
+                                    Positioned(
+                                        // 번호판
+                                        left: dwidth * 0.07,
+                                        top: 26,
+                                        child: Stack(
+                                          children: [
+                                            controller.busDataList[index]
+                                                    .carNumber.isNotEmpty
+                                                ? CustomPaint(
+                                                    size:
+                                                        Size(dwidth * 0.16, 18),
+                                                    painter: ArrowShape(),
+                                                  )
+                                                : Container(
+                                                    width: 0.0001,
+                                                    height: 0.0001,
+                                                    color: Colors.white,
+                                                  ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      5, 0, 0, 0),
+                                              child: Text(
+                                                controller.busDataList[index]
+                                                    .carNumber,
+                                                style: const TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.white,
+                                                  fontFamily: 'NotoSansBold',
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
                                     Container(
                                       padding: EdgeInsets.fromLTRB(
-                                          dwidth * 0.055, 0, 0, 0),
+                                          // 세로선 빼고 나머지 시작점 패딩
+                                          dwidth * 0.2,
+                                          0,
+                                          0,
+                                          0),
                                       child: ListTile(
                                         leading: Container(
-                                          width:
-                                              40, // Choose a fixed width that suits your design
+                                          width: 40, // 글자 시작 선
                                           alignment: Alignment.centerLeft,
                                           child: controller.busDataList[index]
                                                   .carNumber.isNotEmpty
                                               ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Stack(
                                                       alignment:
@@ -237,7 +298,10 @@ class BusDataScreen extends GetView<BusDataController> {
                                         subtitle: controller.busDataList[index]
                                                 .carNumber.isNotEmpty
                                             ? Text(
-                                                '${controller.busDataList[index].carNumber} | ${controller.timeDifference(controller.busDataList[index].eventDate)}',
+                                                controller.timeDifference(
+                                                    controller
+                                                        .busDataList[index]
+                                                        .eventDate),
                                                 style: const TextStyle(
                                                   fontSize: 11,
                                                   color: Colors.black,

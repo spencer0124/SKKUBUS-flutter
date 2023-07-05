@@ -48,10 +48,10 @@ class BusDataScreenDetail extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // TextButton(
-          //   onPressed: () => throw Exception(),
-          //   child: const Text("Throw Test Exception"),
-          // ),
+          TextButton(
+            onPressed: () => throw Exception(),
+            child: const Text("Throw Test Exception"),
+          ),
           Container(
             width: double.infinity,
             height: 61,

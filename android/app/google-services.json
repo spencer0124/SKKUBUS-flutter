@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "1088195043891",
-    "project_id": "skku-bus",
-    "storage_bucket": "skku-bus.appspot.com"
+    "project_number": "1043119106953",
+    "project_id": "skkubus-95723",
+    "storage_bucket": "skkubus-95723.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1088195043891:android:29a8c679e41276deb5b946",
+        "mobilesdk_app_id": "1:1043119106953:android:e6e94beab4ffcdc89b0f58",
         "android_client_info": {
           "package_name": "com.zoyoong.skkubus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1088195043891-ugj6dhdch3q7ahtk7m5vv0ma1940nhqs.apps.googleusercontent.com",
+          "client_id": "1043119106953-sovec4i9osa07a4tbusgq2ugcnno9or8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB8OOH_K4zTAQsFWcEZGAg9KXKrbvs-Lbs"
+          "current_key": "AIzaSyB1RFhhMuQa13Vp23-GUorhzXfeWVvHXeI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1088195043891-ugj6dhdch3q7ahtk7m5vv0ma1940nhqs.apps.googleusercontent.com",
+              "client_id": "1043119106953-sovec4i9osa07a4tbusgq2ugcnno9or8.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1088195043891-comffciue47fvb02usvtrkqpki34cf5n.apps.googleusercontent.com",
+              "client_id": "1043119106953-p31il7fepiu2a48g1be9e6fn5aa12cv8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.zoyoong.skkubus"
+                "bundle_id": "com.example.skkumap"
               }
             }
           ]

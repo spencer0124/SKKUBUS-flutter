@@ -25,16 +25,18 @@ class BusDataController extends GetxController {
       return "Invalid Date";
     }
 
+    // print('Now: ${DateTime.now()}');
+    // print('Event date: $eventDateTime');
     final duration = DateTime.now().difference(eventDateTime);
 
     if (duration.inSeconds < 10) {
-      return '방금 전 도착';
-    } else if (duration.inSeconds < 20) {
       return '도착 혹은 출발';
-    } else if (duration.inMinutes > 1440) {
-      return '하루 이상 전 도착';
-    } else {
-      return '정류장 떠남 (${duration.inMinutes}분 ${duration.inSeconds % 60}초 전)';
+    }
+    // else if (duration.inDays > 1) {
+    //   return '하루 이상 전 도착!';
+    // }
+    else {
+      return '${duration.inMinutes}분 ${duration.inSeconds % 60}초 전 정류장 떠남';
     }
   }
 
