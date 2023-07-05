@@ -59,14 +59,14 @@ class _PageNavigatorState extends State<PageNavigator> {
               icon: Icon(CupertinoIcons.bus),
               label: '셔틀버스',
             ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(CupertinoIcons.bus),
+            //   label: '인자셔틀',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.info_circle),
               label: '운행정보',
             ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(CupertinoIcons.ellipsis),
-            //   label: '설정',
-            // ),
           ],
           currentIndex: _selectedIndex,
           // showSelectedLabels: false,

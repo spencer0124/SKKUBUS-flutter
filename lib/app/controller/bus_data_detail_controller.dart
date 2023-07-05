@@ -6,6 +6,7 @@ class BusDetailController extends GetxController {
   final BusDetailRepository repository;
   var busDetail = BusDetail().obs;
   var phoneNumber = '027601073'.obs;
+  var adLoad = true.obs;
 
   void setPhoneNumber(String number) {
     phoneNumber.value = number;
