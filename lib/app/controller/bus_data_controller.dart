@@ -30,6 +30,17 @@ class BusDataController extends GetxController {
 
   BusDataController({required this.repository});
 
+  String getNextStation(String currentStation) {
+    int currentIndex = stations.indexOf(currentStation);
+    if (currentIndex != -1 && currentIndex < stations.length - 1) {
+      return stations[currentIndex + 1]; // Returns the next station
+    } else if (currentIndex == stations.length - 1) {
+      return stations[0]; // If it's the last station, return the first one
+    } else {
+      return 'null'; // If the currentStation is not found in the list
+    }
+  }
+
   String getStationMessage(int index) {
     var currentStation = busDataList[index].stationName;
     var currentIndex = stations.indexOf(currentStation);
@@ -66,10 +77,26 @@ class BusDataController extends GetxController {
     }
   }
 
+  String timeDifference2(String eventDate) {
+    DateFormat format = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime eventDateTime;
+    try {
+      eventDateTime = format.parse(eventDate);
+    } catch (e) {
+      print("Error parsing date: $e");
+      return "Invalid Date";
+    }
+
+    // print('Now: ${DateTime.now()}');
+    // print('Event date: $eventDateTime');
+    final duration = DateTime.now().difference(eventDateTime);
+
+    return '${duration.inMinutes}분 ${duration.inSeconds % 60}초';
+  }
+
   @override
   void onInit() {
     super.onInit();
-    refreshData();
     fetchBusData();
     startUpdateTimer();
   }
