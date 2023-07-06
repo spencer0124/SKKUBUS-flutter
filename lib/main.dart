@@ -199,8 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 1,
                                 ),
                               ),
-                              child: Row(
-                                children: const [
+                              child: const Row(
+                                children: [
                                   Icon(
                                     Icons.info_outline,
                                     color: Colors.white,
@@ -232,8 +232,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 1,
                                 ),
                               ),
-                              child: Row(
-                                children: const [
+                              child: const Row(
+                                children: [
                                   Icon(
                                     Icons.language,
                                     color: Colors.white,
@@ -650,16 +650,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -708,16 +708,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -766,16 +766,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -824,16 +824,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -882,16 +882,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -940,16 +940,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -998,16 +998,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -1056,16 +1056,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -1114,16 +1114,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),
@@ -1172,16 +1172,16 @@ class _Screen4State extends State<Screen4> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 90,
                             ),

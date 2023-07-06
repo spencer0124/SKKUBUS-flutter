@@ -7,6 +7,7 @@ import 'package:skkumap/app/ui/bus_data_screen_animation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
+import 'dart:math' as math;
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -55,9 +56,9 @@ class ArrowShape extends CustomPainter {
 }
 
 final double dheight =
-    MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
+    MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
-    MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
+    MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
 class BusDataScreen extends GetView<BusDataController> {
   const BusDataScreen({super.key});
@@ -159,7 +160,20 @@ class BusDataScreen extends GetView<BusDataController> {
               Obx(
                 () {
                   if (controller.busDataList.isEmpty) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: dheight * 0.32,
+                          ),
+                          const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.green_main),
+                          ),
+                        ],
+                      ),
+                    ));
                   } else {
                     return Expanded(
                       child: Scrollbar(
@@ -415,20 +429,40 @@ class BusDataScreen extends GetView<BusDataController> {
             height: 50,
             width: 50,
             child: FittedBox(
-              child: FloatingActionButton(
-                onPressed: () async {
-                  List activeBuses = controller.busDataList
-                      .where((bus) => bus.carNumber.isNotEmpty)
-                      .toList();
-                  String activeBusDetails = activeBuses.map((bus) {
-                    return '- ${bus.stationName}, ${controller.timeDifference(bus.eventDate)}';
-                  }).join('\n');
+              child: Transform.rotate(
+                angle: -3 *
+                    math.pi /
+                    4, // Rotate the widget 135 degrees counter-clockwise
+                child: Material(
+                  elevation: 3.0,
+                  shadowColor: Colors.black,
+                  color: Colors.transparent,
+                  shape: const CircleBorder(),
+                  child: Transform.rotate(
+                    angle: 3 *
+                        math.pi /
+                        4, // Rotate the button 135 degrees clockwise to counter the rotation above
+                    child: FloatingActionButton(
+                      onPressed: () async {
+                        List activeBuses = controller.busDataList
+                            .where((bus) => bus.carNumber.isNotEmpty)
+                            .toList();
+                        String activeBusDetails = activeBuses.map((bus) {
+                          String nextStation = Get.find<BusDataController>()
+                              .getNextStation(bus.stationName);
+                          return '${bus.stationName} → $nextStation\n${controller.timeDifference2(bus.eventDate)} 전 출발\n';
+                        }).join('\n');
 
-                  await Share.share(
-                      '[${controller.currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n$activeBusDetails\n\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nhttp://skkubus.kro.kr');
-                },
-                child: const Icon(Icons.share), // Replace with your own icon
-                backgroundColor: Colors.blueGrey[700],
+                        await Share.share(
+                            '인사캠 셔틀버스 실시간 위치\n[${controller.currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nhttp://skkubus.kro.kr');
+                      },
+
+                      child:
+                          const Icon(Icons.share), // Replace with your own icon
+                      backgroundColor: Colors.blueGrey[700],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -439,34 +473,49 @@ class BusDataScreen extends GetView<BusDataController> {
             height: 50,
             width: 50,
             child: FittedBox(
-              child: FloatingActionButton(
-                onPressed: () {
-                  controller.refreshData();
-                },
-                backgroundColor: Colors.blueGrey[700],
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Transform.translate(
-                      offset: const Offset(0,
-                          4.2), // 5 is the number of logical pixels to move the image down
-                      child: Image.asset(
-                        'lib/assets/icon/refresh.png',
-                        width: 48,
-                        height: 48,
+              child: Transform.rotate(
+                angle: 3 *
+                    math.pi /
+                    4, // Rotate the widget 45 degrees counter-clockwise
+                child: Material(
+                  elevation: 3.0,
+                  shadowColor: Colors.black,
+                  color: Colors.transparent,
+                  shape: const CircleBorder(),
+                  child: Transform.rotate(
+                    angle: -3 *
+                        math.pi /
+                        4, // Rotate the button 45 degrees clockwise to counter the rotation above
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        controller.refreshData();
+                      },
+                      backgroundColor: Colors.blueGrey[700],
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Transform.translate(
+                            offset: const Offset(0, 4.2),
+                            child: Image.asset(
+                              'lib/assets/icon/refresh.png',
+                              width: 48,
+                              height: 48,
+                            ),
+                          ),
+                          Obx(
+                            () => Text(
+                              '${controller.refreshTime.value}',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                color: Colors.white,
+                                fontFamily: 'NotoSansBlack',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ), // This is your refresh icon
-                    Obx(
-                      () => Text(
-                        '${controller.refreshTime.value}',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.white,
-                          fontFamily: 'NotoSansBlack',
-                        ),
-                      ),
-                    ), // This is your refresh time
-                  ],
+                    ),
+                  ),
                 ),
               ),
             ),

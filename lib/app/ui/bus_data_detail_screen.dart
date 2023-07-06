@@ -109,8 +109,8 @@ class BusDataScreenDetail extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               // Icon(
                               //   Icons.location_on,
                               //   color: AppColors.green_main,
@@ -155,8 +155,8 @@ class BusDataScreenDetail extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               // Icon(
                               //   Icons.location_on,
                               //   color: AppColors.green_main,
@@ -201,8 +201,8 @@ class BusDataScreenDetail extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                       child: Column(
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               // Icon(
                               //   Icons.credit_card,
                               //   color: AppColors.green_main,
@@ -248,8 +248,8 @@ class BusDataScreenDetail extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                       child: Column(
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               // Icon(
                               //   Icons.timelapse_rounded,
                               //   color: AppColors.green_main,
@@ -295,8 +295,8 @@ class BusDataScreenDetail extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                       child: Column(
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               // Icon(
                               //   Icons.call,
                               //   color: AppColors.green_main,
@@ -326,7 +326,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      '학생지원팀: ',
+                                      '학생지원팀  ',
                                       style: TextStyle(
                                           color: Colors.grey[900],
                                           fontFamily: 'NotoSansRegular',
@@ -343,8 +343,8 @@ class BusDataScreenDetail extends StatelessWidget {
                                               "Failed to make a call due to ${e.toString()}");
                                         }
                                       },
-                                      child: Row(
-                                        children: const [
+                                      child: const Row(
+                                        children: [
                                           Text(
                                             '02-760-1073',
                                             style: TextStyle(
@@ -377,7 +377,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      '인사캠 관리팀: ',
+                                      '인사캠 관리팀  ',
                                       style: TextStyle(
                                           color: Colors.grey[900],
                                           fontFamily: 'NotoSansRegular',
@@ -394,8 +394,8 @@ class BusDataScreenDetail extends StatelessWidget {
                                               "Failed to make a call due to ${e.toString()}");
                                         }
                                       },
-                                      child: Row(
-                                        children: const [
+                                      child: const Row(
+                                        children: [
                                           Text(
                                             '02-760-0110',
                                             style: TextStyle(

@@ -56,7 +56,10 @@ class _PageNavigatorState extends State<PageNavigator> {
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.bus),
+              icon: Padding(
+                padding: EdgeInsets.all(2.6),
+                child: Icon(CupertinoIcons.bus),
+              ),
               label: '셔틀버스',
             ),
             // BottomNavigationBarItem(
@@ -64,7 +67,10 @@ class _PageNavigatorState extends State<PageNavigator> {
             //   label: '인자셔틀',
             // ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.info_circle),
+              icon: Padding(
+                padding: EdgeInsets.all(2.6),
+                child: Icon(CupertinoIcons.info_circle),
+              ),
               label: '운행정보',
             ),
           ],
