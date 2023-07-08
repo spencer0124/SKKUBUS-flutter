@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:skkumap/app/data/model/bus_data_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-var baseUrl = Uri.parse(dotenv.env['KingoBusApi']!);
+// var baseUrl = Uri.parse(dotenv.env['KingoBusApi']!);
 
-// var baseUrl = Uri.parse(dotenv.env['KingoBusApiTest']!);
+var baseUrl = Uri.parse(dotenv.env['KingoBusApiTest']!);
 
 class BusDataProvider {
   List<BusData> _cachedData = []; // Cache to store data

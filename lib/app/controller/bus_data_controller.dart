@@ -8,8 +8,9 @@ class BusDataController extends GetxController {
   final BusDataRepository repository;
   final currentTime = ''.obs;
 
-  final activeBusCount = 0.obs;
-  var adLoad = true.obs;
+  // final activeBusCount = 0.obs;
+  final activeBusCount = Rx<int?>(null);
+  var adLoad = false.obs;
   var busDataList = <BusData>[].obs;
   var refreshTime = 15.obs;
 
@@ -94,9 +95,27 @@ class BusDataController extends GetxController {
     return '${duration.inMinutes}분 ${duration.inSeconds % 60}초';
   }
 
+  int timeDifference3(String eventDate) {
+    DateFormat format = DateFormat('yyyy-MM-dd HH:mm:ss');
+    DateTime eventDateTime;
+    try {
+      eventDateTime = format.parse(eventDate);
+    } catch (e) {
+      print("Error parsing date: $e");
+      return 0;
+    }
+
+    // print('Now: ${DateTime.now()}');
+    // print('Event date: $eventDateTime');
+    final duration = DateTime.now().difference(eventDateTime);
+
+    return duration.inSeconds;
+  }
+
   @override
   void onInit() {
     super.onInit();
+    updateTime();
     fetchBusData();
     startUpdateTimer();
   }
