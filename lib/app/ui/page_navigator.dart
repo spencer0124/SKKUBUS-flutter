@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
 import 'package:skkumap/app/ui/bus_data_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
@@ -41,7 +40,7 @@ class _PageNavigatorState extends State<PageNavigator> {
   Widget build(BuildContext context) {
     final List<Widget> widgetOptions = <Widget>[
       const BusDataScreen(),
-      const BusDataScreenDetail(),
+      // const BusDataScreenDetail(),
       // const BusSettingScreen(),
     ];
 
