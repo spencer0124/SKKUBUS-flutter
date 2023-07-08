@@ -4,13 +4,12 @@ import 'package:skkumap/app/ui/bus_data_screen.dart';
 import 'package:skkumap/app/ui/bus_schedule_screen.dart';
 import 'package:skkumap/app/ui/bus_setting_screen.dart';
 import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
-import 'package:skkumap/app/ui/page_navigator.dart';
 
 class AppRoutes {
   static final routes = [
     GetPage(
       name: '/',
-      page: () => const PageNavigator(), // Your Home page or initial page
+      page: () => const BusDataScreen(), // Your Home page or initial page
     ),
     GetPage(
         name: '/busData',

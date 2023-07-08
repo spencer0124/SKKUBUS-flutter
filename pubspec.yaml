@@ -56,6 +56,8 @@ dependencies:
   firebase_analytics: ^10.4.3
   change_app_package_name: ^1.1.0
   flutter_native_splash: ^2.2.8
+  colorful_safe_area: ^1.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -85,6 +87,7 @@ flutter:
   assets:
     - assets/bigdownlogo.png
     - assets/buslogo.png
+    - assets/passlogo.png
     - lib/assets/icon/refresh.png
     - .env # path to your .env file
 
