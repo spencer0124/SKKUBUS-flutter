@@ -47,6 +47,7 @@ Future<void> main() async {
   Get.put(BusDataProvider());
   Get.put(BusDataRepository(dataProvider: Get.find()));
   Get.put(BusDataController(repository: Get.find()));
+  Get.put(LifeCycleGetx());
 
   // Register BusDetail dependencies
   Get.put(BusDetailDataProvider());

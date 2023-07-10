@@ -4,6 +4,47 @@ import 'package:skkumap/app/data/model/bus_data_model.dart';
 import 'package:skkumap/app/data/repository/bus_data_repository.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
+import 'package:logger/logger.dart';
+
+class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
+  BusDataController busDataController = Get.find<BusDataController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      busDataController.refreshData();
+      // Get.dialog(
+      //   AlertDialog(
+      //     title: const Text('Welcome back!'),
+      //     content: const Text('The app is resumed.'),
+      //     actions: <Widget>[
+      //       TextButton(
+      //         child: const Text('OK'),
+      //         onPressed: () {
+      //           Get.back();
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // );
+    }
+  }
+}
+
 class BusDataController extends GetxController {
   final BusDataRepository repository;
   final currentTime = ''.obs;
@@ -26,6 +67,37 @@ class BusDataController extends GetxController {
     '정문(인문-등교)',
     '600주년 기념관'
   ];
+  var logger = Logger();
+
+  // Future<void> createDynamicLink() async {
+  //   String _yourDomain = "skkubus";
+  //   String _defaultLink = 'https://www.naver.com';
+
+  //   DynamicLinkParameters dynamicLinkParams = DynamicLinkParameters(
+  //     uriPrefix: "https://$_yourDomain.page.link",
+  //     link: Uri.parse("https://$_yourDomain.page.link/app"),
+  //     androidParameters: const AndroidParameters(
+  //       packageName: 'com.zoyoong.skkubus',
+  //       minimumVersion: 0,
+  //     ),
+  //     iosParameters: const IOSParameters(
+  //       bundleId: 'com.example.skkumap',
+  //       minimumVersion: '0',
+  //     ),
+  //     navigationInfoParameters: const NavigationInfoParameters(
+  //       forcedRedirectEnabled: true,
+  //     ),
+  //     longDynamicLink: Uri.parse(
+  //       'https://skkubus.page.link/?link=http%3a%2f%2fskkubus%2fmain&apn=com.zoyoong.skkubus[&amv=0][&afl=http%3a%2f%2fskkubus.kro.kr][&ofl=https%3A%2F%2Fwww.naver.com]',
+  //     ),
+  //   );
+
+  //   ShortDynamicLink dynamicLink =
+  //       await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
+
+  //   String url = dynamicLink.shortUrl.toString();
+  //   logger.e(url);
+  // }
 
   Timer? updateTimer;
 
@@ -69,7 +141,7 @@ class BusDataController extends GetxController {
     // print('Event date: $eventDateTime');
     final duration = DateTime.now().difference(eventDateTime);
 
-    if (duration.inSeconds < 10) {
+    if (duration.inSeconds < 15) {
       return '도착 혹은 출발';
     } else if (duration.inDays > 1) {
       return '하루 이상 전 정류장 떠남';
@@ -114,6 +186,7 @@ class BusDataController extends GetxController {
 
   @override
   void onInit() {
+    // createDynamicLink();
     super.onInit();
     updateTime();
     fetchBusData();

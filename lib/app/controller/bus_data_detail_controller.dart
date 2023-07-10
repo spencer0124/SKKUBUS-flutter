@@ -7,6 +7,7 @@ class BusDetailController extends GetxController {
   var busDetail = BusDetail().obs;
   var phoneNumber = '027601073'.obs;
   var adLoad = true.obs;
+  var isLoading = false.obs;
 
   void setPhoneNumber(String number) {
     phoneNumber.value = number;
@@ -17,6 +18,7 @@ class BusDetailController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     fetchBusDetail();
   }
 
@@ -24,8 +26,10 @@ class BusDetailController extends GetxController {
     try {
       var info = await repository.getBusDetail();
       busDetail.value = info;
+      isLoading.value = true;
     } catch (e) {
       print('Error fetching data: $e');
+      isLoading.value = false;
     }
   }
 }

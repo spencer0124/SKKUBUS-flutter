@@ -145,9 +145,9 @@ class BusDataScreen extends GetView<BusDataController> {
                 color: AppColors.green_main,
                 // color: Colors.red,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
@@ -179,7 +179,7 @@ class BusDataScreen extends GetView<BusDataController> {
                           ),
                           Row(
                             children: [
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -187,14 +187,20 @@ class BusDataScreen extends GetView<BusDataController> {
                                     width: 35,
                                     height: 35,
                                     child: InkWell(
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.info_outline,
                                         color: Colors.white,
+                                        size: 27,
                                       ),
-                                      // onTap: ,
+                                      onTap: () {
+                                        Get.toNamed('/busDetail');
+                                      },
                                     ),
                                   ),
                                 ],
+                              ),
+                              const SizedBox(
+                                width: 5,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,7 +231,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                         }).join('\n');
 
                                         await Share.share(
-                                            '인사캠 셔틀버스 실시간 위치\n[${controller.currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nhttp://skkubus.kro.kr');
+                                            '인사캠 셔틀버스 실시간 위치\n[${controller.currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nskkubus-app.kro.kr');
                                       },
                                     ),
                                   ),
@@ -259,40 +265,42 @@ class BusDataScreen extends GetView<BusDataController> {
                         Padding(
                           padding:
                               const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-                          child: Obx(() {
-                            if (controller.currentTime.value.isEmpty ||
-                                controller.activeBusCount.value == null) {
-                              return Shimmer.fromColors(
-                                baseColor: Colors.grey[100]!,
-                                highlightColor: Colors.white,
-                                child: Container(
-                                  width: 200,
-                                  height: 20,
-                                  color: Colors.grey,
-                                ),
-                              );
-                            } else {
-                              return Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 5,
+                          child: Obx(
+                            () {
+                              if (controller.currentTime.value.isEmpty ||
+                                  controller.activeBusCount.value == null) {
+                                return Shimmer.fromColors(
+                                  baseColor: Colors.grey[100]!,
+                                  highlightColor: Colors.white,
+                                  child: Container(
+                                    width: 200,
+                                    height: 20,
+                                    color: Colors.grey,
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(2, 0, 0, 0),
-                                    child: Text(
-                                      '${controller.currentTime.value} 기준 · ${controller.activeBusCount.value}대 운행 중',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey[800],
-                                        fontFamily: 'NotoSansRegular',
+                                );
+                              } else {
+                                return Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(2, 0, 0, 0),
+                                      child: Text(
+                                        '${controller.currentTime.value} 기준 · ${controller.activeBusCount.value}대 운행 중',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[800],
+                                          fontFamily: 'NotoSansRegular',
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              );
-                            }
-                          }),
+                                  ],
+                                );
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -345,7 +353,28 @@ class BusDataScreen extends GetView<BusDataController> {
                                             MainAxisAlignment.end,
                                         children: [
                                           Container(
-                                            width: dwidth * 0.75,
+                                            width: controller.busDataList[index]
+                                                        .stationName !=
+                                                    '600주년 기념관'
+                                                ? controller.busDataList[index]
+                                                            .stationName !=
+                                                        '정차소(인문.농구장)'
+                                                    ? ((controller
+                                                            .busDataList[
+                                                                index - 1]
+                                                            .carNumber
+                                                            .isNotEmpty))
+                                                        ? (controller.timeDifference3(controller
+                                                                    .busDataList[
+                                                                        index -
+                                                                            1]
+                                                                    .eventDate) >
+                                                                10)
+                                                            ? dwidth * 0.72
+                                                            : dwidth * 0.75
+                                                        : dwidth * 0.75
+                                                    : dwidth * 0.75
+                                                : dwidth * 0.75,
                                             height: 1,
                                             color: controller.busDataList[index]
                                                         .stationName ==
@@ -418,13 +447,13 @@ class BusDataScreen extends GetView<BusDataController> {
                                                   ),
                                                   Container(
                                                     width: 3,
-                                                    height: 27,
-                                                    color: controller
+                                                    height: controller
                                                                 .busDataList
                                                                 .length ==
                                                             index + 1
-                                                        ? Colors.white
-                                                        : AppColors.green_main,
+                                                        ? 1.5
+                                                        : 27,
+                                                    color: AppColors.green_main,
                                                   ),
                                                 ],
                                               ),
@@ -1004,7 +1033,7 @@ class BusDataScreen extends GetView<BusDataController> {
 
                                       // 버스 아이콘 - 10초가 지나서 이동중인 경우 - 하단 부분 표현
                                       Positioned(
-                                        top: -17,
+                                        top: -17.5,
                                         left: dwidth * 0.205,
                                         child: controller.busDataList[index]
                                                     .stationName !=
@@ -1186,27 +1215,35 @@ class BusDataScreen extends GetView<BusDataController> {
                               },
                             ),
                             Container(
-                              height: 8,
+                              height: 15,
                               color: Colors.white,
                             ),
                             Container(
-                              height: 3,
+                              height: 2,
                               color: Colors.grey[100],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  height: 30,
-                                  color: Colors.white,
-                                  child: const Text(
-                                    '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다',
-                                    textAlign: TextAlign.left,
-                                  ),
+                                  height: 10,
                                 ),
-                                const Text(
-                                  '정보수정 제안',
-                                  textAlign: TextAlign.left,
+                                const SizedBox(
+                                  height: 27,
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: Text(
+                                      '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontFamily: 'NotoSansRegulars',
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
