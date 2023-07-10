@@ -6,6 +6,6 @@
 ## 다운로드하기
 
 스꾸버스는 플러터를 이용하여 하나의 소스로 안드로이드/아이폰 앱을 동시에 제작할 수 있도록 설게되었습니다.<br />
-플레이스토어: - (앱 심사 대기중)<br />
-앱스토어: https://shorturl.at/moqAI<br />
+플레이스토어: https://shorturl.ac/skkubus_and<br />
+앱스토어: https://shorturl.ac/skkubus_ios<br />
 
