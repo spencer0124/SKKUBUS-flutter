@@ -9,6 +9,9 @@ PODS:
   - Firebase/Crashlytics (10.10.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 10.10.0)
+  - Firebase/DynamicLinks (10.10.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 10.10.0)
   - firebase_analytics (10.4.3):
     - Firebase/Analytics (= 10.10.0)
     - firebase_core
@@ -18,6 +21,10 @@ PODS:
     - Flutter
   - firebase_crashlytics (3.3.3):
     - Firebase/Crashlytics (= 10.10.0)
+    - firebase_core
+    - Flutter
+  - firebase_dynamic_links (5.3.3):
+    - Firebase/DynamicLinks (= 10.10.0)
     - firebase_core
     - Flutter
   - FirebaseAnalytics (10.10.0):
@@ -54,6 +61,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (~> 2.1)
+  - FirebaseDynamicLinks (10.10.0):
+    - FirebaseCore (~> 10.0)
   - FirebaseInstallations (10.11.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -152,6 +161,7 @@ DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
+  - firebase_dynamic_links (from `.symlinks/plugins/firebase_dynamic_links/ios`)
   - Flutter (from `Flutter`)
   - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -173,6 +183,7 @@ SPEC REPOS:
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseCrashlytics
+    - FirebaseDynamicLinks
     - FirebaseInstallations
     - FirebaseSessions
     - Google-Mobile-Ads-SDK
@@ -191,6 +202,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_crashlytics:
     :path: ".symlinks/plugins/firebase_crashlytics/ios"
+  firebase_dynamic_links:
+    :path: ".symlinks/plugins/firebase_dynamic_links/ios"
   Flutter:
     :path: Flutter
   flutter_config:
@@ -221,11 +234,13 @@ SPEC CHECKSUMS:
   firebase_analytics: 1a5ad75876257318ba5fdc6bf7aae73b6e98d0cf
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
   firebase_crashlytics: cd12245f604099a4ef6557fb36490abe309a118a
+  firebase_dynamic_links: 8e1ef5000616eb1004f06ec5cdd5e679ef199c29
   FirebaseAnalytics: 7bc7de519111dae802f5bc0c9c083918f8b8870d
   FirebaseCore: d027ff503d37edb78db98429b11f580a24a7df2a
   FirebaseCoreExtension: cacdad57fdb60e0b86dcbcac058ec78237946759
   FirebaseCoreInternal: 9e46c82a14a3b3a25be4e1e151ce6d21536b89c0
   FirebaseCrashlytics: bc8f3bed7f4d04be79d87391455efb4c9b163131
+  FirebaseDynamicLinks: 3f61f496236d30fa749377159fb7b3d82ecb3c49
   FirebaseInstallations: 2a2c6859354cbec0a228a863d4daf6de7c74ced4
   FirebaseSessions: a62ba5c45284adb7714f4126cfbdb32b17c260bd
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
