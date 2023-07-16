@@ -9,6 +9,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
+
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
@@ -33,25 +34,21 @@ dependencies:
     sdk: flutter
   http: ^0.13.6
   html: ^0.15.0
-  webview_flutter: ^3.0.0
   cupertino_icons: ^1.0.5
   url_launcher: ^6.1.11
   shared_preferences: ^2.0.9
   get_it: ^7.2.0
   flutter_launcher_icons: ^0.13.1
   permission_handler: 10.2.0
-  location: ^4.3.0
-  location_platform_interface: ^2.1.0
-  geolocator: ^7.2.0
   get: ^4.6.5
   intl: ^0.18.1
-  share_plus: ^6.0.1
+  share_plus: ^7.0.2
   screenshot: ^2.0.0
-  google_mobile_ads: ^2.4.0
+
   flutter_phone_direct_caller: ^2.1.1
   firebase_core: ^2.14.0
   firebase_crashlytics: ^3.3.3
-  flutter_config: ^2.0.0
+  flutter_config: ^2.0.2
   flutter_dotenv: ^5.1.0
   firebase_analytics: ^10.4.3
   change_app_package_name: ^1.1.0
@@ -60,6 +57,7 @@ dependencies:
   shimmer: ^3.0.0
   firebase_dynamic_links: ^5.3.3
   logger: ^1.4.0
+  google_mobile_ads: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
