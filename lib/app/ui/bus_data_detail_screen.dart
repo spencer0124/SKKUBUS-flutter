@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/controller/bus_data_detail_controller.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final double dheight =
@@ -30,20 +30,6 @@ class BusDataScreenDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TargetPlatform os = Theme.of(context).platform;
-
-    BannerAd banner = BannerAd(
-      listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          controller.adLoad.value = false;
-        },
-        onAdLoaded: (_) {},
-      ),
-      size: AdSize.banner,
-      adUnitId: UNIT_ID[os == TargetPlatform.iOS ? 'ios' : 'android']!,
-      request: const AdRequest(),
-    )..load();
-
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
@@ -53,10 +39,10 @@ class BusDataScreenDetail extends StatelessWidget {
                 width: double.infinity,
                 height: 61,
                 alignment: Alignment.center,
-                child: AdWidget(
-                  ad: banner,
-                ),
-              )
+                child: Container(
+                  height: 10,
+                  color: Colors.green,
+                ))
             : Padding(
                 padding: const EdgeInsets.fromLTRB(52, 0, 52, 0),
                 child: Container(

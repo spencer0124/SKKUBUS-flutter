@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/controller/bus_data_controller.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:math' as math;
@@ -11,6 +11,8 @@ import 'dart:math' as math;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skkumap/app/ui/bus_data_screen_animation.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 final stations = [
   '정차소(인문.농구장)',
@@ -83,47 +85,46 @@ class BusDataScreen extends GetView<BusDataController> {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey[200],
-        child: controller.adLoad.value
-            ? Container(
-                width: double.infinity,
-                height: 61,
-                alignment: Alignment.center,
-                child: AdWidget(
-                  ad: banner,
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.fromLTRB(52, 0, 52, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 61,
-                  color: Colors.grey[200],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        color: Colors.red,
-                        child: Image.asset('assets/passlogo.png'),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('중도, 디도 출입은\n스꾸패스 바코드로 편안하게!'),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-        elevation: 0,
-      ),
+          color: Colors.grey[200],
+          child: Container(
+            width: double.infinity,
+            height: 61,
+            alignment: Alignment.center,
+            child: AdWidget(
+              ad: banner,
+            ),
+          )
+          // : Padding(
+          //     padding: const EdgeInsets.fromLTRB(52, 0, 52, 0),
+          //     child: Container(
+          //       width: double.infinity,
+          //       height: 61,
+          //       color: Colors.grey[200],
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         crossAxisAlignment: CrossAxisAlignment.center,
+          //         children: [
+          //           Container(
+          //             width: 35,
+          //             height: 35,
+          //             color: Colors.red,
+          //             child: Image.asset('assets/passlogo.png'),
+          //           ),
+          //           const SizedBox(
+          //             width: 15,
+          //           ),
+          //           const Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text('중도, 디도 출입은\n스꾸패스 바코드로 편안하게!'),
+          //             ],
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // elevation: 0,
+          ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       backgroundColor: Colors.white,
       appBar: PreferredSize(
