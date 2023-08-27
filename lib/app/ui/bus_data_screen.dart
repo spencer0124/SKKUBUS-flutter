@@ -4,15 +4,16 @@ import 'package:skkumap/app/controller/bus_data_controller.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:math' as math;
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skkumap/app/ui/bus_data_screen_animation.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:skkumap/notification_station.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final stations = [
   '정차소(인문.농구장)',
@@ -26,16 +27,6 @@ final stations = [
   '정문(인문-등교)',
   '600주년 기념관'
 ];
-
-Map<String, String> UNIT_ID = kReleaseMode
-    ? {
-        'ios': dotenv.env['AdmobTestIos']!,
-        'android': dotenv.env['AdmobTestAnd']!,
-      }
-    : {
-        'ios': dotenv.env['AdmobIos']!,
-        'android': dotenv.env['AdmobAnd']!,
-      };
 
 class ArrowShape extends CustomPainter {
   final Paint _paint = Paint()
@@ -70,61 +61,27 @@ class BusDataScreen extends GetView<BusDataController> {
   Widget build(BuildContext context) {
     TargetPlatform os = Theme.of(context).platform;
 
-    BannerAd banner = BannerAd(
-      listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('===========Ad failed to load: $error===========\n');
-          controller.adLoad.value = false;
-        },
-        onAdLoaded: (_) {},
-      ),
-      size: AdSize.banner,
-      adUnitId: UNIT_ID[os == TargetPlatform.iOS ? 'ios' : 'android']!,
-      request: const AdRequest(),
-    )..load();
-
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-          color: Colors.grey[200],
-          child: Container(
-            width: double.infinity,
-            height: 61,
-            alignment: Alignment.center,
-            child: AdWidget(
-              ad: banner,
-            ),
-          )
-          // : Padding(
-          //     padding: const EdgeInsets.fromLTRB(52, 0, 52, 0),
-          //     child: Container(
-          //       width: double.infinity,
-          //       height: 61,
-          //       color: Colors.grey[200],
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         crossAxisAlignment: CrossAxisAlignment.center,
-          //         children: [
-          //           Container(
-          //             width: 35,
-          //             height: 35,
-          //             color: Colors.red,
-          //             child: Image.asset('assets/passlogo.png'),
-          //           ),
-          //           const SizedBox(
-          //             width: 15,
-          //           ),
-          //           const Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               Text('중도, 디도 출입은\n스꾸패스 바코드로 편안하게!'),
-          //             ],
-          //           )
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // elevation: 0,
-          ),
+        color: Colors.grey[200],
+        child: Obx(() => controller.isAdLoaded.value
+            ? Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: SizedBox(
+                  // width: double.infinity,
+                  height: 80.h,
+                  child: AdWidget(ad: controller.bannerAd!),
+                ),
+              )
+            : const Padding(
+                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: SizedBox(
+                  // width: double.infinity,
+                  height: 80,
+                  child: Text('error'),
+                ),
+              )),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -1282,6 +1239,7 @@ class BusDataScreen extends GetView<BusDataController> {
                         4, // Rotate the button 45 degrees clockwise to counter the rotation above
                     child: FloatingActionButton(
                       onPressed: () {
+                        FlutterLocalNotification.showNotification();
                         controller.refreshData();
                       },
                       backgroundColor: Colors.blueGrey[700],
