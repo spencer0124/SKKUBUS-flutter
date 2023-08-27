@@ -58,6 +58,8 @@ dependencies:
   firebase_dynamic_links: ^5.3.3
   logger: ^1.4.0
   google_mobile_ads: ^3.0.0
+  flutter_local_notifications: ^15.1.0+1
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0

@@ -3,10 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:skkumap/app/data/model/bus_data_model.dart';
 import 'package:skkumap/app/data/repository/bus_data_repository.dart';
 import 'dart:async';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:logger/logger.dart';
+
+import 'package:skkumap/admob/ad_helper.dart';
 
 class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   BusDataController busDataController = Get.find<BusDataController>();
@@ -20,6 +23,7 @@ class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   @override
   void onClose() {
     super.onClose();
+
     WidgetsBinding.instance.removeObserver(this);
   }
 
@@ -46,6 +50,10 @@ class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
 }
 
 class BusDataController extends GetxController {
+  BannerAd? _bannerAd;
+  BannerAd? get bannerAd => _bannerAd;
+  RxBool isAdLoaded = false.obs;
+
   final BusDataRepository repository;
   final currentTime = ''.obs;
 
@@ -188,6 +196,23 @@ class BusDataController extends GetxController {
   void onInit() {
     // createDynamicLink();
     super.onInit();
+
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          _bannerAd = ad as BannerAd;
+          isAdLoaded.value = true;
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+    )..load();
+
     updateTime();
     fetchBusData();
     startUpdateTimer();
@@ -195,6 +220,7 @@ class BusDataController extends GetxController {
 
   @override
   void onClose() {
+    _bannerAd?.dispose();
     updateTimer?.cancel();
     super.onClose();
   }

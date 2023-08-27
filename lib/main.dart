@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'package:skkumap/firebase_options.dart';
 
@@ -21,6 +22,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:ui';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import 'package:skkumap/notification_station.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +55,9 @@ Future<void> main() async {
   Get.put(BusDetailRepository(dataProvider: Get.find()));
   Get.put(BusDetailController(repository: Get.find()));
 
+  FlutterLocalNotification.requestNotificationPermission();
+  FlutterLocalNotification.init();
+
   runApp(const MyApp());
 }
 
@@ -60,13 +66,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      getPages: AppRoutes.routes,
-      initialRoute: '/',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      builder: (context, child) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        getPages: AppRoutes.routes,
+        initialRoute: '/',
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+          ),
         ),
       ),
     );

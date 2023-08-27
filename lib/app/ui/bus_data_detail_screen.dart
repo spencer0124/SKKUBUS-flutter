@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/controller/bus_data_detail_controller.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:flutter/foundation.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
@@ -14,16 +15,6 @@ final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
 final controller = Get.find<BusDetailController>();
-
-Map<String, String> UNIT_ID = kReleaseMode
-    ? {
-        'ios': dotenv.env['AdmobTestIos']!,
-        'android': dotenv.env['AdmobTestAnd']!,
-      }
-    : {
-        'ios': dotenv.env['AdmobIos']!,
-        'android': dotenv.env['AdmobAnd']!,
-      };
 
 class BusDataScreenDetail extends StatelessWidget {
   const BusDataScreenDetail({Key? key}) : super(key: key);
@@ -34,48 +25,23 @@ class BusDataScreenDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[200],
-        child: controller.adLoad.value
-            ? Container(
-                width: double.infinity,
-                height: 61,
-                alignment: Alignment.center,
-                child: Container(
-                  height: 10,
-                  color: Colors.green,
-                ))
-            : Padding(
-                padding: const EdgeInsets.fromLTRB(52, 0, 52, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 61,
-                  color: Colors.grey[200],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        color: Colors.red,
-                        child: Image.asset('assets/passlogo.png'),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '중도, 디도 출입은\n스꾸패스 바코드로 편안하게!',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+        child: Obx(() => controller.isAdLoaded.value
+            ? Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: SizedBox(
+                  // width: double.infinity,
+                  height: 80.h,
+                  child: AdWidget(ad: controller.bannerAd!),
                 ),
-              ),
-        elevation: 0,
+              )
+            : const Padding(
+                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: SizedBox(
+                  // width: double.infinity,
+                  height: 80,
+                  child: Text('error'),
+                ),
+              )),
       ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0.0),
