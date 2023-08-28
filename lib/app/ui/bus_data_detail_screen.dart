@@ -5,10 +5,6 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/controller/bus_data_detail_controller.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
@@ -23,26 +19,26 @@ class BusDataScreenDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.grey[200],
-        child: Obx(() => controller.isAdLoaded.value
-            ? Padding(
-                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: SizedBox(
-                  // width: double.infinity,
-                  height: 80.h,
-                  child: AdWidget(ad: controller.bannerAd!),
-                ),
-              )
-            : const Padding(
-                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: SizedBox(
-                  // width: double.infinity,
-                  height: 80,
-                  child: Text('error'),
-                ),
-              )),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   color: Colors.grey[200],
+      //   child: Obx(() => controller.isAdLoaded.value
+      //       ? Padding(
+      //           padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+      //           child: SizedBox(
+      //             // width: double.infinity,
+      //             height: 80.h,
+      //             child: AdWidget(ad: controller.bannerAd!),
+      //           ),
+      //         )
+      //       : const Padding(
+      //           padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+      //           child: SizedBox(
+      //             // width: double.infinity,
+      //             height: 80,
+      //             child: Text('error'),
+      //           ),
+      //         )),
+      // ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0.0),
         child: AppBar(
@@ -470,6 +466,114 @@ class BusDataScreenDetail extends StatelessWidget {
                               ],
                             ),
                           ),
+                          // Container(
+                          //   padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                          //   child: Column(
+                          //     children: [
+                          //       const Row(
+                          //         children: [
+                          //           // Icon(
+                          //           //   Icons.call,
+                          //           //   color: AppColors.green_main,
+                          //           //   size: 20,
+                          //           // ),
+                          //           SizedBox(
+                          //             width: 5,
+                          //           ),
+                          //           Text(
+                          //             '고급 수치 설정',
+                          //             style: TextStyle(
+                          //               color: AppColors.green_main,
+                          //               fontFamily: 'NotoSansBold',
+                          //             ),
+                          //             textAlign: TextAlign.start,
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       const SizedBox(
+                          //         height: 5,
+                          //       ),
+                          //       Container(
+                          //         alignment: Alignment.centerLeft,
+                          //         padding:
+                          //             const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          //         child: Column(
+                          //           children: [
+                          //             Text(
+                          //               'UI가 제대로 표시되지 않는다면 수치를 조절해보세요\n해당 수치와 기종을 skkupass@gmail.com으로 전송해주시면\n다음 업데이트시 수정하겠습니다\n불편을 드려 죄송합니다\n',
+                          //               style: TextStyle(
+                          //                   color: Colors.grey[900],
+                          //                   fontFamily: 'NotoSansRegular',
+                          //                   fontSize: 13),
+                          //               textAlign: TextAlign.start,
+                          //             ),
+                          //           ],
+                          //         ),
+                          //       ),
+                          //       Container(
+                          //         alignment: Alignment.centerLeft,
+                          //         padding:
+                          //             const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          //         child: Column(
+                          //           children: [
+                          //             Row(
+                          //               children: [
+                          //                 Text(
+                          //                   '인사캠 관리팀  ',
+                          //                   style: TextStyle(
+                          //                       color: Colors.grey[900],
+                          //                       fontFamily: 'NotoSansRegular',
+                          //                       fontSize: 13),
+                          //                   textAlign: TextAlign.start,
+                          //                 ),
+                          //                 InkWell(
+                          //                   onTap: () async {
+                          //                     try {
+                          //                       await FlutterPhoneDirectCaller
+                          //                           .callNumber('027600110');
+                          //                     } catch (e) {
+                          //                       print(
+                          //                           "Failed to make a call due to ${e.toString()}");
+                          //                     }
+                          //                   },
+                          //                   child: const Row(
+                          //                     children: [
+                          //                       Text(
+                          //                         '02-760-0110',
+                          //                         style: TextStyle(
+                          //                             color:
+                          //                                 AppColors.green_main,
+                          //                             fontFamily:
+                          //                                 'NotoSansBold',
+                          //                             fontSize: 13),
+                          //                         textAlign: TextAlign.start,
+                          //                       ),
+                          //                       // Text(
+                          //                       //   ' (클릭시 전화연결)',
+                          //                       //   style: TextStyle(
+                          //                       //       color: Colors.grey[900],
+                          //                       //       fontFamily: 'NotoSansRegular',
+                          //                       //       fontSize: 13),
+                          //                       //   textAlign: TextAlign.start,
+                          //                       // ),
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ],
+                          //         ),
+                          //       ),
+                          //       Padding(
+                          //         padding:
+                          //             const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                          //         child: Divider(
+                          //           color: Colors.grey[300],
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // )
                         ],
                       );
                     }
