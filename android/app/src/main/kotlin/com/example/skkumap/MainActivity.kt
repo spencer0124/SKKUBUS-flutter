@@ -1,4 +1,4 @@
-package com.example.skkumap
+package com.zoyoong.skkumap
 
 import io.flutter.embedding.android.FlutterActivity
 

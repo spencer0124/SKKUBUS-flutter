@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 import 'package:skkumap/admob/ad_helper.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+import 'dart:io' show Platform;
 
 class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   BusDataController busDataController = Get.find<BusDataController>();
@@ -30,29 +33,72 @@ class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      busDataController.refreshData();
-      // Get.dialog(
-      //   AlertDialog(
-      //     title: const Text('Welcome back!'),
-      //     content: const Text('The app is resumed.'),
-      //     actions: <Widget>[
-      //       TextButton(
-      //         child: const Text('OK'),
-      //         onPressed: () {
-      //           Get.back();
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // );
+      if (busDataController.refreshTime.value > 1 &&
+          busDataController.preventAnimation.value == false) {
+        busDataController.refreshData();
+      }
     }
   }
 }
 
-class BusDataController extends GetxController {
+class BusDataController extends GetxController
+    with SingleGetTickerProviderMixin {
+  RxBool waitAdFail = false.obs;
+  RxBool preventAnimation = false.obs;
+  late String platform;
+
+  @override
+  void onInit() {
+    // createDynamicLink();
+    super.onInit();
+
+    if (Platform.isAndroid) {
+      platform = 'Android';
+    } else if (Platform.isIOS) {
+      platform = 'IOS';
+    } else {
+      platform = 'unknown';
+    }
+
+    Future.delayed(const Duration(milliseconds: 1400), () {
+      waitAdFail.value = true;
+      FirebaseAnalytics.instance
+          .logEvent(name: 'alternative_ad_showed', parameters: {
+        'platform': platform,
+      });
+    });
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          _bannerAd = ad as BannerAd;
+          isAdLoaded.value = true;
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          ad.dispose();
+        },
+      ),
+    )..load();
+
+    updateTime();
+    fetchBusData();
+    startUpdateTimer();
+  }
+
   BannerAd? _bannerAd;
   BannerAd? get bannerAd => _bannerAd;
   RxBool isAdLoaded = false.obs;
+  AnimationController? _animationController;
+  AnimationController? get animationController => _animationController;
 
   final BusDataRepository repository;
   final currentTime = ''.obs;
@@ -61,7 +107,7 @@ class BusDataController extends GetxController {
   final activeBusCount = Rx<int?>(null);
   var adLoad = false.obs;
   var busDataList = <BusData>[].obs;
-  var refreshTime = 15.obs;
+  var refreshTime = 5.obs;
 
   final stations = [
     '정차소(인문.농구장)',
@@ -77,35 +123,7 @@ class BusDataController extends GetxController {
   ];
   var logger = Logger();
 
-  // Future<void> createDynamicLink() async {
-  //   String _yourDomain = "skkubus";
-  //   String _defaultLink = 'https://www.naver.com';
-
-  //   DynamicLinkParameters dynamicLinkParams = DynamicLinkParameters(
-  //     uriPrefix: "https://$_yourDomain.page.link",
-  //     link: Uri.parse("https://$_yourDomain.page.link/app"),
-  //     androidParameters: const AndroidParameters(
-  //       packageName: 'com.zoyoong.skkubus',
-  //       minimumVersion: 0,
-  //     ),
-  //     iosParameters: const IOSParameters(
-  //       bundleId: 'com.example.skkumap',
-  //       minimumVersion: '0',
-  //     ),
-  //     navigationInfoParameters: const NavigationInfoParameters(
-  //       forcedRedirectEnabled: true,
-  //     ),
-  //     longDynamicLink: Uri.parse(
-  //       'https://skkubus.page.link/?link=http%3a%2f%2fskkubus%2fmain&apn=com.zoyoong.skkubus[&amv=0][&afl=http%3a%2f%2fskkubus.kro.kr][&ofl=https%3A%2F%2Fwww.naver.com]',
-  //     ),
-  //   );
-
-  //   ShortDynamicLink dynamicLink =
-  //       await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
-
-  //   String url = dynamicLink.shortUrl.toString();
-  //   logger.e(url);
-  // }
+  RxBool loadingAnimation = false.obs;
 
   Timer? updateTimer;
 
@@ -193,32 +211,6 @@ class BusDataController extends GetxController {
   }
 
   @override
-  void onInit() {
-    // createDynamicLink();
-    super.onInit();
-
-    _bannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          _bannerAd = ad as BannerAd;
-          isAdLoaded.value = true;
-        },
-        onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          ad.dispose();
-        },
-      ),
-    )..load();
-
-    updateTime();
-    fetchBusData();
-    startUpdateTimer();
-  }
-
-  @override
   void onClose() {
     _bannerAd?.dispose();
     updateTimer?.cancel();
@@ -230,8 +222,8 @@ class BusDataController extends GetxController {
       if (refreshTime.value > 0) {
         refreshTime.value--;
       } else {
-        refreshTime.value = 15;
         refreshData();
+        // Future.delayed(const Duration(milliseconds: 1000), () {});
       }
     });
   }
@@ -240,8 +232,19 @@ class BusDataController extends GetxController {
     updateTimer?.cancel();
     fetchBusData();
     updateTime();
-    refreshTime.value = 15;
-    startUpdateTimer();
+
+    _animationController?.reset();
+    _animationController?.forward();
+
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      refreshTime.value = 5;
+      startUpdateTimer();
+    });
+  }
+
+  Future<void> waitanimation() async {
+    await Future.delayed(const Duration(seconds: 2));
+    loadingAnimation.value = false;
   }
 
   void fetchBusData() async {

@@ -1,7 +1,7 @@
 class BusData {
   final String sequence;
   final String stationName;
-  final String eventDate;
+  String eventDate;
   final String kind;
   final String? gpsLongitude;
   final String? gpsLatitude;
