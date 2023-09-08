@@ -24,8 +24,17 @@ import 'dart:ui';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:skkumap/notification_station.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
+import 'package:flutter_naver_map/flutter_naver_map.dart';
+
+import 'package:skkumap/app/controller/ESKARA_controller.dart';
 
 Future<void> main() async {
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
@@ -49,14 +58,21 @@ Future<void> main() async {
   Get.put(BusDataRepository(dataProvider: Get.find()));
   Get.put(BusDataController(repository: Get.find()));
   Get.put(LifeCycleGetx());
+  Get.put(LifeCycleGetx2());
 
   // Register BusDetail dependencies
   Get.put(BusDetailDataProvider());
   Get.put(BusDetailRepository(dataProvider: Get.find()));
   Get.put(BusDetailController(repository: Get.find()));
 
-  FlutterLocalNotification.requestNotificationPermission();
+  Get.put(ESKARAController());
+
+  // FlutterLocalNotification.requestNotificationPermission();
   FlutterLocalNotification.init();
+  await FlutterLocalNotification.scheduleNotification1();
+  await FlutterLocalNotification.scheduleNotification2();
+
+  await NaverMapSdk.instance.initialize(clientId: dotenv.env['naverClientId']!);
 
   runApp(const MyApp());
 }
@@ -71,7 +87,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: AppRoutes.routes,
-        initialRoute: '/',
+        initialRoute: routeToNavigate ?? '/',
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,

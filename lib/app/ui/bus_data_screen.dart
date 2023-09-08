@@ -17,6 +17,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'dart:io' show Platform;
 
+// import 'package:skkumap/app/ui/ESKARA_screen.dart';
+// import 'package:skkumap/app/controller/ESKARA_controller.dart';
+
 final stations = [
   '정차소(인문.농구장)',
   '학생회관(인문)',
@@ -258,6 +261,40 @@ class BusDataScreen extends GetView<BusDataController> {
 
                                           await Share.share(
                                               '인사캠 셔틀버스 실시간 위치\n[${controller.currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nskkubus-app.kro.kr');
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(50),
+                                        ),
+                                      ),
+                                      alignment: Alignment.center,
+                                      width: 125,
+                                      height: 35,
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.translucent,
+                                        child: const Text(
+                                          '\u{00A0}ESKARA 인자셔틀\u{00A0}',
+                                          style: TextStyle(
+                                            color: AppColors.green_main,
+                                            fontFamily: 'NotoSansBold',
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                        onTap: () {
+                                          Get.toNamed('/eskara');
                                         },
                                       ),
                                     ),

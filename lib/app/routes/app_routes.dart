@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:skkumap/app/binding/ESKARA_binding.dart';
 import 'package:skkumap/app/binding/bus_data_binding.dart';
 import 'package:skkumap/app/ui/bus_data_screen.dart';
 import 'package:skkumap/app/ui/bus_schedule_screen.dart';
 import 'package:skkumap/app/ui/bus_setting_screen.dart';
 import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
+import 'package:skkumap/app/ui/ESKARA_screen.dart';
 
 class AppRoutes {
   static final routes = [
@@ -27,5 +29,7 @@ class AppRoutes {
         name: '/busDetail',
         page: () => const BusDataScreenDetail(),
         binding: BusDataBinding()),
+    GetPage(
+        name: '/eskara', page: () => const ESKARA(), binding: ESKARABinding()),
   ];
 }
