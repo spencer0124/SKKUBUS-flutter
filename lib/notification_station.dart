@@ -61,7 +61,7 @@ class FlutterLocalNotification {
 
   static Future<void> scheduleNotification1() async {
     final scheduledDate =
-        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 9, 10, 15, 30);
+        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 9, 14, 15, 30);
     final currentDate = tz.TZDateTime.now(tz.getLocation('Asia/Seoul'));
 
     if (scheduledDate.isAfter(currentDate)) {
