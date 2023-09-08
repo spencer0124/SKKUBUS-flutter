@@ -11,6 +11,7 @@ import 'package:logger/logger.dart';
 
 import 'package:skkumap/admob/ad_helper.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:io' show Platform;
 
@@ -48,9 +49,13 @@ class BusDataController extends GetxController
   late String platform;
 
   @override
-  void onInit() {
+  void onInit() async {
     // createDynamicLink();
     super.onInit();
+
+    if (await Permission.notification.isDenied) {
+      await Permission.notification.request();
+    }
 
     if (Platform.isAndroid) {
       platform = 'Android';
