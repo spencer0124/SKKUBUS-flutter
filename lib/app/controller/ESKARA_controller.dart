@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 
-class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
+class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
   ESKARAController eSKARAController = Get.find<ESKARAController>();
 
   @override

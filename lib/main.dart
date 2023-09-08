@@ -58,7 +58,6 @@ Future<void> main() async {
   Get.put(BusDataRepository(dataProvider: Get.find()));
   Get.put(BusDataController(repository: Get.find()));
   Get.put(LifeCycleGetx());
-  Get.put(LifeCycleGetx2());
 
   // Register BusDetail dependencies
   Get.put(BusDetailDataProvider());
@@ -66,6 +65,7 @@ Future<void> main() async {
   Get.put(BusDetailController(repository: Get.find()));
 
   Get.put(ESKARAController());
+  Get.put(LifeCycleGetx2());
 
   // FlutterLocalNotification.requestNotificationPermission();
   FlutterLocalNotification.init();
