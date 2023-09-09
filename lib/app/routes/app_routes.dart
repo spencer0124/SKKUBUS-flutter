@@ -6,6 +6,7 @@ import 'package:skkumap/app/ui/bus_schedule_screen.dart';
 import 'package:skkumap/app/ui/bus_setting_screen.dart';
 import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
 import 'package:skkumap/app/ui/ESKARA_screen.dart';
+import 'package:skkumap/app/ui/new_alert.dart';
 
 class AppRoutes {
   static final routes = [
@@ -31,5 +32,6 @@ class AppRoutes {
         binding: BusDataBinding()),
     GetPage(
         name: '/eskara', page: () => const ESKARA(), binding: ESKARABinding()),
+    GetPage(name: '/newalert', page: () => const NewAlert()),
   ];
 }

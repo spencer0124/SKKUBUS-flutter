@@ -222,6 +222,9 @@ class BusDataScreen extends GetView<BusDataController> {
                                           size: 27,
                                         ),
                                         onTap: () {
+                                          FirebaseAnalytics.instance.logEvent(
+                                            name: 'info_clicked',
+                                          );
                                           Get.toNamed('/busDetail');
                                         },
                                       ),
@@ -245,6 +248,9 @@ class BusDataScreen extends GetView<BusDataController> {
                                           size: 22,
                                         ),
                                         onTap: () async {
+                                          FirebaseAnalytics.instance.logEvent(
+                                            name: 'share_clicked',
+                                          );
                                           List activeBuses = controller
                                               .busDataList
                                               .where((bus) =>
@@ -294,6 +300,9 @@ class BusDataScreen extends GetView<BusDataController> {
                                           textAlign: TextAlign.start,
                                         ),
                                         onTap: () {
+                                          FirebaseAnalytics.instance.logEvent(
+                                            name: 'eskara_clicked',
+                                          );
                                           Get.toNamed('/eskara');
                                         },
                                       ),

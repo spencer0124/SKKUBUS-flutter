@@ -6,8 +6,7 @@ String? routeToNavigate;
 
 @pragma('vm:entry-point')
 Future<void> notificationResponseHandler(NotificationResponse response) async {
-  routeToNavigate = '/eskara';
-  // You can handle other logic here if needed
+  routeToNavigate = response.payload;
 }
 
 class FlutterLocalNotification {
@@ -55,20 +54,39 @@ class FlutterLocalNotification {
 
   Future showNotification(
       {int id = 0, String? title, String? body, String? payLoad}) async {
-    return flutterLocalNotificationsPlugin.show(
-        id, title, body, notificationDetails());
+    return flutterLocalNotificationsPlugin
+        .show(id, title, body, notificationDetails(), payload: '/eskara');
   }
 
   static Future<void> scheduleNotification1() async {
     final scheduledDate =
-        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 9, 14, 15, 30);
+        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 13, 08, 00, 02);
     final currentDate = tz.TZDateTime.now(tz.getLocation('Asia/Seoul'));
 
     if (scheduledDate.isAfter(currentDate)) {
       await flutterLocalNotificationsPlugin.zonedSchedule(
-        0, // Notification ID
+          0, // Notification ID
+          'ESKARA 전야제 인자셔틀 정보', // Notification title
+          '스꾸버스 앱 상단의 \'ESKARA 인자셔틀\' 버튼을 클릭하면 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
+          scheduledDate, // Date and time
+          notificationDetails(),
+          androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+          uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
+          payload: '/eskara');
+    }
+  }
+
+  static Future<void> scheduleNotification2() async {
+    final scheduledDate =
+        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 14, 08, 00, 02);
+    final currentDate = tz.TZDateTime.now(tz.getLocation('Asia/Seoul'));
+
+    if (scheduledDate.isAfter(currentDate)) {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        1, // Notification ID
         'ESKARA 인자셔틀 정보', // Notification title
-        '스꾸버스에서 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
+        '스꾸버스 앱 상단의 \'ESKARA 인자셔틀\' 버튼을 클릭하면 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
         scheduledDate, // Date and time
         notificationDetails(),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -78,16 +96,35 @@ class FlutterLocalNotification {
     }
   }
 
-  static Future<void> scheduleNotification2() async {
+  static Future<void> scheduleNotification3() async {
     final scheduledDate =
-        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 9, 23, 50, 10);
+        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 10, 03, 10, 02);
     final currentDate = tz.TZDateTime.now(tz.getLocation('Asia/Seoul'));
 
     if (scheduledDate.isAfter(currentDate)) {
       await flutterLocalNotificationsPlugin.zonedSchedule(
-        1, // Notification ID
+        2, // Notification ID
         'ESKARA 인자셔틀 정보', // Notification title
-        '스꾸버스에서 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
+        '스꾸버스 앱 상단의 \'ESKARA 인자셔틀\' 버튼을 클릭하면 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
+        scheduledDate, // Date and time
+        notificationDetails(),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    }
+  }
+
+  static Future<void> scheduleNotification4() async {
+    final scheduledDate =
+        tz.TZDateTime(tz.getLocation('Asia/Seoul'), 2023, 9, 10, 03, 15, 02);
+    final currentDate = tz.TZDateTime.now(tz.getLocation('Asia/Seoul'));
+
+    if (scheduledDate.isAfter(currentDate)) {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        3, // Notification ID
+        'ESKARA 인자셔틀 정보', // Notification title
+        '스꾸버스 앱 상단의 \'ESKARA 인자셔틀\' 버튼을 클릭하면 변경된 인자셔틀 탑승시간, 위치 정보를 확인할 수 있어요', // Notification body
         scheduledDate, // Date and time
         notificationDetails(),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

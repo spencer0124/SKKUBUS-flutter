@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
   ESKARAController eSKARAController = Get.find<ESKARAController>();
 
@@ -98,7 +100,11 @@ class ESKARAController extends GetxController {
   var suwon_14_nextBusTime = ''.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
+    try {
+      await FirebaseAnalytics.instance
+          .setCurrentScreen(screenName: 'ESKARA_screen');
+    } catch (e) {}
     super.onInit();
     determineNextBus();
   }
@@ -108,7 +114,7 @@ class ESKARAController extends GetxController {
     String formattedDate = DateFormat('M/d').format(now);
     String formattedTime = DateFormat('HH:mm').format(now);
 
-    if (formattedDate == '9/9') {
+    if (formattedDate == '9/13') {
       String nextBus = seoul_13_busTimes.firstWhere(
         (busTime) => busTime.compareTo(formattedTime) > 0,
         orElse: () => 'No more buses available today',
@@ -116,7 +122,7 @@ class ESKARAController extends GetxController {
       seoul_13_nextBusTime.value = nextBus;
     }
     // 테스트 말고 실제로 구현할때는 else-if로 변경하기!! To-Do
-    if (formattedDate == '9/9') {
+    else if (formattedDate == '9/14') {
       String nextBus = seoul_14_busTimes.firstWhere(
         (busTime) => busTime.compareTo(formattedTime) > 0,
         orElse: () => 'No more buses available today',
@@ -124,15 +130,13 @@ class ESKARAController extends GetxController {
       seoul_14_nextBusTime.value = nextBus;
     }
 
-    if (formattedDate == '9/9') {
+    if (formattedDate == '9/13') {
       String nextBus = suwon_13_busTimes.firstWhere(
         (busTime) => busTime.compareTo(formattedTime) > 0,
         orElse: () => 'No more buses available today',
       );
       suwon_13_nextBusTime.value = nextBus;
-    }
-
-    if (formattedDate == '9/9') {
+    } else if (formattedDate == '9/14') {
       String nextBus = suwon_14_busTimes.firstWhere(
         (busTime) => busTime.compareTo(formattedTime) > 0,
         orElse: () => 'No more buses available today',

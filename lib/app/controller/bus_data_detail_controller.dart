@@ -6,6 +6,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:skkumap/admob/ad_helper.dart';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+
 class BusDetailController extends GetxController {
   final BusDetailRepository repository;
   var busDetail = BusDetail().obs;
@@ -24,7 +26,11 @@ class BusDetailController extends GetxController {
   BusDetailController({required this.repository});
 
   @override
-  void onInit() {
+  void onInit() async {
+    try {
+      await FirebaseAnalytics.instance
+          .setCurrentScreen(screenName: 'bus_data_detail_screen');
+    } catch (e) {}
     super.onInit();
 
     _bannerAd = BannerAd(
