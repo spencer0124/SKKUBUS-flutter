@@ -66,6 +66,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   flutter_naver_map: ^1.0.2
   flutter_platform_alert: ^0.4.0
+  wolt_modal_sheet: ^0.1.2
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -94,6 +95,8 @@ flutter:
     - lib/assets/icon/refresh.png
     - .env # path to your .env file
     - assets/lottie/refresh_white.json
+    - assets/eskara1398.png
+    - assets/newalert_iphone1.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

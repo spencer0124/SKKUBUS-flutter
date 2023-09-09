@@ -251,7 +251,7 @@ class ESKARA extends StatelessWidget {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 175.w,
+                                    width: 173.w,
                                     height: 37.h,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFF2DB400),
@@ -281,7 +281,7 @@ class ESKARA extends StatelessWidget {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 175.w,
+                                    width: 173.w,
                                     height: 37.h,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFFffe812),
@@ -408,13 +408,13 @@ class ESKARA extends StatelessWidget {
                                                         controller
                                                             .seoul_13_nextBusTime
                                                             .value
-                                                    ? '기존 위치 탑승 | 다음 셔틀'
+                                                    ? '기존 위치 탑승\n탑승 가능한 가장 빠른 셔틀'
                                                     : '기존 위치 탑승'
                                                 : busTime ==
                                                         controller
                                                             .seoul_13_nextBusTime
                                                             .value
-                                                    ? '다음 셔틀'
+                                                    ? '탑승 가능한 가장 빠른 셔틀'
                                                     : ' ',
                                             style: TextStyle(
                                                 color: busTime == '10:00'
@@ -509,13 +509,13 @@ class ESKARA extends StatelessWidget {
                                                         controller
                                                             .seoul_14_nextBusTime
                                                             .value
-                                                    ? '기존 위치 탑승 | 다음 셔틀'
+                                                    ? '기존 위치 탑승\n탑승 가능한 가장 빠른 셔틀'
                                                     : '기존 위치 탑승'
                                                 : busTime ==
                                                         controller
                                                             .seoul_14_nextBusTime
                                                             .value
-                                                    ? '다음 셔틀'
+                                                    ? '탑승 가능한 가장 빠른 셔틀'
                                                     : ' ',
                                             style: TextStyle(
                                                 color: busTime == '10:00'
@@ -632,7 +632,7 @@ class ESKARA extends StatelessWidget {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 175.w,
+                                    width: 173.w,
                                     height: 37.h,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFF2DB400),
@@ -662,7 +662,7 @@ class ESKARA extends StatelessWidget {
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
-                                    width: 175.w,
+                                    width: 173.w,
                                     height: 37.h,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFFffe812),
@@ -788,7 +788,7 @@ class ESKARA extends StatelessWidget {
                                                     controller
                                                         .suwon_13_nextBusTime
                                                         .value
-                                                ? '다음 셔틀'
+                                                ? '탑승 가능한 가장 빠른 셔틀'
                                                 : ' ',
                                             style: TextStyle(
                                                 color: busTime ==
@@ -865,7 +865,7 @@ class ESKARA extends StatelessWidget {
                                                     controller
                                                         .suwon_14_nextBusTime
                                                         .value
-                                                ? '다음 셔틀'
+                                                ? '탑승 가능한 가장 빠른 셔틀'
                                                 : ' ',
                                             style: TextStyle(
                                                 color: busTime ==

@@ -50,6 +50,11 @@ class BusDataController extends GetxController
 
   @override
   void onInit() async {
+    try {
+      await FirebaseAnalytics.instance
+          .setCurrentScreen(screenName: 'bus_data_screen');
+    } catch (e) {}
+
     // createDynamicLink();
     super.onInit();
 

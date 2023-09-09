@@ -31,11 +31,19 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 import 'package:skkumap/app/controller/ESKARA_controller.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+late SharedPreferences prefs;
+
 Future<void> main() async {
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
-
   WidgetsFlutterBinding.ensureInitialized();
+  await Future.wait([
+    SharedPreferences.getInstance().then((value) => prefs = value),
+  ]);
+
+  // WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: SystemUiOverlay.values);
 
@@ -71,14 +79,28 @@ Future<void> main() async {
   FlutterLocalNotification.init();
   await FlutterLocalNotification.scheduleNotification1();
   await FlutterLocalNotification.scheduleNotification2();
+  await FlutterLocalNotification.scheduleNotification3();
+  await FlutterLocalNotification.scheduleNotification4();
 
   await NaverMapSdk.instance.initialize(clientId: dotenv.env['naverClientId']!);
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  bool newalertdone = prefs.getBool('newalertdone') ?? false;
+
+  String determineInitialRoute() {
+    if (routeToNavigate != null) {
+      return routeToNavigate!;
+    } else if (!newalertdone) {
+      return '/newalert';
+    } else {
+      return '/';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +109,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: AppRoutes.routes,
-        initialRoute: routeToNavigate ?? '/',
+        initialRoute: determineInitialRoute(),
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,
