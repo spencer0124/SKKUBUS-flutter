@@ -74,7 +74,7 @@ class BusDataScreen extends GetView<BusDataController> {
                 ? Padding(
                     padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                     child: SizedBox(
-                      // width: double.infinity,
+                      width: double.infinity,
                       height: 60,
                       child: AdWidget(ad: controller.bannerAd!),
                     ),
