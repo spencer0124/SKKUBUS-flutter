@@ -35,6 +35,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
 
+StreamController<String> streamController = StreamController.broadcast();
+
 Future<void> main() async {
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Asia/Seoul'));
@@ -93,8 +95,11 @@ class MyApp extends StatelessWidget {
   bool newalertdone = prefs.getBool('newalertdone') ?? false;
 
   String determineInitialRoute() {
-    if (routeToNavigate != null) {
-      return routeToNavigate!;
+    String? routeFromPrefs = prefs.getString('routeToNavigate');
+    if (routeFromPrefs != null) {
+      prefs
+          .remove('routeToNavigate'); // Clear the stored route after reading it
+      return routeFromPrefs;
     } else if (!newalertdone) {
       return '/newalert';
     } else {

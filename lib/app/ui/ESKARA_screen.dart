@@ -6,6 +6,7 @@ import 'package:skkumap/app/controller/ESKARA_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 final Uri seoul_naver = Uri.parse(
     'nmap://route/walk?dlat=37.586462&dlng=126.995115&dname=%ec%9d%b8%ec%82%ac%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
@@ -245,6 +246,9 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'seoul_map_naver',
+                                    );
                                     if (!await launchUrl(seoul_naver)) {
                                       // throw Exception('Could not launch seoul_nav');
                                     }
@@ -275,6 +279,9 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'seoul_map_kakao',
+                                    );
                                     if (!await launchUrl(seoul_kakao)) {
                                       // throw Exception('Could not launch seoul_nav');
                                     }
@@ -626,6 +633,9 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'suwon_map_naver',
+                                    );
                                     if (!await launchUrl(suwon_naver)) {
                                       // throw Exception('Could not launch seoul_nav');
                                     }
@@ -656,6 +666,9 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'suwon_map_kakao',
+                                    );
                                     if (!await launchUrl(suwon_kakao)) {
                                       // throw Exception('Could not launch seoul_nav');
                                     }
