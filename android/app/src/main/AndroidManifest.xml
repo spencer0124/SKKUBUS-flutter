@@ -14,10 +14,6 @@
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
-           android:name="com.naver.maps.map.CLIENT_ID"
-           android:value="mh9g0q7v14" />
-
-        <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-5619947536545679~7806829793"/>
         

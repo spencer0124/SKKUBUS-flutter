@@ -37,7 +37,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.zoyoong.skkumap"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
