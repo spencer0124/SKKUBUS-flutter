@@ -70,7 +70,7 @@ class BusDataController extends GetxController
       platform = 'unknown';
     }
 
-    Future.delayed(const Duration(milliseconds: 1400), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       waitAdFail.value = true;
       FirebaseAnalytics.instance
           .logEvent(name: 'alternative_ad_showed', parameters: {

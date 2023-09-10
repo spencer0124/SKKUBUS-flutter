@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'dart:io' show Platform;
 
 final Uri seoul_naver = Uri.parse(
     'nmap://route/walk?dlat=37.586462&dlng=126.995115&dname=%ec%9d%b8%ec%82%ac%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
@@ -249,8 +251,49 @@ class ESKARA extends StatelessWidget {
                                     FirebaseAnalytics.instance.logEvent(
                                       name: 'seoul_map_naver',
                                     );
-                                    if (!await launchUrl(seoul_naver)) {
-                                      // throw Exception('Could not launch seoul_nav');
+
+                                    if (await canLaunchUrl(seoul_naver)) {
+                                      await launchUrl(seoul_naver);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'seoul_map_naver_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '네이버 지도가 설치되어 있지 않아요',
+                                        text: '네이버 지도 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_naver_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_naver_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'));
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   child: Container(
@@ -282,8 +325,49 @@ class ESKARA extends StatelessWidget {
                                     FirebaseAnalytics.instance.logEvent(
                                       name: 'seoul_map_kakao',
                                     );
-                                    if (!await launchUrl(seoul_kakao)) {
-                                      // throw Exception('Could not launch seoul_nav');
+
+                                    if (await canLaunchUrl(seoul_kakao)) {
+                                      await launchUrl(seoul_kakao);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'seoul_map_kakao_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '카카오맵이 설치되어 있지 않아요',
+                                        text: '카카오맵 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_kakao_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_kakao_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'));
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   child: Container(
@@ -636,8 +720,49 @@ class ESKARA extends StatelessWidget {
                                     FirebaseAnalytics.instance.logEvent(
                                       name: 'suwon_map_naver',
                                     );
-                                    if (!await launchUrl(suwon_naver)) {
-                                      // throw Exception('Could not launch seoul_nav');
+
+                                    if (await canLaunchUrl(suwon_naver)) {
+                                      await launchUrl(suwon_naver);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'suwon_map_naver_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '네이버 지도가 설치되어 있지 않아요',
+                                        text: '네이버 지도 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_naver_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_naver_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'));
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   child: Container(
@@ -669,8 +794,49 @@ class ESKARA extends StatelessWidget {
                                     FirebaseAnalytics.instance.logEvent(
                                       name: 'suwon_map_kakao',
                                     );
-                                    if (!await launchUrl(suwon_kakao)) {
-                                      // throw Exception('Could not launch seoul_nav');
+
+                                    if (await canLaunchUrl(suwon_kakao)) {
+                                      await launchUrl(suwon_kakao);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'suwon_map_kakao_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '카카오맵이 설치되어 있지 않아요',
+                                        text: '카카오맵 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_kakao_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_kakao_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'));
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   child: Container(
