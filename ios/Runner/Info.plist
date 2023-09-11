@@ -49,6 +49,7 @@
 		<string>tel</string>
 		<string>nmap</string>
 		<string>kakaomap</string>
+		<string>map</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

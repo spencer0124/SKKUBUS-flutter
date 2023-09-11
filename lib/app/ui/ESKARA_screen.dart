@@ -16,11 +16,15 @@ final Uri seoul_naver = Uri.parse(
 final Uri seoul_kakao = Uri.parse(
     'kakaomap://route?ep=37.586462,126.995115&by=FOOT&eName=%ec%9d%b8%ec%82%ac%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
 
+final Uri seoul_apple = Uri.parse('maps://?t=m&daddr=37.586462,126.995115');
+
 final Uri suwon_naver = Uri.parse(
     'nmap://route/walk?dlat=37.292602&dlng=126.972431&dname=%ec%9e%90%ea%b3%bc%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
 
 final Uri suwon_kakao = Uri.parse(
     'kakaomap://route?ep=37.292602,126.972431&by=FOOT&eName=%ec%9e%90%ea%b3%bc%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
+
+final Uri suwon_apple = Uri.parse('maps://?t=m&daddr=37.292602,126.972431');
 
 final seoul_marker =
     NMarker(id: 'seoul_marker', position: const NLatLng(37.586462, 126.995115));
@@ -241,7 +245,7 @@ class ESKARA extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 15),
+                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -393,6 +397,86 @@ class ESKARA extends StatelessWidget {
                               ],
                             ),
                           ),
+                          // 애플지도 추가1
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
+                                  onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'seoul_map_apple',
+                                    );
+
+                                    if (await canLaunchUrl(seoul_apple)) {
+                                      await launchUrl(seoul_apple);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'seoul_map_apple_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '애플 지도가 설치되어 있지 않아요',
+                                        text: '애플 지도 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_apple_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'seoul_map_apple_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 173.w,
+                                    height: 37.h,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      '애플 지도로 길찾기',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'NotoSansBold',
+                                          fontSize: 13),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -710,7 +794,7 @@ class ESKARA extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 15),
+                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 7),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -862,6 +946,85 @@ class ESKARA extends StatelessWidget {
                               ],
                             ),
                           ),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
+                                  onTap: () async {
+                                    FirebaseAnalytics.instance.logEvent(
+                                      name: 'suwon_map_apple',
+                                    );
+
+                                    if (await canLaunchUrl(suwon_apple)) {
+                                      await launchUrl(suwon_apple);
+
+                                      FirebaseAnalytics.instance.logEvent(
+                                        name: 'suwon_map_apple_success',
+                                      );
+                                    } else {
+                                      final result = await FlutterPlatformAlert
+                                          .showCustomAlert(
+                                        windowTitle: '애플 지도가 설치되어 있지 않아요',
+                                        text: '애플 지도 설치 페이지로 이동할까요?',
+                                        negativeButtonTitle: "이동",
+                                        positiveButtonTitle: "취소",
+                                      );
+
+                                      if (result ==
+                                          CustomButton.positiveButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_apple_fail_cancel',
+                                        );
+                                      }
+
+                                      if (result ==
+                                          CustomButton.negativeButton) {
+                                        FirebaseAnalytics.instance.logEvent(
+                                          name: 'suwon_map_apple_fail_move',
+                                        );
+                                        if (Platform.isAndroid) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
+                                          }
+                                        }
+                                        if (Platform.isIOS) {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
+                                            await launchUrl(Uri.parse(
+                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 173.w,
+                                    height: 37.h,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      '애플 지도로 길찾기',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'NotoSansBold',
+                                          fontSize: 13),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
