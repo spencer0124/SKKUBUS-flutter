@@ -196,9 +196,9 @@ class BusDataScreen extends GetView<BusDataController> {
                                 //     color: Colors.white,
                                 //   ),
                                 // ),
-                                const Text(
-                                  'SKKU BUS',
-                                  style: TextStyle(
+                                Text(
+                                  'appname'.tr,
+                                  style: const TextStyle(
                                     fontSize: 22,
                                     color: Colors.white,
                                     fontFamily: 'ProductBold',
@@ -287,13 +287,13 @@ class BusDataScreen extends GetView<BusDataController> {
                                         ),
                                       ),
                                       alignment: Alignment.center,
-                                      width: 125,
+                                      // width: 70,
                                       height: 35,
                                       child: GestureDetector(
                                         behavior: HitTestBehavior.translucent,
-                                        child: const Text(
-                                          '\u{00A0}ESKARA 인자셔틀\u{00A0}',
-                                          style: TextStyle(
+                                        child: Text(
+                                          '\u{00A0}\u{00A0}${'인자셔틀'.tr}\u{00A0}\u{00A0}',
+                                          style: const TextStyle(
                                             color: AppColors.green_main,
                                             fontFamily: 'NotoSansBold',
                                           ),
@@ -360,7 +360,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                         padding: const EdgeInsets.fromLTRB(
                                             2, 0, 0, 0),
                                         child: Text(
-                                          '${controller.currentTime.value} 기준 · ${controller.activeBusCount.value}대 운행 중',
+                                          '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: Colors.grey[800],
@@ -572,7 +572,8 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                   controller
                                                                       .busDataList[
                                                                           index]
-                                                                      .stationName,
+                                                                      .stationName
+                                                                      .tr,
                                                                   style:
                                                                       const TextStyle(
                                                                     fontSize:
@@ -632,10 +633,11 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                             index]
                                                                         .stationName ==
                                                                     '정차소(인문.농구장)'
-                                                                ? const Text(
-                                                                    '도착 정보 없음',
+                                                                ? Text(
+                                                                    '도착 정보 없음'
+                                                                        .tr,
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       fontSize:
                                                                           11,
                                                                       color: Colors
@@ -1337,15 +1339,16 @@ class BusDataScreen extends GetView<BusDataController> {
                                   Container(
                                     height: 10,
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 27,
                                     width: double.infinity,
                                     child: Padding(
-                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 0, 0, 0),
                                       child: Text(
-                                        '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다',
+                                        '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다'.tr,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                           color: Colors.black,
                                           fontFamily: 'NotoSansRegulars',

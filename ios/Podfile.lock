@@ -97,6 +97,8 @@ PODS:
     - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
+  - flutter_localization (0.0.1):
+    - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
   - flutter_naver_map (1.0.0):
@@ -192,6 +194,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
+  - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - flutter_phone_direct_caller (from `.symlinks/plugins/flutter_phone_direct_caller/ios`)
@@ -244,6 +247,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_config/ios"
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
+  flutter_localization:
+    :path: ".symlinks/plugins/flutter_localization/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   flutter_naver_map:
@@ -286,6 +291,7 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_config: 2226c1df19c78fe34a05eb7f1363445f18e76fc1
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
+  flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_naver_map: d1ee15e7a2fe5360a19640648ceed5abf79d82aa
   flutter_phone_direct_caller: bd2ffd297f371a8a6c7bfbba0196964ffe3c4358
@@ -304,7 +310,7 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   share_plus: 599aa54e4ea31d4b4c0e9c911bcc26c55e791028
-  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 

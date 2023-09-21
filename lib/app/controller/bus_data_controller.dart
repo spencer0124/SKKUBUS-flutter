@@ -156,11 +156,11 @@ class BusDataController extends GetxController
 
     for (var i = currentIndex - 1; i >= 0; i--) {
       if (busDataList[i].carNumber.isNotEmpty) {
-        return '${currentIndex - i}개 정거장 남음';
+        return '${currentIndex - i}${'개 정거장 남음'.tr}';
       }
     }
 
-    return '도착 정보 없음';
+    return '도착 정보 없음'.tr;
   }
 
   String timeDifference(String eventDate) {
@@ -178,11 +178,11 @@ class BusDataController extends GetxController
     final duration = DateTime.now().difference(eventDateTime);
 
     if (duration.inSeconds < 15) {
-      return '도착 혹은 출발';
+      return '도착 혹은 출발'.tr;
     } else if (duration.inDays > 1) {
-      return '하루 이상 전 정류장 떠남';
+      return '하루 이상 전 정류장 떠남'.tr;
     } else {
-      return '${duration.inMinutes}분 ${duration.inSeconds % 60}초 전 정류장 떠남';
+      return '${duration.inMinutes}${'분'.tr}\u{00A0}${duration.inSeconds % 60}${'초'.tr}\u{00A0}${'전 정류장 떠남'.tr}';
     }
   }
 
