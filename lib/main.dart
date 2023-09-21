@@ -33,6 +33,8 @@ import 'package:skkumap/app/controller/ESKARA_controller.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'languages.dart';
+
 late SharedPreferences prefs;
 
 StreamController<String> streamController = StreamController.broadcast();
@@ -115,6 +117,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         getPages: AppRoutes.routes,
         initialRoute: determineInitialRoute(),
+        translations: Languages(),
+        locale: Get.deviceLocale,
+        fallbackLocale: const Locale('ko', 'KR'),
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,

@@ -3,52 +3,55 @@ import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/controller/ESKARA_controller.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'dart:io' show Platform;
 
-final Uri seoul_naver = Uri.parse(
-    'nmap://route/walk?dlat=37.586462&dlng=126.995115&dname=%ec%9d%b8%ec%82%ac%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
+// 좌표랑 목적지 이름 다 완성 아니니까 완성하고 한번씩 테스트해보기
 
-final Uri seoul_kakao = Uri.parse(
-    'kakaomap://route?ep=37.586462,126.995115&by=FOOT&eName=%ec%9d%b8%ec%82%ac%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
+// 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
+const double seoulLat = 37.587308;
+const double seoulLon = 126.993688;
+const String seoulDestnameEncode =
+    '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9D%B8%EC%82%AC%EC%BA%A0%20%EC%85%94%ED%8B%80%20%EC%9C%84%EC%B9%98';
 
-final Uri seoul_apple = Uri.parse('maps://?t=m&daddr=37.586462,126.995115');
+// 자과캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
+const double suwonLat = 37.292345;
+const double suwonLon = 126.975532;
+const String suwonDestnameEncode =
+    '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9E%90%EA%B3%BC%EC%BA%A0%20%EC%85%94%ED%8B%80%20%EC%9C%84%EC%B9%98';
 
-final Uri suwon_naver = Uri.parse(
-    'nmap://route/walk?dlat=37.292602&dlng=126.972431&dname=%ec%9e%90%ea%b3%bc%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
+// 인사캠 길찾기 바로가기 링크
+final Uri seoulMapNaver = Uri.parse(
+    'nmap://route/walk?dlat=$seoulLat&dlng=$seoulLon&dname=$seoulDestnameEncode');
+final Uri seoulMapKakao = Uri.parse(
+    'kakaomap://route?ep=$seoulLat,$seoulLon&by=FOOT&eName=$seoulDestnameEncode');
+final Uri seoulMapApple = Uri.parse('maps://?t=m&daddr=$seoulLat,$seoulLon');
 
-final Uri suwon_kakao = Uri.parse(
-    'kakaomap://route?ep=37.292602,126.972431&by=FOOT&eName=%ec%9e%90%ea%b3%bc%ec%ba%a0%20%ec%85%94%ed%8b%80%20%ec%9c%84%ec%b9%98%20%7c%20%ec%8a%a4%ea%be%b8%eb%b2%84%ec%8a%a4');
+// 자과캠 길찾기 바로가기 링크
+final Uri suwonMapNaver = Uri.parse(
+    'nmap://route/walk?dlat=$suwonLat&dlng=$suwonLon&dname=$suwonDestnameEncode');
+final Uri suwonMapKakao = Uri.parse(
+    'kakaomap://route?ep=$suwonLat,$suwonLon&by=FOOT&eName=$suwonDestnameEncode');
+final Uri suwonMapApple = Uri.parse('maps://?t=m&daddr=$suwonLat,$suwonLon');
 
-final Uri suwon_apple = Uri.parse('maps://?t=m&daddr=37.292602,126.972431');
-
-final seoul_marker =
-    NMarker(id: 'seoul_marker', position: const NLatLng(37.586462, 126.995115));
-
-final suwon_marker =
-    NMarker(id: 'suwon_marker', position: const NLatLng(37.292602, 126.972431));
-
-const seoul_cameraPosition = NCameraPosition(
-  target: NLatLng(37.586462, 126.995115),
+// 인사캠 셔틀 탑승 위치 네이버 지도 관련 설정들
+final seoulMarker =
+    NMarker(id: 'seoul_marker', position: const NLatLng(seoulLat, seoulLon));
+const seoulCameraPosition = NCameraPosition(
+  target: NLatLng(seoulLat, seoulLon),
   zoom: 15,
   bearing: 45,
   tilt: 30,
 );
 
-const suwon_cameraPosition = NCameraPosition(
-  target: NLatLng(37.292602, 126.972431),
+// 자과캠 셔틀 탑승 위치 네이버 지도 관련
+final suwonMarker =
+    NMarker(id: 'suwon_marker', position: const NLatLng(suwonLat, suwonLon));
+const suwonCameraPosition = NCameraPosition(
+  target: NLatLng(suwonLat, suwonLon),
   zoom: 15,
   bearing: 45,
   tilt: 30,
-);
-
-final seoul_onMarkerInfoWindow = NInfoWindow.onMarker(
-  id: seoul_marker.info.id,
-  text: "비천당 앞",
 );
 
 final controller = Get.find<ESKARAController>();
@@ -96,9 +99,9 @@ class ESKARA extends StatelessWidget {
                             size: 22,
                           ),
                         ),
-                        const Text(
-                          'ESKARA 인자셔틀',
-                          style: TextStyle(
+                        Text(
+                          '인자셔틀'.tr,
+                          style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
                             fontFamily: 'NotoSansBold',
@@ -123,7 +126,6 @@ class ESKARA extends StatelessWidget {
                   children: [
                     Container(
                       padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      // color: Colors.green,
                       child: Column(
                         children: [
                           Padding(
@@ -137,9 +139,9 @@ class ESKARA extends StatelessWidget {
                               Container(
                                 width: 5,
                               ),
-                              const Text(
-                                '안내사항',
-                                style: TextStyle(
+                              Text(
+                                '안내사항'.tr,
+                                style: const TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
                                 ),
@@ -157,7 +159,7 @@ class ESKARA extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '셔틀은 재학생/교직원만 이용 가능합니다\n9/13-14 양일간 기숙사 통금이 02:00로 연장됩니다\n축제 당일 상황에 따라 변동될 수 있습니다',
+                                  '요금 무료\n매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
                                   style: TextStyle(
                                       color: Colors.grey[900],
                                       fontFamily: 'NotoSansRegular',
@@ -181,18 +183,14 @@ class ESKARA extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              // Icon(
-                              //   Icons.location_on,
-                              //   color: AppColors.green_main,
-                              // ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                '인자셔틀 위치 [인사캠 → 자과캠]',
-                                style: TextStyle(
+                                '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[인사캠 → 자과캠]'.tr}',
+                                style: const TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
                                 ),
@@ -206,21 +204,10 @@ class ESKARA extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Text(
-                              '9/13-14 문서수발(10:00)을 제외한 모든 셔틀 탑승위치 변경',
+                              '${'탑승장소'.tr} : ${'600주년 기념관 건너편'.tr}',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'NotoSansBold',
-                                  fontSize: 13),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              '600주년 기념관 건너편 → 비천당 앞',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'NotoSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -236,11 +223,9 @@ class ESKARA extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
                             child: NaverMap(
                               options: const NaverMapViewOptions(
-                                  initialCameraPosition: seoul_cameraPosition),
+                                  initialCameraPosition: seoulCameraPosition),
                               onMapReady: (controller) {
-                                controller.addOverlay(seoul_marker);
-                                // seoul_marker
-                                //     .openInfoWindow(seoul_onMarkerInfoWindow);
+                                controller.addOverlay(seoulMarker);
                               },
                             ),
                           ),
@@ -252,53 +237,15 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'seoul_map_naver',
-                                    );
-
-                                    if (await canLaunchUrl(seoul_naver)) {
-                                      await launchUrl(seoul_naver);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'seoul_map_naver_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '네이버 지도가 설치되어 있지 않아요',
-                                        text: '네이버 지도 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_naver_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_naver_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'seoul',
+                                        mapNameEn: 'naver_map',
+                                        mapNameKr: '네이버 지도',
+                                        mapUri: seoulMapNaver,
+                                        playStoreLink:
+                                            'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -310,9 +257,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '네이버 지도로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '네이버 지도로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -326,53 +273,15 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'seoul_map_kakao',
-                                    );
-
-                                    if (await canLaunchUrl(seoul_kakao)) {
-                                      await launchUrl(seoul_kakao);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'seoul_map_kakao_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '카카오맵이 설치되어 있지 않아요',
-                                        text: '카카오맵 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_kakao_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_kakao_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'seoul',
+                                        mapNameEn: 'kakao_map',
+                                        mapNameKr: '카카오맵',
+                                        mapUri: seoulMapKakao,
+                                        playStoreLink:
+                                            'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -384,9 +293,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '카카오맵으로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '카카오맵으로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -406,53 +315,15 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'seoul_map_apple',
-                                    );
-
-                                    if (await canLaunchUrl(seoul_apple)) {
-                                      await launchUrl(seoul_apple);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'seoul_map_apple_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '애플 지도가 설치되어 있지 않아요',
-                                        text: '애플 지도 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_apple_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'seoul_map_apple_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'seoul',
+                                        mapNameEn: 'apple_map',
+                                        mapNameKr: '애플 지도',
+                                        mapUri: seoulMapApple,
+                                        playStoreLink:
+                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -464,9 +335,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '애플 지도로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '애플 지도로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -491,18 +362,14 @@ class ESKARA extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              // Icon(
-                              //   Icons.location_on,
-                              //   color: AppColors.green_main,
-                              // ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                '인자셔틀 시간표 [인사캠 → 자과캠]',
-                                style: TextStyle(
+                                '${'인자셔틀'.tr} ${'시간표'.tr} ${'[인사캠 → 자과캠]'.tr}',
+                                style: const TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
                                 ),
@@ -510,20 +377,6 @@ class ESKARA extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              '기존 운행 셔틀 포함, *은 증차된 셔틀',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'NotoSansRegular',
-                                  fontSize: 13),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
                           Container(
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
@@ -531,15 +384,16 @@ class ESKARA extends StatelessWidget {
                               () {
                                 return DataTable(
                                   columnSpacing: 90.w,
-                                  columns: const [
+                                  columns: [
                                     DataColumn(
-                                      label: Text('9/13'),
+                                      label: Text('운행시간'.tr),
                                     ),
                                     DataColumn(
-                                      label: Text('비고'),
+                                      label: Text('비고'.tr),
                                     ),
                                   ],
-                                  rows: controller.seoul_13_busTimes
+                                  rows: controller
+                                      .schedule('seoul')
                                       .map((busTime) {
                                     return DataRow(
                                       cells: [
@@ -547,29 +401,21 @@ class ESKARA extends StatelessWidget {
                                           Builder(
                                             builder: (BuildContext context) {
                                               String displayText;
-                                              switch (busTime) {
-                                                case '14:00':
-                                                case '14:30':
-                                                case '15:30':
-                                                  displayText = '$busTime*';
-                                                  break;
-                                                default:
-                                                  displayText = busTime;
-                                              }
+                                              displayText = busTime;
                                               return Text(
                                                 displayText,
                                                 style: TextStyle(
                                                   fontWeight: busTime ==
                                                           controller
-                                                              .seoul_13_nextBusTime
+                                                              .seoulNextBusTime
                                                               .value
                                                       ? FontWeight.bold
                                                       : FontWeight.normal,
                                                   color: busTime ==
                                                           controller
-                                                              .seoul_13_nextBusTime
+                                                              .seoulNextBusTime
                                                               .value
-                                                      ? Colors.green
+                                                      ? AppColors.green_main
                                                       : Colors.black,
                                                 ),
                                               );
@@ -578,134 +424,18 @@ class ESKARA extends StatelessWidget {
                                         ),
                                         DataCell(
                                           Text(
-                                            busTime == '10:00'
-                                                ? busTime ==
-                                                        controller
-                                                            .seoul_13_nextBusTime
-                                                            .value
-                                                    ? '기존 위치 탑승\n탑승 가능한 가장 빠른 셔틀'
-                                                    : '기존 위치 탑승'
-                                                : busTime ==
-                                                        controller
-                                                            .seoul_13_nextBusTime
-                                                            .value
-                                                    ? '탑승 가능한 가장 빠른 셔틀'
-                                                    : ' ',
+                                            busTime ==
+                                                    controller
+                                                        .seoulNextBusTime.value
+                                                ? '탑승 가능한 가장 빠른 셔틀'.tr
+                                                : ' ',
                                             style: TextStyle(
-                                                color: busTime == '10:00'
-                                                    ? busTime ==
-                                                            controller
-                                                                .seoul_13_nextBusTime
-                                                                .value
-                                                        ? Colors.green
-                                                        : Colors.black
-                                                    : busTime ==
-                                                            controller
-                                                                .seoul_13_nextBusTime
-                                                                .value
-                                                        ? Colors.green
-                                                        : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  }).toList(),
-                                );
-                              },
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
-                            child: Obx(
-                              () {
-                                return DataTable(
-                                  columnSpacing: 90.w,
-                                  columns: const [
-                                    DataColumn(
-                                      label: Text('9/14'),
-                                    ),
-                                    DataColumn(
-                                      label: Text('비고'),
-                                    ),
-                                  ],
-                                  rows: controller.seoul_14_busTimes
-                                      .map((busTime) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Builder(
-                                            builder: (BuildContext context) {
-                                              String displayText;
-                                              switch (busTime) {
-                                                case '10:15':
-                                                case '10:30':
-                                                case '10:45':
-                                                case '11:00':
-                                                case '11:15':
-                                                case '11:30':
-                                                case '11:45':
-                                                case '12:15':
-                                                case '12:30':
-                                                case '12:45':
-                                                case '13:00':
-                                                case '13:15':
-                                                case '13:30':
-                                                  displayText = '$busTime*';
-                                                  break;
-                                                default:
-                                                  displayText = busTime;
-                                              }
-                                              return Text(
-                                                displayText,
-                                                style: TextStyle(
-                                                  fontWeight: busTime ==
-                                                          controller
-                                                              .seoul_14_nextBusTime
-                                                              .value
-                                                      ? FontWeight.bold
-                                                      : FontWeight.normal,
-                                                  color: busTime ==
-                                                          controller
-                                                              .seoul_14_nextBusTime
-                                                              .value
-                                                      ? Colors.green
-                                                      : Colors.black,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            busTime == '10:00'
-                                                ? busTime ==
+                                                color: busTime ==
                                                         controller
-                                                            .seoul_14_nextBusTime
+                                                            .seoulNextBusTime
                                                             .value
-                                                    ? '기존 위치 탑승\n탑승 가능한 가장 빠른 셔틀'
-                                                    : '기존 위치 탑승'
-                                                : busTime ==
-                                                        controller
-                                                            .seoul_14_nextBusTime
-                                                            .value
-                                                    ? '탑승 가능한 가장 빠른 셔틀'
-                                                    : ' ',
-                                            style: TextStyle(
-                                                color: busTime == '10:00'
-                                                    ? busTime ==
-                                                            controller
-                                                                .seoul_14_nextBusTime
-                                                                .value
-                                                        ? Colors.green
-                                                        : Colors.black
-                                                    : busTime ==
-                                                            controller
-                                                                .seoul_14_nextBusTime
-                                                                .value
-                                                        ? Colors.green
-                                                        : Colors.black,
+                                                    ? AppColors.green_main
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         )
@@ -730,18 +460,14 @@ class ESKARA extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              // Icon(
-                              //   Icons.location_on,
-                              //   color: AppColors.green_main,
-                              // ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                '인자셔틀 위치 [자과캠 → 인사캠]',
-                                style: TextStyle(
+                                '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[자과캠 → 인사캠]'.tr}',
+                                style: const TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
                                 ),
@@ -755,21 +481,10 @@ class ESKARA extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Text(
-                              '9/13-14 양일간 모든 셔틀 탑승위치 변경',
+                              '${'탑승장소'.tr} : ${'N센터 앞'.tr}',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'NotoSansBold',
-                                  fontSize: 13),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              'N센터 앞 → 의대 대강당 앞',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'NotoSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -785,69 +500,29 @@ class ESKARA extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
                             child: NaverMap(
                               options: const NaverMapViewOptions(
-                                  initialCameraPosition: suwon_cameraPosition),
+                                  initialCameraPosition: suwonCameraPosition),
                               onMapReady: (controller) {
-                                controller.addOverlay(suwon_marker);
-                                // seoul_marker
-                                //     .openInfoWindow(seoul_onMarkerInfoWindow);
+                                controller.addOverlay(suwonMarker);
                               },
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 7),
+                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'suwon_map_naver',
-                                    );
-
-                                    if (await canLaunchUrl(suwon_naver)) {
-                                      await launchUrl(suwon_naver);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'suwon_map_naver_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '네이버 지도가 설치되어 있지 않아요',
-                                        text: '네이버 지도 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_naver_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_naver_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'suwon',
+                                        mapNameEn: 'naver_map',
+                                        mapNameKr: '네이버 지도',
+                                        mapUri: suwonMapNaver,
+                                        playStoreLink:
+                                            'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -859,9 +534,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '네이버 지도로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '네이버 지도로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -875,53 +550,15 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'suwon_map_kakao',
-                                    );
-
-                                    if (await canLaunchUrl(suwon_kakao)) {
-                                      await launchUrl(suwon_kakao);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'suwon_map_kakao_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '카카오맵이 설치되어 있지 않아요',
-                                        text: '카카오맵 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_kakao_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_kakao_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'suwon',
+                                        mapNameEn: 'kakao_map',
+                                        mapNameKr: '카카오맵',
+                                        mapUri: suwonMapKakao,
+                                        playStoreLink:
+                                            'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -933,9 +570,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '카카오맵으로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '카카오맵으로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -946,6 +583,7 @@ class ESKARA extends StatelessWidget {
                               ],
                             ),
                           ),
+                          // 애플지도 추가1
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
                             child: Row(
@@ -954,53 +592,15 @@ class ESKARA extends StatelessWidget {
                                 GestureDetector(
                                   behavior: HitTestBehavior.translucent,
                                   onTap: () async {
-                                    FirebaseAnalytics.instance.logEvent(
-                                      name: 'suwon_map_apple',
-                                    );
-
-                                    if (await canLaunchUrl(suwon_apple)) {
-                                      await launchUrl(suwon_apple);
-
-                                      FirebaseAnalytics.instance.logEvent(
-                                        name: 'suwon_map_apple_success',
-                                      );
-                                    } else {
-                                      final result = await FlutterPlatformAlert
-                                          .showCustomAlert(
-                                        windowTitle: '애플 지도가 설치되어 있지 않아요',
-                                        text: '애플 지도 설치 페이지로 이동할까요?',
-                                        negativeButtonTitle: "이동",
-                                        positiveButtonTitle: "취소",
-                                      );
-
-                                      if (result ==
-                                          CustomButton.positiveButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_apple_fail_cancel',
-                                        );
-                                      }
-
-                                      if (result ==
-                                          CustomButton.negativeButton) {
-                                        FirebaseAnalytics.instance.logEvent(
-                                          name: 'suwon_map_apple_fail_move',
-                                        );
-                                        if (Platform.isAndroid) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
-                                          }
-                                        }
-                                        if (Platform.isIOS) {
-                                          if (await canLaunchUrl(Uri.parse(
-                                              'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'))) {
-                                            await launchUrl(Uri.parse(
-                                                'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB'));
-                                          }
-                                        }
-                                      }
-                                    }
+                                    controller.executeMap(
+                                        type: 'suwon',
+                                        mapNameEn: 'apple_map',
+                                        mapNameKr: '애플 지도',
+                                        mapUri: suwonMapApple,
+                                        playStoreLink:
+                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                        appStoreLink:
+                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -1012,9 +612,9 @@ class ESKARA extends StatelessWidget {
                                         Radius.circular(20),
                                       ),
                                     ),
-                                    child: const Text(
-                                      '애플 지도로 길찾기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      '애플 지도로 길찾기'.tr,
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'NotoSansBold',
                                           fontSize: 13),
@@ -1039,18 +639,14 @@ class ESKARA extends StatelessWidget {
                               color: Colors.grey[300],
                             ),
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              // Icon(
-                              //   Icons.location_on,
-                              //   color: AppColors.green_main,
-                              // ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                '인자셔틀 시간표 [자과캠 → 인사캠]',
-                                style: TextStyle(
+                                '${'인자셔틀'.tr} ${'시간표'.tr} ${'[자과캠 → 인사캠]'.tr}',
+                                style: const TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'NotoSansBold',
                                 ),
@@ -1058,20 +654,6 @@ class ESKARA extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              '기존 운행 셔틀 포함, *은 증차된 셔틀',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'NotoSansRegular',
-                                  fontSize: 13),
-                              textAlign: TextAlign.start,
-                            ),
-                          ),
                           Container(
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
@@ -1079,15 +661,16 @@ class ESKARA extends StatelessWidget {
                               () {
                                 return DataTable(
                                   columnSpacing: 90.w,
-                                  columns: const [
+                                  columns: [
                                     DataColumn(
-                                      label: Text('9/13'),
+                                      label: Text('운행시간'.tr),
                                     ),
                                     DataColumn(
-                                      label: Text('비고'),
+                                      label: Text('비고'.tr),
                                     ),
                                   ],
-                                  rows: controller.suwon_13_busTimes
+                                  rows: controller
+                                      .schedule('suwon')
                                       .map((busTime) {
                                     return DataRow(
                                       cells: [
@@ -1095,29 +678,21 @@ class ESKARA extends StatelessWidget {
                                           Builder(
                                             builder: (BuildContext context) {
                                               String displayText;
-                                              switch (busTime) {
-                                                case '23:20':
-                                                case '23:30':
-                                                case '23:40':
-                                                  displayText = '$busTime*';
-                                                  break;
-                                                default:
-                                                  displayText = busTime;
-                                              }
+                                              displayText = busTime;
                                               return Text(
                                                 displayText,
                                                 style: TextStyle(
                                                   fontWeight: busTime ==
                                                           controller
-                                                              .suwon_13_nextBusTime
+                                                              .suwonNextBusTime
                                                               .value
                                                       ? FontWeight.bold
                                                       : FontWeight.normal,
                                                   color: busTime ==
                                                           controller
-                                                              .suwon_13_nextBusTime
+                                                              .suwonNextBusTime
                                                               .value
-                                                      ? Colors.green
+                                                      ? AppColors.green_main
                                                       : Colors.black,
                                                 ),
                                               );
@@ -1128,93 +703,15 @@ class ESKARA extends StatelessWidget {
                                           Text(
                                             busTime ==
                                                     controller
-                                                        .suwon_13_nextBusTime
-                                                        .value
-                                                ? '탑승 가능한 가장 빠른 셔틀'
+                                                        .suwonNextBusTime.value
+                                                ? '탑승 가능한 가장 빠른 셔틀'.tr
                                                 : ' ',
                                             style: TextStyle(
                                                 color: busTime ==
                                                         controller
-                                                            .suwon_13_nextBusTime
+                                                            .suwonNextBusTime
                                                             .value
-                                                    ? Colors.green
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  }).toList(),
-                                );
-                              },
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
-                            child: Obx(
-                              () {
-                                return DataTable(
-                                  columnSpacing: 90.w,
-                                  columns: const [
-                                    DataColumn(
-                                      label: Text('9/14'),
-                                    ),
-                                    DataColumn(
-                                      label: Text('비고'),
-                                    ),
-                                  ],
-                                  rows: controller.suwon_14_busTimes
-                                      .map((busTime) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Builder(
-                                            builder: (BuildContext context) {
-                                              String displayText;
-                                              switch (busTime) {
-                                                case '23:20':
-                                                case '23:30':
-                                                case '23:40':
-                                                  displayText = '$busTime*';
-                                                  break;
-                                                default:
-                                                  displayText = busTime;
-                                              }
-                                              return Text(
-                                                displayText,
-                                                style: TextStyle(
-                                                  fontWeight: busTime ==
-                                                          controller
-                                                              .suwon_14_nextBusTime
-                                                              .value
-                                                      ? FontWeight.bold
-                                                      : FontWeight.normal,
-                                                  color: busTime ==
-                                                          controller
-                                                              .suwon_14_nextBusTime
-                                                              .value
-                                                      ? Colors.green
-                                                      : Colors.black,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            busTime ==
-                                                    controller
-                                                        .suwon_14_nextBusTime
-                                                        .value
-                                                ? '탑승 가능한 가장 빠른 셔틀'
-                                                : ' ',
-                                            style: TextStyle(
-                                                color: busTime ==
-                                                        controller
-                                                            .suwon_14_nextBusTime
-                                                            .value
-                                                    ? Colors.green
+                                                    ? AppColors.green_main
                                                     : Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
