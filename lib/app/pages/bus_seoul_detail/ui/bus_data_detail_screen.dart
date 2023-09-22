@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:skkumap/app/controller/bus_data_detail_controller.dart';
+import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_data_detail_controller.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 final double dheight =
