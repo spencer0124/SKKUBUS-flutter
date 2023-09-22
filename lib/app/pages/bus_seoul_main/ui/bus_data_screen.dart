@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skkumap/app/controller/bus_data_controller.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_data_controller.dart';
 import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
 
 import 'package:share_plus/share_plus.dart';
 
-import 'package:skkumap/app/pages/bus_seoul_main/bus_data_screen_animation.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_data_screen_animation.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';

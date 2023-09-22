@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:skkumap/app/pages/bus_inja_detail/binding/ESKARA_binding.dart';
+import 'package:skkumap/app/pages/bus_inja_detail/binding/bus_inja_detail_binding.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/binding/bus_data_binding.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_data_screen.dart';
 
 import 'package:skkumap/app/pages/bus_seoul_detail/ui/bus_data_detail_screen.dart';
-import 'package:skkumap/app/pages/bus_inja_detail/ui/ESKARA_screen.dart';
+import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
 
 class AppRoutes {
