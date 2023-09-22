@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
-import 'package:skkumap/app/binding/ESKARA_binding.dart';
-import 'package:skkumap/app/binding/bus_data_binding.dart';
-import 'package:skkumap/app/ui/bus_data_screen.dart';
-import 'package:skkumap/app/ui/bus_schedule_screen.dart';
-import 'package:skkumap/app/ui/bus_setting_screen.dart';
-import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
-import 'package:skkumap/app/ui/ESKARA_screen.dart';
-import 'package:skkumap/app/ui/new_alert.dart';
+import 'package:skkumap/app/pages/bus_inja_detail/binding/ESKARA_binding.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/binding/bus_data_binding.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_data_screen.dart';
+
+import 'package:skkumap/app/pages/bus_seoul_detail/ui/bus_data_detail_screen.dart';
+import 'package:skkumap/app/pages/bus_inja_detail/ui/ESKARA_screen.dart';
+import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
 
 class AppRoutes {
   static final routes = [
@@ -19,19 +18,17 @@ class AppRoutes {
         page: () => const BusDataScreen(),
         binding: BusDataBinding()),
     GetPage(
-        name: '/busSchedule',
-        page: () => const BusScheduleScreen(),
-        binding: BusDataBinding()),
-    GetPage(
-        name: '/busSetting',
-        page: () => const BusSettingScreen(),
-        binding: BusDataBinding()),
-    GetPage(
         name: '/busDetail',
         page: () => const BusDataScreenDetail(),
         binding: BusDataBinding()),
     GetPage(
-        name: '/eskara', page: () => const ESKARA(), binding: ESKARABinding()),
-    GetPage(name: '/newalert', page: () => const NewAlert()),
+      name: '/eskara',
+      page: () => const ESKARA(),
+      binding: ESKARABinding(),
+    ),
+    GetPage(
+      name: '/newalert',
+      page: () => const NewAlert(),
+    ),
   ];
 }

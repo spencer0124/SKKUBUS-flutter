@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skkumap/app/ui/bus_data_screen.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/bus_data_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:skkumap/app/ui/bus_data_detail_screen.dart';
 

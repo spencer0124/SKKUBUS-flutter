@@ -102,9 +102,11 @@ class MyApp extends StatelessWidget {
       prefs
           .remove('routeToNavigate'); // Clear the stored route after reading it
       return routeFromPrefs;
-    } else if (!newalertdone) {
-      return '/newalert';
-    } else {
+    }
+    // else if (!newalertdone) {
+    //   return '/newalert';
+    // }
+    else {
       return '/';
     }
   }
@@ -119,7 +121,7 @@ class MyApp extends StatelessWidget {
         initialRoute: determineInitialRoute(),
         translations: Languages(),
         locale: Get.deviceLocale,
-        fallbackLocale: const Locale('ko', 'KR'),
+        fallbackLocale: const Locale('en', 'US'),
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,
