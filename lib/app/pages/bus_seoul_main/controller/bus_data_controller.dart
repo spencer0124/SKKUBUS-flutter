@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:flutter/material.dart';
-
 import 'package:logger/logger.dart';
 
 import 'package:skkumap/admob/ad_helper.dart';
@@ -15,6 +14,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:io' show Platform;
 
+import 'package:skkumap/app/utils/return_platform.dart';
+
+/*
+라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
+*/
 class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   BusDataController busDataController = Get.find<BusDataController>();
 
@@ -42,6 +46,10 @@ class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   }
 }
 
+/*
+메인 컨트롤러
+*/
+
 class BusDataController extends GetxController
     with SingleGetTickerProviderMixin {
   RxBool waitAdFail = false.obs;
@@ -50,33 +58,34 @@ class BusDataController extends GetxController
 
   @override
   void onInit() async {
-    try {
-      await FirebaseAnalytics.instance
-          .setCurrentScreen(screenName: 'bus_data_screen');
-    } catch (e) {}
-
-    // createDynamicLink();
     super.onInit();
 
+    // permission handler로 이전하기
     if (await Permission.notification.isDenied) {
       await Permission.notification.request();
     }
 
-    if (Platform.isAndroid) {
-      platform = 'Android';
-    } else if (Platform.isIOS) {
-      platform = 'IOS';
-    } else {
-      platform = 'unknown';
-    }
+    // 현재 스크린 firebase에 기록
 
-    Future.delayed(const Duration(milliseconds: 3000), () {
-      waitAdFail.value = true;
-      FirebaseAnalytics.instance
-          .logEvent(name: 'alternative_ad_showed', parameters: {
-        'platform': platform,
-      });
-    });
+    // 현재 플랫폼 가져와서 firebase에 기록
+
+    // getCurrentPlatform()
+
+    // if (Platform.isAndroid) {
+    //   platform = 'Android';
+    // } else if (Platform.isIOS) {
+    //   platform = 'IOS';
+    // } else {
+    //   platform = 'unknown';
+    // }
+
+    // Future.delayed(const Duration(milliseconds: 3000), () {
+    //   waitAdFail.value = true;
+    //   FirebaseAnalytics.instance
+    //       .logEvent(name: 'alternative_ad_showed', parameters: {
+    //     'platform': platform,
+    //   });
+    // });
 
     _animationController = AnimationController(
       vsync: this,
@@ -93,7 +102,7 @@ class BusDataController extends GetxController
           isAdLoaded.value = true;
         },
         onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
+          // print('Failed to load a banner ad: ${err.message}');
           ad.dispose();
         },
       ),
@@ -173,8 +182,6 @@ class BusDataController extends GetxController
       return "Invalid Date";
     }
 
-    // print('Now: ${DateTime.now()}');
-    // print('Event date: $eventDateTime');
     final duration = DateTime.now().difference(eventDateTime);
 
     if (duration.inSeconds < 15) {
