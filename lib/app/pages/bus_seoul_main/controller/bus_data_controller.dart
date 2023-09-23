@@ -15,6 +15,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' show Platform;
 
 import 'package:skkumap/app/utils/return_platform.dart';
+import 'package:share_plus/share_plus.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
@@ -111,6 +112,19 @@ class BusDataController extends GetxController
     updateTime();
     fetchBusData();
     startUpdateTimer();
+  }
+
+  Future<void> onShareClicked() async {
+    FirebaseAnalytics.instance.logEvent(name: 'share_clicked');
+    List activeBuses =
+        busDataList.where((bus) => bus.carNumber.isNotEmpty).toList();
+    String activeBusDetails = activeBuses.map((bus) {
+      String nextStation = getNextStation(bus.stationName);
+      return '${bus.stationName} → $nextStation\n${timeDifference2(bus.eventDate)} 전 출발\n';
+    }).join('\n');
+
+    await Share.share(
+        '인사캠 셔틀버스 실시간 위치\n[${currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nskkubus-app.kro.kr');
   }
 
   BannerAd? _bannerAd;
