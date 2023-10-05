@@ -120,11 +120,11 @@ class BusDataController extends GetxController
         busDataList.where((bus) => bus.carNumber.isNotEmpty).toList();
     String activeBusDetails = activeBuses.map((bus) {
       String nextStation = getNextStation(bus.stationName);
-      return '${bus.stationName} → $nextStation\n${timeDifference2(bus.eventDate)} 전 출발\n';
+      return '${bus.stationName} → $nextStation\n${timeDifference2(bus.eventDate)} ${'전 출발\n'.tr}';
     }).join('\n');
 
     await Share.share(
-        '인사캠 셔틀버스 실시간 위치\n[${currentTime.value} 기준 · ${activeBuses.length}대 운행 중]\n\n$activeBusDetails\n스꾸버스 앱에서 편하게 정보를 받아보세요!\nskkubus-app.kro.kr');
+        '${'인사캠 셔틀버스 실시간 위치'.tr}\n[${currentTime.value} ${'기준'.tr} · ${activeBuses.length}${'대 운행 중'.tr}]\n\n$activeBusDetails\n${'스꾸버스 앱에서 편하게 정보를 받아보세요!'.tr}\nskkubus-app.kro.kr');
   }
 
   BannerAd? _bannerAd;

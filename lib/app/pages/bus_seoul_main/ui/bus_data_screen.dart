@@ -97,10 +97,10 @@ class BusDataScreen extends GetView<BusDataController> {
                                   label: '스꾸버스 앱 로고',
                                   child: Text(
                                     'appname'.tr,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 22,
                                       color: Colors.white,
-                                      fontFamily: 'ProductBold',
+                                      fontFamily: 'ProductBold'.tr,
                                     ),
                                   ),
                                 ),
@@ -181,7 +181,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                             '\u{00A0}\u{00A0}${'인자셔틀'.tr}\u{00A0}\u{00A0}',
                                             style: const TextStyle(
                                               color: AppColors.green_main,
-                                              fontFamily: 'NotoSansBold',
+                                              fontFamily: 'CJKBold',
                                             ),
                                             textAlign: TextAlign.start,
                                           ),
@@ -251,7 +251,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: Colors.grey[800],
-                                            fontFamily: 'NotoSansRegular',
+                                            fontFamily: 'CJKRegular',
                                           ),
                                         ),
                                       ),
@@ -468,7 +468,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                     color: Colors
                                                                         .black,
                                                                     fontFamily:
-                                                                        'NotoSansBold',
+                                                                        'CJKBold',
                                                                   ),
                                                                 ),
                                                               )
@@ -492,7 +492,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                     color: Colors
                                                                         .black,
                                                                     fontFamily:
-                                                                        'NotoSansRegular',
+                                                                        'CJKRegular',
                                                                   ),
                                                                 ),
                                                               ),
@@ -512,7 +512,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                   color: Colors
                                                                       .black,
                                                                   fontFamily:
-                                                                      'NotoSansBold',
+                                                                      'CJKBold',
                                                                 ),
                                                               )
                                                             : controller
@@ -530,7 +530,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontFamily:
-                                                                          'NotoSansRegular',
+                                                                          'CJKRegular',
                                                                     ),
                                                                   )
                                                                 : Text(
@@ -545,7 +545,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontFamily:
-                                                                          'NotoSansRegular',
+                                                                          'CJKRegular',
                                                                     ),
                                                                   ),
                                                       ],
@@ -719,7 +719,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                               color:
                                                                   Colors.white,
                                                               fontFamily:
-                                                                  'NotoSansBold',
+                                                                  'CJKBold',
                                                             ),
                                                           ),
                                                         ),
@@ -795,7 +795,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                               color:
                                                                   Colors.white,
                                                               fontFamily:
-                                                                  'NotoSansBold',
+                                                                  'CJKBold',
                                                             ),
                                                           ),
                                                         ),
@@ -882,7 +882,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                   color: Colors
                                                                       .white,
                                                                   fontFamily:
-                                                                      'NotoSansBold',
+                                                                      'CJKBold',
                                                                 ),
                                                               ),
                                                             ),
@@ -976,7 +976,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                       color: Colors
                                                                           .white,
                                                                       fontFamily:
-                                                                          'NotoSansBold',
+                                                                          'CJKBold',
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1238,7 +1238,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                         style: const TextStyle(
                                           fontSize: 12,
                                           color: Colors.black,
-                                          fontFamily: 'NotoSansRegulars',
+                                          fontFamily: 'CJKRegular',
                                         ),
                                       ),
                                     ),
@@ -1285,11 +1285,13 @@ class BusDataScreen extends GetView<BusDataController> {
                     child: Stack(alignment: Alignment.center, children: [
                       Transform.translate(
                         offset: const Offset(1, 0),
-                        child: Lottie.asset('assets/lottie/refresh_white.json',
-                            repeat: false,
-                            controller: controller.animationController,
-                            width: 200,
-                            height: 200),
+                        child: const Icon(Icons.refresh,
+                            size: 40, color: Colors.white),
+                        // Lottie.asset('assets/lottie/refresh_white.json',
+                        //     repeat: false,
+                        //     controller: controller.animationController,
+                        //     width: 200,
+                        //     height: 200),
                       ),
                       // Obx(
                       //   () => Text(

@@ -165,8 +165,8 @@ class ESKARAController extends GetxController {
   void determineNextBus() {
     DateTime now = DateTime.now().toLocal();
     String formattedTime = DateFormat('HH:mm').format(now);
-
-    if (now.weekday == DateTime.friday) {
+    if (now.weekday == DateTime.saturday || now.weekday == DateTime.sunday) {
+    } else if (now.weekday == DateTime.friday) {
       seoulNextBusTime.value =
           determineNextTime(formattedTime, seoulFridayBusTimes);
       suwonNextBusTime.value =
