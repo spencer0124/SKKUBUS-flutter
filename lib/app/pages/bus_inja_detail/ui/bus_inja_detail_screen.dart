@@ -102,7 +102,7 @@ class ESKARA extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                            fontFamily: 'NotoSansBold',
+                            fontFamily: 'CJKBold',
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -141,7 +141,7 @@ class ESKARA extends StatelessWidget {
                                 '안내사항'.tr,
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'CJKBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -160,7 +160,7 @@ class ESKARA extends StatelessWidget {
                                   '요금 무료\n매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
                                   style: TextStyle(
                                       color: Colors.grey[900],
-                                      fontFamily: 'NotoSansRegular',
+                                      fontFamily: 'CJKRegular',
                                       fontSize: 13),
                                   textAlign: TextAlign.start,
                                 ),
@@ -190,7 +190,7 @@ class ESKARA extends StatelessWidget {
                                 '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[인사캠 → 자과캠]'.tr}',
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'CJKBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -205,7 +205,7 @@ class ESKARA extends StatelessWidget {
                               '${'탑승장소'.tr} : ${'600주년 기념관 건너편'.tr}',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'NotoSansRegular',
+                                  fontFamily: 'CJKRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -259,7 +259,7 @@ class ESKARA extends StatelessWidget {
                                       '네이버 지도로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -295,7 +295,7 @@ class ESKARA extends StatelessWidget {
                                       '카카오맵으로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.black,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -337,7 +337,7 @@ class ESKARA extends StatelessWidget {
                                       '애플 지도로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -369,7 +369,7 @@ class ESKARA extends StatelessWidget {
                                 '${'인자셔틀'.tr} ${'시간표'.tr} ${'[인사캠 → 자과캠]'.tr}',
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'CJKBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -467,7 +467,7 @@ class ESKARA extends StatelessWidget {
                                 '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[자과캠 → 인사캠]'.tr}',
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'CJKBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -482,7 +482,7 @@ class ESKARA extends StatelessWidget {
                               '${'탑승장소'.tr} : ${'N센터 앞'.tr}',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'NotoSansRegular',
+                                  fontFamily: 'CJKRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -536,7 +536,7 @@ class ESKARA extends StatelessWidget {
                                       '네이버 지도로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -572,7 +572,7 @@ class ESKARA extends StatelessWidget {
                                       '카카오맵으로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.black,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -614,7 +614,7 @@ class ESKARA extends StatelessWidget {
                                       '애플 지도로 길찾기'.tr,
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontFamily: 'NotoSansBold',
+                                          fontFamily: 'CJKBold',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -646,7 +646,7 @@ class ESKARA extends StatelessWidget {
                                 '${'인자셔틀'.tr} ${'시간표'.tr} ${'[자과캠 → 인사캠]'.tr}',
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'NotoSansBold',
+                                  fontFamily: 'CJKBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
