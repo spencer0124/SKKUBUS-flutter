@@ -122,10 +122,13 @@ class ESKARAController extends GetxController {
     '08:00',
     '10:00',
     '12:00',
+    '14:00',
     '15:00',
+    '16:20',
     '16:30',
     '18:00',
-    '19:00'
+    '18:10',
+    '19:00',
   ];
 
   // 자과캠 -> 인사캠
@@ -141,12 +144,16 @@ class ESKARAController extends GetxController {
 
   final List<String> suwonFridayBusTimes = [
     '08:00',
+    '10:00',
     '10:30',
     '12:00',
     '13:30',
+    '14:00',
     '15:00',
+    '16:20',
     '16:30',
     '18:00',
+    '18:10',
   ];
 
   // 다음 버스 시간 저장하는 변수
