@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'dart:ui';
 import 'dart:async';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -17,7 +20,7 @@ import 'package:skkumap/app/data/repository/bus_data_repository.dart';
 import 'package:skkumap/app/data/provider/but_data_provider.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_data_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
-import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
+import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
 import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_data_detail_controller.dart';
 import 'package:skkumap/app/data/provider/bus_data_detail_provider.dart';
 import 'package:skkumap/app/data/repository/bus_data_detail_repository.dart';
@@ -68,7 +71,7 @@ class MyApp extends StatelessWidget {
     //   return '/newalert';
     // }
     else {
-      return '/';
+      return '/mainpage';
     }
   }
 
@@ -150,6 +153,12 @@ void registerDependencies() {
   // bus_inja_detail
   Get.put(ESKARAController());
   Get.put(LifeCycleGetx2());
+
+  Get.put(mainpageController());
+
+  Get.put(UserChatController());
+
+  Get.put(InjaDetailController());
 }
 
 ///////////////////

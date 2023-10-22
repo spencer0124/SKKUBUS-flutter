@@ -7,6 +7,12 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'dart:io' show Platform;
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future<void> initEnvironmentVariables() async {
+  await dotenv.load(fileName: ".env");
+}
 
 /*
 LifeCycleGetx2, WidgetsBindingObserver
@@ -14,15 +20,41 @@ LifeCycleGetx2, WidgetsBindingObserver
 탑승 가능한 가장 빠른 버스 시간을 표시하기 위한 로직
  */
 
+class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
+  ESKARAController eSKARAController = Get.find<ESKARAController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      eSKARAController.determineNextBus();
+    }
+  }
+}
+
 /*
-InjaDetailController
+ESKARAController
 메인 컨트롤러
 */
-class InjaDetailController extends GetxController {
+class ESKARAController extends GetxController {
   // currentTime
 
   @override
   void onInit() async {
+    await initEnvironmentVariables();
+    getDrivingDuration();
     try {
       await FirebaseAnalytics.instance
           .setCurrentScreen(screenName: 'injashuttle_screen');
@@ -31,6 +63,42 @@ class InjaDetailController extends GetxController {
     }
     super.onInit();
     determineNextBus();
+  }
+
+  var duration = ''.obs;
+
+  final Dio _dio = Dio();
+
+  // 인자셔틀 이동 소요시간 체크해주는 함수
+  Future<void> getDrivingDuration() async {
+    try {
+      final response = await _dio.get(
+        'https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving?start=126.993688,37.587308&goal=126.975532,37.292345',
+        options: Options(
+          headers: {
+            'X-NCP-APIGW-API-KEY-ID': dotenv.env['naverClientId'],
+            'X-NCP-APIGW-API-KEY': dotenv.env['naverClientSecret'],
+          },
+        ),
+      );
+
+      final data = response.data;
+      if (data['code'] == 0) {
+        final durationInMillis =
+            data['route']['traoptimal'][0]['summary']['duration'];
+        final durationInHours = (durationInMillis / (1000 * 60 * 60)).floor();
+        final durationInMinutes =
+            ((durationInMillis % (1000 * 60 * 60)) / (1000 * 60)).floor();
+
+        duration.value = '$durationInHours시간 $durationInMinutes분';
+      } else {
+        // Handle API error or any other condition as per your requirement
+        print('error1');
+      }
+    } catch (e) {
+      // Handle Dio exception or any other exception as per your requirement
+      print(e);
+    }
   }
 
   // 지도 앱 실행 가능한지 확인 후 분기처리해주는 함수

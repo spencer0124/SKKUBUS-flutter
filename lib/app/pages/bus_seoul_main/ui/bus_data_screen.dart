@@ -75,128 +75,88 @@ class BusDataScreen extends GetView<BusDataController> {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 50,
+                  height: 50.h,
                   alignment: Alignment.topCenter,
                   color: AppColors.green_main,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 5.w,
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: const Icon(
+                                  Icons.arrow_back_ios_new_rounded,
+                                  color: Colors.white,
+                                  size: 22,
                                 ),
-                                Semantics(
-                                  label: '스꾸버스 앱 로고',
-                                  child: Text(
-                                    'appname'.tr,
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontFamily: 'ProductBold'.tr,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 35,
-                                      height: 35,
-                                      child: InkWell(
-                                        child: const Icon(
-                                          Icons.info_outline,
-                                          color: Colors.white,
-                                          size: 27,
-                                          semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
-                                        ),
-                                        onTap: () {
-                                          FirebaseAnalytics.instance.logEvent(
-                                            name: 'info_clicked',
-                                          );
-                                          Get.toNamed('/busDetail');
-                                        },
-                                      ),
-                                    ),
-                                  ],
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: InkWell(
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.arrow_back_ios_new_rounded,
+                                  color: AppColors.green_main,
+                                  size: 22,
                                 ),
-                                const SizedBox(
-                                  width: 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          '인사캠 셔틀버스'.tr,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontFamily: 'CJKBold',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: InkWell(
+                                child: const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.white,
+                                  size: 27,
+                                  semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 35,
-                                      height: 35,
-                                      child: InkWell(
-                                        child: const Icon(
-                                          Icons.share,
-                                          color: Colors.white,
-                                          size: 22,
-                                          semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
-                                        ),
-                                        onTap: () async {
-                                          controller.onShareClicked();
-                                        },
-                                      ),
-                                    ),
-                                  ],
+                                onTap: () {
+                                  FirebaseAnalytics.instance.logEvent(
+                                    name: 'info_clicked',
+                                  );
+                                  Get.toNamed('/busDetail');
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 35,
+                              height: 35,
+                              child: InkWell(
+                                child: const Icon(
+                                  Icons.share,
+                                  color: Colors.white,
+                                  size: 22,
+                                  semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
                                 ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Semantics(
-                                      label: '인자셔틀 시간표 확인하기 버튼',
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(50),
-                                          ),
-                                        ),
-                                        alignment: Alignment.center,
-                                        // width: 70,
-                                        height: 35,
-                                        child: GestureDetector(
-                                          behavior: HitTestBehavior.translucent,
-                                          child: Text(
-                                            '\u{00A0}\u{00A0}${'인자셔틀'.tr}\u{00A0}\u{00A0}',
-                                            style: const TextStyle(
-                                              color: AppColors.green_main,
-                                              fontFamily: 'CJKBold',
-                                            ),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          onTap: () {
-                                            FirebaseAnalytics.instance.logEvent(
-                                              name: 'eskara_clicked',
-                                            );
-                                            Get.toNamed('/eskara');
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                onTap: () async {
+                                  controller.onShareClicked();
+                                },
+                              ),
                             ),
                           ],
                         ),
