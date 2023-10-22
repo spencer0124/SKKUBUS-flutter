@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
@@ -52,683 +53,542 @@ const suwonCameraPosition = NCameraPosition(
   tilt: 30,
 );
 
-final controller = Get.find<ESKARAController>();
+final controller = Get.find<InjaDetailController>();
 
-class ESKARA extends StatelessWidget {
-  const ESKARA({Key? key}) : super(key: key);
+class InjaDetail extends StatelessWidget {
+  const InjaDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
-          child: AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-            backgroundColor: AppColors.green_main,
-            elevation: 0,
-          ),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0.0),
+        child: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          backgroundColor: AppColors.green_main,
+          elevation: 0,
         ),
-        body: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 50,
-              alignment: Alignment.topCenter,
-              color: AppColors.green_main,
-              // color: Colors.red,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 50,
+            alignment: Alignment.topCenter,
+            color: AppColors.green_main,
+            // color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: InkWell(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: const Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: InkWell(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: AppColors.green_main,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Text(
+                        '인자셔틀 상세정보',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontFamily: 'CJKBold',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: InkWell(
+                              child: const Icon(
+                                Icons.info_outline,
+                                color: AppColors.green_main,
+                                size: 27,
+                                // semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
+                              ),
+                              onTap: () {},
+                            ),
+                          ),
+                          SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: InkWell(
+                              child: const Icon(
+                                Icons.share,
+                                color: AppColors.green_main,
+                                size: 22,
+                                // semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
+                              ),
+                              onTap: () async {
+                                // controller.onShareClicked();
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
+          Flexible(
+            child: Scrollbar(
+              child: ListView(
+                physics: const ClampingScrollPhysics(),
+                children: [
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    child: Column(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: const Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 22,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                          child: Divider(
+                            color: Colors.grey[300],
                           ),
                         ),
-                        Text(
-                          '인자셔틀'.tr,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: 'CJKBold',
-                          ),
-                          textAlign: TextAlign.center,
+                        Row(
+                          children: [
+                            Container(
+                              width: 5,
+                            ),
+                            Text(
+                              '안내사항'.tr,
+                              style: const TextStyle(
+                                color: AppColors.green_main,
+                                fontFamily: 'CJKBold',
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
                         ),
-                        const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: AppColors.green_main,
-                          size: 22,
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '요금 무료\n매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
+                                style: TextStyle(
+                                    color: Colors.grey[900],
+                                    fontFamily: 'CJKRegular',
+                                    fontSize: 13),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Flexible(
-              child: Scrollbar(
-                child: ListView(
-                  physics: const ClampingScrollPhysics(),
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                            child: Divider(
-                              color: Colors.grey[300],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                          child: Divider(
+                            color: Colors.grey[300],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 5,
                             ),
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 5,
+                            Text(
+                              '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[인사캠 → 자과캠]'.tr}',
+                              style: const TextStyle(
+                                color: AppColors.green_main,
+                                fontFamily: 'CJKBold',
                               ),
-                              Text(
-                                '안내사항'.tr,
-                                style: const TextStyle(
-                                  color: AppColors.green_main,
-                                  fontFamily: 'CJKBold',
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '요금 무료\n매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
-                                  style: TextStyle(
-                                      color: Colors.grey[900],
-                                      fontFamily: 'CJKRegular',
-                                      fontSize: 13),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                            child: Divider(
-                              color: Colors.grey[300],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[인사캠 → 자과캠]'.tr}',
-                                style: const TextStyle(
-                                  color: AppColors.green_main,
-                                  fontFamily: 'CJKBold',
-                                ),
-                                textAlign: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              '${'탑승장소'.tr} : ${'600주년 기념관 건너편'.tr}',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'CJKRegular',
-                                  fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: Text(
+                            '${'탑승장소'.tr} : ${'600주년 기념관 건너편'.tr}',
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontFamily: 'CJKRegular',
+                                fontSize: 13),
+                            textAlign: TextAlign.start,
                           ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            width: double.infinity,
-                            height: 180,
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                            child: NaverMap(
-                              options: const NaverMapViewOptions(
-                                  initialCameraPosition: seoulCameraPosition),
-                              onMapReady: (controller) {
-                                controller.addOverlay(seoulMarker);
-                              },
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'seoul',
-                                        mapNameEn: 'naver_map',
-                                        mapNameKr: '네이버 지도',
-                                        mapUri: seoulMapNaver,
-                                        playStoreLink:
-                                            'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFF2DB400),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '네이버 지도로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'seoul',
-                                        mapNameEn: 'kakao_map',
-                                        mapNameKr: '카카오맵',
-                                        mapUri: seoulMapKakao,
-                                        playStoreLink:
-                                            'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFffe812),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '카카오맵으로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
                             ),
                           ),
-                          // 애플지도 추가1
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'seoul',
-                                        mapNameEn: 'apple_map',
-                                        mapNameKr: '애플 지도',
-                                        mapUri: seoulMapApple,
-                                        playStoreLink:
-                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '애플 지도로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                            child: Divider(
-                              color: Colors.grey[300],
-                            ),
+                          width: double.infinity,
+                          height: 180,
+                          padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                          child: NaverMap(
+                            options: const NaverMapViewOptions(
+                                initialCameraPosition: seoulCameraPosition),
+                            onMapReady: (controller) {
+                              controller.addOverlay(seoulMarker);
+                            },
                           ),
-                          Row(
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '${'인자셔틀'.tr} ${'시간표'.tr} ${'[인사캠 → 자과캠]'.tr}',
-                                style: const TextStyle(
-                                  color: AppColors.green_main,
-                                  fontFamily: 'CJKBold',
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'naver_map',
+                                      mapNameKr: '네이버 지도',
+                                      mapUri: seoulMapNaver,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF2DB400),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '네이버 지도로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ),
-                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'kakao_map',
+                                      mapNameKr: '카카오맵',
+                                      mapUri: seoulMapKakao,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFffe812),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '카카오맵으로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
-                            child: Obx(
-                              () {
-                                return DataTable(
-                                  columnSpacing: 90.w,
-                                  columns: [
-                                    DataColumn(
-                                      label: Text('운행시간'.tr),
-                                    ),
-                                    DataColumn(
-                                      label: Text('비고'.tr),
-                                    ),
-                                  ],
-                                  rows: controller
-                                      .schedule('seoul')
-                                      .map((busTime) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Builder(
-                                            builder: (BuildContext context) {
-                                              String displayText;
-                                              displayText = busTime;
-                                              return Text(
-                                                displayText,
-                                                style: TextStyle(
-                                                  fontWeight: busTime ==
-                                                          controller
-                                                              .seoulNextBusTime
-                                                              .value
-                                                      ? FontWeight.bold
-                                                      : FontWeight.normal,
-                                                  color: busTime ==
-                                                          controller
-                                                              .seoulNextBusTime
-                                                              .value
-                                                      ? AppColors.green_main
-                                                      : Colors.black,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            busTime ==
-                                                    controller
-                                                        .seoulNextBusTime.value
-                                                ? '탑승 가능한 가장 빠른 셔틀'.tr
-                                                : ' ',
-                                            style: TextStyle(
-                                                color: busTime ==
-                                                        controller
-                                                            .seoulNextBusTime
-                                                            .value
-                                                    ? AppColors.green_main
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  }).toList(),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                            child: Divider(
-                              color: Colors.grey[300],
-                            ),
-                          ),
-                          Row(
+                        ),
+                        // 애플지도 추가1
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[자과캠 → 인사캠]'.tr}',
-                                style: const TextStyle(
-                                  color: AppColors.green_main,
-                                  fontFamily: 'CJKBold',
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'apple_map',
+                                      mapNameKr: '애플 지도',
+                                      mapUri: seoulMapApple,
+                                      playStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '애플 지도로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ),
-                                textAlign: TextAlign.start,
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 5,
+                        ),
+                        Container(
+                          height: 8.h,
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                          child: Divider(
+                            color: Colors.grey[300],
                           ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Text(
-                              '${'탑승장소'.tr} : ${'N센터 앞'.tr}',
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontFamily: 'CJKRegular',
-                                  fontSize: 13),
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[자과캠 → 인사캠]'.tr}',
+                              style: const TextStyle(
+                                color: AppColors.green_main,
+                                fontFamily: 'CJKBold',
+                              ),
                               textAlign: TextAlign.start,
                             ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: Text(
+                            '${'탑승장소'.tr} : ${'N센터 앞'.tr}',
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontFamily: 'CJKRegular',
+                                fontSize: 13),
+                            textAlign: TextAlign.start,
                           ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            width: double.infinity,
-                            height: 180,
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                            child: NaverMap(
-                              options: const NaverMapViewOptions(
-                                  initialCameraPosition: suwonCameraPosition),
-                              onMapReady: (controller) {
-                                controller.addOverlay(suwonMarker);
-                              },
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'suwon',
-                                        mapNameEn: 'naver_map',
-                                        mapNameKr: '네이버 지도',
-                                        mapUri: suwonMapNaver,
-                                        playStoreLink:
-                                            'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFF2DB400),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '네이버 지도로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'suwon',
-                                        mapNameEn: 'kakao_map',
-                                        mapNameKr: '카카오맵',
-                                        mapUri: suwonMapKakao,
-                                        playStoreLink:
-                                            'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFffe812),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '카카오맵으로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
                             ),
                           ),
-                          // 애플지도 추가1
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
-                                  onTap: () async {
-                                    controller.executeMap(
-                                        type: 'suwon',
-                                        mapNameEn: 'apple_map',
-                                        mapNameKr: '애플 지도',
-                                        mapUri: suwonMapApple,
-                                        playStoreLink:
-                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
-                                        appStoreLink:
-                                            'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    width: 173.w,
-                                    height: 37.h,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      '애플 지도로 길찾기'.tr,
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'CJKBold',
-                                          fontSize: 13),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                            child: Divider(
-                              color: Colors.grey[300],
-                            ),
+                          width: double.infinity,
+                          height: 180,
+                          padding: const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                          child: NaverMap(
+                            options: const NaverMapViewOptions(
+                                initialCameraPosition: suwonCameraPosition),
+                            onMapReady: (controller) {
+                              controller.addOverlay(suwonMarker);
+                            },
                           ),
-                          Row(
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 10, 0, 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                '${'인자셔틀'.tr} ${'시간표'.tr} ${'[자과캠 → 인사캠]'.tr}',
-                                style: const TextStyle(
-                                  color: AppColors.green_main,
-                                  fontFamily: 'CJKBold',
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'suwon',
+                                      mapNameEn: 'naver_map',
+                                      mapNameKr: '네이버 지도',
+                                      mapUri: suwonMapNaver,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF2DB400),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '네이버 지도로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ),
-                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'suwon',
+                                      mapNameEn: 'kakao_map',
+                                      mapNameKr: '카카오맵',
+                                      mapUri: suwonMapKakao,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFffe812),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '카카오맵으로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
-                            child: Obx(
-                              () {
-                                return DataTable(
-                                  columnSpacing: 90.w,
-                                  columns: [
-                                    DataColumn(
-                                      label: Text('운행시간'.tr),
+                        ),
+                        // 애플지도 추가1
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async {
+                                  controller.executeMap(
+                                      type: 'suwon',
+                                      mapNameEn: 'apple_map',
+                                      mapNameKr: '애플 지도',
+                                      mapUri: suwonMapApple,
+                                      playStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 173.w,
+                                  height: 37.h,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
                                     ),
-                                    DataColumn(
-                                      label: Text('비고'.tr),
-                                    ),
-                                  ],
-                                  rows: controller
-                                      .schedule('suwon')
-                                      .map((busTime) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(
-                                          Builder(
-                                            builder: (BuildContext context) {
-                                              String displayText;
-                                              displayText = busTime;
-                                              return Text(
-                                                displayText,
-                                                style: TextStyle(
-                                                  fontWeight: busTime ==
-                                                          controller
-                                                              .suwonNextBusTime
-                                                              .value
-                                                      ? FontWeight.bold
-                                                      : FontWeight.normal,
-                                                  color: busTime ==
-                                                          controller
-                                                              .suwonNextBusTime
-                                                              .value
-                                                      ? AppColors.green_main
-                                                      : Colors.black,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        DataCell(
-                                          Text(
-                                            busTime ==
-                                                    controller
-                                                        .suwonNextBusTime.value
-                                                ? '탑승 가능한 가장 빠른 셔틀'.tr
-                                                : ' ',
-                                            style: TextStyle(
-                                                color: busTime ==
-                                                        controller
-                                                            .suwonNextBusTime
-                                                            .value
-                                                    ? AppColors.green_main
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                  }).toList(),
-                                );
-                              },
-                            ),
+                                  ),
+                                  child: Text(
+                                    '애플 지도로 길찾기'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                        fontSize: 13),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
