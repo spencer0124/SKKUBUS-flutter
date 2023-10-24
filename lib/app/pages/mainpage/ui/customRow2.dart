@@ -31,7 +31,7 @@ class CustomRow2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(routeName);
+        // Get.toNamed(routeName);
       },
       child: Stack(
         children: [
@@ -148,22 +148,27 @@ class CustomRow2 extends StatelessWidget {
             right: 10.w,
             top: 22.h,
             // bottom: 0,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '동시접속 10명',
-                  style: TextStyle(fontSize: 15),
-                ),
-                SizedBox(
-                  width: 8.w,
-                ),
-                // const Icon(
-                //   CupertinoIcons.right_chevron,
-                //   size: 17,
-                //   color: Colors.black,
-                // ),
-              ],
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed('kingologin');
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '동시접속 인원 확인',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(
+                    width: 8.w,
+                  ),
+                  // const Icon(
+                  //   CupertinoIcons.right_chevron,
+                  //   size: 17,
+                  //   color: Colors.black,
+                  // ),
+                ],
+              ),
             ),
           )
         ],

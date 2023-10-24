@@ -28,6 +28,7 @@ import 'package:skkumap/app/utils/return_platform.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:skkumap/setting/securestorage.dart';
 
 const double hewa1Lat = 37.583427;
 const double hewa1Lon = 127.001850;
@@ -57,9 +58,9 @@ class mainpageController extends GetxController {
       // icon: controller.iconImage,
     );
 
-    markerinfo =
-        NInfoWindow.onMarker(id: 'seoul_marker', text: '인사캠 셔틀 \\ 종로07');
-    seoulMarker.openInfoWindow(markerinfo);
+    // markerinfo =
+    //     NInfoWindow.onMarker(id: 'seoul_marker', text: '인사캠 셔틀 \\ 종로07');
+    // seoulMarker.openInfoWindow(markerinfo);
     loadingdone.value = true;
   }
 

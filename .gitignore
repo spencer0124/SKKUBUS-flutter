@@ -1,3 +1,9 @@
+# Login related
+/lib/app/pages/KingoLogin/
+/lib/app/pages/KingoInfo/
+kingoinfo_controller.dart
+KingoLogin_controller.dart
+
 # Miscellaneous
 *.class
 *.log

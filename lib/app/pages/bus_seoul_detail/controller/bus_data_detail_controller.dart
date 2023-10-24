@@ -9,8 +9,8 @@ import 'package:skkumap/admob/ad_helper.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class BusDetailController extends GetxController {
-  final BusDetailRepository repository;
-  var busDetail = BusDetail().obs;
+  // final BusDetailRepository repository;
+  // var busDetail = BusDetail().obs;
   var phoneNumber = '027601073'.obs;
   var adLoad = true.obs;
   var isLoading = false.obs;
@@ -23,7 +23,7 @@ class BusDetailController extends GetxController {
     phoneNumber.value = number;
   }
 
-  BusDetailController({required this.repository});
+  // BusDetailController({required this.repository});
 
   @override
   void onInit() async {
@@ -61,8 +61,8 @@ class BusDetailController extends GetxController {
 
   void fetchBusDetail() async {
     try {
-      var info = await repository.getBusDetail();
-      busDetail.value = info;
+      // var info = await repository.getBusDetail();
+      // busDetail.value = info;
       isLoading.value = true;
     } catch (e) {
       print('Error fetching data: $e');
