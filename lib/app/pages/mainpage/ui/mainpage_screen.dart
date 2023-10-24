@@ -12,6 +12,7 @@ import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final arrowPathOverlay = NPathOverlay(
   id: 'path_overlay',
@@ -64,47 +65,226 @@ class mainpage extends StatelessWidget {
                   // <Widget>
                   [
                 SizedBox(
-                  height: 60.h,
+                  height: 80.h,
                 ),
                 Container(
-                  height: 100.h,
+                  height: 140.h,
                   color: Colors.white,
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Text('H'),
+                        const SizedBox(
+                          child: CircleAvatar(
+                            radius: 45,
+                            backgroundColor: Colors.white,
+                            child: Icon(CupertinoIcons.person_alt_circle,
+                                color: Colors.grey, size: 80),
+                          ),
                         ),
-                        SizedBox(height: 10.0),
-                        Text('조승용'),
-                        Text('소프트웨어학과'),
+                        SizedBox(height: 2.h),
+                        const Text(
+                          '조승용',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'NotoSansbold',
+                            fontSize: 15,
+                          ),
+                        ),
+                        // Container(
+                        //   padding: const EdgeInsets.fromLTRB(5.5, 2, 5.5, 2),
+                        //   width: 50.w,
+                        //   alignment: Alignment.center,
+                        //   decoration: BoxDecoration(
+                        //     color: AppColors.green_main,
+                        //     borderRadius: BorderRadius.circular(5),
+                        //   ),
+                        //   child: const Text(
+                        //     '성균인',
+                        //     style: TextStyle(
+                        //       color: Colors.white,
+                        //       fontFamily: 'CJKMedium',
+                        //       fontSize: 11,
+                        //     ),
+                        //     textAlign: TextAlign.start,
+                        //   ),
+                        // ),
+                        Text(
+                          '자연과학캠퍼스',
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontFamily: 'CJKMedium',
+                            fontSize: 13,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-                // This is your list of items
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text(
-                    '길찾기',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'CJKMedium',
-                      fontSize: 18,
+                Divider(
+                  color: Colors.grey[100],
+                  thickness: 0.8,
+                  endIndent: 30.w,
+                  indent: 30.w,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/kingologin');
+                    },
+                    child: const Text(
+                      '킹고 계정 연동하기',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'CJKMedium',
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.start,
                     ),
-                    textAlign: TextAlign.start,
                   ),
                 ),
-                ListTile(
-                  title: const Text('네비게이션'),
-                  onTap: () {
-                    // Do something when this list item is tapped
-                    Navigator.pop(context); // Close the drawer
-                  },
+                SizedBox(
+                  height: 12.h,
                 ),
-                // Add more ListTiles for more items
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(
+                        Uri.parse(
+                            'https://brash-distance-4c3.notion.site/2ce3b22006f64d65ae92ea3f01ec4bc2?pvs=4'),
+                      );
+                    },
+                    child: const Text(
+                      '공지사항',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'CJKMedium',
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/kingologin');
+                    },
+                    child: const Text(
+                      '환경설정',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'CJKMedium',
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Divider(
+                  color: Colors.grey[100],
+                  thickness: 0.8,
+                  endIndent: 30.w,
+                  indent: 30.w,
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/kingologin');
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '홈화면 설정',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'CJKMedium',
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          '지도 화면',
+                          style: TextStyle(
+                            color: AppColors.green_main,
+                            fontFamily: 'CJKMedium',
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Divider(
+                  color: Colors.grey[100],
+                  thickness: 0.8,
+                  endIndent: 30.w,
+                  indent: 30.w,
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(Uri.parse('https://pf.kakao.com/_cjxexdG'));
+                    },
+                    child: Text(
+                      '고객센터',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontFamily: 'CJKMedium',
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+                  child: GestureDetector(
+                    onTap: () {
+                      launchUrl(
+                        Uri.parse(
+                            'https://brash-distance-4c3.notion.site/17f6a2ae496f4e6e95af6f8148e81f78?pvs=4'),
+                      );
+                    },
+                    child: Text(
+                      '정보수정제안',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontFamily: 'CJKMedium',
+                        fontSize: 14,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -178,11 +358,12 @@ class mainpage extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.toNamed('/userchat');
+                                  // Get.toNamed('/userchat');
                                 },
                                 child: const Icon(
                                   CupertinoIcons.chat_bubble_2,
-                                  color: Colors.white,
+                                  // color: Colors.white,
+                                  color: AppColors.green_main,
                                   size: 28,
                                 ),
                               ),
@@ -302,7 +483,7 @@ class mainpage extends StatelessWidget {
                                                 size: 10,
                                               ),
                                               Text(
-                                                ' 혜화역 정류장',
+                                                ' 혜화역 정류장 (93m)',
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'CJKMedium',

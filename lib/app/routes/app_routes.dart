@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
+import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
+import 'package:skkumap/app/pages/LocalAuth/view/localauth_view.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/binding/bus_data_binding.dart';
@@ -44,6 +47,18 @@ class AppRoutes {
     GetPage(
       name: '/injadetail',
       page: () => const InjaDetail(),
+    ),
+    GetPage(
+      name: '/kingologin',
+      page: () => const KingoLoginView(),
+    ),
+    GetPage(
+      name: '/kingoinfo',
+      page: () => const KingoInfoView(),
+    ),
+    GetPage(
+      name: '/localauth',
+      page: () => const LocalAuthView(),
     ),
   ];
 }

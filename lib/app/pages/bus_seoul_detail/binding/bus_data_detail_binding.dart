@@ -8,9 +8,9 @@ class BusDetailBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<BusDetailController>(() {
-      final dataProvider = BusDetailDataProvider();
-      final repository = BusDetailRepository(dataProvider: dataProvider);
-      return BusDetailController(repository: repository);
+      // final dataProvider = BusDetailDataProvider();
+      // final repository = BusDetailRepository(dataProvider: dataProvider);
+      return BusDetailController();
     });
   }
 }
