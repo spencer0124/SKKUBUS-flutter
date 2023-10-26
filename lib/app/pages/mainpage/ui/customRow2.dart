@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -64,10 +65,10 @@ class CustomRow2 extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 0, 10, 0),
-                          child: Icon(
-                            iconData,
-                            size: 25,
-                            color: Colors.black,
+                          child: Image.asset(
+                            'assets/flaticon_stop1.png',
+                            width: 22.w,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(
@@ -84,7 +85,7 @@ class CustomRow2 extends StatelessWidget {
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'CJKMedium',
-                                    fontSize: 17,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
@@ -93,13 +94,15 @@ class CustomRow2 extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'CJKBold',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
+                                  width: 53.w,
+                                  height: 18.h,
                                   padding:
-                                      const EdgeInsets.fromLTRB(5.5, 2, 5.5, 2),
+                                      const EdgeInsets.fromLTRB(5, 2, 5, 2),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color: Colors.red[400]!,
@@ -107,7 +110,8 @@ class CustomRow2 extends StatelessWidget {
                                   ),
                                   child: Text(
                                     containerText,
-                                    style: const TextStyle(
+                                    style: TextStyle(
+                                      height: 1.3.h,
                                       color: Colors.white,
                                       fontFamily: 'CJKMedium',
                                       fontSize: 11,
@@ -123,9 +127,9 @@ class CustomRow2 extends StatelessWidget {
                             Text(
                               '$subtitleText1\n$subtitleText2',
                               style: TextStyle(
-                                color: Colors.grey[800],
+                                color: Colors.grey[600],
                                 fontFamily: 'CJKMedium',
-                                fontSize: 12,
+                                fontSize: 11.5,
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -146,7 +150,7 @@ class CustomRow2 extends StatelessWidget {
           ),
           Positioned(
             right: 10.w,
-            top: 22.h,
+            top: 19.2.h,
             // bottom: 0,
             child: GestureDetector(
               onTap: () {
@@ -155,9 +159,13 @@ class CustomRow2 extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '동시접속 인원 확인',
-                    style: TextStyle(fontSize: 15),
+                  Text(
+                    '동시접속 5명',
+                    style: TextStyle(
+                      color: Colors.grey[900],
+                      fontFamily: 'CJKMedium',
+                      fontSize: 12.5,
+                    ),
                   ),
                   SizedBox(
                     width: 8.w,
@@ -168,6 +176,16 @@ class CustomRow2 extends StatelessWidget {
                   //   color: Colors.black,
                   // ),
                 ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 20.h,
+            left: 2.w,
+            child: SizedBox(
+              width: 60.w,
+              child: Lottie.asset(
+                'assets/lottie/locationloading_red.json',
               ),
             ),
           )

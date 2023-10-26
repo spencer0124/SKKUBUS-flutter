@@ -38,7 +38,7 @@ class CustomRow1 extends StatelessWidget {
               Container(
                 width: dwidth,
                 height: 65.h,
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 11.h, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   border: Border(
@@ -59,10 +59,10 @@ class CustomRow1 extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 0, 10, 0),
-                          child: Icon(
-                            iconData,
-                            size: 25,
-                            color: Colors.black,
+                          child: Image.asset(
+                            'assets/flaticon_bus1.png',
+                            width: 20.w,
+                            color: Colors.grey,
                           ),
                         ),
                         SizedBox(
@@ -79,7 +79,7 @@ class CustomRow1 extends StatelessWidget {
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'CJKMedium',
-                                    fontSize: 17,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
@@ -88,13 +88,15 @@ class CustomRow1 extends StatelessWidget {
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'CJKBold',
-                                    fontSize: 18,
+                                    fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
+                                  width: 32.w,
+                                  height: 18.h,
                                   padding:
-                                      const EdgeInsets.fromLTRB(5.5, 2, 5.5, 2),
+                                      const EdgeInsets.fromLTRB(5, 2, 5, 2),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color: containerColor,
@@ -102,7 +104,8 @@ class CustomRow1 extends StatelessWidget {
                                   ),
                                   child: Text(
                                     containerText,
-                                    style: const TextStyle(
+                                    style: TextStyle(
+                                      height: 1.3.h,
                                       color: Colors.white,
                                       fontFamily: 'CJKMedium',
                                       fontSize: 11,
@@ -118,9 +121,9 @@ class CustomRow1 extends StatelessWidget {
                             Text(
                               subtitleText,
                               style: TextStyle(
-                                color: Colors.grey[800],
+                                color: Colors.grey[600],
                                 fontFamily: 'CJKMedium',
-                                fontSize: 12,
+                                fontSize: 11.5,
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -141,18 +144,25 @@ class CustomRow1 extends StatelessWidget {
           ),
           Positioned(
             right: 10.w,
-            top: 16.h,
+            top: 10.5.h,
             // bottom: 0,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('상세정보'),
+                Text(
+                  '상세정보',
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontFamily: 'CJKMedium',
+                    fontSize: 12.5,
+                  ),
+                ),
                 SizedBox(
                   width: 2.w,
                 ),
                 const Icon(
                   CupertinoIcons.right_chevron,
-                  size: 17,
+                  size: 12,
                   color: Colors.black,
                 ),
               ],

@@ -1,34 +1,22 @@
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'dart:io' show Platform;
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:skkumap/app/data/model/bus_data_model.dart';
-import 'package:skkumap/app/data/repository/bus_data_repository.dart';
+
 import 'dart:async';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-
-import 'package:skkumap/admob/ad_helper.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import 'dart:io' show Platform;
-
-import 'package:skkumap/app/utils/return_platform.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:skkumap/setting/securestorage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+const options = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
+AndroidOptions _getAndroidOptions() => const AndroidOptions(
+      encryptedSharedPreferences: true,
+    );
+final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
 const double hewa1Lat = 37.583427;
 const double hewa1Lon = 127.001850;
@@ -39,12 +27,26 @@ late var seoulMarker;
 late var markerinfo;
 
 class mainpageController extends GetxController {
+  RxString name = '로그인해주세요'.obs;
+  RxString subname = ''.obs;
   late NOverlayImage iconImage;
 
   @override
   void onInit() {
     super.onInit();
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   fetchSecureStorage();
+    // }); // 의도한대로 작동 안해서 그냥 사이드바 열때 securestorage fetch하도록 함
     fetchIconImage();
+    fetchSecureStorage();
+  }
+
+  Future<void> fetchSecureStorage() async {
+    name.value =
+        await storage.read(key: 'local_name', iOptions: options) ?? '로그인해주세요';
+    subname.value =
+        await storage.read(key: 'local_branchGroup', iOptions: options) ?? '';
   }
 
   Future<void> fetchIconImage() async {
