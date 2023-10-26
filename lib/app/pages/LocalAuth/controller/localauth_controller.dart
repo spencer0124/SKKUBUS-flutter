@@ -2,13 +2,9 @@ import 'package:get/get.dart';
 
 import 'package:local_auth/local_auth.dart';
 
-import 'package:skkumap/setting/securestorage.dart';
-
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 
 class LocalAuthController extends GetxController {
-  final StorageController storageController = Get.put(StorageController());
-
   final LocalAuthentication auth = LocalAuthentication();
 
   RxBool didAuthenticate = false.obs;
@@ -105,17 +101,17 @@ class LocalAuthController extends GetxController {
   }
 
   Future<void> saveAuthfunction() async {
-    await storageController.writeValue(
-        'didAuthenticate', didAuthenticate.value.toString());
-    await storageController.writeValue('didinitial', 'true');
-    await Future.delayed(const Duration(seconds: 1));
+    // await storageController.writeValue(
+    //     'didAuthenticate', didAuthenticate.value.toString());
+    // await storageController.writeValue('didinitial', 'true');
+    // await Future.delayed(const Duration(seconds: 1));
 
-    Get.toNamed('/mainpage');
+    // Get.toNamed('/mainpage');
   }
 
   Future<void> saveLaterfunction() async {
-    await storageController.writeValue('didAuthenticate', 'false');
-    await storageController.writeValue('didinitial', 'true');
-    Get.toNamed('/mainpage');
+    // await storageController.writeValue('didAuthenticate', 'false');
+    // await storageController.writeValue('didinitial', 'true');
+    // Get.toNamed('/mainpage');
   }
 }

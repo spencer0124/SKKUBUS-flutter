@@ -111,13 +111,19 @@ flutter:
     - lib/assets/icon/refresh.png
     - .env # path to your .env file
     - assets/lottie/refresh_white.json
-    - assets/locationloadingfinal.gif
+    - assets/lottie/locationloading.json
+    - assets/lottie/locationloading_green.json
+    - assets/lottie/locationloading_red.json
+    - assets/lottie/locationloading_type2.json
 
     - assets/lottie/locationloading.json
     - assets/eskara1398.png
     - assets/newalert_iphone1.png
     - assets/skkulogo/black.jpg
     - assets/skkulogo/black_crop.jpg
+    - assets/flaticon_bus1.png
+    - assets/flaticon_stop1.png
+    - assets/flaticon_stop2.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

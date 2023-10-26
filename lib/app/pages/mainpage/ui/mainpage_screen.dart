@@ -14,6 +14,8 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+final controller = Get.find<mainpageController>();
+
 final arrowPathOverlay = NPathOverlay(
   id: 'path_overlay',
   coords: [
@@ -42,8 +44,6 @@ const double hewa1Lat = 37.583427;
 const double hewa1Lon = 127.001850;
 const String hewa1DestnameEncode =
     '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9D%B8%EC%82%AC%EC%BA%A0%20%EC%85%94%ED%8B%80%20%EC%9C%84%EC%B9%98';
-
-final controller = Get.find<mainpageController>();
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -83,14 +83,27 @@ class mainpage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 2.h),
-                        const Text(
-                          '조승용',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'NotoSansbold',
-                            fontSize: 15,
+                        Obx(
+                          () => Text(
+                            controller.name.value,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'NotoSansbold',
+                              fontSize: 15,
+                            ),
                           ),
                         ),
+                        Obx(
+                          () => Text(
+                            controller.subname.value,
+                            style: TextStyle(
+                              color: Colors.grey[800],
+                              fontFamily: 'CJKMedium',
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+
                         // Container(
                         //   padding: const EdgeInsets.fromLTRB(5.5, 2, 5.5, 2),
                         //   width: 50.w,
@@ -109,14 +122,6 @@ class mainpage extends StatelessWidget {
                         //     textAlign: TextAlign.start,
                         //   ),
                         // ),
-                        Text(
-                          '자연과학캠퍼스',
-                          style: TextStyle(
-                            color: Colors.grey[800],
-                            fontFamily: 'CJKMedium',
-                            fontSize: 13,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -326,6 +331,7 @@ class mainpage extends StatelessWidget {
                                 behavior: HitTestBehavior.translucent,
                                 onTap: () {
                                   Scaffold.of(context).openDrawer();
+                                  controller.fetchSecureStorage();
                                   print('click');
                                 },
                                 child: const Icon(

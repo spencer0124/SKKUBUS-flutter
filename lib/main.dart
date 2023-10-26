@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
@@ -38,16 +39,25 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:skkumap/setting/securestorage.dart';
+// import 'package:skkumap/setting/securestorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:io' show Platform;
+
+const storage = FlutterSecureStorage();
 
 late SharedPreferences prefs;
 bool logindataSavedValue = false;
 bool blockeduser = false;
 bool unknownerror = false;
-String id = 'spencer0124@g.skku.edu', pw = '2023310021cilGN7';
+late String id, pw;
 
+// 앱이 백그라운드에서 알림 수신했을때
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -56,40 +66,75 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> initFirebaseMessaging() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  if (Platform.isIOS) {
-    NotificationSettings settings =
-        await FirebaseMessaging.instance.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
-    print('User granted permission: ${settings.authorizationStatus}');
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-  }
+  NotificationSettings settings =
+      await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+    provisional: false,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
 }
 
 void setupFirebaseMessagingListeners() {
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  // 앱이 foreground 상태일 때
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
     print(message);
     print("Foreground message received: ${message.notification!.body!}");
+
+    if (await canLaunchUrl(Uri.parse('http://skkubus-app.kro.kr'))) {
+      await launchUrl(Uri.parse('http://skkubus-app.kro.kr'));
+    }
+
+    Get.toNamed('/userchat');
+
+    // if (message.data['type'] == 'update') {
+    //   Get.toNamed('/userchat');
+    // }
+
     // Handle the foreground notification or update the UI if necessary
   });
 
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  // 앱이 백그라운드에서 열리는 경우 행동 - 완료
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    print(message);
+    if (await canLaunchUrl(Uri.parse('http://skkubus-app.kro.kr'))) {
+      await launchUrl(Uri.parse('http://skkubus-app.kro.kr'));
+    }
+
+    Get.toNamed('/userchat');
+    // if (message.data['type'] == 'update') {
+    //   if (await canLaunchUrl(Uri.parse('http://skkubus-app.kro.kr'))) {
+    //     await launchUrl(Uri.parse('http://skkubus-app.kro.kr'));
+    //   }
+    // }
     print("Message clicked: ${message.notification!.body!}");
     // Handle the notification or navigate to a certain screen
   });
 
-  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+  // 앱이 종료된 상태에서 열리는 경우 행동 - 완료
+  FirebaseMessaging.instance
+      .getInitialMessage()
+      .then((RemoteMessage? message) async {
     if (message != null) {
+      print(message);
       print(
           "App opened by tapping on the notification: ${message.notification!.body!}");
+      if (await canLaunchUrl(Uri.parse('http://skkubus-app.kro.kr'))) {
+        await launchUrl(Uri.parse('http://skkubus-app.kro.kr'));
+      }
+
+      Get.toNamed('/userchat');
+      // if (message.data['type'] == 'update') {
+      //   if (await canLaunchUrl(Uri.parse('http://skkubus-app.kro.kr'))) {
+      //     await launchUrl(Uri.parse('http://skkubus-app.kro.kr'));
+      //   }
+      // }
       // Handle the notification caused by tapping on it in a terminated state
     }
   });
@@ -97,14 +142,16 @@ void setupFirebaseMessagingListeners() {
 
 ////
 Future<void> main() async {
-  Get.put(StorageController());
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Get.put(StorageController());
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: SystemUiOverlay.values,
   );
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseMessaging.instance.subscribeToTopic("necessaryupdate");
 
   registerDependencies();
 
@@ -116,6 +163,8 @@ Future<void> main() async {
   await initMobileAds();
   await initEnvironmentVariables();
   // await initNotifications(); //
+
+  initLocalNotification();
   await initNaverMapSdk();
 
   await checkLocalDataSaved();
@@ -129,6 +178,17 @@ Future<void> main() async {
 }
 
 ///
+///
+
+void initLocalNotification() async {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(const AndroidNotificationChannel(
+          'high_importance_channel', 'high_importance_notification',
+          importance: Importance.max));
+}
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
@@ -183,16 +243,18 @@ class MyApp extends StatelessWidget {
 ///
 
 Future<void> checkLocalDataSaved() async {
-  final StorageController storageController = Get.find<StorageController>();
-
-  if ((await storageController.readValue('local_dataSaved')) == 'true') {
+  if ((await storage.read(key: 'local_dataSaved')) == 'true') {
+    id = '${(await storage.read(key: 'local_id'))!}@g.skku.edu';
+    pw = (await storage.read(key: 'local_firebasepw'))!;
+    print('id: $id');
+    print('pw: $pw');
     logindataSavedValue = true;
   }
 
-  print('---12');
-  print(await storageController.readValue('local_dataSaved'));
+  print('---123');
+  print((await storage.read(key: 'local_dataSaved')));
   print(logindataSavedValue);
-  print('---12');
+  print('---123');
 }
 
 Future<void> initTimeZones() async {
@@ -207,13 +269,16 @@ Future<void> initSharedPreferences() async {
 
 Future<void> initFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  if (!kDebugMode) {
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
+
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 }
 
@@ -295,6 +360,7 @@ Future<void> initLogin() async {
       );
       print('initLogin 성공 / logindataSavedValue');
     } on FirebaseAuthException catch (e) {
+      print(e.toString());
       if (e.code == 'user-disabled') {
         blockeduser = true;
         print('initLogin 실패 / logindataSavedValue / blockeduser');
@@ -309,7 +375,7 @@ Future<void> initLogin() async {
       print('initLogin 성공 / signInAnonymously');
     } on FirebaseAuthException catch (e) {
       unknownerror = true;
-      print(e);
+      print(e.toString());
       print('initLogin 실패 / signInAnonymously / unknownerror');
     }
   }
