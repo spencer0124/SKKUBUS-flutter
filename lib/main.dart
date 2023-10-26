@@ -4,11 +4,11 @@ import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skkumap/app/pages/KingoInfo/controller/kingoinfo_controller.dart';
-import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
+
 import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.dart';
-import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
+
 import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart';
-import 'package:skkumap/app/pages/LocalAuth/view/localauth_view.dart';
+
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
@@ -26,12 +26,10 @@ import 'languages.dart';
 
 import 'package:skkumap/app/data/repository/bus_data_repository.dart';
 import 'package:skkumap/app/data/provider/but_data_provider.dart';
-import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_data_controller.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
-import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_data_detail_controller.dart';
-import 'package:skkumap/app/data/provider/bus_data_detail_provider.dart';
-import 'package:skkumap/app/data/repository/bus_data_detail_repository.dart';
+import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_seoul_detail_controller.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -324,31 +322,34 @@ Future<void> initNaverMapSdk() async {
 }
 
 void registerDependencies() {
-  // bus_seoul_main
   Get.put(BusDataProvider());
   Get.put(BusDataRepository(dataProvider: Get.find()));
   Get.put(BusDataController(repository: Get.find()));
-  Get.put(LifeCycleGetx());
+  Get.put(SeoulMainLifeCycle());
 
-  // bus_seoul_detail
+  Get.put(SeoulDetailController());
+  Get.put(SeoulDetailLifeCycle());
 
-  Get.put(BusDetailController());
-
-  // bus_inja_detail
-  Get.put(ESKARAController());
-  Get.put(LifeCycleGetx2());
-
-  Get.put(mainpageController());
-
-  Get.put(UserChatController());
+  Get.put(InjaMainController());
+  Get.put(InjaMainLifeCycle());
 
   Get.put(InjaDetailController());
+  Get.put(InjaDetailLifeCycle());
+
+  Get.put(KingoInfoController());
+  Get.put(KingoInfoLifeCycle());
 
   Get.put(KingoLoginController());
+  Get.put(KingoLoginLifeCycle());
 
-  // Get.put(KingoInfoController());
+  Get.put(LocalAuthController());
+  Get.put(LocalAuthLifeCycle());
 
-  // Get.put(LocalAuthController());
+  Get.put(MainpageController());
+  Get.put(MainpageLifeCycle());
+
+  Get.put(UserChatController());
+  Get.put(UserChatLifeCycle());
 }
 
 Future<void> initLogin() async {

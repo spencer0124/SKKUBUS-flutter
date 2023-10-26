@@ -8,6 +8,31 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'dart:io' show Platform;
 
+class InjaDetailLifeCycle extends GetxController with WidgetsBindingObserver {
+  InjaDetailController injaDetailController = Get.find<InjaDetailController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {}
+    if (state == AppLifecycleState.inactive) {}
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
+  }
+}
+
 /*
 LifeCycleGetx2, WidgetsBindingObserver
 라이프사이클을 이용해 앱이 백그라운드에서 포그라운드로 돌아올때 

@@ -1,16 +1,36 @@
 import 'package:get/get.dart';
-import 'package:skkumap/app/data/model/bus_data_detail_model.dart';
-import 'package:skkumap/app/data/repository/bus_data_detail_repository.dart';
-
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import 'package:skkumap/admob/ad_helper.dart';
-
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 
-class BusDetailController extends GetxController {
-  // final BusDetailRepository repository;
-  // var busDetail = BusDetail().obs;
+class SeoulDetailLifeCycle extends GetxController with WidgetsBindingObserver {
+  SeoulDetailController seoulDetailController =
+      Get.find<SeoulDetailController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {}
+    if (state == AppLifecycleState.inactive) {}
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
+  }
+}
+
+class SeoulDetailController extends GetxController {
   var phoneNumber = '027601073'.obs;
   var adLoad = true.obs;
   var isLoading = false.obs;

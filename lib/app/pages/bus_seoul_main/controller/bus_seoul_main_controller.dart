@@ -20,7 +20,7 @@ import 'package:share_plus/share_plus.dart';
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
 */
-class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
+class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
   BusDataController busDataController = Get.find<BusDataController>();
 
   @override
@@ -32,7 +32,6 @@ class LifeCycleGetx extends GetxController with WidgetsBindingObserver {
   @override
   void onClose() {
     super.onClose();
-
     WidgetsBinding.instance.removeObserver(this);
   }
 

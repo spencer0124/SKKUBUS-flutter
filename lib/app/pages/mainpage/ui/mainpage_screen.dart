@@ -14,7 +14,7 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final controller = Get.find<mainpageController>();
+final controller = Get.find<MainpageController>();
 
 final arrowPathOverlay = NPathOverlay(
   id: 'path_overlay',
@@ -48,8 +48,8 @@ const String hewa1DestnameEncode =
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
-class mainpage extends StatelessWidget {
-  const mainpage({Key? key}) : super(key: key);
+class Mainpage extends StatelessWidget {
+  const Mainpage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -557,8 +557,8 @@ class mainpage extends StatelessWidget {
             CustomRow2(
               iconData: Icons.stop_circle_rounded,
               titleText: '혜화역 정류장',
-              subtitleText1: '[인사캠 셔틀] 5개 전 전류장',
-              subtitleText2: '[종로07] 3개 전 전류장',
+              subtitleText1: '[인사캠 셔틀]  5개 정류장 전',
+              subtitleText2: '[종로07버스]  2개 정류장 전 (1분 41초)',
               containerColor: Colors.red[400]!,
               containerText: '위치 기반',
               routeName: '/busData',
@@ -571,14 +571,14 @@ class mainpage extends StatelessWidget {
               containerText: '성대',
               routeName: '/busData',
             ),
-            CustomRow1(
-              iconData: Icons.directions_bus,
-              titleText: '종로 07',
-              subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-              containerColor: Colors.green[400]!,
-              containerText: '마을',
-              routeName: '/busData',
-            ),
+            // CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '종로 07',
+            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+            //   containerColor: Colors.green[400]!,
+            //   containerText: '마을',
+            //   routeName: '/busData',
+            // ),
             const CustomRow1(
               iconData: Icons.directions_bus,
               titleText: '인자셔틀',
