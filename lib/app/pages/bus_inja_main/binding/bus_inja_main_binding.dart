@@ -5,6 +5,6 @@ import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_control
 class ESKARABinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ESKARAController>(() => ESKARAController());
+    Get.lazyPut<InjaMainController>(() => InjaMainController());
   }
 }

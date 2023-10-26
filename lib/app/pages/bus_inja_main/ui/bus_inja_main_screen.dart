@@ -53,7 +53,7 @@ const suwonCameraPosition = NCameraPosition(
   tilt: 30,
 );
 
-final controller = Get.find<ESKARAController>();
+final controller = Get.find<InjaMainController>();
 
 class ESKARA extends StatelessWidget {
   const ESKARA({Key? key}) : super(key: key);

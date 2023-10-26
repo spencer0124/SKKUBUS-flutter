@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 
 // late SharedPreferences prefs;
 
+// 여기는 lifecycle 그거 설정안해줬다는 거 주의하기
+
 class NewAlert extends StatelessWidget {
   const NewAlert({Key? key}) : super(key: key);
 

@@ -20,8 +20,8 @@ LifeCycleGetx2, WidgetsBindingObserver
 탑승 가능한 가장 빠른 버스 시간을 표시하기 위한 로직
  */
 
-class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
-  ESKARAController eSKARAController = Get.find<ESKARAController>();
+class InjaMainLifeCycle extends GetxController with WidgetsBindingObserver {
+  InjaMainController injaMainController = Get.find<InjaMainController>();
 
   @override
   void onInit() {
@@ -39,7 +39,7 @@ class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      eSKARAController.determineNextBus();
+      injaMainController.determineNextBus();
     }
   }
 }
@@ -48,7 +48,7 @@ class LifeCycleGetx2 extends GetxController with WidgetsBindingObserver {
 ESKARAController
 메인 컨트롤러
 */
-class ESKARAController extends GetxController {
+class InjaMainController extends GetxController {
   // currentTime
 
   @override

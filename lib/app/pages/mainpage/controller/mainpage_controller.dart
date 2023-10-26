@@ -12,6 +12,31 @@ import 'dart:async';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
+  MainpageController mainpageController = Get.find<MainpageController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {}
+    if (state == AppLifecycleState.inactive) {}
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
+  }
+}
+
 const options = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
 AndroidOptions _getAndroidOptions() => const AndroidOptions(
       encryptedSharedPreferences: true,
@@ -26,7 +51,7 @@ RxBool loadingdone = false.obs;
 late var seoulMarker;
 late var markerinfo;
 
-class mainpageController extends GetxController {
+class MainpageController extends GetxController {
   RxString name = '로그인해주세요'.obs;
   RxString subname = ''.obs;
   late NOverlayImage iconImage;

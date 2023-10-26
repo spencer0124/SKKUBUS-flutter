@@ -3,6 +3,32 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:flutter/material.dart';
+
+class LocalAuthLifeCycle extends GetxController with WidgetsBindingObserver {
+  LocalAuthController localAuthController = Get.find<LocalAuthController>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {}
+    if (state == AppLifecycleState.inactive) {}
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
+  }
+}
 
 class LocalAuthController extends GetxController {
   final LocalAuthentication auth = LocalAuthentication();
