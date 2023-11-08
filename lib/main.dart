@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
@@ -46,6 +48,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:io' show Platform;
+import 'package:http/http.dart' as http;
+
+late FirebaseAuth auth;
+late User user;
+late final uid;
+// late final campus;
 
 const storage = FlutterSecureStorage();
 
@@ -172,7 +180,7 @@ Future<void> main() async {
   await initFirebaseMessaging();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 ///
@@ -188,10 +196,78 @@ void initLocalNotification() async {
           importance: Importance.max));
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final bool newalertdone = prefs.getBool('newalertdone') ?? false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      print(uid);
+      print('online -> resumed');
+
+      var campus = ((await storage.read(key: 'local_branchGroup')) == '자연과학캠퍼스')
+          ? 'live_inja_suwon'
+          : 'typeA_hewa';
+      final url = Uri.parse(
+        dotenv.env['UpdateLiveAccessUrl']!,
+      );
+
+      var response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(
+          {
+            "uid": uid,
+            "stationtype": campus,
+            "accesstoken": dotenv.env['UpdateLiveAccessToken']!
+          },
+        ),
+      );
+
+      print(response.body);
+    }
+    //TODO: set status to online here in firestore
+    else {
+      var campus = ((await storage.read(key: 'local_branchGroup')) == '자연과학캠퍼스')
+          ? 'live_inja_suwon'
+          : 'typeA_hewa';
+      final url = Uri.parse(
+        dotenv.env['DeleteLiveAccessUrl']!,
+      );
+
+      var response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(
+          {
+            "uid": uid,
+            "stationtype": campus,
+            "accesstoken": dotenv.env['UpdateLiveAccessToken']!
+          },
+        ),
+      );
+
+      print(response.body);
+    }
+    //TODO: set status to offline here in firestore
+  }
 
   // 새로운 기능 있을때 new_alert 페이지를 거치게 해서 보여주고 싶으면 주석 해제하고 설정하면 된다
   String determineInitialRoute() {
@@ -336,8 +412,8 @@ void registerDependencies() {
   Get.put(InjaDetailController());
   Get.put(InjaDetailLifeCycle());
 
-  Get.put(KingoInfoController());
-  Get.put(KingoInfoLifeCycle());
+  // Get.put(KingoInfoController());
+  // Get.put(KingoInfoLifeCycle());
 
   Get.put(KingoLoginController());
   Get.put(KingoLoginLifeCycle());
@@ -380,6 +456,10 @@ Future<void> initLogin() async {
       print('initLogin 실패 / signInAnonymously / unknownerror');
     }
   }
+
+  auth = FirebaseAuth.instance;
+  user = auth.currentUser!;
+  uid = user.uid;
 }
 
 ///////////////////

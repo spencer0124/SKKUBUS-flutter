@@ -104,18 +104,6 @@ class ESKARA extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: AppColors.green_main,
-                                size: 22,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                       Text(
@@ -141,21 +129,6 @@ class ESKARA extends StatelessWidget {
                               ),
                               onTap: () {
                                 Get.toNamed('/injadetail');
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.share,
-                                color: Colors.white,
-                                size: 22,
-                                semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
-                              ),
-                              onTap: () async {
-                                // controller.onShareClicked();
                               },
                             ),
                           ),
@@ -194,7 +167,7 @@ class ESKARA extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                             child: Text(
-                              '현재시간 기준 운행종료',
+                              '11:35 PM 기준 · 운행종료',
                               // '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
                               style: TextStyle(
                                 fontSize: 12,
@@ -221,7 +194,7 @@ class ESKARA extends StatelessWidget {
                 physics: const ClampingScrollPhysics(),
                 children: [
                   Container(
-                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 3, 20, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -234,38 +207,133 @@ class ESKARA extends StatelessWidget {
                         //     color: Colors.grey[300],
                         //   ),
                         // ),
-                        Row(
-                          children: [
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '${'인자셔틀'.tr} ${'[인사캠 → 자과캠]'.tr}',
-                              style: const TextStyle(
-                                color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
+                        Text(
+                          '${'인자셔틀'.tr} ${'[인사캠 → 자과캠]'.tr}',
+                          style: const TextStyle(
+                            color: AppColors.green_main,
+                            fontFamily: 'CJKBold',
+                          ),
+                          textAlign: TextAlign.start,
                         ),
-                        const Row(
-                          children: [
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              '실시간 교통정보 반영 소요시간: ',
-                              style: TextStyle(
-                                color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                          ],
+                        SizedBox(
+                          height: 5.h,
                         ),
                         Obx(
-                          () => Text(controller.duration.value),
+                          () => Text(
+                            '예상 소요시간 : ${controller.duration.value}',
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'CJKRegular',
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10.0),
+                              width: 170.w,
+                              height: 90.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey[100],
+                                border: Border.all(
+                                  color: Colors.grey[300]!,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '승차알림 설정하기',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontFamily: 'CJKBold',
+                                        ),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      Icon(
+                                        Icons.alarm,
+                                        size: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  const Text(
+                                    '선택한 셔틀이 출발하기\n15분 전에 알려드릴게요',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                      fontFamily: 'CJKRegular',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10.0),
+                              width: 170.w,
+                              height: 90.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey[100],
+                                border: Border.all(
+                                  color: Colors.grey[300]!,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '하차알림 설정하기',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontFamily: 'CJKBold',
+                                        ),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      Icon(
+                                        Icons.alarm,
+                                        size: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  const Text(
+                                    '선택한 셔틀이 도착하기\n10분 전에 알려드릴게요',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                      fontFamily: 'CJKRegular',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
 
                         Container(

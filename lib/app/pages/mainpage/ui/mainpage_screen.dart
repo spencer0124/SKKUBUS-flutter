@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
@@ -54,254 +55,234 @@ class Mainpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Drawer(
-          child: Container(
-            // width: 50,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:
-                  // <Widget>
-                  [
-                SizedBox(
-                  height: 80.h,
-                ),
-                Container(
-                  height: 140.h,
-                  color: Colors.white,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          child: CircleAvatar(
-                            radius: 45,
-                            backgroundColor: Colors.white,
-                            child: Icon(CupertinoIcons.person_alt_circle,
-                                color: Colors.grey, size: 80),
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Obx(
-                          () => Text(
-                            controller.name.value,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'NotoSansbold',
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                        Obx(
-                          () => Text(
-                            controller.subname.value,
-                            style: TextStyle(
-                              color: Colors.grey[800],
-                              fontFamily: 'CJKMedium',
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-
-                        // Container(
-                        //   padding: const EdgeInsets.fromLTRB(5.5, 2, 5.5, 2),
-                        //   width: 50.w,
-                        //   alignment: Alignment.center,
-                        //   decoration: BoxDecoration(
-                        //     color: AppColors.green_main,
-                        //     borderRadius: BorderRadius.circular(5),
-                        //   ),
-                        //   child: const Text(
-                        //     '성균인',
-                        //     style: TextStyle(
-                        //       color: Colors.white,
-                        //       fontFamily: 'CJKMedium',
-                        //       fontSize: 11,
-                        //     ),
-                        //     textAlign: TextAlign.start,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                Divider(
-                  color: Colors.grey[100],
-                  thickness: 0.8,
-                  endIndent: 30.w,
-                  indent: 30.w,
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed('/kingologin');
-                    },
-                    child: const Text(
-                      '킹고 계정 연동하기',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'CJKMedium',
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      launchUrl(
-                        Uri.parse(
-                            'https://brash-distance-4c3.notion.site/2ce3b22006f64d65ae92ea3f01ec4bc2?pvs=4'),
-                      );
-                    },
-                    child: const Text(
-                      '공지사항',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'CJKMedium',
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed('/kingologin');
-                    },
-                    child: const Text(
-                      '환경설정',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'CJKMedium',
-                        fontSize: 18,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Divider(
-                  color: Colors.grey[100],
-                  thickness: 0.8,
-                  endIndent: 30.w,
-                  indent: 30.w,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed('/kingologin');
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '홈화면 설정',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'CJKMedium',
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                        Text(
-                          '지도 화면',
-                          style: TextStyle(
-                            color: AppColors.green_main,
-                            fontFamily: 'CJKMedium',
-                            fontSize: 18,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                Divider(
-                  color: Colors.grey[100],
-                  thickness: 0.8,
-                  endIndent: 30.w,
-                  indent: 30.w,
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      launchUrl(Uri.parse('https://pf.kakao.com/_cjxexdG'));
-                    },
-                    child: Text(
-                      '고객센터',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontFamily: 'CJKMedium',
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 12.h,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      launchUrl(
-                        Uri.parse(
-                            'https://brash-distance-4c3.notion.site/17f6a2ae496f4e6e95af6f8148e81f78?pvs=4'),
-                      );
-                    },
-                    child: Text(
-                      '정보수정제안',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontFamily: 'CJKMedium',
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        // bottomNavigationBar: BottomAppBar(
-        //   color: Colors.grey[200],
-        //   child: SizedBox(
-        //     height: 30.h,
-        //     child: const Text(' '),
+        // drawer: Drawer(
+        //   child: Container(
+        //     // width: 50,
+        //     color: Colors.white,
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.start,
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children:
+        //           // <Widget>
+        //           [
+        //         SizedBox(
+        //           height: 80.h,
+        //         ),
+        //         Container(
+        //           height: 140.h,
+        //           color: Colors.white,
+        //           child: Center(
+        //             child: Column(
+        //               mainAxisAlignment: MainAxisAlignment.center,
+        //               children: [
+        //                 const SizedBox(
+        //                   child: CircleAvatar(
+        //                     radius: 45,
+        //                     backgroundColor: Colors.white,
+        //                     child: Icon(CupertinoIcons.person_alt_circle,
+        //                         color: Colors.grey, size: 80),
+        //                   ),
+        //                 ),
+        //                 SizedBox(height: 2.h),
+        //                 Obx(
+        //                   () => Text(
+        //                     controller.name.value,
+        //                     style: const TextStyle(
+        //                       color: Colors.black,
+        //                       fontFamily: 'NotoSansbold',
+        //                       fontSize: 15,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 Obx(
+        //                   () => Text(
+        //                     controller.subname.value,
+        //                     style: TextStyle(
+        //                       color: Colors.grey[800],
+        //                       fontFamily: 'CJKMedium',
+        //                       fontSize: 13,
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //         Divider(
+        //           color: Colors.grey[100],
+        //           thickness: 0.8,
+        //           endIndent: 30.w,
+        //           indent: 30.w,
+        //         ),
+        //         SizedBox(
+        //           height: 15.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               Get.toNamed('/kingologin');
+        //             },
+        //             child: const Text(
+        //               '킹고 계정 연동하기',
+        //               style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontFamily: 'CJKMedium',
+        //                 fontSize: 18,
+        //               ),
+        //               textAlign: TextAlign.start,
+        //             ),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 12.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               launchUrl(
+        //                 Uri.parse(
+        //                     'https://brash-distance-4c3.notion.site/2ce3b22006f64d65ae92ea3f01ec4bc2?pvs=4'),
+        //               );
+        //             },
+        //             child: const Text(
+        //               '공지사항',
+        //               style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontFamily: 'CJKMedium',
+        //                 fontSize: 18,
+        //               ),
+        //               textAlign: TextAlign.start,
+        //             ),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 12.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               Get.toNamed('/kingologin');
+        //             },
+        //             child: const Text(
+        //               '환경설정',
+        //               style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontFamily: 'CJKMedium',
+        //                 fontSize: 18,
+        //               ),
+        //               textAlign: TextAlign.start,
+        //             ),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 10.h,
+        //         ),
+        //         Divider(
+        //           color: Colors.grey[100],
+        //           thickness: 0.8,
+        //           endIndent: 30.w,
+        //           indent: 30.w,
+        //         ),
+        //         SizedBox(
+        //           height: 10.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               Get.toNamed('/kingologin');
+        //             },
+        //             child: const Row(
+        //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //               children: [
+        //                 Text(
+        //                   '홈화면 설정',
+        //                   style: TextStyle(
+        //                     color: Colors.black,
+        //                     fontFamily: 'CJKMedium',
+        //                     fontSize: 18,
+        //                   ),
+        //                   textAlign: TextAlign.start,
+        //                 ),
+        //                 Text(
+        //                   '지도 화면',
+        //                   style: TextStyle(
+        //                     color: AppColors.green_main,
+        //                     fontFamily: 'CJKMedium',
+        //                     fontSize: 18,
+        //                   ),
+        //                   textAlign: TextAlign.start,
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 12.h,
+        //         ),
+        //         Divider(
+        //           color: Colors.grey[100],
+        //           thickness: 0.8,
+        //           endIndent: 30.w,
+        //           indent: 30.w,
+        //         ),
+        //         SizedBox(
+        //           height: 12.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               launchUrl(Uri.parse('https://pf.kakao.com/_cjxexdG'));
+        //             },
+        //             child: Text(
+        //               '고객센터',
+        //               style: TextStyle(
+        //                 color: Colors.grey[800],
+        //                 fontFamily: 'CJKMedium',
+        //                 fontSize: 14,
+        //               ),
+        //               textAlign: TextAlign.start,
+        //             ),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 12.h,
+        //         ),
+        //         Padding(
+        //           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
+        //           child: GestureDetector(
+        //             onTap: () {
+        //               launchUrl(
+        //                 Uri.parse(
+        //                     'https://brash-distance-4c3.notion.site/17f6a2ae496f4e6e95af6f8148e81f78?pvs=4'),
+        //               );
+        //             },
+        //             child: Text(
+        //               '정보수정제안',
+        //               style: TextStyle(
+        //                 color: Colors.grey[800],
+        //                 fontFamily: 'CJKMedium',
+        //                 fontSize: 14,
+        //               ),
+        //               textAlign: TextAlign.start,
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
         //   ),
         // ),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.grey[200],
+          child: SizedBox(
+            height: 30.h,
+            child: const Text('ad'),
+          ),
+        ),
         backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0),
@@ -330,13 +311,12 @@ class Mainpage extends StatelessWidget {
                               GestureDetector(
                                 behavior: HitTestBehavior.translucent,
                                 onTap: () {
-                                  Scaffold.of(context).openDrawer();
-                                  controller.fetchSecureStorage();
-                                  print('click');
+                                  // Scaffold.of(context).openDrawer();
+                                  // controller.fetchSecureStorage();
                                 },
                                 child: const Icon(
                                   CupertinoIcons.list_bullet,
-                                  color: Colors.white,
+                                  color: AppColors.green_main,
                                   size: 25,
                                 ),
                               ),
@@ -426,8 +406,8 @@ class Mainpage extends StatelessWidget {
                                             onMapReady: (controller) {
                                               controller
                                                   .addOverlay(seoulMarker);
-                                              controller
-                                                  .addOverlay(arrowPathOverlay);
+                                              // controller
+                                              //     .addOverlay(arrowPathOverlay);
                                               // seoulMarker
                                               //     .openInfoWindow(markerinfo);
                                             },
@@ -437,93 +417,11 @@ class Mainpage extends StatelessWidget {
                                 },
                               ),
                               Positioned(
-                                left: 20.w,
-                                right: 20.w,
+                                left: 0.w,
+                                right: 0.w,
                                 top: 10.h,
-                                child: Center(
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal:
-                                              12), // Add some horizontal padding
-                                      height: 30.h,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(25),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(
-                                                0.5), // Color of the shadow
-                                            spreadRadius:
-                                                1, // Extent of the shadow, negative values can decrease the size of the shadow
-                                            blurRadius: 5, // Amount of blurring
-                                            offset: const Offset(
-                                                0, 3), // Position of the shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: const Row(
-                                        mainAxisSize: MainAxisSize
-                                            .min, // Ensure the Row takes the minimum space required by its children
-                                        children: [
-                                          Icon(CupertinoIcons.location_fill,
-                                              color: Colors.black, size: 15),
-                                          SizedBox(
-                                              width:
-                                                  8), // Add some space between the icon and text
-                                          Row(
-                                            children: [
-                                              Text(
-                                                '현재위치 ',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'CJKMedium',
-                                                  fontSize: 14,
-                                                ),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                              Icon(
-                                                CupertinoIcons.right_chevron,
-                                                size: 10,
-                                              ),
-                                              Text(
-                                                ' 혜화역 정류장 (93m)',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'CJKMedium',
-                                                  fontSize: 14,
-                                                ),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                child: const Center(child: ScrollableRow()),
                               ),
-                              // Positioned(
-                              //   bottom: 30.h,
-                              //   left: 0,
-                              //   right: 0,
-                              //   child: Center(
-                              //     child: Container(
-                              //       width: dwidth * 0.9,
-                              //       height: 30.h,
-                              //       decoration: const BoxDecoration(
-                              //         color: Colors.red,
-                              //         borderRadius: BorderRadius.only(
-                              //           topLeft: Radius.circular(25),
-                              //           topRight: Radius.circular(25),
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-
                               Positioned(
                                 bottom: -10.h,
                                 child: Container(
@@ -554,13 +452,13 @@ class Mainpage extends StatelessWidget {
                 ],
               ),
             ),
-            CustomRow2(
+            const CustomRow2(
               iconData: Icons.stop_circle_rounded,
-              titleText: '혜화역 정류장',
-              subtitleText1: '[인사캠 셔틀]  5개 정류장 전',
-              subtitleText2: '[종로07버스]  2개 정류장 전 (1분 41초)',
-              containerColor: Colors.red[400]!,
-              containerText: '위치 기반',
+              titleText: '종로07',
+              subtitleText1: '[혜화역1번출구] 1분 30초',
+              subtitleText2: '[학생회관] 회차대기중',
+              containerColor: Colors.green,
+              containerText: '마을',
               routeName: '/busData',
             ),
             const CustomRow1(
@@ -571,14 +469,6 @@ class Mainpage extends StatelessWidget {
               containerText: '성대',
               routeName: '/busData',
             ),
-            // CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '종로 07',
-            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-            //   containerColor: Colors.green[400]!,
-            //   containerText: '마을',
-            //   routeName: '/busData',
-            // ),
             const CustomRow1(
               iconData: Icons.directions_bus,
               titleText: '인자셔틀',
@@ -587,6 +477,14 @@ class Mainpage extends StatelessWidget {
               containerText: '성대',
               routeName: '/eskara',
             ),
+            // CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '종로 07',
+            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+            //   containerColor: Colors.green[400]!,
+            //   containerText: '마을',
+            //   routeName: '/busData',
+            // ),
             SizedBox(
               height: 5.h,
             ),

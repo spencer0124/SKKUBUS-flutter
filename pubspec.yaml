@@ -115,6 +115,7 @@ flutter:
     - assets/lottie/locationloading_green.json
     - assets/lottie/locationloading_red.json
     - assets/lottie/locationloading_type2.json
+    - assets/lottie/kingologindone.json
 
     - assets/lottie/locationloading.json
     - assets/eskara1398.png
