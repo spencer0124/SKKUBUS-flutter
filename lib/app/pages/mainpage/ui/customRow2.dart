@@ -99,13 +99,13 @@ class CustomRow2 extends StatelessWidget {
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
-                                  width: 53.w,
+                                  width: 32.w,
                                   height: 18.h,
                                   padding:
                                       const EdgeInsets.fromLTRB(5, 2, 5, 2),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: Colors.red[400]!,
+                                    color: containerColor,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Text(
@@ -119,6 +119,27 @@ class CustomRow2 extends StatelessWidget {
                                     textAlign: TextAlign.start,
                                   ),
                                 ),
+                                // Container(
+                                //   width: 32.w,
+                                //   height: 18.h,
+                                //   padding:
+                                //       const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                                //   alignment: Alignment.center,
+                                //   decoration: BoxDecoration(
+                                //     color: containerColor,
+                                //     borderRadius: BorderRadius.circular(5),
+                                //   ),
+                                //   child: Text(
+                                //     containerText,
+                                //     style: TextStyle(
+                                //       height: 1.3.h,
+                                //       color: Colors.white,
+                                //       fontFamily: 'CJKMedium',
+                                //       fontSize: 11,
+                                //     ),
+                                //     textAlign: TextAlign.start,
+                                //   ),
+                                // ),
                               ],
                             ),
                             SizedBox(
@@ -160,7 +181,7 @@ class CustomRow2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '동시접속 5명',
+                    '',
                     style: TextStyle(
                       color: Colors.grey[900],
                       fontFamily: 'CJKMedium',

@@ -1,14 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-import 'package:firebase_analytics/firebase_analytics.dart';
-
-import 'dart:io' show Platform;
-
-import 'package:get/get.dart';
-
 import 'dart:async';
-
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
