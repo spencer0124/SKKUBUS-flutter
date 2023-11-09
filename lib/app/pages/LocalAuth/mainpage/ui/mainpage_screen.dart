@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +16,7 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:ui' as ui;
 
 final controller = Get.find<MainpageController>();
 
@@ -276,16 +279,16 @@ class Mainpage extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.grey[200],
-          child: SizedBox(
-            height: 30.h,
-            child: const Text('ad'),
-          ),
-        ),
+        // bottomNavigationBar: BottomAppBar(
+        //   color: Colors.grey[200],
+        //   child: SizedBox(
+        //     height: 30.h,
+        //     child: const Text('ad'),
+        //   ),
+        // ),
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0),
+          preferredSize: const ui.Size.fromHeight(0.0),
           child: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle.light,
             backgroundColor: AppColors.green_main,
@@ -452,14 +455,20 @@ class Mainpage extends StatelessWidget {
                 ],
               ),
             ),
-            const CustomRow2(
-              iconData: Icons.stop_circle_rounded,
-              titleText: '종로07',
-              subtitleText1: '[혜화역1번출구] 1분 30초',
-              subtitleText2: '[학생회관] 회차대기중',
-              containerColor: Colors.green,
-              containerText: '마을',
-              routeName: '/busData',
+            Obx(
+              () => CustomRow2(
+                iconData: Icons.stop_circle_rounded,
+                titleText: '혜화역 1번 출구',
+                subtitleText1: controller.jongro07BusRemainStation.value < 0
+                    ? controller.jongro07BusMessage.value
+                    : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTimeMin.value}분 ${controller.jongro07BusRemainTimeSec.value}초)',
+                subtitleText2: controller.hsscBusRemainStation.value == -1
+                    ? '정보없음'
+                    : '${controller.hsscBusRemainStation.value}번째 전 (${controller.hsscBusRemainStationName.value})',
+                containerColor: Colors.black,
+                containerText: '정류장',
+                routeName: '/busData',
+              ),
             ),
             const CustomRow1(
               iconData: Icons.directions_bus,
@@ -477,14 +486,14 @@ class Mainpage extends StatelessWidget {
               containerText: '성대',
               routeName: '/eskara',
             ),
-            // CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '종로 07',
-            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-            //   containerColor: Colors.green[400]!,
-            //   containerText: '마을',
-            //   routeName: '/busData',
-            // ),
+            CustomRow1(
+              iconData: Icons.directions_bus,
+              titleText: '종로 07',
+              subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+              containerColor: Colors.green[400]!,
+              containerText: '마을',
+              routeName: '/busData',
+            ),
             SizedBox(
               height: 5.h,
             ),
