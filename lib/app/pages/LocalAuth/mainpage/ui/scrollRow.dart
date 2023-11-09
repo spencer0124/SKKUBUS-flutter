@@ -17,7 +17,7 @@ class ScrollableRow extends StatelessWidget {
             width: 5,
           ),
           const ScrollRowContainer(
-            text: '혜화역승차장',
+            text: '혜화역 정류장',
             icon: Icons.location_on_rounded,
             ischecked: true,
           ),

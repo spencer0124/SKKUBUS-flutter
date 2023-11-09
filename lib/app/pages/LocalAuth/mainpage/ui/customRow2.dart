@@ -99,7 +99,7 @@ class CustomRow2 extends StatelessWidget {
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
-                                  width: 32.w,
+                                  width: 43.w,
                                   height: 18.h,
                                   padding:
                                       const EdgeInsets.fromLTRB(5, 2, 5, 2),
@@ -145,14 +145,41 @@ class CustomRow2 extends StatelessWidget {
                             SizedBox(
                               height: 3.h,
                             ),
-                            Text(
-                              '$subtitleText1\n$subtitleText2',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontFamily: 'CJKMedium',
-                                fontSize: 11.5,
-                              ),
-                              textAlign: TextAlign.start,
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '[종로07버스]  ',
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontFamily: 'CJKMedium',
+                                        fontSize: 11.5,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    Text(
+                                      '[인사캠셔틀]   ',
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontFamily: 'CJKMedium',
+                                        fontSize: 11.5,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '$subtitleText1\n$subtitleText2',
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontFamily: 'CJKMedium',
+                                    fontSize: 11.5,
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -175,7 +202,7 @@ class CustomRow2 extends StatelessWidget {
             // bottom: 0,
             child: GestureDetector(
               onTap: () {
-                Get.toNamed('kingologin');
+                // Get.toNamed('kingologin');
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
