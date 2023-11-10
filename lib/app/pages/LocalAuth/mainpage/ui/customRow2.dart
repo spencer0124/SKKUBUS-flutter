@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -68,7 +65,7 @@ class CustomRow2 extends StatelessWidget {
                           child: Image.asset(
                             'assets/flaticon_stop1.png',
                             width: 22.w,
-                            color: Colors.white,
+                            color: Colors.grey,
                           ),
                         ),
                         SizedBox(
@@ -98,27 +95,27 @@ class CustomRow2 extends StatelessWidget {
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
-                                Container(
-                                  width: 43.w,
-                                  height: 18.h,
-                                  padding:
-                                      const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: containerColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    containerText,
-                                    style: TextStyle(
-                                      height: 1.3.h,
-                                      color: Colors.white,
-                                      fontFamily: 'CJKMedium',
-                                      fontSize: 11,
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ),
+                                // Container(
+                                //   width: 43.w,
+                                //   height: 18.h,
+                                //   padding:
+                                //       const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                                //   alignment: Alignment.center,
+                                //   decoration: BoxDecoration(
+                                //     color: containerColor,
+                                //     borderRadius: BorderRadius.circular(5),
+                                //   ),
+                                //   child: Text(
+                                //     containerText,
+                                //     style: TextStyle(
+                                //       height: 1.3.h,
+                                //       color: Colors.white,
+                                //       fontFamily: 'CJKMedium',
+                                //       fontSize: 11,
+                                //     ),
+                                //     textAlign: TextAlign.start,
+                                //   ),
+                                // ),
                                 // Container(
                                 //   width: 32.w,
                                 //   height: 18.h,
@@ -227,16 +224,16 @@ class CustomRow2 extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: 20.h,
-            left: 2.w,
-            child: SizedBox(
-              width: 60.w,
-              child: Lottie.asset(
-                'assets/lottie/locationloading_red.json',
-              ),
-            ),
-          )
+          // Positioned( // lottie 애니메이션 어울리지 않아서 삭제
+          //   top: 20.h,
+          //   left: 2.w,
+          //   child: SizedBox(
+          //     width: 60.w,
+          //     child: Lottie.asset(
+          //       'assets/lottie/locationloading_red.json',
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

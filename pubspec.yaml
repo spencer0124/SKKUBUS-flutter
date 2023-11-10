@@ -39,7 +39,7 @@ dependencies:
   shared_preferences: ^2.0.9
   get_it: ^7.2.0
   flutter_launcher_icons: ^0.13.1
-  permission_handler: ^11.0.0
+  permission_handler: ^11.0.1
   get: ^4.6.5
   intl: ^0.18.1
   share_plus: ^7.0.2
@@ -126,6 +126,7 @@ flutter:
     - assets/flaticon_bus1.png
     - assets/flaticon_stop1.png
     - assets/flaticon_stop2.png
+    - assets/locationicon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

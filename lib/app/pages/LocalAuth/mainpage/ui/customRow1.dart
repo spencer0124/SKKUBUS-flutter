@@ -41,12 +41,6 @@ class CustomRow1 extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0, 11.h, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  border: Border(
-                      // top: BorderSide(color: Colors.grey[350]!, width: 1),
-                      // bottom: BorderSide(color: Colors.grey[300]!, width: 1),
-                      // left: BorderSide(color: Colors.grey, width: 1),
-                      // right: BorderSide(color: Colors.grey, width: 1),
-                      ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
