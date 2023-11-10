@@ -8,6 +8,33 @@ import 'mainpage_controller.dart';
 final controller = Get.find<MainpageController>();
 Future<void> calculateRemainingStationsToHyehwaStation2() async {
   await dotenv.load(fileName: ".env");
+  var baseUrl2 = Uri.parse(dotenv.env['JonroBusHewaLocApi']!);
+  final response2 = await http.get(baseUrl2);
+
+  if (response2.statusCode == 200) {
+    // 예외 처리 (버스 없는 경우 해야함)
+    print('response2');
+    var jsonResponse = jsonDecode(response2.body);
+    print(jsonResponse);
+    print('---');
+    List<dynamic> itemList = jsonResponse['msgBody']['itemList'];
+
+    for (var item in itemList) {
+      String stopFlag = item['stopFlag'];
+      String posX = item['posX'];
+      String posY = item['posY'];
+      String plainNo = item['plainNo'];
+      String lastStnId = item['lastStnId'];
+
+      // Now you have the data for each item, you can process it as needed
+      print(
+          'Bus $plainNo at position ($posX, $posY) with stop flag $stopFlag is heading to station ID $lastStnId');
+    }
+  } else {
+    // Handle the case where the API call was not successful
+    print('Failed to load data');
+  }
+
   var baseUrl = Uri.parse(dotenv.env['JonroBusHewaApi']!);
   final response = await http.get(baseUrl);
 

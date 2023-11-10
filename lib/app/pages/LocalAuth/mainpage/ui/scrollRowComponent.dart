@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skkumap/app_theme.dart';
 
 class ScrollRowContainer extends StatelessWidget {
   final String text;
@@ -22,7 +21,19 @@ class ScrollRowContainer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       height: 30.h,
       decoration: BoxDecoration(
-        color: ischecked ? AppColors.green_main : color,
+        color: ischecked ? null : color,
+        gradient: ischecked
+            ? const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  // Color(0xFF97fdac),
+                  Color(0xFF6feaa7),
+                  Color(0xFF32cda1),
+                  Color(0xFF13be9e),
+                ],
+              )
+            : null,
         borderRadius: BorderRadius.circular(25.r),
         boxShadow: [
           BoxShadow(

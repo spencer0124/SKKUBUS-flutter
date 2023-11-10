@@ -5,20 +5,15 @@ import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
 
-import 'package:share_plus/share_plus.dart';
 
 import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'package:skkumap/app/utils/return_platform.dart';
-import 'dart:io' show Platform;
 
 class ArrowShape extends CustomPainter {
   final Paint _paint = Paint()..color = AppColors.green_main;

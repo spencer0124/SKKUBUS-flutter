@@ -12,9 +12,7 @@ import 'package:skkumap/admob/ad_helper.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'dart:io' show Platform;
 
-import 'package:skkumap/app/utils/return_platform.dart';
 import 'package:share_plus/share_plus.dart';
 
 /*

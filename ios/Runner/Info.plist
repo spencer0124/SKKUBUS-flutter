@@ -59,7 +59,15 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>캠퍼스, 정류장 위치 확인 및 경로 안내를 위해 위치 권한이 필요합니다</string>
+    <string>주변 버스 정류장 안내, 셔틀 탑승장소 안내 등 위치 서비스를 제공하기 위해 필요한 권한입니다</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>주변 버스 정류장 안내, 셔틀 탑승장소 안내 등 위치 서비스를 제공하기 위해 필요한 권한입니다</string>
+    <key>NSLocationUsageDescription</key>
+    <string>주변 버스 정류장 안내, 셔틀 탑승장소 안내 등 위치 서비스를 제공하기 위해 필요한 권한입니다</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>주변 버스 정류장 안내, 셔틀 탑승장소 안내 등 위치 서비스를 제공하기 위해 필요한 권한입니다</string>
+	<key>PermissionGroupNotification</key>
+	<string>승차 알림, 하차 알림, 중요 공지 알림 등을 위해 필요한 권한입니다</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

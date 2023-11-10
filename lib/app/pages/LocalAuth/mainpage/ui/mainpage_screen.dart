@@ -1,44 +1,24 @@
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
-import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
+import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/scrollRow.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
-import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
+import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow1.dart';
+import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow2.dart';
 
-import 'package:cupertino_icons/cupertino_icons.dart';
 
-import 'package:lottie/lottie.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 
 final controller = Get.find<MainpageController>();
 
-final arrowPathOverlay = NPathOverlay(
-  id: 'path_overlay',
-  coords: [
-    const NLatLng(37.587308, 126.993688),
-    const NLatLng(hewa1Lat, hewa1Lon)
-  ],
-  color: Colors.blue, // Color of the line
-  width: 2, // Width of the line
-);
-
-// final seoulMarker = NMarker(
-//   id: 'seoul_marker',
-//   position: const NLatLng(hewa1Lat, hewa1Lon),
-//   // icon: controller.iconImage,
-// );
-
 const seoulCameraPosition = NCameraPosition(
   target: NLatLng(hewa1Lat, hewa1Lon),
-  zoom: 14.5,
+  zoom: 14,
   bearing: 45,
   tilt: 30,
 );
@@ -46,8 +26,6 @@ const seoulCameraPosition = NCameraPosition(
 // 혜화역 1번 출구 위도, 경도, 목적지 이름
 const double hewa1Lat = 37.583427;
 const double hewa1Lon = 127.001850;
-const String hewa1DestnameEncode =
-    '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9D%B8%EC%82%AC%EC%BA%A0%20%EC%85%94%ED%8B%80%20%EC%9C%84%EC%B9%98';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -57,6 +35,9 @@ class Mainpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.fetchIconImage(context);
+    });
     return Scaffold(
         // drawer: Drawer(
         //   child: Container(
@@ -393,24 +374,46 @@ class Mainpage extends StatelessWidget {
                                           width: dwidth,
                                           child: NaverMap(
                                             options: const NaverMapViewOptions(
+                                              zoomGesturesEnable: true,
                                               locationButtonEnable: false,
-                                              // mapType: NMapType.navi,
+                                              mapType: NMapType.navi,
                                               logoAlign: NLogoAlign.rightBottom,
                                               logoClickEnable: true,
                                               logoMargin: EdgeInsets.all(1000),
                                               activeLayerGroups: [
                                                 NLayerGroup.building,
                                                 NLayerGroup.transit,
-                                                NLayerGroup.traffic,
+                                                // NLayerGroup.traffic,
                                               ],
                                               initialCameraPosition:
                                                   seoulCameraPosition,
                                             ),
                                             onMapReady: (controller) {
-                                              controller
-                                                  .addOverlay(seoulMarker);
-                                              // controller
-                                              //     .addOverlay(arrowPathOverlay);
+                                              controller.addOverlayAll({
+                                                // station1,
+                                                station2,
+                                                station3,
+                                                station4,
+                                                station5,
+                                                station6,
+                                                station7,
+                                                station8,
+                                                station9,
+                                                station10,
+                                                station11,
+                                                station12,
+                                                station13,
+                                                station14,
+                                                station15,
+                                                station16,
+                                                station17,
+                                                station18,
+                                                station19,
+                                                station20,
+                                                jongroRoute,
+                                                // testRoute
+                                              });
+
                                               // seoulMarker
                                               //     .openInfoWindow(markerinfo);
                                             },

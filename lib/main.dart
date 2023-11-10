@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skkumap/app/pages/KingoInfo/controller/kingoinfo_controller.dart';
 
 import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.dart';
 
 import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart';
 
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
-import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'dart:ui';
 import 'dart:async';
@@ -47,7 +46,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:io' show Platform;
 import 'package:http/http.dart' as http;
 
 late FirebaseAuth auth;
@@ -72,14 +70,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> initFirebaseMessaging() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  NotificationSettings settings =
-      await FirebaseMessaging.instance.requestPermission(
-    alert: true,
-    badge: true,
-    sound: true,
-    provisional: false,
-  );
-  print('User granted permission: ${settings.authorizationStatus}');
+  // NotificationSettings settings =
+  //     await FirebaseMessaging.instance.requestPermission(
+  //   alert: true,
+  //   badge: true,
+  //   sound: true,
+  //   provisional: false,
+  // );
+  // print('User granted permission: ${settings.authorizationStatus}');
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
