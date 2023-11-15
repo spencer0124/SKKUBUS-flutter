@@ -29,9 +29,10 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      mainpageController.checkpermission();
+      // mainpageController.checkpermission();
       mainpageController.fetchhewaBusData();
       mainpageController.fetchhewaBusData2();
+      mainpageController._startCountdown();
     }
     if (state == AppLifecycleState.inactive) {}
     if (state == AppLifecycleState.detached) {}
@@ -54,6 +55,7 @@ late var jongrobusMarker1;
 late var jongrobusMarker2;
 late var jongrobusMarker3;
 late var jongrobusMarker4;
+late var jongrobusMarker5;
 
 late var station1;
 late var station2;
@@ -81,26 +83,36 @@ late var jongroRoute;
 late var testRoute;
 
 class MainpageController extends GetxController {
-  // 혜화역 1번 출구 정보를 담는 변수
+  // 혜화역 1번 출구 - 종로 07 정보
   RxInt jongro07BusRemainTimeMin = 0.obs;
   RxInt jongro07BusRemainTimeSec = 0.obs;
+  RxInt jongro07BusRemainTotalTimeSec = 0.obs;
   RxInt jongro07BusRemainStation = 0.obs;
-  RxString jongro07BusMessage = ''.obs;
+  RxString jongro07BusMessage = "".obs;
+
+  // 혜화역 1번 출구 - 인사캠 셔틀버스 정보
   // var hsscBusRemainTime = 0.obs;
-
   RxInt hsscBusRemainStation = 0.obs;
-  RxString hsscBusRemainStationName = ''.obs;
+  RxString hsscBusMessage = ''.obs;
 
+  // 사이드바에 표출되는 이름과 sub이름
   RxString name = '로그인해주세요'.obs;
   RxString subname = ''.obs;
+
+  // 네이버 지도 오버레이 초기화
   late NOverlayImage iconImage;
+
+  // 인사캠 셔틀버스와 종로07 버스 정보 갱신해주는 타이머
   Timer? _timer10s;
   Timer? _timer30s;
+
+  // 종로 07 자동 카운트다운해주는 타이머
+  Timer? _countdownTimer;
 
   @override
   void onInit() {
     super.onInit();
-    checkpermission();
+    // checkpermission();
     calculateRemainingStationsToHyehwaStation();
     calculateRemainingStationsToHyehwaStation2();
     // WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -117,9 +129,9 @@ class MainpageController extends GetxController {
 
   @override
   void onClose() {
-    // Cancel the timer when the controller is disposed
     _timer10s?.cancel();
     _timer30s?.cancel();
+    _countdownTimer?.cancel();
     super.onClose();
   }
 
@@ -157,39 +169,28 @@ class MainpageController extends GetxController {
   }
 
   Future<void> fetchhewaBusData() async {
-    print('hewa data fetch1');
-    hsscBusRemainStation.value =
-        await calculateRemainingStationsToHyehwaStation();
-
-    switch (hsscBusRemainStation.value) {
-      case 0:
-        hsscBusRemainStationName.value = '당역 도착';
-        break;
-      case 1:
-        hsscBusRemainStationName.value = '혜화역U턴지점';
-        break;
-      case 2:
-        hsscBusRemainStationName.value = '혜화로터리(하차지점)';
-        break;
-      case 3:
-        hsscBusRemainStationName.value = '정문(인문-하교)';
-        break;
-      case 4:
-        hsscBusRemainStationName.value = '학생회관(인문)';
-        break;
-      case 5:
-        hsscBusRemainStationName.value = '정차소(인문.농구장)';
-        break;
-      default:
-        hsscBusRemainStationName.value = '정보없음';
-        break;
-    }
+    // 인사캠 셔틀 정보 갱신
+    print('fetchhewaBusData1');
+    await calculateRemainingStationsToHyehwaStation();
   }
 
   Future<void> fetchhewaBusData2() async {
-    // 종로07 혜화역 1번 출구 남은 시간 및 정류장 정보 가져오기와, 위치 표현해주는 함수
-    print('hewa data fetch2');
-    calculateRemainingStationsToHyehwaStation2();
+    // 종로 07 정보 갱신
+    print('fetchhewaBusData2');
+    await calculateRemainingStationsToHyehwaStation2();
+    _startCountdown();
+  }
+
+  // 종로 07 남은 시간 카운트다운
+  void _startCountdown() {
+    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+      // print("Timer tick: ${jongro07BusRemainTotalTimeSec.value}");
+      if (jongro07BusRemainTotalTimeSec.value > 0) {
+        jongro07BusRemainTotalTimeSec.value--;
+      } else {
+        t.cancel(); // Stop the timer if the countdown has finished
+      }
+    });
   }
 
   Future<void> fetchSecureStorage() async {
@@ -199,9 +200,123 @@ class MainpageController extends GetxController {
         await storage.read(key: 'local_branchGroup', iOptions: options) ?? '';
   }
 
+  void fetchBusMap(List<dynamic> itemList) {
+    List<NMarker> markers = [
+      jongrobusMarker1,
+      jongrobusMarker2,
+      jongrobusMarker3,
+      jongrobusMarker4,
+      jongrobusMarker5
+    ];
+
+    for (int i = 0; i < markers.length; i++) {
+      if (i < itemList.length) {
+        var item = itemList[i];
+        double posX = double.parse(item['tmY']);
+        double posY = double.parse(item['tmX']);
+
+        markers[i].setPosition(
+          NLatLng(posX, posY),
+        );
+
+        markers[i].setOnTapListener((overlay) async {
+          await FlutterPlatformAlert.showCustomAlert(
+            windowTitle: item['plainNo'],
+            text: '이전 정류장: ${item['lastStnId']}',
+            negativeButtonTitle: "확인",
+            // positiveButtonTitle: "취소",
+          );
+        });
+
+        markers[i].setIsVisible(true);
+      } else {
+        markers[i].setIsVisible(false);
+      }
+    }
+
+    // Update the map to reflect changes
+    // Implement the logic to refresh the map view if necessary
+  }
+
+  // 네이버 지도 마커 이미지 초기화
   Future<void> fetchIconImage(BuildContext context) async {
     const iconImage = NOverlayImage.fromAssetImage(
       'assets/locationicon.png',
+    );
+
+    var busImageWidget = Image.asset(
+      'assets/jonrobus.png',
+      scale: 1.0,
+    );
+
+    var busImage2 = await NOverlayImage.fromWidget(
+      widget: busImageWidget,
+      size: const Size(24, 24), // Set the desired size
+      context: context,
+    );
+
+    const busImage = NOverlayImage.fromAssetImage(
+      'assets/jonrobus.png',
+    );
+
+    jongrobusMarker1 = NMarker(
+      size: const Size(42, 42),
+      id: 'jongrobusMarker1',
+      position: const NLatLng(37.583427, 127.001850),
+      icon: busImage,
+    );
+
+    jongrobusMarker2 = NMarker(
+      size: const Size(42, 42),
+      id: 'jongrobusMarker2',
+      position: const NLatLng(37.583427, 127.001850),
+      icon: busImage,
+    );
+
+    jongrobusMarker3 = NMarker(
+      size: const Size(42, 42),
+      id: 'jongrobusMarker3',
+      position: const NLatLng(37.583427, 127.001850),
+      icon: busImage,
+    );
+
+    jongrobusMarker4 = NMarker(
+      size: const Size(42, 42),
+      id: 'jongrobusMarker4',
+      position: const NLatLng(37.583427, 127.001850),
+      icon: busImage,
+    );
+
+    jongrobusMarker5 = NMarker(
+      size: const Size(42, 42),
+      id: 'jongrobusMarker5',
+      position: const NLatLng(37.583427, 127.001850),
+      icon: busImage,
+    );
+
+    jongrobusMarker1.setIsVisible(false);
+    jongrobusMarker2.setIsVisible(false);
+    jongrobusMarker3.setIsVisible(false);
+    jongrobusMarker4.setIsVisible(false);
+    jongrobusMarker5.setIsVisible(false);
+
+    jongrobusMarker1.setZIndex(100);
+    jongrobusMarker2.setZIndex(101);
+    jongrobusMarker3.setZIndex(102);
+    jongrobusMarker4.setZIndex(103);
+    jongrobusMarker5.setZIndex(104);
+
+    jongrobusMarker1.setGlobalZIndex(100);
+    jongrobusMarker2.setGlobalZIndex(101);
+    jongrobusMarker3.setGlobalZIndex(102);
+    jongrobusMarker4.setGlobalZIndex(103);
+    jongrobusMarker5.setGlobalZIndex(104);
+
+    station1 = NMarker(
+      size: const Size(18, 18),
+      id: 'station1',
+      position: const NLatLng(37.587707, 126.996686),
+      icon: iconImage,
     );
 
     station2 = NMarker(
@@ -336,6 +451,48 @@ class MainpageController extends GetxController {
       position: const NLatLng(37.587707, 126.996686),
       icon: iconImage,
     );
+
+    station1.setZIndex(1);
+    station2.setZIndex(2);
+    station3.setZIndex(3);
+    station4.setZIndex(4);
+    station5.setZIndex(5);
+    station6.setZIndex(6);
+    station7.setZIndex(7);
+    station8.setZIndex(8);
+    station9.setZIndex(9);
+    station10.setZIndex(10);
+    station11.setZIndex(11);
+    station12.setZIndex(12);
+    station13.setZIndex(13);
+    station14.setZIndex(14);
+    station15.setZIndex(15);
+    station16.setZIndex(16);
+    station17.setZIndex(17);
+    station18.setZIndex(18);
+    station19.setZIndex(19);
+    station20.setZIndex(20);
+
+    station1.setGlobalZIndex(1);
+    station2.setGlobalZIndex(2);
+    station3.setGlobalZIndex(3);
+    station4.setGlobalZIndex(4);
+    station5.setGlobalZIndex(5);
+    station6.setGlobalZIndex(6);
+    station7.setGlobalZIndex(7);
+    station8.setGlobalZIndex(8);
+    station9.setGlobalZIndex(9);
+    station10.setGlobalZIndex(10);
+    station11.setGlobalZIndex(11);
+    station12.setGlobalZIndex(12);
+    station13.setGlobalZIndex(13);
+    station14.setGlobalZIndex(14);
+    station15.setGlobalZIndex(15);
+    station16.setGlobalZIndex(16);
+    station17.setGlobalZIndex(17);
+    station18.setGlobalZIndex(18);
+    station19.setGlobalZIndex(19);
+    station20.setGlobalZIndex(20);
 
     testRoute = NPathOverlay(
       id: "test",

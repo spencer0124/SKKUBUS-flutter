@@ -166,7 +166,7 @@ Future<void> main() async {
   await initFirebase();
   await initMobileAds();
   await initEnvironmentVariables();
-  // await initNotifications(); //
+  // await initNotifications();
 
   initLocalNotification();
   await initNaverMapSdk();
