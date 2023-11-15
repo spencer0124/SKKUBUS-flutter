@@ -341,7 +341,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 0c0ae1eb722ef0c07f7801e5ded8dccd1357d6d4
   FirebaseSessions: ee59a7811bef4c15f65ef6472f3210faa293f9c8
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_config: 2226c1df19c78fe34a05eb7f1363445f18e76fc1
+  flutter_config: f48f0d47a284f1791aacce2687eabb3309ba7a41
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
@@ -375,4 +375,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a1eab4f2e27bf565990e82e0cb9fde3e434d53e9
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.2
