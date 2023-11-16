@@ -17,7 +17,7 @@ final controller = Get.find<MainpageController>();
 const seoulCameraPosition = NCameraPosition(
   target: NLatLng(37.583323, 126.998977),
   zoom: 13.5,
-  bearing: 0,
+  bearing: 90,
   tilt: 30,
 );
 
