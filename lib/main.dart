@@ -12,6 +12,7 @@ import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart
 
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_controller.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'dart:ui';
 import 'dart:async';
@@ -171,7 +172,7 @@ Future<void> main() async {
   initLocalNotification();
   await initNaverMapSdk();
 
-  await checkLocalDataSaved();
+  // await checkLocalDataSaved();
 
   await initLogin();
 
@@ -316,8 +317,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 Future<void> checkLocalDataSaved() async {
   if ((await storage.read(key: 'local_dataSaved')) == 'true') {
-    id = '${(await storage.read(key: 'local_id'))!}@g.skku.edu';
-    pw = (await storage.read(key: 'local_firebasepw'))!;
+    id = '${(await storage.read(key: 'local_id')) ?? 'test'}@g.skku.edu';
+    pw = (await storage.read(key: 'local_firebasepw')) ?? 'test';
     print('id: $id');
     print('pw: $pw');
     logindataSavedValue = true;
@@ -424,6 +425,9 @@ void registerDependencies() {
 
   Get.put(UserChatController());
   Get.put(UserChatLifeCycle());
+
+  Get.put(JonroMainController());
+  Get.put(JonroMainLifeCycle());
 }
 
 Future<void> initLogin() async {
