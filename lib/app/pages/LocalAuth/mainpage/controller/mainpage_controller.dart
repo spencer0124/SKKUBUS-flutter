@@ -29,10 +29,10 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
+      // mainpageController.fetchIconImage();
       // mainpageController.checkpermission();
       mainpageController.fetchhewaBusData();
       mainpageController.fetchhewaBusData2();
-      mainpageController._startCountdown();
     }
     if (state == AppLifecycleState.inactive) {}
     if (state == AppLifecycleState.detached) {}
@@ -63,175 +63,175 @@ const busImage = NOverlayImage.fromAssetImage(
 );
 
 NMarker jongrobusMarker1 = NMarker(
-  size: const Size(35, 35),
+  size: const Size(30, 30),
   id: 'jongrobusMarker1',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker2 = NMarker(
-  size: const Size(42, 42),
+  size: const Size(30, 30),
   id: 'jongrobusMarker2',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker3 = NMarker(
-  size: const Size(42, 42),
+  size: const Size(30, 30),
   id: 'jongrobusMarker3',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker4 = NMarker(
-  size: const Size(42, 42),
+  size: const Size(30, 30),
   id: 'jongrobusMarker4',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker5 = NMarker(
-  size: const Size(42, 42),
+  size: const Size(30, 30),
   id: 'jongrobusMarker5',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker station1 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station1',
   position: const NLatLng(37.587707, 126.996686),
   icon: iconImage,
 );
 
 NMarker station2 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station2',
   position: const NLatLng(37.589185, 126.9972903),
   icon: iconImage,
 );
 
 NMarker station3 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station3',
   position: const NLatLng(37.589829, 126.998893),
   icon: iconImage,
 );
 
 NMarker station4 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station4',
   position: const NLatLng(37.587254, 126.999908),
   icon: iconImage,
 );
 
 NMarker station5 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station5',
   position: const NLatLng(37.586098, 127.000658),
   icon: iconImage,
 );
 
 NMarker station6 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station6',
   position: const NLatLng(37.58350804, 127.0015539),
   icon: iconImage,
 );
 
 NMarker station7 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station7',
   position: const NLatLng(37.581117, 127.001914),
   icon: iconImage,
 );
 
 NMarker station8 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station8',
   position: const NLatLng(37.578845, 127.002061),
   icon: iconImage,
 );
 
 NMarker station9 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station9',
   position: const NLatLng(37.576628, 127.002098),
   icon: iconImage,
 );
 
 NMarker station10 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station10',
   position: const NLatLng(37.578149, 127.002411),
   icon: iconImage,
 );
 
 NMarker station11 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station11',
   position: const NLatLng(37.58111949, 127.0022769),
   icon: iconImage,
 );
 
 NMarker station12 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station12',
   position: const NLatLng(37.58348551, 127.0018454),
   icon: iconImage,
 );
 
 NMarker station13 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station13',
   position: const NLatLng(37.58558033, 127.0006878),
   icon: iconImage,
 );
 
 NMarker station14 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station14',
   position: const NLatLng(37.583323, 126.998977),
   icon: iconImage,
 );
 
 NMarker station15 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station15',
   position: const NLatLng(37.584897, 126.996569),
   icon: iconImage,
 );
 
 NMarker station16 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station16',
   position: const NLatLng(37.5873281, 126.9939426),
   icon: iconImage,
 );
 
 NMarker station17 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station17',
   position: const NLatLng(37.5878641, 126.9923688),
   icon: iconImage,
 );
 
 NMarker station18 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station18',
   position: const NLatLng(37.58744522, 126.9937417),
   icon: iconImage,
 );
 
 NMarker station19 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station19',
   position: const NLatLng(37.58516359, 126.9971922),
   icon: iconImage,
 );
 
 NMarker station20 = NMarker(
-  size: const Size(18, 18),
+  size: const Size(12, 12),
   id: 'station20',
   position: const NLatLng(37.587707, 126.996686),
   icon: iconImage,
@@ -416,6 +416,12 @@ class MainpageController extends GetxController {
 
   // 종로 07 남은 시간 카운트다운
   void _startCountdown() {
+    // Cancel the existing timer if it's already running
+    if (_countdownTimer?.isActive ?? false) {
+      _countdownTimer?.cancel();
+    }
+
+    // Start a new timer
     _countdownTimer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       // print("Timer tick: ${jongro07BusRemainTotalTimeSec.value}");
       if (jongro07BusRemainTotalTimeSec.value > 0) {
@@ -442,9 +448,12 @@ class MainpageController extends GetxController {
   }
 
   void fetchBusMap(List<dynamic> itemList) {
-    print('12');
-    print(itemList);
-    print('12');
+    jongrobusMarker1.setIsVisible(false);
+    jongrobusMarker2.setIsVisible(false);
+    jongrobusMarker3.setIsVisible(false);
+    jongrobusMarker4.setIsVisible(false);
+    jongrobusMarker5.setIsVisible(false);
+
     List<NMarker> markers = [
       jongrobusMarker1,
       jongrobusMarker2,
@@ -545,15 +554,5 @@ class MainpageController extends GetxController {
     station20.setGlobalZIndex(20);
 
     loadingdone.value = true;
-  }
-
-  Future<NOverlayImage> createIconImage() async {
-    // Use the context from the nearest ancestor GetMaterialApp or GetBuilder
-    final context = Get.context!;
-    return await NOverlayImage.fromWidget(
-      widget: const FlutterLogo(),
-      size: const Size(24, 24),
-      context: context,
-    );
   }
 }

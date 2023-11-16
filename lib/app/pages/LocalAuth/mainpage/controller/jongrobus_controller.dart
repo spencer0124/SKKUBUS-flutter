@@ -12,6 +12,9 @@ mainpage에서 사용되는 종로07 버스와 관련된 api를 호출하는 con
 final controller = Get.find<MainpageController>();
 bool isHewaStation = false;
 // 혜화역 정류장에 도착한 경우 '당역 도착'이라고 설정해줘야하므로 bool값 담는 변수 설정
+/*
+stopflag가 생각보다 부정확하다! 어떻게 '도착 혹은 출발'을 표시해줄지 고민
+ */
 
 Future<void> calculateRemainingStationsToHyehwaStation2() async {
   await dotenv.load(fileName: ".env");

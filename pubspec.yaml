@@ -82,6 +82,7 @@ dependencies:
   firebase_auth: ^4.11.1
   xml: ^6.3.0
   flutter_flip_card: ^0.0.4
+  xml2json: ^6.2.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
