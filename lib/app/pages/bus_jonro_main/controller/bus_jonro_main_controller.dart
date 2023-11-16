@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/hsscbus_controller.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
-import 'package:xml2json/xml2json.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
@@ -207,8 +206,7 @@ class JonroMainController extends GetxController {
           int index = stationNodeId.indexWhere((id) => id == lastStnId);
           if (index == -1) {
             flag[index] = 0;
-          }
-          if (stopFlag == "1") {
+          } else if (stopFlag == "1") {
             flag[index] = 2;
           } else if (index != -1) {
             flag[index] = 1;

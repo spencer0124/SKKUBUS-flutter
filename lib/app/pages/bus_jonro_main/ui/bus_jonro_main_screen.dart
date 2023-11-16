@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
 
 import 'package:skkumap/app/utils/return_platform.dart';

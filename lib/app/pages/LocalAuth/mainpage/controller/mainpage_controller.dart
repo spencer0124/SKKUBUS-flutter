@@ -315,6 +315,9 @@ NMultipartPathOverlay jongroRoute =
 ]);
 
 class MainpageController extends GetxController {
+  // 메인화면 스크롤 컨트롤러
+  final ScrollController scrollController = ScrollController();
+
   // 혜화역 1번 출구 - 종로 07 정보
   RxInt jongro07BusRemainTimeMin = 0.obs;
   RxInt jongro07BusRemainTimeSec = 0.obs;
