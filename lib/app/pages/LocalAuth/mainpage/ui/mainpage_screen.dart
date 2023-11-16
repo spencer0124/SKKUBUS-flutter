@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
+import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/scrollRow.dart';
 import 'package:skkumap/app_theme.dart';
@@ -11,6 +12,8 @@ import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow1.dart';
 import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow2.dart';
 
 import 'dart:ui' as ui;
+
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 final controller = Get.find<MainpageController>();
 
@@ -277,234 +280,276 @@ class Mainpage extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      body: Column(
-        children: [
-          Builder(
-            builder: (context) => Container(
-              width: dwidth,
-              height: 47.h,
-              color: AppColors.green_main,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {
-                                // Scaffold.of(context).openDrawer();
-                                // controller.fetchSecureStorage();
-                              },
-                              child: const Icon(
-                                CupertinoIcons.list_bullet,
-                                color: AppColors.green_main,
-                                size: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 3.w,
-                            ),
-                            Semantics(
-                              label: '스꾸버스 앱 로고',
-                              child: Text(
-                                'appname'.tr,
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                  fontFamily: 'ProductBold'.tr,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                // Get.toNamed('/userchat');
-                              },
-                              child: const Icon(
-                                CupertinoIcons.chat_bubble_2,
-                                // color: Colors.white,
-                                color: AppColors.green_main,
-                                size: 28,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+      body: SnappingSheet(
+        snappingPositions: const [
+          SnappingPosition.factor(
+            positionFactor: 0.11,
+            snappingCurve: Curves.easeOutExpo,
+            snappingDuration: Duration(seconds: 1),
+            grabbingContentOffset: GrabbingContentOffset.top,
+          ),
+          SnappingPosition.factor(
+            positionFactor: 0.5,
+            snappingCurve: Curves.easeOutExpo,
+            snappingDuration: Duration(seconds: 1),
+            grabbingContentOffset: GrabbingContentOffset.top,
+          ),
+          SnappingPosition.factor(
+            positionFactor: 0.85,
+            snappingCurve: Curves.easeOutExpo,
+            snappingDuration: Duration(seconds: 1),
+            grabbingContentOffset: GrabbingContentOffset.top,
+          ),
+        ],
+        grabbingHeight: 22,
+        grabbing: Container(
+            height: 22,
+            width: dwidth,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
+                Container(
+                  height: 5,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ],
+            )),
+        sheetBelow: SnappingSheetContent(
+          draggable: true,
+          // childScrollController:
+          //     controller.scrollController, // ScrollController for the ListView
+          child: Container(
+            color: Colors.white,
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: [
+                  Obx(
+                    () => CustomRow2(
+                      iconData: Icons.stop_circle_rounded,
+                      titleText: '혜화역 1번 출구',
+                      subtitleText1: controller
+                              .jongro07BusMessage.value.isNotEmpty
+                          ? controller.jongro07BusMessage.value
+                          : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
+                      subtitleText2: controller.hsscBusMessage.value,
+                      containerColor: Colors.black,
+                      containerText: '정류장',
+                      routeName: '/busData',
+                    ),
+                  ),
+                  const CustomRow1(
+                    iconData: Icons.directions_bus,
+                    titleText: '인사캠 셔틀',
+                    subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
+                    containerColor: AppColors.green_main,
+                    containerText: '성대',
+                    routeName: '/busData',
+                  ),
+                  const CustomRow1(
+                    iconData: Icons.directions_bus,
+                    titleText: '인자셔틀',
+                    subtitleText: '인사캠 ↔ 자과캠',
+                    containerColor: AppColors.green_main,
+                    containerText: '성대',
+                    routeName: '/eskara',
+                  ),
+                  CustomRow1(
+                    iconData: Icons.directions_bus,
+                    titleText: '종로 07',
+                    subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+                    containerColor: Colors.green[400]!,
+                    containerText: '마을',
+                    routeName: '/jonromain',
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                ],
               ),
             ),
           ),
-          Container(
-            // padding: const EdgeInsets.all(20),
-            width: dwidth,
-            height: 350.h,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            Obx(
-                              () {
-                                return loadingdone.value
-                                    ? SizedBox(
-                                        height: 350.h,
-                                        width: dwidth,
-                                        child: NaverMap(
-                                          options: const NaverMapViewOptions(
-                                            zoomGesturesEnable: true,
-                                            locationButtonEnable: false,
-                                            mapType: NMapType.navi,
-                                            logoAlign: NLogoAlign.rightBottom,
-                                            logoClickEnable: true,
-                                            logoMargin: EdgeInsets.all(1000),
-                                            activeLayerGroups: [
-                                              NLayerGroup.building,
-                                              NLayerGroup.transit,
-                                              // NLayerGroup.traffic,
-                                            ],
-                                            initialCameraPosition:
-                                                seoulCameraPosition,
-                                          ),
-                                          onMapReady: (controller) {
-                                            controller.addOverlayAll({
-                                              // station1,
-                                              station2,
-                                              station3,
-                                              station4,
-                                              station5,
-                                              station6,
-                                              station7,
-                                              station8,
-                                              station9,
-                                              station10,
-                                              station11,
-                                              station12,
-                                              station13,
-                                              station14,
-                                              station15,
-                                              station16,
-                                              station17,
-                                              station18,
-                                              station19,
-                                              station20,
-                                              jongroRoute,
-                                              jongrobusMarker1,
-                                              jongrobusMarker2,
-                                              jongrobusMarker3,
-                                              jongrobusMarker4,
-                                              jongrobusMarker5,
-                                              // testRoute
-                                            });
-
-                                            // seoulMarker
-                                            //     .openInfoWindow(markerinfo);
-                                          },
-                                        ),
-                                      )
-                                    : const Text('loading');
-                              },
-                            ),
-                            Positioned(
-                              left: 0.w,
-                              right: 0.w,
-                              top: 10.h,
-                              child: const Center(child: ScrollableRow()),
-                            ),
-                            Positioned(
-                              bottom: -10.h,
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: dwidth,
-                                height: 22.h,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    topRight: Radius.circular(25),
-                                  ),
-                                ),
-                                child: Divider(
-                                  color: Colors.grey[500],
-                                  thickness: 2.0,
-                                  endIndent: dwidth * (1 / 2.2),
-                                  indent: dwidth * (1 / 2.2),
+        ),
+        child: Column(
+          children: [
+            Builder(
+              builder: (context) => Container(
+                width: dwidth,
+                height: 47.h,
+                color: AppColors.green_main,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  // Scaffold.of(context).openDrawer();
+                                  // controller.fetchSecureStorage();
+                                },
+                                child: const Icon(
+                                  CupertinoIcons.list_bullet,
+                                  color: AppColors.green_main,
+                                  size: 25,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 3.w,
+                              ),
+                              Semantics(
+                                label: '스꾸버스 앱 로고',
+                                child: Text(
+                                  'appname'.tr,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.white,
+                                    fontFamily: 'ProductBold'.tr,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  // Get.toNamed('/userchat');
+                                },
+                                child: const Icon(
+                                  CupertinoIcons.chat_bubble_2,
+                                  // color: Colors.white,
+                                  color: AppColors.green_main,
+                                  size: 28,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
-          Obx(
-            () => CustomRow2(
-              iconData: Icons.stop_circle_rounded,
-              titleText: '혜화역 1번 출구',
-              subtitleText1: controller.jongro07BusMessage.value.isNotEmpty
-                  ? controller.jongro07BusMessage.value
-                  : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
-              subtitleText2: controller.hsscBusMessage.value,
-              containerColor: Colors.black,
-              containerText: '정류장',
-              routeName: '/busData',
+            Container(
+              width: dwidth,
+              // height: 350.h, // 이거 주석처리를 안하면 overflow 에러가 난다
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Obx(
+                                () {
+                                  return loadingdone.value
+                                      ? SizedBox(
+                                          height: dheight - 47.h,
+                                          width: dwidth,
+                                          child: NaverMap(
+                                            options: const NaverMapViewOptions(
+                                              zoomGesturesEnable: true,
+                                              locationButtonEnable: false,
+                                              mapType: NMapType.navi,
+                                              logoAlign: NLogoAlign.rightBottom,
+                                              logoClickEnable: true,
+                                              logoMargin: EdgeInsets.all(1000),
+                                              activeLayerGroups: [
+                                                NLayerGroup.building,
+                                                NLayerGroup.transit,
+                                                // NLayerGroup.traffic,
+                                              ],
+                                              initialCameraPosition:
+                                                  seoulCameraPosition,
+                                            ),
+                                            onMapReady: (controller) {
+                                              controller.addOverlayAll({
+                                                // station1,
+                                                station2,
+                                                station3,
+                                                station4,
+                                                station5,
+                                                station6,
+                                                station7,
+                                                station8,
+                                                station9,
+                                                station10,
+                                                station11,
+                                                station12,
+                                                station13,
+                                                station14,
+                                                station15,
+                                                station16,
+                                                station17,
+                                                station18,
+                                                station19,
+                                                station20,
+                                                jongroRoute,
+                                                jongrobusMarker1,
+                                                jongrobusMarker2,
+                                                jongrobusMarker3,
+                                                jongrobusMarker4,
+                                                jongrobusMarker5,
+                                                // testRoute
+                                              });
+
+                                              // seoulMarker
+                                              //     .openInfoWindow(markerinfo);
+                                            },
+                                          ),
+                                        )
+                                      : const Text('loading');
+                                },
+                              ),
+                              Positioned(
+                                left: 0.w,
+                                right: 0.w,
+                                top: 10.h,
+                                child: const Center(child: ScrollableRow()),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          const CustomRow1(
-            iconData: Icons.directions_bus,
-            titleText: '인사캠 셔틀',
-            subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
-            containerColor: AppColors.green_main,
-            containerText: '성대',
-            routeName: '/busData',
-          ),
-          const CustomRow1(
-            iconData: Icons.directions_bus,
-            titleText: '인자셔틀',
-            subtitleText: '인사캠 ↔ 자과캠',
-            containerColor: AppColors.green_main,
-            containerText: '성대',
-            routeName: '/eskara',
-          ),
-          CustomRow1(
-            iconData: Icons.directions_bus,
-            titleText: '종로 07',
-            subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-            containerColor: Colors.green[400]!,
-            containerText: '마을',
-            routeName: '/jonromain',
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
