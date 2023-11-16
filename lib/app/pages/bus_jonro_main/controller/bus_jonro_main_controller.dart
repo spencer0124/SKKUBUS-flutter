@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
