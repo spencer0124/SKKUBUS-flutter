@@ -205,6 +205,9 @@ class JonroMainController extends GetxController {
           String lastStnId = item['lastStnId'];
 
           int index = stationNodeId.indexWhere((id) => id == lastStnId);
+          if (index == -1) {
+            flag[index] = 0;
+          }
           if (stopFlag == "1") {
             flag[index] = 2;
           } else if (index != -1) {
