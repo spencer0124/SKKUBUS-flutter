@@ -42,6 +42,9 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
     String headerMsg = jsonResponse['msgHeader']['headerMsg'];
     String headerCd = jsonResponse['msgHeader']['headerCd'];
 
+    // 일단 버스 마커를 모두 지우고 시작
+    controller.fetchBusInit();
+
     if (headerMsg == "정상적으로 처리되었습니다." && headerCd == "0") {
       /*
        jongro07BusMessage는 예외 처리가 필요한 경우 값이 있으며
@@ -66,11 +69,13 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
       }
     } else {
       // 운영시간이 아니여서 정보를 반환하지 않는 경우
-      controller.jongro07BusMessage.value = "정보 없음1";
+      controller.jongro07BusMessage.value = "정보 없음 [1]";
+      return;
     }
   } else {
     // 기타 예외 처리
-    controller.jongro07BusMessage.value = "정보 없음2";
+    controller.jongro07BusMessage.value = "정보 없음 [2]";
+    return;
   }
 
   /*
@@ -130,9 +135,11 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
         controller.jongro07BusMessage.value = arrmsg1;
       }
     } else {
-      controller.jongro07BusMessage.value = "정보 없음3";
+      controller.jongro07BusMessage.value = "정보 없음 [3]";
+      return;
     }
   } else {
-    controller.jongro07BusMessage.value = "정보 없음4";
+    controller.jongro07BusMessage.value = "정보 없음 [4]";
+    return;
   }
 }

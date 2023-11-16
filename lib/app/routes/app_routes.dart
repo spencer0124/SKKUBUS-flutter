@@ -4,6 +4,7 @@ import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
 import 'package:skkumap/app/pages/LocalAuth/view/localauth_view.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
+import 'package:skkumap/app/pages/bus_jonro_main/ui/bus_jonro_main_screen.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/binding/bus_seoul_main_binding.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_screen.dart';
 
@@ -59,6 +60,10 @@ class AppRoutes {
     GetPage(
       name: '/localauth',
       page: () => const LocalAuthView(),
+    ),
+    GetPage(
+      name: '/jonromain',
+      page: () => const JonroMainScreen(),
     ),
   ];
 }
