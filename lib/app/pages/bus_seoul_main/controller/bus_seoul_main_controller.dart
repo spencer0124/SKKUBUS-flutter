@@ -12,7 +12,6 @@ import 'package:skkumap/admob/ad_helper.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 import 'package:share_plus/share_plus.dart';
 
 /*
@@ -100,7 +99,7 @@ class BusDataController extends GetxController
           isAdLoaded.value = true;
         },
         onAdFailedToLoad: (ad, err) {
-          // print('Failed to load a banner ad: ${err.message}');
+          print('Failed to load a banner ad: ${err.message}');
           ad.dispose();
         },
       ),

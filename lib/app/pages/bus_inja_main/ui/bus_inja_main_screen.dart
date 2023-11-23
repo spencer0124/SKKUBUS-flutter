@@ -147,42 +147,43 @@ class ESKARA extends StatelessWidget {
             height: 0.5,
             color: Colors.grey[300],
           ),
-          Container(
-            height: 30,
-            color: Colors.grey[100],
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
-                            child: Text(
-                              '11:35 PM 기준 · 운행종료',
-                              // '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey[800],
-                                fontFamily: 'CJKRegular',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // 상단바 몇시 기준, 운행종료/몇대 운행 정보 담는곳
+          // Container(
+          //   height: 30,
+          //   color: Colors.grey[100],
+          //   child: Column(
+          //     children: [
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //         crossAxisAlignment: CrossAxisAlignment.center,
+          //         children: [
+          //           Padding(
+          //             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
+          //             child: Row(
+          //               children: [
+          //                 const SizedBox(
+          //                   width: 5,
+          //                 ),
+          //                 Padding(
+          //                   padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
+          //                   child: Text(
+          //                     '11:35 PM 기준 · 운행종료',
+          //                     // '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
+          //                     style: TextStyle(
+          //                       fontSize: 12,
+          //                       color: Colors.grey[800],
+          //                       fontFamily: 'CJKRegular',
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Container(
             height: 0.5,
             color: Colors.grey[300],
@@ -217,123 +218,123 @@ class ESKARA extends StatelessWidget {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Obx(
-                          () => Text(
-                            '예상 소요시간 : ${controller.duration.value}',
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'CJKRegular',
-                              fontSize: 12,
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10.0),
-                              width: 170.w,
-                              height: 90.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey[100],
-                                border: Border.all(
-                                  color: Colors.grey[300]!,
-                                  width: 1,
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '승차알림 설정하기',
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.black,
-                                          fontFamily: 'CJKBold',
-                                        ),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Icon(
-                                        Icons.alarm,
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  const Text(
-                                    '선택한 셔틀이 출발하기\n15분 전에 알려드릴게요',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                      fontFamily: 'CJKRegular',
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(10.0),
-                              width: 170.w,
-                              height: 90.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey[100],
-                                border: Border.all(
-                                  color: Colors.grey[300]!,
-                                  width: 1,
-                                ),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '하차알림 설정하기',
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.black,
-                                          fontFamily: 'CJKBold',
-                                        ),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Icon(
-                                        Icons.alarm,
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  const Text(
-                                    '선택한 셔틀이 도착하기\n10분 전에 알려드릴게요',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                      fontFamily: 'CJKRegular',
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Obx(
+                        //   () => Text(
+                        //     '예상 소요시간 : ${controller.duration.value}',
+                        //     style: const TextStyle(
+                        //       color: Colors.black,
+                        //       fontFamily: 'CJKRegular',
+                        //       fontSize: 12,
+                        //     ),
+                        //     textAlign: TextAlign.start,
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Container(
+                        //       padding: const EdgeInsets.all(10.0),
+                        //       width: 170.w,
+                        //       height: 90.h,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //         color: Colors.grey[100],
+                        //         border: Border.all(
+                        //           color: Colors.grey[300]!,
+                        //           width: 1,
+                        //         ),
+                        //       ),
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           const Row(
+                        //             mainAxisAlignment:
+                        //                 MainAxisAlignment.spaceBetween,
+                        //             children: [
+                        //               Text(
+                        //                 '승차알림 설정하기',
+                        //                 style: TextStyle(
+                        //                   fontSize: 13,
+                        //                   color: Colors.black,
+                        //                   fontFamily: 'CJKBold',
+                        //                 ),
+                        //                 textAlign: TextAlign.start,
+                        //               ),
+                        //               Icon(
+                        //                 Icons.alarm,
+                        //                 size: 18,
+                        //               ),
+                        //             ],
+                        //           ),
+                        //           SizedBox(
+                        //             height: 5.h,
+                        //           ),
+                        //           const Text(
+                        //             '선택한 셔틀이 출발하기\n15분 전에 알려드릴게요',
+                        //             style: TextStyle(
+                        //               fontSize: 12,
+                        //               color: Colors.black,
+                        //               fontFamily: 'CJKRegular',
+                        //             ),
+                        //             textAlign: TextAlign.start,
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //     Container(
+                        //       padding: const EdgeInsets.all(10.0),
+                        //       width: 170.w,
+                        //       height: 90.h,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //         color: Colors.grey[100],
+                        //         border: Border.all(
+                        //           color: Colors.grey[300]!,
+                        //           width: 1,
+                        //         ),
+                        //       ),
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           const Row(
+                        //             mainAxisAlignment:
+                        //                 MainAxisAlignment.spaceBetween,
+                        //             children: [
+                        //               Text(
+                        //                 '하차알림 설정하기',
+                        //                 style: TextStyle(
+                        //                   fontSize: 13,
+                        //                   color: Colors.black,
+                        //                   fontFamily: 'CJKBold',
+                        //                 ),
+                        //                 textAlign: TextAlign.start,
+                        //               ),
+                        //               Icon(
+                        //                 Icons.alarm,
+                        //                 size: 18,
+                        //               ),
+                        //             ],
+                        //           ),
+                        //           SizedBox(
+                        //             height: 5.h,
+                        //           ),
+                        //           const Text(
+                        //             '선택한 셔틀이 도착하기\n10분 전에 알려드릴게요',
+                        //             style: TextStyle(
+                        //               fontSize: 12,
+                        //               color: Colors.black,
+                        //               fontFamily: 'CJKRegular',
+                        //             ),
+                        //             textAlign: TextAlign.start,
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
 
                         Container(
                           alignment: Alignment.centerLeft,

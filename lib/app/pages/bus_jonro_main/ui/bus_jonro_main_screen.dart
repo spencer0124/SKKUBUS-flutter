@@ -8,12 +8,32 @@ import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_contr
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'package:skkumap/app_theme.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
+
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
 final PlatformType platformType = getCurrentPlatform();
+
+class ArrowShape extends CustomPainter {
+  final Paint _paint = Paint()..color = Colors.green;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path();
+    path.lineTo(size.width - 5, 0);
+    path.lineTo(size.width, size.height / 2);
+    path.lineTo(size.width - 5, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    canvas.drawPath(path, _paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
 
 class JonroMainScreen extends GetView<JonroMainController> {
   const JonroMainScreen({super.key});
@@ -106,12 +126,12 @@ class JonroMainScreen extends GetView<JonroMainController> {
                             child: InkWell(
                               child: const Icon(
                                 Icons.info_outline,
-                                color: Colors.white,
+                                color: Colors.green,
                                 size: 27,
-                                semanticLabel: "종로07 정보 확인하기 버튼",
+                                // semanticLabel: "종로07 정보 확인하기 버튼",
                               ),
                               onTap: () {
-                                Get.toNamed('/busDetail');
+                                // Get.toNamed('/busDetail');
                               },
                             ),
                           ),
@@ -143,8 +163,7 @@ class JonroMainScreen extends GetView<JonroMainController> {
                               const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
                           child: Obx(
                             () {
-                              if (controller.currentTime.value.isEmpty ||
-                                  controller.activeBusCount.value == null) {
+                              if (controller.currentTime.value.isEmpty) {
                                 return Shimmer.fromColors(
                                   baseColor: Colors.grey[100]!,
                                   highlightColor: Colors.white,
@@ -201,7 +220,7 @@ class JonroMainScreen extends GetView<JonroMainController> {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: const ClampingScrollPhysics(),
-                              itemCount: 20,
+                              itemCount: 19,
                               itemBuilder: (_, index) {
                                 return SizedBox(
                                   height: 70,
@@ -273,7 +292,7 @@ class JonroMainScreen extends GetView<JonroMainController> {
                                               // 가장 마지막 요소는 아래쪽 세로선 그려주지 말기
                                               Container(
                                                 width: 3,
-                                                height: index == 19 ? 2 : 27,
+                                                height: index == 18 ? 2 : 27,
                                                 color: Colors.green,
                                               ),
                                             ],
@@ -329,6 +348,93 @@ class JonroMainScreen extends GetView<JonroMainController> {
                                         ],
                                       ),
                                       // 흰색 구분선
+                                      Obx(
+                                        () {
+                                          return Positioned(
+                                            top: 20.h,
+                                            left: 80.w,
+                                            child: controller.flag[index] == 1
+                                                ? Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      const PulseAnimation(
+                                                        child: Icon(
+                                                          Icons.circle,
+                                                          size: 35,
+                                                          color: Colors.green,
+                                                        ),
+                                                      ),
+                                                      const Icon(
+                                                        Icons.circle,
+                                                        size: 35,
+                                                        color: Colors.green,
+                                                      ),
+                                                      Container(
+                                                        child: const Icon(
+                                                          Icons.directions_bus,
+                                                          size: 17,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Container(
+                                                    height: 1,
+                                                    color: Colors.transparent,
+                                                  ),
+                                          );
+                                        },
+                                      ),
+                                      Obx(
+                                        () {
+                                          return Positioned(
+                                            left: 16.w,
+                                            top: 28.5.h,
+                                            child: controller.flag[index] == 1
+                                                ? Row(
+                                                    children: [
+                                                      Stack(
+                                                        children: [
+                                                          CustomPaint(
+                                                            size: const Size(
+                                                                62, 18),
+                                                            painter:
+                                                                ArrowShape(),
+                                                          ),
+                                                          Container(
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .fromLTRB(
+                                                                    4.3,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                            child: Text(
+                                                              controller.busNum[
+                                                                  index],
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 11,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontFamily:
+                                                                    'CJKBold',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Container(
+                                                    height: 1,
+                                                    color: Colors.transparent,
+                                                  ),
+                                          );
+                                        },
+                                      ),
                                     ],
                                   ),
                                 );

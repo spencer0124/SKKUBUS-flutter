@@ -8,6 +8,7 @@ import 'hsscbus_controller.dart';
 import 'jongrobus_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
@@ -63,35 +64,35 @@ const busImage = NOverlayImage.fromAssetImage(
 );
 
 NMarker jongrobusMarker1 = NMarker(
-  size: const Size(30, 30),
+  size: const Size(20, 20),
   id: 'jongrobusMarker1',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker2 = NMarker(
-  size: const Size(30, 30),
+  size: const Size(20, 20),
   id: 'jongrobusMarker2',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker3 = NMarker(
-  size: const Size(30, 30),
+  size: const Size(20, 20),
   id: 'jongrobusMarker3',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker4 = NMarker(
-  size: const Size(30, 30),
+  size: const Size(20, 20),
   id: 'jongrobusMarker4',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
 );
 
 NMarker jongrobusMarker5 = NMarker(
-  size: const Size(30, 30),
+  size: const Size(20, 20),
   id: 'jongrobusMarker5',
   position: const NLatLng(37.583427, 127.001850),
   icon: busImage,
@@ -212,7 +213,7 @@ NMarker station16 = NMarker(
 NMarker station17 = NMarker(
   size: const Size(12, 12),
   id: 'station17',
-  position: const NLatLng(37.5878641, 126.9923688),
+  position: const NLatLng(37.587943, 126.992523),
   icon: iconImage,
 );
 
@@ -296,19 +297,32 @@ NMultipartPathOverlay jongroRoute =
       NLatLng(37.58558033, 127.0006878), // 혜화동로터리
       NLatLng(37.585496, 127.000855),
       NLatLng(37.585348, 127.000909),
-
       NLatLng(37.583323, 126.998977), // 성대입구
       NLatLng(37.583151, 126.998708),
       NLatLng(37.583514, 126.998353),
-
       NLatLng(37.584236, 126.997634),
-
       NLatLng(37.584915, 126.997237),
       NLatLng(37.584897, 126.996569), // 성균관대정문
+      NLatLng(37.584859, 126.995868),
+      NLatLng(37.584886, 126.995694),
+      NLatLng(37.585028, 126.995540),
       NLatLng(37.5873281, 126.9939426), // 600주년기념관
-      NLatLng(37.5878641, 126.9923688), // 성균관대운동장
+      NLatLng(37.588045, 126.993413),
+      NLatLng(37.588560, 126.993053),
+      NLatLng(37.588137, 126.992209),
+      NLatLng(37.587943, 126.992523), // 성균관대운동장
+      NLatLng(37.587437, 126.992650),
+      NLatLng(37.587450, 126.992768),
+      NLatLng(37.587744, 126.993470),
+      NLatLng(37.587705, 126.993536),
       NLatLng(37.58744522, 126.9937417), // 학생회관
+      NLatLng(37.584865, 126.995611),
+      NLatLng(37.584811, 126.995696),
+      NLatLng(37.584787, 126.995797),
+      NLatLng(37.584893, 126.997181),
       NLatLng(37.58516359, 126.9971922), // 성균관대학교
+      NLatLng(37.586414, 126.996755),
+      NLatLng(37.587180, 126.996577),
       NLatLng(37.587707, 126.996686), // 명륜새마을금고
     ],
   ),
@@ -316,7 +330,7 @@ NMultipartPathOverlay jongroRoute =
 
 class MainpageController extends GetxController {
   // 메인화면 스크롤 컨트롤러
-  final ScrollController scrollController = ScrollController();
+  final snappingSheetController = SnappingSheetController();
 
   // 혜화역 1번 출구 - 종로 07 정보
   RxInt jongro07BusRemainTimeMin = 0.obs;
@@ -347,6 +361,14 @@ class MainpageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    Future.delayed(Duration.zero, () {
+      snappingSheetController.snapToPosition(
+        const SnappingPosition.factor(positionFactor: 0.5),
+      );
+    });
+
+    // waitForAttachment(); // attach 된 후에 snaptoposition해주기
+
     fetchIconImage();
     // checkpermission();
     calculateRemainingStationsToHyehwaStation();
@@ -362,6 +384,21 @@ class MainpageController extends GetxController {
     _timer30s = Timer.periodic(
         const Duration(seconds: 30), (Timer t) => fetchhewaBusData2());
   }
+
+  // void waitForAttachment() {
+  //   Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
+  //     if (snappingSheetController.isAttached) {
+  //       timer.cancel();
+  //       snapSheetToPosition();
+  //     }
+  //   });
+  // }
+
+  // void snapSheetToPosition() {
+  //   snappingSheetController.snapToPosition(
+  //     const SnappingPosition.factor(positionFactor: 0.5),
+  //   );
+  // }
 
   @override
   void onClose() {
@@ -477,8 +514,8 @@ class MainpageController extends GetxController {
 
         markers[i].setOnTapListener((overlay) async {
           await FlutterPlatformAlert.showCustomAlert(
-            windowTitle: item['plainNo'],
-            text: '이전 정류장: ${item['lastStnId']}',
+            windowTitle: '종로07 버스',
+            text: item['plainNo'],
             negativeButtonTitle: "확인",
             // positiveButtonTitle: "취소",
           );

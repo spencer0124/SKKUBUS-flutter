@@ -18,10 +18,10 @@ import 'package:snapping_sheet/snapping_sheet.dart';
 final controller = Get.find<MainpageController>();
 
 const seoulCameraPosition = NCameraPosition(
-  target: NLatLng(37.583323, 126.998977),
-  zoom: 13.5,
+  target: NLatLng(37.582716, 126.989456),
+  zoom: 13.9,
   bearing: 90,
-  tilt: 30,
+  tilt: 0,
 );
 
 // 혜화역 1번 출구 위도, 경도, 목적지 이름
@@ -281,15 +281,41 @@ class Mainpage extends StatelessWidget {
         ),
       ),
       body: SnappingSheet(
+        controller: controller.snappingSheetController,
+        onSheetMoved: (sheetPosition) {
+          // print("onSheetMoved - Current position ${sheetPosition.pixels}");
+        },
+        onSnapCompleted: (sheetPosition, _) {
+          // Predefined snapping positions
+          const List<double> predefinedPositions = [0.11, 0.5, 0.85];
+
+          // Calculate the position factor
+          double grabbingHeight =
+              22; // Adjust this value as per your grabbing height
+          double screenHeight = MediaQuery.of(context).size.height;
+          double totalMovableHeight = screenHeight - grabbingHeight;
+          double positionFactor = sheetPosition.pixels / totalMovableHeight;
+
+          // Find the closest predefined position
+          double closest = predefinedPositions.reduce((a, b) =>
+              (positionFactor - a).abs() < (positionFactor - b).abs() ? a : b);
+
+          // Print the closest position factor
+          print("Closest predefined position to current: $closest");
+
+          // Additional: print current position factor for reference
+          print("Current position factor: $positionFactor");
+        },
+        lockOverflowDrag: true,
         snappingPositions: const [
           SnappingPosition.factor(
-            positionFactor: 0.11,
+            positionFactor: 0.5,
             snappingCurve: Curves.easeOutExpo,
             snappingDuration: Duration(seconds: 1),
             grabbingContentOffset: GrabbingContentOffset.top,
           ),
           SnappingPosition.factor(
-            positionFactor: 0.5,
+            positionFactor: 0.11,
             snappingCurve: Curves.easeOutExpo,
             snappingDuration: Duration(seconds: 1),
             grabbingContentOffset: GrabbingContentOffset.top,
@@ -306,6 +332,14 @@ class Mainpage extends StatelessWidget {
             height: 22,
             width: dwidth,
             decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 2,
+                    spreadRadius: 2,
+                    color: Colors.white,
+                    offset: Offset(0, 10),
+                  ),
+                ],
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -388,7 +422,7 @@ class Mainpage extends StatelessWidget {
             Builder(
               builder: (context) => Container(
                 width: dwidth,
-                height: 47.h,
+                height: 48.h,
                 color: AppColors.green_main,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
