@@ -157,7 +157,7 @@ class CustomRow2 extends StatelessWidget {
                                       textAlign: TextAlign.start,
                                     ),
                                     Text(
-                                      '[인사캠셔틀]    ',
+                                      '[인사캠셔틀]   ',
                                       style: TextStyle(
                                         color: Colors.grey[600],
                                         fontFamily: 'CJKMedium',

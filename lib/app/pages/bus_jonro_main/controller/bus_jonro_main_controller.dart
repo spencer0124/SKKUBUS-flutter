@@ -41,7 +41,7 @@ class JonroMainLifeCycle extends GetxController with WidgetsBindingObserver {
 class JonroMainController extends GetxController {
   RxBool loading = true.obs;
   final currentTime = ''.obs; // 현재시간
-  final activeBusCount = Rx<int?>(null); // 현재 운영중인 버스 대수
+  RxInt activeBusCount = 0.obs; // 현재 운영중인 버스 대수
   Timer? _updateCurrentTime; // 현재시간을 10초마다 업데이트해주는 타이머
   Timer? _updateBusApi; // 버스 정보를 30초마다 업데이트해주는 타이머
 
@@ -51,7 +51,7 @@ class JonroMainController extends GetxController {
     '명륜새마을금고',
     '서울국제고등학교',
     '국민생활관',
-    '혜화 초등학교',
+    '혜화초등학교',
     '혜화우체국',
     '혜화역4번출구',
     '혜화역.서울대병원입구',
@@ -95,6 +95,7 @@ class JonroMainController extends GetxController {
   var arrmsg1 = RxList<String>(List.filled(19, '도착 정보 없음'));
   var arrmsg2 = RxList<String>(List.filled(19, '도착 정보 없음'));
   var flag = RxList<int>(List.filled(19, 0));
+  var busNum = RxList<String>(List.filled(19, '00000'));
 
   @override
   void onInit() async {
@@ -180,6 +181,7 @@ class JonroMainController extends GetxController {
       return;
     }
 
+    // 두번째 api 호출
     var baseUrl2 = Uri.parse(dotenv.env['JonroBusHewaLocApi']!);
     final response2 = await http.get(baseUrl2);
 
@@ -195,28 +197,42 @@ class JonroMainController extends GetxController {
 
         int count = 0;
 
+        flag.value = List.filled(19, 0);
         for (var item in itemList) {
           count++;
-          String stopFlag = item['stopFlag'];
+          // String stopFlag = item['stopFlag'];
           // String posX = item['posX'];
           // String posY = item['posY'];
           // String plainNo = item['plainNo'];
           String lastStnId = item['lastStnId'];
+          print('$lastStnId\n');
 
-          int index = stationNodeId.indexWhere((id) => id == lastStnId);
-          if (index == -1) {
-            flag[index] = 0;
-          } else if (stopFlag == "1") {
-            flag[index] = 2;
-          } else if (index != -1) {
+          int lastStnIdInt = int.tryParse(lastStnId) ?? -1;
+
+          int index = stationNodeId.indexWhere((id) => id == lastStnIdInt);
+
+          if (index != -1) {
             flag[index] = 1;
-          } else {
-            flag[index] = 0;
+            busNum[index] = item['plainNo'].substring(2);
           }
+
+          // 요거 flag 때문에 에러나는거였다
+
+          // int index = stationNodeId.indexWhere((id) => id == lastStnId);
+          // if (index == -1) {
+          //   flag[index] = 0;
+          // } else if (stopFlag == "1") {
+          //   flag[index] = 2;
+          // } else if (index != -1) {
+          //   flag[index] = 1;
+          // } else {
+          //   flag[index] = 0;
+          // }
 
           activeBusCount.value = count;
         }
         print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+
         print(flag);
         print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
       } else {

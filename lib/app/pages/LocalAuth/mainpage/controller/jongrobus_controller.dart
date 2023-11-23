@@ -11,9 +11,11 @@ mainpage에서 사용되는 종로07 버스와 관련된 api를 호출하는 con
 
 final controller = Get.find<MainpageController>();
 bool isHewaStation = false;
+DateTime isHewaStationUpdateTime = DateTime.now();
 // 혜화역 정류장에 도착한 경우 '당역 도착'이라고 설정해줘야하므로 bool값 담는 변수 설정
 /*
 stopflag가 생각보다 부정확하다! 어떻게 '도착 혹은 출발'을 표시해줄지 고민
+-> 20초 후면 이동한걸로 판단하자
  */
 
 Future<void> calculateRemainingStationsToHyehwaStation2() async {
@@ -66,6 +68,7 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
 
         if (lastStnId == "100900075" && stopFlag == "1") {
           isHewaStation = true;
+          isHewaStationUpdateTime = DateTime.now();
         }
         // print(
         // 'Bus $plainNo at position ($posX, $posY) with stop flag $stopFlag is heading to station ID $lastStnId');
@@ -112,8 +115,16 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
       final matchTypeA = regExptypeA.firstMatch(arrmsg1);
       final matchTypeB = regExptypeB.firstMatch(arrmsg1);
 
-      // 메세지가 주어진 형식과 일치하는 경우
+      var duration = 100;
+      var currentTime = DateTime.now();
       if (isHewaStation) {
+        duration = currentTime.difference(isHewaStationUpdateTime).inSeconds;
+      }
+
+      print('duration: $duration');
+      print('isHewaStation: $isHewaStation');
+      // 메세지가 주어진 형식과 일치하는 경우
+      if (isHewaStation && duration.abs() < 30) {
         controller.jongro07BusMessage.value = '도착 또는 출발';
       } else if (matchTypeA != null) {
         controller.jongro07BusRemainTimeMin.value =
