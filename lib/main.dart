@@ -150,6 +150,6 @@ void registerDependencies() {
   Get.lazyPut(() => UserChatController());
   Get.lazyPut(() => UserChatLifeCycle());
 
-  Get.lazyPut(() => JonroMainController());
-  Get.lazyPut(() => JonroMainLifeCycle());
+  Get.put(JonroMainController());
+  Get.put(JonroMainLifeCycle());
 }
