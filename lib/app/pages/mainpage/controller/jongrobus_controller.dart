@@ -21,8 +21,11 @@ stopflag가 생각보다 부정확하다! 어떻게 '도착 혹은 출발'을 �
 
 Future<void> calculateRemainingStationsToHyehwaStation2() async {
   // controller.jongro07BusMessage.value = "";
+  // controller.jonro07BusMessageVisible.value = false;
+  // controller.jongro07BusMessage.value = "";
   await dotenv.load(fileName: ".env");
   isHewaStation = false;
+  controller.jonroLoadingDone.value = false;
 
   /*
   종로07 버스의 현재 위치, 번호판, 도착했는지 여부를 확인할 수 있는 첫번째 api 호출
@@ -81,11 +84,13 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
     } else {
       // 운영시간이 아니여서 정보를 반환하지 않는 경우
       controller.jongro07BusMessage.value = "정보 없음 [1]";
+      controller.jonro07BusMessageVisible.value = true;
       return;
     }
   } else {
     // 기타 예외 처리
     controller.jongro07BusMessage.value = "정보 없음 [2]";
+    controller.jonro07BusMessageVisible.value = true;
     return;
   }
 
@@ -136,6 +141,7 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
 
       if (isHewaStation && duration.abs() < 20 && totalisHewaStation == true) {
         controller.jongro07BusMessage.value = '도착 또는 출발';
+        controller.jonro07BusMessageVisible.value = true;
       } else if (matchTypeA != null) {
         controller.jongro07BusRemainTimeMin.value =
             int.parse(matchTypeA.group(1)!);
@@ -157,13 +163,18 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
       } else {
         // 메세지가 주어진 형식과 일치하지 않는 경우. 이 경우 msg자체를 변수에 저장
         controller.jongro07BusMessage.value = arrmsg1;
+        controller.jonro07BusMessageVisible.value = true;
       }
     } else {
       controller.jongro07BusMessage.value = "정보 없음 [3]";
+      controller.jonro07BusMessageVisible.value = true;
       return;
     }
   } else {
     controller.jongro07BusMessage.value = "정보 없음 [4]";
+    controller.jonro07BusMessageVisible.value = true;
     return;
   }
+
+  controller.jonroLoadingDone.value = true;
 }

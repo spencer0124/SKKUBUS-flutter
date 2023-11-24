@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/scrollRow.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow1.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/customRow2.dart';
+import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
+import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
 
 import 'dart:ui' as ui;
 
@@ -373,10 +373,12 @@ class Mainpage extends StatelessWidget {
                 children: [
                   Obx(
                     () => CustomRow2(
+                      isLoading: controller.jonroLoadingDone.value,
                       iconData: Icons.stop_circle_rounded,
                       titleText: '혜화역 1번 출구',
                       subtitleText1: controller
-                              .jongro07BusMessage.value.isNotEmpty
+                                  .jonro07BusMessageVisible.value ==
+                              true
                           ? controller.jongro07BusMessage.value
                           : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
                       subtitleText2: controller.hsscBusMessage.value,

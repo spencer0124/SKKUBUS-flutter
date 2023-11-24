@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/hsscbus_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/hsscbus_controller.dart';
 import 'dart:convert';
 import 'package:xml/xml.dart';
 

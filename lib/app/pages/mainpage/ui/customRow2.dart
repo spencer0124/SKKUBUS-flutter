@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -13,6 +14,7 @@ class CustomRow2 extends StatelessWidget {
   final Color containerColor;
   final String containerText;
   final String routeName;
+  final bool isLoading;
 
   const CustomRow2({
     super.key,
@@ -23,6 +25,7 @@ class CustomRow2 extends StatelessWidget {
     required this.containerColor,
     required this.containerText,
     required this.routeName,
+    required this.isLoading,
   });
 
   @override
@@ -143,6 +146,7 @@ class CustomRow2 extends StatelessWidget {
                               height: 3.h,
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,15 +171,55 @@ class CustomRow2 extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Text(
-                                  '$subtitleText1\n$subtitleText2',
-                                  style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontFamily: 'CJKMedium',
-                                    fontSize: 11.5,
-                                  ),
-                                  textAlign: TextAlign.start,
-                                ),
+                                Column(
+                                  children: [
+                                    isLoading
+                                        ? Text(
+                                            '$subtitleText1\n$subtitleText2',
+                                            style: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontFamily: 'CJKMedium',
+                                              fontSize: 11.5,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          )
+                                        : Column(
+                                            children: [
+                                              Shimmer.fromColors(
+                                                baseColor: Colors.grey[100]!,
+                                                highlightColor: Colors.white,
+                                                child: Container(
+                                                  width: 100.w,
+                                                  height: 12.h,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5.h,
+                                              ),
+                                              Shimmer.fromColors(
+                                                baseColor: Colors.grey[100]!,
+                                                highlightColor: Colors.white,
+                                                child: Container(
+                                                  width: 100.w,
+                                                  height: 12.h,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                  ],
+                                )
+
+                                // Text(
+                                //     'loading..\n$subtitleText2',
+                                //     style: TextStyle(
+                                //       color: Colors.grey[600],
+                                //       fontFamily: 'CJKMedium',
+                                //       fontSize: 11.5,
+                                //     ),
+                                //     textAlign: TextAlign.start,
+                                //   ),
                               ],
                             ),
                           ],

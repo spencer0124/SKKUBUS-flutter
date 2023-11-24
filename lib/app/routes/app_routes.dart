@@ -10,7 +10,7 @@ import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_screen.dart';
 
 import 'package:skkumap/app/pages/bus_seoul_detail/ui/bus_seoul_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/ui/mainpage_screen.dart';
+import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
 import 'package:skkumap/app/pages/userchat/ui/userchat_screen.dart';
 

@@ -32,6 +32,8 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       // mainpageController.fetchIconImage();
       // mainpageController.checkpermission();
+      mainpageController.jongro07BusMessage.value = "";
+      mainpageController.jonro07BusMessageVisible.value = false;
       mainpageController.fetchhewaBusData();
       mainpageController.fetchhewaBusData2();
     }
@@ -338,6 +340,9 @@ class MainpageController extends GetxController {
   RxInt jongro07BusRemainTotalTimeSec = 0.obs;
   RxInt jongro07BusRemainStation = 0.obs;
   RxString jongro07BusMessage = "".obs;
+  RxBool jonro07BusMessageVisible = false.obs;
+
+  RxBool jonroLoadingDone = false.obs;
 
   // 혜화역 1번 출구 - 인사캠 셔틀버스 정보
   // var hsscBusRemainTime = 0.obs;
@@ -380,7 +385,8 @@ class MainpageController extends GetxController {
     // fetchIconImage();
     fetchSecureStorage();
     fetchhewaBusData();
-    jongro07BusMessage.value = "";
+    // jongro07BusMessage.value = "";
+    // jonro07BusMessageVisible.value = false;
     fetchhewaBusData2();
     _timer10s = Timer.periodic(
         const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
@@ -452,6 +458,8 @@ class MainpageController extends GetxController {
 
   Future<void> fetchhewaBusData2() async {
     // 종로 07 정보 갱신
+    jongro07BusMessage.value = "";
+    jonro07BusMessageVisible.value = false;
     print('fetchhewaBusData2');
     await calculateRemainingStationsToHyehwaStation2();
     _startCountdown();
