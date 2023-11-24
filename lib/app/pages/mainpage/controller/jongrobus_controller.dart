@@ -85,12 +85,14 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
       // 운영시간이 아니여서 정보를 반환하지 않는 경우
       controller.jongro07BusMessage.value = "정보 없음 [1]";
       controller.jonro07BusMessageVisible.value = true;
+      controller.jonroLoadingDone.value = true;
       return;
     }
   } else {
     // 기타 예외 처리
     controller.jongro07BusMessage.value = "정보 없음 [2]";
     controller.jonro07BusMessageVisible.value = true;
+    controller.jonroLoadingDone.value = true;
     return;
   }
 
