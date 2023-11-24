@@ -33,7 +33,6 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const storage = FlutterSecureStorage();
@@ -46,7 +45,12 @@ Future<void> main() async {
   );
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseMessaging.instance.subscribeToTopic("necessaryupdate");
+
+  try {
+    await FirebaseMessaging.instance.subscribeToTopic("necessaryupdate");
+  } catch (e) {
+    print(e);
+  }
 
   registerDependencies();
   await initFirebase();
