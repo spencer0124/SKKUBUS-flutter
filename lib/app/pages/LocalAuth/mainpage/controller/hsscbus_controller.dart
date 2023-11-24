@@ -24,7 +24,7 @@ Future<void> calculateRemainingStationsToHyehwaStation() async {
 
     // '혜화역 정류장' 정보를 찾지 못했을 경우
     if (hyehwaStationIndex == -1) {
-      controller.hsscBusMessage.value = '정보 없음 [1]';
+      controller.hsscBusMessage.value = '오류 [1]';
       return;
     }
 
@@ -63,11 +63,11 @@ Future<void> calculateRemainingStationsToHyehwaStation() async {
     if (closestBusIndex != -1) {
       finalIndex = hyehwaStationIndex - closestBusIndex;
     } else {
-      controller.hsscBusMessage.value = '정보 없음 [2]';
+      controller.hsscBusMessage.value = '출발대기';
       return;
     }
   } else {
-    controller.hsscBusMessage.value = '정보 없음 [3]';
+    controller.hsscBusMessage.value = '오류 [2]';
     return;
   }
 

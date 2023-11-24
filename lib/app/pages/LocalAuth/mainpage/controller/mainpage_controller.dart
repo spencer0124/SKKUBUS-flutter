@@ -361,6 +361,7 @@ class MainpageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     Future.delayed(Duration.zero, () {
       snappingSheetController.snapToPosition(
         const SnappingPosition.factor(positionFactor: 0.5),
@@ -379,6 +380,8 @@ class MainpageController extends GetxController {
     // fetchIconImage();
     fetchSecureStorage();
     fetchhewaBusData();
+    jongro07BusMessage.value = "";
+    fetchhewaBusData2();
     _timer10s = Timer.periodic(
         const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
     _timer30s = Timer.periodic(
