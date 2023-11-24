@@ -39,7 +39,7 @@ class CustomRow2 extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                height: 10.h,
+                height: 14.h,
               ),
               Container(
                 width: dwidth,
@@ -143,7 +143,7 @@ class CustomRow2 extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 3.h,
+                              height: 5.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -156,7 +156,7 @@ class CustomRow2 extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.grey[600],
                                         fontFamily: 'CJKMedium',
-                                        fontSize: 11.5,
+                                        fontSize: 11.5.sp,
                                       ),
                                       textAlign: TextAlign.start,
                                     ),
@@ -165,7 +165,7 @@ class CustomRow2 extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.grey[600],
                                         fontFamily: 'CJKMedium',
-                                        fontSize: 11.5,
+                                        fontSize: 11.5.sp,
                                       ),
                                       textAlign: TextAlign.start,
                                     ),

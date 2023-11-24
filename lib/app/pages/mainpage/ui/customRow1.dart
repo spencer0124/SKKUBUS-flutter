@@ -87,7 +87,7 @@ class CustomRow1 extends StatelessWidget {
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
-                                  width: 32.w,
+                                  width: 34,
                                   height: 18.h,
                                   padding:
                                       const EdgeInsets.fromLTRB(5, 2, 5, 2),
@@ -99,10 +99,10 @@ class CustomRow1 extends StatelessWidget {
                                   child: Text(
                                     containerText,
                                     style: TextStyle(
-                                      height: 1.3.h,
+                                      height: 1.4.h,
                                       color: Colors.white,
                                       fontFamily: 'CJKMedium',
-                                      fontSize: 11,
+                                      fontSize: 10.sp,
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
