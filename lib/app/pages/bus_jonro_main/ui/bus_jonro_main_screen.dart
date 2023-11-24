@@ -8,7 +8,6 @@ import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_contr
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'package:skkumap/app_theme.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
 
 final double dheight =
