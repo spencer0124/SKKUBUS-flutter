@@ -11,7 +11,7 @@ import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.da
 import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart';
 
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
-import 'package:skkumap/app/pages/LocalAuth/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_controller.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'dart:ui';

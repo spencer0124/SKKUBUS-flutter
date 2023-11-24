@@ -25,7 +25,7 @@ class AdWidgetContainer extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: SizedBox(
               width: double.infinity,
-              height: 70,
+              height: 55,
               child: AdWidget(ad: bannerAd!),
             ),
           )
