@@ -63,7 +63,7 @@ Future<void> calculateRemainingStationsToHyehwaStation() async {
     if (closestBusIndex != -1) {
       finalIndex = hyehwaStationIndex - closestBusIndex;
     } else {
-      controller.hsscBusMessage.value = '출발대기';
+      controller.hsscBusMessage.value = '정보없음 [1]';
       return;
     }
   } else {
