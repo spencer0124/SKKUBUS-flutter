@@ -121,22 +121,25 @@ Future<void> initNaverMapSdk() async {
 }
 
 void registerDependencies() {
-  Get.lazyPut(() => BusDataProvider());
-  Get.lazyPut(() => BusDataRepository(dataProvider: Get.find()));
-  Get.lazyPut(() => BusDataController(repository: Get.find()));
-  Get.lazyPut(() => SeoulMainLifeCycle());
+  Get.put(BusDataProvider());
+  Get.put(BusDataRepository(dataProvider: Get.find()));
+  Get.put(BusDataController(repository: Get.find()));
+  Get.put(SeoulMainLifeCycle());
 
   Get.lazyPut(() => SeoulDetailController());
   Get.lazyPut(() => SeoulDetailLifeCycle());
 
-  Get.lazyPut(() => InjaMainController());
-  Get.lazyPut(() => InjaMainLifeCycle());
+  Get.put(InjaMainController());
+  Get.put(InjaMainLifeCycle());
 
   Get.lazyPut(() => InjaDetailController());
   Get.lazyPut(() => InjaDetailLifeCycle());
 
-// Get.lazyPut(() => KingoInfoController());
-// Get.lazyPut(() => KingoInfoLifeCycle());
+  Get.put(MainpageController());
+  Get.put(MainpageLifeCycle());
+
+  Get.put(JonroMainController());
+  Get.put(JonroMainLifeCycle());
 
   Get.lazyPut(() => KingoLoginController());
   Get.lazyPut(() => KingoLoginLifeCycle());
@@ -144,12 +147,6 @@ void registerDependencies() {
   Get.lazyPut(() => LocalAuthController());
   Get.lazyPut(() => LocalAuthLifeCycle());
 
-  Get.lazyPut(() => MainpageController());
-  Get.lazyPut(() => MainpageLifeCycle());
-
   Get.lazyPut(() => UserChatController());
   Get.lazyPut(() => UserChatLifeCycle());
-
-  Get.put(JonroMainController());
-  Get.put(JonroMainLifeCycle());
 }

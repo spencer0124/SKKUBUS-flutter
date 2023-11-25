@@ -8,6 +8,7 @@ import 'hsscbus_controller.dart';
 import 'jongrobus_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
@@ -331,6 +332,7 @@ NMultipartPathOverlay jongroRoute =
 
 class MainpageController extends GetxController {
   // 메인화면 스크롤 컨트롤러
+  final snappingSheetController = SnappingSheetController();
 
   // 혜화역 1번 출구 - 종로 07 정보
   RxInt jongro07BusRemainTimeMin = 0.obs;
@@ -364,6 +366,12 @@ class MainpageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    Future.delayed(Duration.zero, () {
+      snappingSheetController.snapToPosition(
+        const SnappingPosition.factor(positionFactor: 0.5),
+      );
+    });
 
     // waitForAttachment(); // attach 된 후에 snaptoposition해주기
 
