@@ -1,18 +1,16 @@
+import 'dart:async';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:skkumap/admob/ad_helper.dart';
 import 'package:skkumap/app/data/model/bus_data_model.dart';
 import 'package:skkumap/app/data/repository/bus_data_repository.dart';
-import 'dart:async';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-
-import 'package:skkumap/admob/ad_helper.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import 'package:share_plus/share_plus.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
@@ -175,7 +173,8 @@ class BusDataController extends GetxController
 
     for (var i = currentIndex - 1; i >= 0; i--) {
       if (busDataList[i].carNumber.isNotEmpty) {
-        return '${currentIndex - i}${'개 정거장 남음'.tr}';
+        return '개 정거장 남음'.trPluralParams('개 정거장 남음s', currentIndex - i,
+            {'count': (currentIndex - i).toString()});
       }
     }
 
