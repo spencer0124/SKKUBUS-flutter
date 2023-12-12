@@ -14,8 +14,6 @@ import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
-final controller = Get.find<MainpageController>();
-
 const seoulCameraPosition = NCameraPosition(
   target: NLatLng(37.582716, 126.98389456),
   zoom: 13.4,
@@ -27,7 +25,7 @@ const seoulCameraPosition = NCameraPosition(
 const double hewa1Lat = 37.583427;
 const double hewa1Lon = 127.001850;
 
-class Mainpage extends StatelessWidget {
+class Mainpage extends GetView<MainpageController> {
   const Mainpage({Key? key}) : super(key: key);
 
   @override

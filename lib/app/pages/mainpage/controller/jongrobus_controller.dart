@@ -1,15 +1,16 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:xml/xml.dart';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:xml/xml.dart';
+
 import 'mainpage_controller.dart';
 
 /*
 mainpage에서 사용되는 종로07 버스와 관련된 api를 호출하는 controller
  */
 
-final controller = Get.find<MainpageController>();
 bool isHewaStation = false;
 bool totalisHewaStation = false;
 DateTime isHewaStationUpdateTime = DateTime.now();
@@ -20,10 +21,10 @@ stopflag가 생각보다 부정확하다! 어떻게 '도착 혹은 출발'을 �
  */
 
 Future<void> calculateRemainingStationsToHyehwaStation2() async {
+  final controller = Get.find<MainpageController>();
   // controller.jongro07BusMessage.value = "";
   // controller.jonro07BusMessageVisible.value = false;
   // controller.jongro07BusMessage.value = "";
-  await dotenv.load(fileName: ".env");
   isHewaStation = false;
   controller.jonroLoadingDone.value = false;
 

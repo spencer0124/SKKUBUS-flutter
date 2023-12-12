@@ -484,8 +484,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                                                     ),
                                                                   )
                                                                 : Text(
-                                                                    Get.find<
-                                                                            BusDataController>()
+                                                                    controller
                                                                         .getStationMessage(
                                                                             index),
                                                                     style:

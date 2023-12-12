@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:skkumap/app_theme.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_seoul_detail_controller.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:get/get.dart';
+import 'package:skkumap/app_theme.dart';
 
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
-
-final controller = Get.find<SeoulDetailController>();
 
 class BusDataScreenDetail extends StatelessWidget {
   const BusDataScreenDetail({Key? key}) : super(key: key);

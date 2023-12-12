@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app_theme.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
@@ -52,13 +52,12 @@ const suwonCameraPosition = NCameraPosition(
   tilt: 30,
 );
 
-final controller = Get.find<InjaDetailController>();
-
 class InjaDetail extends StatelessWidget {
   const InjaDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<InjaDetailController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(

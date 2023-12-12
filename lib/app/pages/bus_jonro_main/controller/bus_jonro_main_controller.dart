@@ -1,11 +1,12 @@
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:intl/intl.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
-import 'package:skkumap/app/pages/mainpage/controller/hsscbus_controller.dart';
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:xml/xml.dart';
 
 /*
@@ -39,6 +40,7 @@ class JonroMainLifeCycle extends GetxController with WidgetsBindingObserver {
 */
 
 class JonroMainController extends GetxController {
+  MainpageController controller = Get.find<MainpageController>();
   RxBool loading = true.obs;
   final currentTime = ''.obs; // 현재시간
   RxInt activeBusCount = 0.obs; // 현재 운영중인 버스 대수
@@ -129,8 +131,6 @@ class JonroMainController extends GetxController {
 
   // 종로07 정보를 가져오는 api 호출
   Future<void> fetchJonrobusApi() async {
-    await dotenv.load(fileName: ".env");
-
     /*
   종로 07의 도착 정보를 확인할 수 있는 api 호출
   <버스도착정보조회 서비스>
