@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/data/map_data.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
 import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
@@ -31,12 +33,6 @@ class Mainpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double dwidth = MediaQuery.of(context).size.width;
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   controller.fetchIconImage(context);
-    // });
-    // return FutureBuilder(
-    //     future: controller.fetchIconImage(context),
-    //     builder: (context, snapshot) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -246,56 +242,7 @@ class Mainpage extends StatelessWidget {
                               SizedBox(
                                 height: dheight - 47.h,
                                 width: dwidth,
-                                child: NaverMap(
-                                  options: const NaverMapViewOptions(
-                                    zoomGesturesEnable: true,
-                                    locationButtonEnable: false,
-                                    mapType: NMapType.navi,
-                                    logoAlign: NLogoAlign.rightBottom,
-                                    logoClickEnable: true,
-                                    logoMargin: EdgeInsets.all(1000),
-                                    activeLayerGroups: [
-                                      NLayerGroup.building,
-                                      NLayerGroup.transit,
-                                      // NLayerGroup.traffic,
-                                    ],
-                                    initialCameraPosition: seoulCameraPosition,
-                                  ),
-                                  onMapReady: (controller) {
-                                    controller.addOverlayAll({
-                                      // station1,
-                                      station2,
-                                      station3,
-                                      station4,
-                                      station5,
-                                      station6,
-                                      station7,
-                                      station8,
-                                      station9,
-                                      station10,
-                                      station11,
-                                      station12,
-                                      station13,
-                                      station14,
-                                      station15,
-                                      station16,
-                                      station17,
-                                      station18,
-                                      station19,
-                                      station20,
-                                      jongroRoute,
-                                      jongrobusMarker1,
-                                      jongrobusMarker2,
-                                      jongrobusMarker3,
-                                      jongrobusMarker4,
-                                      jongrobusMarker5,
-                                      // testRoute
-                                    });
-
-                                    // seoulMarker
-                                    //     .openInfoWindow(markerinfo);
-                                  },
-                                ),
+                                child: _buildMap(),
                               ),
                               Positioned(
                                 left: 0.w,
@@ -315,6 +262,52 @@ class Mainpage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  NaverMap _buildMap() {
+    return NaverMap(
+      options: const NaverMapViewOptions(
+        zoomGesturesEnable: true,
+        locationButtonEnable: false,
+        mapType: NMapType.navi,
+        logoAlign: NLogoAlign.rightBottom,
+        logoClickEnable: true,
+        logoMargin: EdgeInsets.all(1000),
+        activeLayerGroups: [NLayerGroup.building, NLayerGroup.transit],
+        initialCameraPosition: seoulCameraPosition,
+      ),
+      onMapReady: (controller) {
+        controller.addOverlayAll({
+          ...stations.mapIndexed(
+            (index, element) => NMarker(
+              id: 'station$index',
+              position: element,
+              size: const Size(12, 12),
+              icon: const NOverlayImage.fromAssetImage(
+                'assets/locationicon.png',
+              ),
+            )
+              ..setZIndex(10)
+              ..setGlobalZIndex(10),
+          ),
+          NMultipartPathOverlay(
+            id: "jongroRoute",
+            paths: [
+              const NMultipartPath(
+                color: Colors.green,
+                outlineColor: Colors.white,
+                coords: jongroRoute,
+              ),
+            ],
+          ),
+          jongrobusMarker1,
+          jongrobusMarker2,
+          jongrobusMarker3,
+          jongrobusMarker4,
+          jongrobusMarker5,
+        });
+      },
     );
   }
 }
