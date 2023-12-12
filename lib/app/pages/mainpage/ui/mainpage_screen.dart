@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import 'dart:ui' as ui;
 

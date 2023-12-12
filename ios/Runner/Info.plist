@@ -98,5 +98,7 @@
 	<false/>
 	<key>`resIPhoneOS</key>
 	<true/>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 </dict>
 </plist>

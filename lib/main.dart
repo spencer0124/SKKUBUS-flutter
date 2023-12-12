@@ -135,8 +135,8 @@ void registerDependencies() {
   Get.lazyPut(() => InjaDetailController());
   Get.lazyPut(() => InjaDetailLifeCycle());
 
-  Get.put(MainpageController());
-  Get.put(MainpageLifeCycle());
+  Get.lazyPut(() => MainpageController());
+  Get.lazyPut(() => MainpageLifeCycle());
 
   Get.put(JonroMainController());
   Get.put(JonroMainLifeCycle());

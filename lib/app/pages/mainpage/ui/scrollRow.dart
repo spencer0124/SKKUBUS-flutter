@@ -17,7 +17,7 @@ class ScrollableRow extends StatelessWidget {
             width: 5,
           ),
           const ScrollRowContainer(
-            text: '종로07 실시간 위치',
+            text: '종로07 ',
             icon: Icons.location_on_rounded,
             ischecked: true,
           ),
@@ -30,8 +30,22 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/injadetail');
             },
             child: const ScrollRowContainer(
-              text: '인자셔틀 탑승장소',
+              text: '인자셔틀 탑승',
               icon: Icons.location_on_rounded,
+              ischecked: false,
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Get.toNamed('/placetypeA');
+            },
+            child: const ScrollRowContainer(
+              text: '충전돼지',
+              icon: Icons.battery_charging_full_outlined,
               ischecked: false,
             ),
           ),
@@ -44,12 +58,11 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/busDetail');
             },
             child: const ScrollRowContainer(
-              text: '인사캠셔틀 노선',
-              icon: Icons.map_outlined,
+              text: 'dummy',
+              icon: Icons.battery_charging_full_outlined,
               ischecked: false,
             ),
           ),
-          // Add more containers as needed
         ],
       ),
     );

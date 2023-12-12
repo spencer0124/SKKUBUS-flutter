@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:live_activities/live_activities.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
@@ -332,6 +334,9 @@ NMultipartPathOverlay jongroRoute =
 ]);
 
 class MainpageController extends GetxController {
+  // 라이브 액티비티 관련
+  final LiveActivities _liveActivitiesPlugin = LiveActivities();
+
   // 메인화면 스크롤 컨트롤러
   final snappingSheetController = SnappingSheetController();
 
@@ -364,9 +369,18 @@ class MainpageController extends GetxController {
   // 종로 07 자동 카운트다운해주는 타이머
   Timer? _countdownTimer;
 
+  // live activity 관련
+  String? activityId;
+
   @override
   void onInit() {
     super.onInit();
+
+    if (Platform.isIOS) {
+      _liveActivitiesPlugin.init(appGroupId: "group.flutterioswidget1");
+    }
+
+    createPizzaActivity();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snappingSheetController.snapToPosition(
@@ -393,6 +407,16 @@ class MainpageController extends GetxController {
         const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
     _timer30s = Timer.periodic(
         const Duration(seconds: 30), (Timer t) => fetchhewaBusData2());
+  }
+
+  void createPizzaActivity() async {
+    final Map<String, dynamic> activityModel = {
+      'name': 'Margherita',
+      'ingredient': 'tomato, mozzarella, basil',
+      'quantity': 1,
+    };
+
+    _liveActivitiesPlugin.createActivity(activityModel);
   }
 
   // void waitForAttachment() {
