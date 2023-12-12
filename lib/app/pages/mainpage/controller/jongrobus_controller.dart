@@ -1,8 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:skkumap/app/pages/mainpage/data/repositories/jongro_bus_repository.dart';
-import 'package:xml/xml.dart';
 
 import 'mainpage_controller.dart';
 
@@ -43,94 +40,56 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
     controller.jongro07BusMessage.value = "정보 없음 [2]";
     controller.jonro07BusMessageVisible.value = true;
     controller.jonroLoadingDone.value = true;
+    return;
   } on NoJongroBusListException {
     controller.fetchBusMap([]);
     controller.jongro07BusMessage.value = "정보 없음 [1]";
     controller.jonro07BusMessageVisible.value = true;
     controller.jonroLoadingDone.value = true;
-  }
-
-  /*
-  종로 07의 도착 정보를 확인할 수 있는 두번째 api 호출
-  <버스도착정보조회 서비스>
-
-  응답형태
-  xml
-
-  응답예시
-  (너무 길어서 생략, 문서 참조)
-  */
-
-  var baseUrl = Uri.parse(dotenv.env['JonroBusHewaApi']!);
-  final response = await http.get(baseUrl);
-
-  if (response.statusCode == 200) {
-    final document = XmlDocument.parse(response.body);
-
-    var headerCd = document.findAllElements('headerCd').first.text;
-    var headerMsg = document.findAllElements('headerMsg').first.text;
-
-    if (headerCd == "0" && headerMsg == "정상적으로 처리되었습니다.") {
-      final arrmsg1 = document.findAllElements('arrmsg1').first.text;
-
-      // Check if the message is '출발대기'
-
-      // Use a RegExp to extract the time and remaining stations
-      final RegExp regExptypeA = RegExp(r'(\d+)분(\d+)초후\[(\d+)번째 전\]');
-      final RegExp regExptypeB = RegExp(r'(\d+)분후\[(\d+)번째 전\]');
-      final matchTypeA = regExptypeA.firstMatch(arrmsg1);
-      final matchTypeB = regExptypeB.firstMatch(arrmsg1);
-
-      var duration = 100;
-      var currentTime = DateTime.now();
-      if (isHewaStation) {
-        duration = currentTime.difference(isHewaStationUpdateTime).inSeconds;
-      }
-
-      print('duration: $duration');
-      print('isHewaStation: $isHewaStation');
-      // 메세지가 주어진 형식과 일치하는 경우
-
-      if (!(isHewaStation && duration.abs() < 20)) {
-        totalisHewaStation = false;
-      }
-
-      if (isHewaStation && duration.abs() < 20 && totalisHewaStation == true) {
-        controller.jongro07BusMessage.value = '도착 또는 출발';
-        controller.jonro07BusMessageVisible.value = true;
-      } else if (matchTypeA != null) {
-        controller.jongro07BusRemainTimeMin.value =
-            int.parse(matchTypeA.group(1)!);
-        controller.jongro07BusRemainTimeSec.value =
-            int.parse(matchTypeA.group(2)!);
-        controller.jongro07BusRemainStation.value =
-            int.parse(matchTypeA.group(3)!);
-        controller.jongro07BusRemainTotalTimeSec.value =
-            controller.jongro07BusRemainTimeMin.value * 60 +
-                controller.jongro07BusRemainTimeSec.value;
-      } else if (matchTypeB != null) {
-        controller.jongro07BusRemainTimeMin.value =
-            int.parse(matchTypeB.group(1)!);
-        controller.jongro07BusRemainTimeSec.value = 0;
-        controller.jongro07BusRemainStation.value =
-            int.parse(matchTypeB.group(2)!);
-        controller.jongro07BusRemainTotalTimeSec.value =
-            controller.jongro07BusRemainTimeMin.value * 60;
-      } else {
-        // 메세지가 주어진 형식과 일치하지 않는 경우. 이 경우 msg자체를 변수에 저장
-        controller.jongro07BusMessage.value = arrmsg1;
-        controller.jonro07BusMessageVisible.value = true;
-      }
-    } else {
-      controller.jongro07BusMessage.value = "정보 없음 [3]";
-      controller.jonro07BusMessageVisible.value = true;
-      return;
-    }
-  } else {
-    controller.jongro07BusMessage.value = "정보 없음 [4]";
-    controller.jonro07BusMessageVisible.value = true;
     return;
   }
 
+  try {
+    final [hewa] = await getJongroBusArrivalList(true);
+    final arrival = hewa.arrivals.first;
+
+    var duration = 100;
+    var currentTime = DateTime.now();
+    if (isHewaStation) {
+      duration = currentTime.difference(isHewaStationUpdateTime).inSeconds;
+    }
+
+    // 메세지가 주어진 형식과 일치하는 경우
+
+    if (!(isHewaStation && duration.abs() < 20)) {
+      totalisHewaStation = false;
+    }
+
+    if (isHewaStation && duration.abs() < 20 && totalisHewaStation == true) {
+      controller.jongro07BusMessage.value = '도착 또는 출발';
+      controller.jonro07BusMessageVisible.value = true;
+    } else if (arrival.duration != Duration.zero) {
+      controller.jongro07BusRemainTimeMin.value =
+          arrival.duration.inMinutes % 60;
+      controller.jongro07BusRemainTimeSec.value =
+          arrival.duration.inSeconds % 60;
+      controller.jongro07BusRemainStation.value = arrival.left;
+      controller.jongro07BusRemainTotalTimeSec.value =
+          controller.jongro07BusRemainTimeMin.value * 60 +
+              controller.jongro07BusRemainTimeSec.value;
+    } else {
+      // 메세지가 주어진 형식과 일치하지 않는 경우. 이 경우 msg자체를 변수에 저장
+      controller.jongro07BusMessage.value = arrival.message;
+      controller.jonro07BusMessageVisible.value = true;
+    }
+  } on FailedToGetJongroBusListException {
+    controller.jongro07BusMessage.value = "정보 없음 [4]";
+    controller.jonro07BusMessageVisible.value = true;
+    return;
+  } on NoJongroBusListException {
+    controller.jongro07BusMessage.value = "정보 없음 [3]";
+    controller.jonro07BusMessageVisible.value = true;
+    return;
+  }
   controller.jonroLoadingDone.value = true;
 }

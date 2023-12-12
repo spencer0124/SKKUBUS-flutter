@@ -245,7 +245,6 @@ class MainpageController extends GetxController {
 
   /// 인사캠 셔틀 정보 갱신
   Future<void> fetchhewaBusData() async {
-    print('fetchhewaBusData1');
     await calculateRemainingStationsToHyehwaStation();
   }
 
@@ -253,7 +252,6 @@ class MainpageController extends GetxController {
   Future<void> fetchhewaBusData2() async {
     jongro07BusMessage.value = "";
     jonro07BusMessageVisible.value = false;
-    print('fetchhewaBusData2');
     await calculateRemainingStationsToHyehwaStation2();
     _startCountdown();
   }
