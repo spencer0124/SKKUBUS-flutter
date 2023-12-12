@@ -1,19 +1,18 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
-import 'package:skkumap/app_theme.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow1.dart';
 import 'package:skkumap/app/pages/mainpage/ui/customRow2.dart';
+import 'package:skkumap/app/pages/mainpage/ui/scrollRow.dart';
+import 'package:skkumap/app_theme.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
-import 'dart:ui' as ui;
 
 final controller = Get.find<MainpageController>();
 
@@ -77,7 +76,7 @@ class Mainpage extends StatelessWidget {
       //                     controller.name.value,
       //                     style: const TextStyle(
       //                       color: Colors.black,
-      //                       fontFamily: 'NotoSansbold',
+      //                       fontFamily: 'CJKBold',
       //                       fontSize: 15,
       //                     ),
       //                   ),

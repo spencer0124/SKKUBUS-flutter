@@ -1,12 +1,9 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // late SharedPreferences prefs;
 
@@ -49,7 +46,7 @@ class NewAlert extends StatelessWidget {
               //         style: TextStyle(
               //           fontSize: 20,
               //           color: Colors.white,
-              //           fontFamily: 'NotoSansBold',
+              //           fontFamily: 'CJKBold',
               //         ),
               //         textAlign: TextAlign.center,
               //       ),
@@ -75,18 +72,14 @@ class NewAlert extends StatelessWidget {
               const Text(
                 '에스카라 인자셔틀 정보를 추가했어요',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'NotoSansBold',
-                    fontSize: 16),
+                    color: Colors.white, fontFamily: 'CJKBold', fontSize: 16),
                 textAlign: TextAlign.start,
               ),
 
               const Text(
                 '화면 상단의 \'에스카라 인자셔틀\'을 클릭해보세요',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'NotoSansBold',
-                    fontSize: 16),
+                    color: Colors.white, fontFamily: 'CJKBold', fontSize: 16),
                 textAlign: TextAlign.start,
               ),
               SizedBox(
@@ -127,9 +120,7 @@ class NewAlert extends StatelessWidget {
                 child: const Text(
                   '지금 확인해보기',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'NotoSansBold',
-                      fontSize: 14),
+                      color: Colors.black, fontFamily: 'CJKBold', fontSize: 14),
                   // textAlign: TextAlign.start,
                 ),
               ),

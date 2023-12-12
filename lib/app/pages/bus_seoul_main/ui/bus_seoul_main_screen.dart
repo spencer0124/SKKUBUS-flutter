@@ -1,19 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/utils/ad_widget.dart';
-import 'package:skkumap/app_theme.dart';
-import 'package:flutter/services.dart';
-
-
-import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
-import 'package:shimmer/shimmer.dart';
-
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
+import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
+import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app/utils/return_platform.dart';
+import 'package:skkumap/app_theme.dart';
 
 class ArrowShape extends CustomPainter {
   final Paint _paint = Paint()..color = AppColors.green_main;
@@ -1254,7 +1249,7 @@ class BusDataScreen extends GetView<BusDataController> {
                       //     style: const TextStyle(
                       //       fontSize: 10,
                       //       color: Colors.white,
-                      //       fontFamily: 'NotoSansBlack',
+                      //       fontFamily: 'CJKBold',
                       //     ),
                       //   ),
                       // ),
