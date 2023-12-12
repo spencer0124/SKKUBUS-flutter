@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/data/repositories/jongro_bus_repository.dart';
 import 'package:xml/xml.dart';
 
 /*
@@ -182,64 +182,45 @@ class JonroMainController extends GetxController {
     }
 
     // 두번째 api 호출
-    var baseUrl2 = Uri.parse(dotenv.env['JonroBusHewaLocApi']!);
-    final response2 = await http.get(baseUrl2);
+    try {
+      final list = await getJongroBusList();
+      controller.fetchBusMap(list);
+      int count = 0;
 
-    if (response2.statusCode == 200) {
-      var jsonResponse = jsonDecode(response2.body);
+      flag.value = List.filled(19, 0);
+      for (final bus in list) {
+        count++;
+        int index = stationNodeId.indexWhere((id) => id == bus.lastStationId);
 
-      String headerMsg = jsonResponse['msgHeader']['headerMsg'];
-      String headerCd = jsonResponse['msgHeader']['headerCd'];
-
-      if (headerMsg == "정상적으로 처리되었습니다." && headerCd == "0") {
-        List<dynamic> itemList = jsonResponse['msgBody']['itemList'];
-        controller.fetchBusMap(itemList);
-
-        int count = 0;
-
-        flag.value = List.filled(19, 0);
-        for (var item in itemList) {
-          count++;
-          // String stopFlag = item['stopFlag'];
-          // String posX = item['posX'];
-          // String posY = item['posY'];
-          // String plainNo = item['plainNo'];
-          String lastStnId = item['lastStnId'];
-          print('$lastStnId\n');
-
-          int lastStnIdInt = int.tryParse(lastStnId) ?? -1;
-
-          int index = stationNodeId.indexWhere((id) => id == lastStnIdInt);
-
-          if (index != -1) {
-            flag[index] = 1;
-            busNum[index] = item['plainNo'].substring(2);
-          }
-
-          // 요거 flag 때문에 에러나는거였다
-
-          // int index = stationNodeId.indexWhere((id) => id == lastStnId);
-          // if (index == -1) {
-          //   flag[index] = 0;
-          // } else if (stopFlag == "1") {
-          //   flag[index] = 2;
-          // } else if (index != -1) {
-          //   flag[index] = 1;
-          // } else {
-          //   flag[index] = 0;
-          // }
-
-          activeBusCount.value = count;
+        if (index != -1) {
+          flag[index] = 1;
+          busNum[index] = bus.busNumber.substring(2);
         }
-        print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
 
-        print(flag);
-        print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
-      } else {
-        // 기타 예외 처리
-        // controller.jongro07BusMessage.value = "정보 없음 [2]";
-        return;
+        // 요거 flag 때문에 에러나는거였다
+
+        // int index = stationNodeId.indexWhere((id) => id == lastStnId);
+        // if (index == -1) {
+        //   flag[index] = 0;
+        // } else if (stopFlag == "1") {
+        //   flag[index] = 2;
+        // } else if (index != -1) {
+        //   flag[index] = 1;
+        // } else {
+        //   flag[index] = 0;
+        // }
+
+        activeBusCount.value = count;
       }
+      print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+
+      print(flag);
+      print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+    } on Exception {
+      controller.fetchBusMap([]);
+      // 기타 예외 처리
+      // controller.jongro07BusMessage.value = "정보 없음 [2]";
+      return;
     }
   }
 }

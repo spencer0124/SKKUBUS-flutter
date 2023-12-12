@@ -8,6 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:live_activities/live_activities.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:skkumap/app/pages/mainpage/data/models/jongro_bus_model.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'hsscbus_controller.dart';
@@ -282,15 +283,7 @@ class MainpageController extends GetxController {
         await storage.read(key: 'local_branchGroup', iOptions: options) ?? '';
   }
 
-  void fetchBusInit() {
-    jongrobusMarker1.setIsVisible(false);
-    jongrobusMarker2.setIsVisible(false);
-    jongrobusMarker3.setIsVisible(false);
-    jongrobusMarker4.setIsVisible(false);
-    jongrobusMarker5.setIsVisible(false);
-  }
-
-  void fetchBusMap(List<dynamic> itemList) {
+  void fetchBusMap(List<JongroBusModel> itemList) {
     jongrobusMarker1.setIsVisible(false);
     jongrobusMarker2.setIsVisible(false);
     jongrobusMarker3.setIsVisible(false);
@@ -308,17 +301,12 @@ class MainpageController extends GetxController {
     for (int i = 0; i < markers.length; i++) {
       if (i < itemList.length) {
         var item = itemList[i];
-        double posX = double.parse(item['tmY']);
-        double posY = double.parse(item['tmX']);
-
-        markers[i].setPosition(
-          NLatLng(posX, posY),
-        );
+        markers[i].setPosition(item.position);
 
         markers[i].setOnTapListener((overlay) async {
           await FlutterPlatformAlert.showCustomAlert(
             windowTitle: '종로07 버스',
-            text: item['plainNo'],
+            text: item.busNumber,
             negativeButtonTitle: "확인",
             // positiveButtonTitle: "취소",
           );
