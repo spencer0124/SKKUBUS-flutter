@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final controller = Get.find<UserChatController>();
-
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
-class UserChat extends StatelessWidget {
+class UserChat extends GetView<UserChatController> {
   const UserChat({Key? key}) : super(key: key);
 
   @override

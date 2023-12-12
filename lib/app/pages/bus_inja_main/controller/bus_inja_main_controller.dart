@@ -1,18 +1,13 @@
+import 'dart:io' show Platform;
+
+import 'package:dio/dio.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-
-import 'package:firebase_analytics/firebase_analytics.dart';
-
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'dart:io' show Platform;
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-Future<void> initEnvironmentVariables() async {
-  await dotenv.load(fileName: ".env");
-}
 
 /*
 LifeCycleGetx2, WidgetsBindingObserver
@@ -53,7 +48,6 @@ class InjaMainController extends GetxController {
 
   @override
   void onInit() async {
-    await initEnvironmentVariables();
     getDrivingDuration();
     try {
       await FirebaseAnalytics.instance

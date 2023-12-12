@@ -1,14 +1,15 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
 import 'mainpage_controller.dart';
 
-final controller = Get.find<MainpageController>();
 int finalIndex = 0; // 아래 Switch-case문에서 사용할 최종 역 차이를 담은 변수
 
 Future<void> calculateRemainingStationsToHyehwaStation() async {
-  await dotenv.load(fileName: ".env");
+  final controller = Get.find<MainpageController>();
   var baseUrl = Uri.parse(dotenv.env['KingoBusApi']!);
   final response = await http.get(baseUrl);
 

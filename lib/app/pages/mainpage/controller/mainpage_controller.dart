@@ -148,33 +148,32 @@ class MainpageController extends GetxController {
       _liveActivitiesPlugin.init(appGroupId: "group.flutterioswidget1");
     }
 
-    createPizzaActivity();
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snappingSheetController.snapToPosition(
         const SnappingPosition.factor(positionFactor: 0.5),
       );
+      createPizzaActivity();
+
+      // waitForAttachment(); // attach 된 후에 snaptoposition해주기
+
+      fetchIconImage();
+      // checkpermission();
+      calculateRemainingStationsToHyehwaStation();
+      calculateRemainingStationsToHyehwaStation2();
+      // WidgetsBinding.instance.addPostFrameCallback((_) async {
+      //   fetchSecureStorage();
+      // }); // 의도한대로 작동 안해서 그냥 사이드바 열때 securestorage fetch하도록 함
+      // fetchIconImage();
+      fetchSecureStorage();
+      fetchhewaBusData();
+      // jongro07BusMessage.value = "";
+      // jonro07BusMessageVisible.value = false;
+      fetchhewaBusData2();
+      _timer10s = Timer.periodic(
+          const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
+      _timer30s = Timer.periodic(
+          const Duration(seconds: 30), (Timer t) => fetchhewaBusData2());
     });
-
-    // waitForAttachment(); // attach 된 후에 snaptoposition해주기
-
-    fetchIconImage();
-    // checkpermission();
-    calculateRemainingStationsToHyehwaStation();
-    calculateRemainingStationsToHyehwaStation2();
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   fetchSecureStorage();
-    // }); // 의도한대로 작동 안해서 그냥 사이드바 열때 securestorage fetch하도록 함
-    // fetchIconImage();
-    fetchSecureStorage();
-    fetchhewaBusData();
-    // jongro07BusMessage.value = "";
-    // jonro07BusMessageVisible.value = false;
-    fetchhewaBusData2();
-    _timer10s = Timer.periodic(
-        const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
-    _timer30s = Timer.periodic(
-        const Duration(seconds: 30), (Timer t) => fetchhewaBusData2());
   }
 
   void createPizzaActivity() async {
