@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:skkumap/app/pages/mainpage/data/repositories/jongro_bus_repository.dart';
 import 'package:xml/xml.dart';
 
 import 'mainpage_controller.dart';
@@ -28,73 +27,27 @@ Future<void> calculateRemainingStationsToHyehwaStation2() async {
   isHewaStation = false;
   controller.jonroLoadingDone.value = false;
 
-  /*
-  종로07 버스의 현재 위치, 번호판, 도착했는지 여부를 확인할 수 있는 첫번째 api 호출
-  <버스위치정보조회 서비스>
+  try {
+    final list = await getJongroBusList();
+    controller.fetchBusMap(list);
 
-  응답 형태
-  json
-
-  응답 예시
-  "posX": "199326.19175136427",
-  "posY": "454260.7792981323",
-  "plainNo": "서울70사5537",
-  "lastStnId": "100900220",
-  "stopFlag": "1", -> 0: 운행중, 1: 도착
-
-   */
-
-  var baseUrl2 = Uri.parse(dotenv.env['JonroBusHewaLocApi']!);
-  final response2 = await http.get(baseUrl2);
-
-  if (response2.statusCode == 200) {
-    var jsonResponse = jsonDecode(response2.body);
-
-    String headerMsg = jsonResponse['msgHeader']['headerMsg'];
-    String headerCd = jsonResponse['msgHeader']['headerCd'];
-
-    // 일단 버스 마커를 모두 지우고 시작
-    controller.fetchBusInit();
-
-    if (headerMsg == "정상적으로 처리되었습니다." && headerCd == "0") {
-      /*
-       jongro07BusMessage는 예외 처리가 필요한 경우 값이 있으며
-       예외 처리가 필요 없는 경우 한칸공백으로 설정하기
-       */
-
-      List<dynamic> itemList = jsonResponse['msgBody']['itemList'];
-      controller.fetchBusMap(itemList);
-
-      for (var item in itemList) {
-        String stopFlag = item['stopFlag'];
-        // String posX = item['posX'];
-        // String posY = item['posY'];
-        // String plainNo = item['plainNo'];
-        String lastStnId = item['lastStnId'];
-
-        if (lastStnId == "100900075" &&
-            stopFlag == "1" &&
-            totalisHewaStation == false) {
-          isHewaStation = true;
-          isHewaStationUpdateTime = DateTime.now();
-          totalisHewaStation = true;
-        }
-        // print(
-        // 'Bus $plainNo at position ($posX, $posY) with stop flag $stopFlag is heading to station ID $lastStnId');
+    for (var bus in list) {
+      if (bus.isLastStation && totalisHewaStation == false) {
+        isHewaStation = true;
+        isHewaStationUpdateTime = DateTime.now();
+        totalisHewaStation = true;
       }
-    } else {
-      // 운영시간이 아니여서 정보를 반환하지 않는 경우
-      controller.jongro07BusMessage.value = "정보 없음 [1]";
-      controller.jonro07BusMessageVisible.value = true;
-      controller.jonroLoadingDone.value = true;
-      return;
     }
-  } else {
-    // 기타 예외 처리
+  } on FailedToGetJongroBusListException {
+    controller.fetchBusMap([]);
     controller.jongro07BusMessage.value = "정보 없음 [2]";
     controller.jonro07BusMessageVisible.value = true;
     controller.jonroLoadingDone.value = true;
-    return;
+  } on NoJongroBusListException {
+    controller.fetchBusMap([]);
+    controller.jongro07BusMessage.value = "정보 없음 [1]";
+    controller.jonro07BusMessageVisible.value = true;
+    controller.jonroLoadingDone.value = true;
   }
 
   /*
