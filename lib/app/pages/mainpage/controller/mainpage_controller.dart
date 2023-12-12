@@ -1,14 +1,15 @@
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'hsscbus_controller.dart';
 import 'jongrobus_controller.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:snapping_sheet/snapping_sheet.dart';
 
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
@@ -367,7 +368,7 @@ class MainpageController extends GetxController {
   void onInit() {
     super.onInit();
 
-    Future.delayed(Duration.zero, () {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snappingSheetController.snapToPosition(
         const SnappingPosition.factor(positionFactor: 0.5),
       );
