@@ -83,6 +83,9 @@ dependencies:
   flutter_flip_card: ^0.0.4
   xml2json: ^6.2.1
   snapping_sheet: ^3.1.0
+  persistent_bottom_nav_bar: ^5.0.2
+  flutter_popup: ^3.1.8
+  live_activities: ^1.9.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -130,6 +133,9 @@ flutter:
     - assets/flaticon_stop1.png
     - assets/flaticon_stop2.png
     - assets/locationicon.png
+
+    - assets/map/charge/charge_hssc_01.png
+    - assets/map/charge/charge_logo.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

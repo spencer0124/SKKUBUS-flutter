@@ -1,4 +1,6 @@
 PODS:
+  - app_group_directory (1.0.0):
+    - Flutter
   - Firebase/Analytics (10.18.0):
     - Firebase/Core
   - Firebase/Auth (10.18.0):
@@ -110,9 +112,16 @@ PODS:
   - Flutter (1.0.0)
   - flutter_config (0.0.1):
     - Flutter
+  - flutter_image_compress_common (1.0.0):
+    - Flutter
+    - Mantle
+    - SDWebImage
+    - SDWebImageWebPCoder
   - flutter_local_notifications (0.0.1):
     - Flutter
   - flutter_localization (0.0.1):
+    - Flutter
+  - flutter_native_image (0.0.1):
     - Flutter
   - flutter_naver_map (1.0.0):
     - Flutter
@@ -181,8 +190,25 @@ PODS:
   - GoogleUtilities/UserDefaults (7.12.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (3.1.1)
+  - libwebp (1.3.2):
+    - libwebp/demux (= 1.3.2)
+    - libwebp/mux (= 1.3.2)
+    - libwebp/sharpyuv (= 1.3.2)
+    - libwebp/webp (= 1.3.2)
+  - libwebp/demux (1.3.2):
+    - libwebp/webp
+  - libwebp/mux (1.3.2):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.3.2)
+  - libwebp/webp (1.3.2):
+    - libwebp/sharpyuv
+  - live_activities (0.0.1):
+    - Flutter
   - local_auth_ios (0.0.1):
     - Flutter
+  - Mantle (2.2.0):
+    - Mantle/extobjc (= 2.2.0)
+  - Mantle/extobjc (2.2.0)
   - nanopb (2.30909.1):
     - nanopb/decode (= 2.30909.1)
     - nanopb/encode (= 2.30909.1)
@@ -200,6 +226,12 @@ PODS:
   - PromisesSwift (2.3.1):
     - PromisesObjC (= 2.3.1)
   - RecaptchaInterop (100.0.0)
+  - SDWebImage (5.18.7):
+    - SDWebImage/Core (= 5.18.7)
+  - SDWebImage/Core (5.18.7)
+  - SDWebImageWebPCoder (0.14.2):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.17)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -211,6 +243,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_group_directory (from `.symlinks/plugins/app_group_directory/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -219,8 +252,10 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
+  - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_localization (from `.symlinks/plugins/flutter_localization/ios`)
+  - flutter_native_image (from `.symlinks/plugins/flutter_native_image/ios`)
   - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - flutter_phone_direct_caller (from `.symlinks/plugins/flutter_phone_direct_caller/ios`)
   - flutter_platform_alert (from `.symlinks/plugins/flutter_platform_alert/ios`)
@@ -229,6 +264,7 @@ DEPENDENCIES:
   - geocoding_ios (from `.symlinks/plugins/geocoding_ios/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
+  - live_activities (from `.symlinks/plugins/live_activities/ios`)
   - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -257,14 +293,20 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - GTMSessionFetcher
+    - libwebp
+    - Mantle
     - nanopb
     - NMapsGeometry
     - NMapsMap
     - PromisesObjC
     - PromisesSwift
     - RecaptchaInterop
+    - SDWebImage
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
+  app_group_directory:
+    :path: ".symlinks/plugins/app_group_directory/ios"
   firebase_analytics:
     :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_auth:
@@ -281,10 +323,14 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_config:
     :path: ".symlinks/plugins/flutter_config/ios"
+  flutter_image_compress_common:
+    :path: ".symlinks/plugins/flutter_image_compress_common/ios"
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_localization:
     :path: ".symlinks/plugins/flutter_localization/ios"
+  flutter_native_image:
+    :path: ".symlinks/plugins/flutter_native_image/ios"
   flutter_naver_map:
     :path: ".symlinks/plugins/flutter_naver_map/ios"
   flutter_phone_direct_caller:
@@ -301,6 +347,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   google_mobile_ads:
     :path: ".symlinks/plugins/google_mobile_ads/ios"
+  live_activities:
+    :path: ".symlinks/plugins/live_activities/ios"
   local_auth_ios:
     :path: ".symlinks/plugins/local_auth_ios/ios"
   path_provider_foundation:
@@ -317,6 +365,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  app_group_directory: 7bf9f8f9819ead554de29da7c25fb7a680d6a9a0
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
   firebase_analytics: 3e5dba777bb51d1e0358b5a37adefa69746a94bd
   firebase_auth: 88053a759923970e580789d167a43b6031568ef5
@@ -337,8 +386,10 @@ SPEC CHECKSUMS:
   FirebaseSessions: f90fe9212ee2818641eda051c0835c9c4e30d9ae
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_config: f48f0d47a284f1791aacce2687eabb3309ba7a41
+  flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
+  flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
   flutter_naver_map: d1ee15e7a2fe5360a19640648ceed5abf79d82aa
   flutter_phone_direct_caller: bd2ffd297f371a8a6c7bfbba0196964ffe3c4358
   flutter_platform_alert: 6a241c90f3cc350d0286deeefee9f52bee957019
@@ -353,7 +404,10 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  live_activities: 9ff56a06a2d43ecd68f56deeed13b18a8304789c
   local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
+  Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: aaa64717249b06ae82c3a3addb3a01f0e33100ab
@@ -362,6 +416,8 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  SDWebImage: f9258c58221ed854cfa0e2b80ee4033710b1c6d3
+  SDWebImageWebPCoder: 633b813fca24f1de5e076bcd7f720c038b23892b
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
@@ -369,4 +425,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8e07a61c004920fe10fdf77c5a5480cee80f5139
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.14.3
