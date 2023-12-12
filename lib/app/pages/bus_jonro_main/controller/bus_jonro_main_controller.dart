@@ -1,13 +1,11 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/mainpage/data/repositories/jongro_bus_repository.dart';
-import 'package:xml/xml.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
@@ -131,53 +129,21 @@ class JonroMainController extends GetxController {
 
   // 종로07 정보를 가져오는 api 호출
   Future<void> fetchJonrobusApi() async {
-    /*
-  종로 07의 도착 정보를 확인할 수 있는 api 호출
-  <버스도착정보조회 서비스>
-
-  응답형태
-  xml
-
-  응답예시
-  (너무 길어서 생략, 문서 참조)
-  */
-
-    var baseUrl = Uri.parse(dotenv.env['JonroBusAllApi']!);
-    final response = await http.get(baseUrl);
-
-    if (response.statusCode == 200) {
-      final document = XmlDocument.parse(response.body);
-
-      var headerCd = document.findAllElements('headerCd').first.text;
-      var headerMsg = document.findAllElements('headerMsg').first.text;
-
-      if (headerCd == "0" && headerMsg == "정상적으로 처리되었습니다.") {
-        final items = document.findAllElements('itemList');
-
-        int index = 0;
-        for (var item in items) {
-          String msg1 = item.findAllElements('arrmsg1').first.text;
-          String msg2 = item.findAllElements('arrmsg2').first.text;
-
-          print(
-              "Index $index: arrmsg1 = $msg1, arrmsg2 = $msg2"); // Debugging print
-
-          arrmsg1[index] = msg1;
-          arrmsg2[index] = msg2;
-
-          index++;
-        }
-
-        arrmsg1.refresh();
-        arrmsg2.refresh();
-      } else {
-        // controller.jongro07BusMessage.value = "정보 없음 [3]";
-        // print('error 1');
-        return;
-      }
-    } else {
+    try {
+      final items = await getJongroBusArrivalList();
+      items.forEachIndexed((index, element) {
+        arrmsg1[index] = element.arrivals.first.message;
+        arrmsg2[index] = element.arrivals.last.message;
+      });
+      arrmsg1.refresh();
+      arrmsg2.refresh();
+    } on FailedToGetJongroBusListException {
       // controller.jongro07BusMessage.value = "정보 없음 [4]";
       // print('error 2');
+      return;
+    } on NoJongroBusListException {
+      // controller.jongro07BusMessage.value = "정보 없음 [3]";
+      // print('error 1');
       return;
     }
 
