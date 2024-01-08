@@ -20,9 +20,10 @@ import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
 import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_controller.dart';
+import 'package:skkumap/app/pages/bus_knewyear/controller/bus_knewyear_controller.dart';
 import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_seoul_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpageB/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/firebase_options.dart';
@@ -75,7 +76,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       builder: (context, child) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: AppRoutes.routes,
-        initialRoute: '/mainpage',
+        initialRoute: '/',
         translations: Languages(),
         locale: Get.deviceLocale,
         fallbackLocale: const Locale('en', 'US'),
@@ -126,8 +127,10 @@ void registerDependencies() {
   Get.put(InjaMainController());
   Get.put(InjaMainLifeCycle());
 
-  Get.lazyPut(() => InjaDetailController());
-  Get.lazyPut(() => InjaDetailLifeCycle());
+  Get.put(InjaDetailController());
+  // Get.lazyPut(() => InjaDetailController());
+  Get.put(InjaDetailLifeCycle());
+  // Get.lazyPut(() => InjaDetailLifeCycle());
 
   Get.lazyPut(() => MainpageController());
   Get.lazyPut(() => MainpageLifeCycle());
@@ -143,4 +146,6 @@ void registerDependencies() {
 
   Get.lazyPut(() => UserChatController());
   Get.lazyPut(() => UserChatLifeCycle());
+
+  Get.put(KNewYearBusController());
 }

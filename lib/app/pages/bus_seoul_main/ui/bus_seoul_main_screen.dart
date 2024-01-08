@@ -242,960 +242,7 @@ class BusDataScreen extends GetView<BusDataController> {
                       return Expanded(
                         child: SingleChildScrollView(
                           physics: const ClampingScrollPhysics(),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 8,
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const ClampingScrollPhysics(),
-                                itemCount: controller.busDataList.length,
-                                itemBuilder: (_, index) {
-                                  return SizedBox(
-                                    height: 69,
-                                    child: Stack(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Container(
-                                              width: controller
-                                                          .busDataList[index]
-                                                          .stationName !=
-                                                      '600주년 기념관'
-                                                  ? controller
-                                                              .busDataList[
-                                                                  index]
-                                                              .stationName !=
-                                                          '정차소(인문.농구장)'
-                                                      ? ((controller
-                                                              .busDataList[
-                                                                  index - 1]
-                                                              .carNumber
-                                                              .isNotEmpty))
-                                                          ? (controller.timeDifference3(controller
-                                                                      .busDataList[
-                                                                          index -
-                                                                              1]
-                                                                      .eventDate) >
-                                                                  10)
-                                                              ? dwidth * 0.72
-                                                              : dwidth * 0.75
-                                                          : dwidth * 0.75
-                                                      : dwidth * 0.75
-                                                  : dwidth * 0.75,
-                                              height: 1,
-                                              color: controller
-                                                          .busDataList[index]
-                                                          .stationName ==
-                                                      '정차소(인문.농구장)'
-                                                  ? Colors.white
-                                                  : Colors.grey[200],
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  // 좌측 여백
-                                                  // width: dwidth * 0.23,
-                                                  width: 90.w,
-                                                ),
-                                                Column(
-                                                  // 세로선, 겹친 동그라미와 아래 화살표, 세로선
-                                                  children: [
-                                                    Container(
-                                                      width: 3,
-                                                      height: 27,
-                                                      color: controller
-                                                                  .busDataList[
-                                                                      index]
-                                                                  .stationName ==
-                                                              '정차소(인문.농구장)'
-                                                          ? Colors.white
-                                                          : AppColors
-                                                              .green_main,
-                                                    ),
-                                                    Stack(
-                                                      alignment:
-                                                          Alignment.topCenter,
-                                                      children: [
-                                                        Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: AppColors
-                                                                        .green_main,
-                                                                    width: 2,
-                                                                    strokeAlign:
-                                                                        BorderSide
-                                                                            .strokeAlignOutside,
-                                                                  ),
-                                                                  color: Colors
-                                                                      .white),
-                                                          child: const Icon(
-                                                            Icons.circle,
-                                                            size: 15,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                        const Icon(
-                                                          Icons
-                                                              .keyboard_arrow_down_sharp,
-                                                          size: 15,
-                                                          color: AppColors
-                                                              .green_main,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Container(
-                                                      width: 3,
-                                                      height: controller
-                                                                  .busDataList
-                                                                  .length ==
-                                                              index + 1
-                                                          ? 1.5
-                                                          : 27,
-                                                      color:
-                                                          AppColors.green_main,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      // 세로선과 글자 사이 간격
-                                                      width: dwidth * 0.06,
-                                                    ),
-                                                    Column(
-                                                      // 제목과 내용
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber
-                                                                .isNotEmpty // 제목
-                                                            ? Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .fromLTRB(
-                                                                        0,
-                                                                        10,
-                                                                        0,
-                                                                        3),
-                                                                child: Text(
-                                                                  controller
-                                                                      .busDataList[
-                                                                          index]
-                                                                      .stationName
-                                                                      .tr,
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontFamily:
-                                                                        'CJKBold',
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            : Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .fromLTRB(
-                                                                        0,
-                                                                        10,
-                                                                        0,
-                                                                        3),
-                                                                child: Text(
-                                                                  controller
-                                                                      .busDataList[
-                                                                          index]
-                                                                      .stationName,
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontFamily:
-                                                                        'CJKRegular',
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                        controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber
-                                                                .isNotEmpty // 내용
-                                                            ? Text(
-                                                                controller.timeDifference(controller
-                                                                    .busDataList[
-                                                                        index]
-                                                                    .eventDate),
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 11,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontFamily:
-                                                                      'CJKBold',
-                                                                ),
-                                                              )
-                                                            : controller
-                                                                        .busDataList[
-                                                                            index]
-                                                                        .stationName ==
-                                                                    '정차소(인문.농구장)'
-                                                                ? Text(
-                                                                    '도착 정보 없음'
-                                                                        .tr,
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontFamily:
-                                                                          'CJKRegular',
-                                                                    ),
-                                                                  )
-                                                                : Text(
-                                                                    controller
-                                                                        .getStationMessage(
-                                                                            index),
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontFamily:
-                                                                          'CJKRegular',
-                                                                    ),
-                                                                  ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        // 버스 아이콘 - 10초 이내인 경우
-                                        Positioned(
-                                          top: 18,
-                                          left: dwidth * 0.205,
-                                          child: ((controller.busDataList[index]
-                                                  .carNumber.isNotEmpty))
-                                              ? (controller.timeDifference3(
-                                                          controller
-                                                              .busDataList[
-                                                                  index]
-                                                              .eventDate) <
-                                                      10)
-                                                  ? Stack(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      children: [
-                                                        const PulseAnimation(
-                                                          child: Icon(
-                                                            Icons.circle,
-                                                            size: 35,
-                                                            color: AppColors
-                                                                .green_main,
-                                                          ),
-                                                        ),
-                                                        const Icon(
-                                                          Icons.circle,
-                                                          size: 35,
-                                                          color: AppColors
-                                                              .green_main,
-                                                        ),
-                                                        Container(
-                                                          child: const Icon(
-                                                            Icons
-                                                                .directions_bus,
-                                                            size: 17,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-                                        // 10초 이내는 아니지만 정류장이 600주년 기념관인 경우 - 버스 아이콘
-                                        Positioned(
-                                          top: 18,
-                                          left: dwidth * 0.205,
-                                          child: ((controller.busDataList[index]
-                                                  .carNumber.isNotEmpty))
-                                              ? ((controller.busDataList[index]
-                                                          .stationName) ==
-                                                      '600주년 기념관')
-                                                  ? Stack(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      children: [
-                                                        const PulseAnimation(
-                                                          child: Icon(
-                                                            Icons.circle,
-                                                            size: 35,
-                                                            color: AppColors
-                                                                .green_main,
-                                                          ),
-                                                        ),
-                                                        const Icon(
-                                                          Icons.circle,
-                                                          size: 35,
-                                                          color: AppColors
-                                                              .green_main,
-                                                        ),
-                                                        Container(
-                                                          child: const Icon(
-                                                            Icons
-                                                                .directions_bus,
-                                                            size: 17,
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 10초 이내는 아니지만 정류장이 600주년 기념관인 경우 - 버스 번호판
-                                        Positioned(
-                                          top: 26,
-                                          left: dwidth * 0.04,
-                                          child: ((controller.busDataList[index]
-                                                  .carNumber.isNotEmpty))
-                                              ? ((controller.busDataList[index]
-                                                          .stationName) ==
-                                                      '600주년 기념관')
-                                                  ? Stack(
-                                                      children: [
-                                                        controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber
-                                                                .isNotEmpty
-                                                            ? CustomPaint(
-                                                                size:
-                                                                    const Size(
-                                                                        62, 18),
-                                                                painter:
-                                                                    ArrowShape(),
-                                                              )
-                                                            : Container(
-                                                                width: 0.0001,
-                                                                height: 0.0001,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .fromLTRB(
-                                                                  4.3, 0, 0, 0),
-                                                          child: Text(
-                                                            controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 11,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontFamily:
-                                                                  'CJKBold',
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 버스 번호판 - 10초 이내인 경우
-                                        Positioned(
-                                          top: 26,
-                                          left: dwidth * 0.04,
-                                          child: ((controller.busDataList[index]
-                                                  .carNumber.isNotEmpty))
-                                              ? (controller.timeDifference3(
-                                                          controller
-                                                              .busDataList[
-                                                                  index]
-                                                              .eventDate) <
-                                                      10)
-                                                  ? Stack(
-                                                      children: [
-                                                        controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber
-                                                                .isNotEmpty
-                                                            ? CustomPaint(
-                                                                size:
-                                                                    const Size(
-                                                                        62, 18),
-                                                                painter:
-                                                                    ArrowShape(),
-                                                              )
-                                                            : Container(
-                                                                width: 0.0001,
-                                                                height: 0.0001,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .fromLTRB(
-                                                                  4.3, 0, 0, 0),
-                                                          child: Text(
-                                                            controller
-                                                                .busDataList[
-                                                                    index]
-                                                                .carNumber,
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 11,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontFamily:
-                                                                  'CJKBold',
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 버스 번호판 - 10초 지난 경우 - 상단 부분 표현
-                                        Positioned(
-                                          bottom: -9,
-                                          left: dwidth * 0.04,
-                                          child: ((controller.busDataList[index]
-                                                  .carNumber.isNotEmpty))
-                                              ? (controller.timeDifference3(
-                                                          controller
-                                                              .busDataList[
-                                                                  index]
-                                                              .eventDate) >
-                                                      10)
-                                                  ? controller
-                                                              .busDataList[
-                                                                  index]
-                                                              .stationName !=
-                                                          '600주년 기념관'
-                                                      ? Stack(
-                                                          children: [
-                                                            controller
-                                                                    .busDataList[
-                                                                        index]
-                                                                    .carNumber
-                                                                    .isNotEmpty
-                                                                ? CustomPaint(
-                                                                    size:
-                                                                        const Size(
-                                                                            62,
-                                                                            18),
-                                                                    painter:
-                                                                        ArrowShape(),
-                                                                  )
-                                                                : Container(
-                                                                    width:
-                                                                        0.0001,
-                                                                    height:
-                                                                        0.0001,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                            Container(
-                                                              alignment: Alignment
-                                                                  .centerLeft,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .fromLTRB(
-                                                                      4.3,
-                                                                      0,
-                                                                      0,
-                                                                      0),
-                                                              child: Text(
-                                                                controller
-                                                                    .busDataList[
-                                                                        index]
-                                                                    .carNumber,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 11,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontFamily:
-                                                                      'CJKBold',
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : Stack(
-                                                          children: [
-                                                            Container(
-                                                              width: 0.01,
-                                                              height: 0.01,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          ],
-                                                        )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 버스 번호판 - 10초 지난 경우 - 하단 부분 표현
-                                        Positioned(
-                                          top: -9,
-                                          left: dwidth * 0.04,
-                                          child: controller.busDataList[index]
-                                                      .stationName !=
-                                                  '정차소(인문.농구장)'
-                                              ? controller
-                                                          .busDataList[index -
-                                                              1]
-                                                          .stationName !=
-                                                      '600주년 기념관'
-                                                  ? ((controller
-                                                          .busDataList[index -
-                                                              1]
-                                                          .carNumber
-                                                          .isNotEmpty))
-                                                      ? (controller.timeDifference3(
-                                                                  controller
-                                                                      .busDataList[
-                                                                          index -
-                                                                              1]
-                                                                      .eventDate) >
-                                                              10)
-                                                          ? Stack(
-                                                              children: [
-                                                                CustomPaint(
-                                                                  size:
-                                                                      const Size(
-                                                                          62,
-                                                                          18),
-                                                                  painter:
-                                                                      ArrowShape(),
-                                                                ),
-                                                                Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerLeft,
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .fromLTRB(
-                                                                          4.3,
-                                                                          0,
-                                                                          0,
-                                                                          0),
-                                                                  child: Text(
-                                                                    controller
-                                                                        .busDataList[
-                                                                            index -
-                                                                                1]
-                                                                        .carNumber,
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontFamily:
-                                                                          'CJKBold',
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          : Stack(
-                                                              children: [
-                                                                Container(
-                                                                  width: 0.01,
-                                                                  height: 0.01,
-                                                                  color: Colors
-                                                                      .white,
-                                                                )
-                                                              ],
-                                                            )
-                                                      : Stack(
-                                                          children: [
-                                                            Container(
-                                                              width: 0.01,
-                                                              height: 0.01,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          ],
-                                                        )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 버스 아이콘 - 10초가 지나서 이동중인 경우 - 하단 부분 표현
-                                        Positioned(
-                                          top: -17.5,
-                                          left: 80.w,
-                                          child: controller.busDataList[index]
-                                                      .stationName !=
-                                                  '정차소(인문.농구장)'
-                                              ? controller
-                                                          .busDataList[index -
-                                                              1]
-                                                          .stationName !=
-                                                      '600주년 기념관'
-                                                  ? ((controller
-                                                          .busDataList[index -
-                                                              1]
-                                                          .carNumber
-                                                          .isNotEmpty))
-                                                      ? (controller.timeDifference3(
-                                                                  controller
-                                                                      .busDataList[
-                                                                          index -
-                                                                              1]
-                                                                      .eventDate) >
-                                                              10)
-                                                          ? const Stack(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              children: [
-                                                                PulseAnimation(
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .circle,
-                                                                    size: 35,
-                                                                    color: AppColors
-                                                                        .green_main,
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons.circle,
-                                                                  size: 35,
-                                                                  color: AppColors
-                                                                      .green_main,
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .directions_bus,
-                                                                  size: 17,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              ],
-                                                            )
-                                                          : Stack(
-                                                              children: [
-                                                                Container(
-                                                                  width: 0.01,
-                                                                  height: 0.01,
-                                                                  color: Colors
-                                                                      .white,
-                                                                )
-                                                              ],
-                                                            )
-                                                      : Stack(
-                                                          children: [
-                                                            Container(
-                                                              width: 0.01,
-                                                              height: 0.01,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          ],
-                                                        )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-
-                                        // 버스 아이콘 - 10초가 지나서 이동중인 경우 - 상단 부분 표현
-                                        Positioned(
-                                          bottom: -17,
-                                          left: 80.w,
-                                          child: controller.busDataList[index]
-                                                      .stationName !=
-                                                  '정차소(인문.농구장)1' // 이 경우 제외해줘야함
-                                              ? controller.busDataList[index]
-                                                          .stationName !=
-                                                      '600주년 기념관'
-                                                  ? ((controller
-                                                          .busDataList[index]
-                                                          .carNumber
-                                                          .isNotEmpty))
-                                                      ? (controller.timeDifference3(
-                                                                  controller
-                                                                      .busDataList[
-                                                                          index]
-                                                                      .eventDate) >
-                                                              10)
-                                                          ? Stack(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              children: [
-                                                                const PulseAnimation(
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .circle,
-                                                                    size: 35,
-                                                                    color: AppColors
-                                                                        .green_main,
-                                                                  ),
-                                                                ),
-                                                                const Icon(
-                                                                  Icons.circle,
-                                                                  size: 35,
-                                                                  color: AppColors
-                                                                      .green_main,
-                                                                ),
-                                                                Container(
-                                                                  child:
-                                                                      const Icon(
-                                                                    Icons
-                                                                        .directions_bus,
-                                                                    size: 17,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          : Stack(
-                                                              children: [
-                                                                Container(
-                                                                  width: 0.01,
-                                                                  height: 0.01,
-                                                                  color: Colors
-                                                                      .white,
-                                                                )
-                                                              ],
-                                                            )
-                                                      : Stack(
-                                                          children: [
-                                                            Container(
-                                                              width: 0.01,
-                                                              height: 0.01,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          ],
-                                                        )
-                                                  : Stack(
-                                                      children: [
-                                                        Container(
-                                                          width: 0.01,
-                                                          height: 0.01,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    )
-                                              : Stack(
-                                                  children: [
-                                                    Container(
-                                                      width: 0.01,
-                                                      height: 0.01,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                              Container(
-                                height: 15,
-                                color: Colors.white,
-                              ),
-                              Container(
-                                height: 2,
-                                color: Colors.grey[100],
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    height: 27,
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      child: Text(
-                                        '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다'.tr,
-                                        textAlign: TextAlign.left,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                          fontFamily: 'CJKRegular',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          child: _buildBusList(),
                         ),
                       );
                     }
@@ -1259,5 +306,729 @@ class BusDataScreen extends GetView<BusDataController> {
             ],
           ),
         ));
+  }
+
+  Column _buildBusList() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          height: 8,
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount: controller.busDataList.length,
+          itemBuilder: (_, index) {
+            return SizedBox(
+              height: 69,
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: controller.busDataList[index].stationName !=
+                                '600주년 기념관'
+                            ? controller.busDataList[index].stationName !=
+                                    '정차소(인문.농구장)'
+                                ? ((controller.busDataList[index - 1].carNumber
+                                        .isNotEmpty))
+                                    ? (controller.timeDifference3(controller
+                                                .busDataList[index - 1]
+                                                .eventDate) >
+                                            10)
+                                        ? dwidth * 0.72
+                                        : dwidth * 0.75
+                                    : dwidth * 0.75
+                                : dwidth * 0.75
+                            : dwidth * 0.75,
+                        height: 1,
+                        color: controller.busDataList[index].stationName ==
+                                '정차소(인문.농구장)'
+                            ? Colors.white
+                            : Colors.grey[200],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            // 좌측 여백
+                            // width: dwidth * 0.23,
+                            width: 90.w,
+                          ),
+                          Column(
+                            // 세로선, 겹친 동그라미와 아래 화살표, 세로선
+                            children: [
+                              Container(
+                                width: 3,
+                                height: 27,
+                                color:
+                                    controller.busDataList[index].stationName ==
+                                            '정차소(인문.농구장)'
+                                        ? Colors.white
+                                        : AppColors.green_main,
+                              ),
+                              Stack(
+                                alignment: Alignment.topCenter,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: AppColors.green_main,
+                                          width: 2,
+                                          strokeAlign:
+                                              BorderSide.strokeAlignOutside,
+                                        ),
+                                        color: Colors.white),
+                                    child: const Icon(
+                                      Icons.circle,
+                                      size: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.keyboard_arrow_down_sharp,
+                                    size: 15,
+                                    color: AppColors.green_main,
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                width: 3,
+                                height:
+                                    controller.busDataList.length == index + 1
+                                        ? 1.5
+                                        : 27,
+                                color: AppColors.green_main,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                // 세로선과 글자 사이 간격
+                                width: dwidth * 0.06,
+                              ),
+                              Column(
+                                // 제목과 내용
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  controller.busDataList[index].carNumber
+                                          .isNotEmpty // 제목
+                                      ? Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 10, 0, 3),
+                                          child: Text(
+                                            controller.busDataList[index]
+                                                .stationName.tr,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                              fontFamily: 'CJKBold',
+                                            ),
+                                          ),
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 10, 0, 3),
+                                          child: Text(
+                                            controller
+                                                .busDataList[index].stationName,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                              fontFamily: 'CJKRegular',
+                                            ),
+                                          ),
+                                        ),
+                                  controller.busDataList[index].carNumber
+                                          .isNotEmpty // 내용
+                                      ? Text(
+                                          controller.timeDifference(controller
+                                              .busDataList[index].eventDate),
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.black,
+                                            fontFamily: 'CJKBold',
+                                          ),
+                                        )
+                                      : controller.busDataList[index]
+                                                  .stationName ==
+                                              '정차소(인문.농구장)'
+                                          ? Text(
+                                              '도착 정보 없음'.tr,
+                                              style: const TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black,
+                                                fontFamily: 'CJKRegular',
+                                              ),
+                                            )
+                                          : Text(
+                                              controller
+                                                  .getStationMessage(index),
+                                              style: const TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black,
+                                                fontFamily: 'CJKRegular',
+                                              ),
+                                            ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  // 버스 아이콘 - 10초 이내인 경우
+                  Positioned(
+                    top: 18,
+                    left: dwidth * 0.205,
+                    child: ((controller
+                            .busDataList[index].carNumber.isNotEmpty))
+                        ? (controller.timeDifference3(
+                                    controller.busDataList[index].eventDate) <
+                                10)
+                            ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  const PulseAnimation(
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 35,
+                                      color: AppColors.green_main,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.circle,
+                                    size: 35,
+                                    color: AppColors.green_main,
+                                  ),
+                                  Container(
+                                    child: const Icon(
+                                      Icons.directions_bus,
+                                      size: 17,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+                  // 10초 이내는 아니지만 정류장이 600주년 기념관인 경우 - 버스 아이콘
+                  Positioned(
+                    top: 18,
+                    left: dwidth * 0.205,
+                    child:
+                        ((controller.busDataList[index].carNumber.isNotEmpty))
+                            ? ((controller.busDataList[index].stationName) ==
+                                    '600주년 기념관')
+                                ? Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      const PulseAnimation(
+                                        child: Icon(
+                                          Icons.circle,
+                                          size: 35,
+                                          color: AppColors.green_main,
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.circle,
+                                        size: 35,
+                                        color: AppColors.green_main,
+                                      ),
+                                      Container(
+                                        child: const Icon(
+                                          Icons.directions_bus,
+                                          size: 17,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Stack(
+                                    children: [
+                                      Container(
+                                        width: 0.01,
+                                        height: 0.01,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                  ),
+
+                  // 10초 이내는 아니지만 정류장이 600주년 기념관인 경우 - 버스 번호판
+                  Positioned(
+                    top: 26,
+                    left: dwidth * 0.04,
+                    child: ((controller
+                            .busDataList[index].carNumber.isNotEmpty))
+                        ? ((controller.busDataList[index].stationName) ==
+                                '600주년 기념관')
+                            ? Stack(
+                                children: [
+                                  controller.busDataList[index].carNumber
+                                          .isNotEmpty
+                                      ? CustomPaint(
+                                          size: const Size(62, 18),
+                                          painter: ArrowShape(),
+                                        )
+                                      : Container(
+                                          width: 0.0001,
+                                          height: 0.0001,
+                                          color: Colors.white,
+                                        ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding:
+                                        const EdgeInsets.fromLTRB(4.3, 0, 0, 0),
+                                    child: Text(
+                                      controller.busDataList[index].carNumber,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+
+                  // 버스 번호판 - 10초 이내인 경우
+                  Positioned(
+                    top: 26,
+                    left: dwidth * 0.04,
+                    child: ((controller
+                            .busDataList[index].carNumber.isNotEmpty))
+                        ? (controller.timeDifference3(
+                                    controller.busDataList[index].eventDate) <
+                                10)
+                            ? Stack(
+                                children: [
+                                  controller.busDataList[index].carNumber
+                                          .isNotEmpty
+                                      ? CustomPaint(
+                                          size: const Size(62, 18),
+                                          painter: ArrowShape(),
+                                        )
+                                      : Container(
+                                          width: 0.0001,
+                                          height: 0.0001,
+                                          color: Colors.white,
+                                        ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding:
+                                        const EdgeInsets.fromLTRB(4.3, 0, 0, 0),
+                                    child: Text(
+                                      controller.busDataList[index].carNumber,
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        color: Colors.white,
+                                        fontFamily: 'CJKBold',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+
+                  // 버스 번호판 - 10초 지난 경우 - 상단 부분 표현
+                  Positioned(
+                    bottom: -9,
+                    left: dwidth * 0.04,
+                    child: ((controller
+                            .busDataList[index].carNumber.isNotEmpty))
+                        ? (controller.timeDifference3(
+                                    controller.busDataList[index].eventDate) >
+                                10)
+                            ? controller.busDataList[index].stationName !=
+                                    '600주년 기념관'
+                                ? Stack(
+                                    children: [
+                                      controller.busDataList[index].carNumber
+                                              .isNotEmpty
+                                          ? CustomPaint(
+                                              size: const Size(62, 18),
+                                              painter: ArrowShape(),
+                                            )
+                                          : Container(
+                                              width: 0.0001,
+                                              height: 0.0001,
+                                              color: Colors.white,
+                                            ),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            4.3, 0, 0, 0),
+                                        child: Text(
+                                          controller
+                                              .busDataList[index].carNumber,
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.white,
+                                            fontFamily: 'CJKBold',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Stack(
+                                    children: [
+                                      Container(
+                                        width: 0.01,
+                                        height: 0.01,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+
+                  // 버스 번호판 - 10초 지난 경우 - 하단 부분 표현
+                  Positioned(
+                    top: -9,
+                    left: dwidth * 0.04,
+                    child: controller.busDataList[index].stationName !=
+                            '정차소(인문.농구장)'
+                        ? controller.busDataList[index - 1].stationName !=
+                                '600주년 기념관'
+                            ? ((controller.busDataList[index - 1].carNumber
+                                    .isNotEmpty))
+                                ? (controller.timeDifference3(controller
+                                            .busDataList[index - 1].eventDate) >
+                                        10)
+                                    ? Stack(
+                                        children: [
+                                          CustomPaint(
+                                            size: const Size(62, 18),
+                                            painter: ArrowShape(),
+                                          ),
+                                          Container(
+                                            alignment: Alignment.centerLeft,
+                                            padding: const EdgeInsets.fromLTRB(
+                                                4.3, 0, 0, 0),
+                                            child: Text(
+                                              controller.busDataList[index - 1]
+                                                  .carNumber,
+                                              style: const TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.white,
+                                                fontFamily: 'CJKBold',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Stack(
+                                        children: [
+                                          Container(
+                                            width: 0.01,
+                                            height: 0.01,
+                                            color: Colors.white,
+                                          )
+                                        ],
+                                      )
+                                : Stack(
+                                    children: [
+                                      Container(
+                                        width: 0.01,
+                                        height: 0.01,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+
+                  // 버스 아이콘 - 10초가 지나서 이동중인 경우 - 하단 부분 표현
+                  Positioned(
+                    top: -17.5,
+                    left: 80.w,
+                    child: controller.busDataList[index].stationName !=
+                            '정차소(인문.농구장)'
+                        ? controller.busDataList[index - 1].stationName !=
+                                '600주년 기념관'
+                            ? ((controller.busDataList[index - 1].carNumber
+                                    .isNotEmpty))
+                                ? (controller.timeDifference3(controller
+                                            .busDataList[index - 1].eventDate) >
+                                        10)
+                                    ? const Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          PulseAnimation(
+                                            child: Icon(
+                                              Icons.circle,
+                                              size: 35,
+                                              color: AppColors.green_main,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.circle,
+                                            size: 35,
+                                            color: AppColors.green_main,
+                                          ),
+                                          Icon(
+                                            Icons.directions_bus,
+                                            size: 17,
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      )
+                                    : Stack(
+                                        children: [
+                                          Container(
+                                            width: 0.01,
+                                            height: 0.01,
+                                            color: Colors.white,
+                                          )
+                                        ],
+                                      )
+                                : Stack(
+                                    children: [
+                                      Container(
+                                        width: 0.01,
+                                        height: 0.01,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+
+                  // 버스 아이콘 - 10초가 지나서 이동중인 경우 - 상단 부분 표현
+                  Positioned(
+                    bottom: -17,
+                    left: 80.w,
+                    child: controller.busDataList[index].stationName !=
+                            '정차소(인문.농구장)1' // 이 경우 제외해줘야함
+                        ? controller.busDataList[index].stationName !=
+                                '600주년 기념관'
+                            ? ((controller
+                                    .busDataList[index].carNumber.isNotEmpty))
+                                ? (controller.timeDifference3(controller
+                                            .busDataList[index].eventDate) >
+                                        10)
+                                    ? Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          const PulseAnimation(
+                                            child: Icon(
+                                              Icons.circle,
+                                              size: 35,
+                                              color: AppColors.green_main,
+                                            ),
+                                          ),
+                                          const Icon(
+                                            Icons.circle,
+                                            size: 35,
+                                            color: AppColors.green_main,
+                                          ),
+                                          Container(
+                                            child: const Icon(
+                                              Icons.directions_bus,
+                                              size: 17,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Stack(
+                                        children: [
+                                          Container(
+                                            width: 0.01,
+                                            height: 0.01,
+                                            color: Colors.white,
+                                          )
+                                        ],
+                                      )
+                                : Stack(
+                                    children: [
+                                      Container(
+                                        width: 0.01,
+                                        height: 0.01,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                            : Stack(
+                                children: [
+                                  Container(
+                                    width: 0.01,
+                                    height: 0.01,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              )
+                        : Stack(
+                            children: [
+                              Container(
+                                width: 0.01,
+                                height: 0.01,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        Container(height: 15, color: Colors.white),
+        Container(height: 2, color: Colors.grey[100]),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 10,
+            ),
+            SizedBox(
+              height: 27,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Text(
+                  '실시간 정보는 상황에 따라 오차가 발생할 수 있습니다'.tr,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontFamily: 'CJKRegular',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

@@ -4,7 +4,7 @@ class Languages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ko_KR': {
-          'appname': 'SKKU BUS',
+          'appname': 'SKKU LIFE',
           '기준': '기준',
           '대 운행 중': '대 운행 중',
           '인자셔틀': '인자셔틀',
@@ -50,7 +50,7 @@ class Languages extends Translations {
           '스꾸버스 앱에서 편하게 정보를 받아보세요!': '스꾸버스 앱에서 편하게 정보를 받아보세요!',
         },
         'en_US': {
-          'appname': 'SKKU BUS',
+          'appname': 'SKKU LIFE',
           '기준': 'based',
           '대 운행 중': ' buses in operation',
           '인자셔틀': 'shuttle',
