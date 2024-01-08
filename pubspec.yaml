@@ -1,6 +1,6 @@
 name: skkumap
 description: A new Flutter project.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 2.0.2+16
 
 environment:
@@ -63,13 +63,19 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   flutter_popup: ^3.1.8
   live_activities: ^1.9.0
+  sf_symbols: ^0.2.0
+  awesome_bottom_bar: ^1.2.4
+  buttons_tabbar: ^1.3.8
+  squircle: ^0.0.2
+  flutter_sfsymbols: ^2.0.0
+  webview_flutter: ^4.4.3
 
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
 flutter_launcher_name:
-  name: '스꾸버스'
+  name: "스꾸버스"
 
 dependency_overrides:
   intl: any
@@ -98,3 +104,6 @@ flutter:
     - family: CJKMedium
       fonts:
         - asset: assets/fonts/NotoSansCJKkr-Medium.otf
+    - family: toss
+      fonts:
+        - asset: assets/fonts/TossFaceFontMac.ttf
