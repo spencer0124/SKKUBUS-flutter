@@ -10,6 +10,8 @@ import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app/utils/return_platform.dart';
 import 'package:skkumap/app_theme.dart';
 
+import 'package:skkumap/app/components/CustomNavigationBar.dart';
+
 class ArrowShape extends CustomPainter {
   final Paint _paint = Paint()..color = AppColors.green_main;
   @override
@@ -63,96 +65,18 @@ class BusDataScreen extends GetView<BusDataController> {
           children: [
             Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 50.h,
-                  alignment: Alignment.topCenter,
-                  color: AppColors.green_main,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 35,
-                              height: 35,
-                              child: InkWell(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: const Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  color: Colors.white,
-                                  size: 22,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 35,
-                              height: 35,
-                              child: InkWell(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  color: AppColors.green_main,
-                                  size: 22,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          '인사캠 셔틀버스'.tr,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: 'CJKBold',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 35,
-                              height: 35,
-                              child: InkWell(
-                                child: const Icon(
-                                  Icons.info_outline,
-                                  color: Colors.white,
-                                  size: 27,
-                                  semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
-                                ),
-                                onTap: () {
-                                  FirebaseAnalytics.instance.logEvent(
-                                    name: 'info_clicked',
-                                  );
-                                  Get.toNamed('/busDetail');
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: 35,
-                              height: 35,
-                              child: InkWell(
-                                child: const Icon(
-                                  Icons.share,
-                                  color: Colors.white,
-                                  size: 22,
-                                  semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
-                                ),
-                                onTap: () async {
-                                  controller.onShareClicked();
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                CustomNavigationBar(
+                  title: '인사캠 셔틀버스'.tr,
+                  backgroundColor: AppColors.green_main,
+                  isDisplayLeftBtn: true,
+                  isDisplayRightBtn: true,
+                  leftBtnAction: () {
+                    Get.back();
+                  },
+                  rightBtnAction: () {
+                    Get.toNamed('/busDetail');
+                  },
+                  rightBtnType: CustomNavigationBtnType.info,
                 ),
                 Container(
                   height: 0.5,
