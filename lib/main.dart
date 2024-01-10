@@ -16,15 +16,13 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:skkumap/app/data/provider/but_data_provider.dart';
 import 'package:skkumap/app/data/repository/bus_data_repository.dart';
 import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.dart';
-import 'package:skkumap/app/pages/LocalAuth/controller/localauth_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
 import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_controller.dart';
-import 'package:skkumap/app/pages/bus_knewyear/controller/bus_knewyear_controller.dart';
+import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
 import 'package:skkumap/app/pages/bus_seoul_detail/controller/bus_seoul_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/pages/mainpageB/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/userchat/controller/userchat_controller.dart';
+import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/firebase_options.dart';
 
@@ -140,12 +138,6 @@ void registerDependencies() {
 
   Get.lazyPut(() => KingoLoginController());
   Get.lazyPut(() => KingoLoginLifeCycle());
-
-  Get.lazyPut(() => LocalAuthController());
-  Get.lazyPut(() => LocalAuthLifeCycle());
-
-  Get.lazyPut(() => UserChatController());
-  Get.lazyPut(() => UserChatLifeCycle());
 
   Get.put(KNewYearBusController());
 }

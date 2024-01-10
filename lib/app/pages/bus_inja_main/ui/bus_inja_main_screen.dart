@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
 import 'package:skkumap/app_theme.dart';
 
+import 'package:skkumap/app/components/CustomNavigationBar.dart';
+
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
 const double seoulLon = 126.993688;
@@ -70,73 +72,18 @@ class ESKARA extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 50,
-            alignment: Alignment.topCenter,
-            color: AppColors.green_main,
-            // color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        '인자셔틀'.tr,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontFamily: 'CJKBold',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.info_outline,
-                                color: Colors.white,
-                                size: 27,
-                                semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
-                              ),
-                              onTap: () {
-                                Get.toNamed('/injadetail');
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          CustomNavigationBar(
+            title: '인자셔틀'.tr,
+            backgroundColor: AppColors.green_main,
+            isDisplayLeftBtn: true,
+            isDisplayRightBtn: true,
+            leftBtnAction: () {
+              Get.back();
+            },
+            rightBtnAction: () {
+              Get.toNamed('/injadetail');
+            },
+            rightBtnType: CustomNavigationBtnType.info,
           ),
           Container(
             height: 0.5,
@@ -146,43 +93,6 @@ class ESKARA extends StatelessWidget {
             height: 0.5,
             color: Colors.grey[300],
           ),
-          // 상단바 몇시 기준, 운행종료/몇대 운행 정보 담는곳
-          // Container(
-          //   height: 30,
-          //   color: Colors.grey[100],
-          //   child: Column(
-          //     children: [
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         crossAxisAlignment: CrossAxisAlignment.center,
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-          //             child: Row(
-          //               children: [
-          //                 const SizedBox(
-          //                   width: 5,
-          //                 ),
-          //                 Padding(
-          //                   padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
-          //                   child: Text(
-          //                     '11:35 PM 기준 · 운행종료',
-          //                     // '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
-          //                     style: TextStyle(
-          //                       fontSize: 12,
-          //                       color: Colors.grey[800],
-          //                       fontFamily: 'CJKRegular',
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Container(
             height: 0.5,
             color: Colors.grey[300],

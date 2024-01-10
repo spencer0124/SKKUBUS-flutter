@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app_theme.dart';
 
+import 'package:skkumap/app/components/CustomNavigationBar.dart';
+
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
 const double seoulLon = 126.993688;
@@ -70,98 +72,16 @@ class InjaDetail extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 50,
-            alignment: Alignment.topCenter,
-            color: AppColors.green_main,
-            // color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: AppColors.green_main,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        '인자셔틀 상세정보',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontFamily: 'CJKBold',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.info_outline,
-                                color: AppColors.green_main,
-                                size: 27,
-                                // semanticLabel: "인사캠 셔틀버스 정보 확인하기 버튼",
-                              ),
-                              onTap: () {},
-                            ),
-                          ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.share,
-                                color: AppColors.green_main,
-                                size: 22,
-                                // semanticLabel: "인사캠 셔틀버스 정보 공유하기 버튼",
-                              ),
-                              onTap: () async {
-                                // controller.onShareClicked();
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          CustomNavigationBar(
+            title: '인자셔틀 상세정보',
+            backgroundColor: AppColors.green_main,
+            isDisplayLeftBtn: true,
+            isDisplayRightBtn: false,
+            leftBtnAction: () {
+              Get.back();
+            },
+            rightBtnAction: () {},
+            rightBtnType: CustomNavigationBtnType.info,
           ),
           Container(
             height: 0.5,

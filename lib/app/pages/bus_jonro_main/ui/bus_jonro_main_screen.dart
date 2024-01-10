@@ -10,6 +10,8 @@ import 'package:shimmer/shimmer.dart';
 
 import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
 
+import 'package:skkumap/app/components/CustomNavigationBar.dart';
+
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
@@ -55,90 +57,16 @@ class JonroMainScreen extends GetView<JonroMainController> {
           // 상단 메뉴바 부분
           Column(
             children: [
-              Container(
-                width: double.infinity,
-                height: 50.h,
-                alignment: Alignment.topCenter,
-                color: Colors.green,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.arrow_back_ios_new_rounded,
-                                color: Colors.green,
-                                size: 22,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        '종로07'.tr,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontFamily: 'CJKBold',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.share,
-                                color: Colors.green,
-                                size: 22,
-                              ),
-                              onTap: () async {},
-                            ),
-                          ),
-                          SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: InkWell(
-                              child: const Icon(
-                                Icons.info_outline,
-                                color: Colors.green,
-                                size: 27,
-                                // semanticLabel: "종로07 정보 확인하기 버튼",
-                              ),
-                              onTap: () {
-                                // Get.toNamed('/busDetail');
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+              CustomNavigationBar(
+                title: '종로07'.tr,
+                backgroundColor: Colors.green,
+                isDisplayLeftBtn: true,
+                isDisplayRightBtn: false,
+                leftBtnAction: () {
+                  Get.back();
+                },
+                rightBtnAction: () {},
+                rightBtnType: CustomNavigationBtnType.info,
               ),
               Container(
                 height: 0.5,

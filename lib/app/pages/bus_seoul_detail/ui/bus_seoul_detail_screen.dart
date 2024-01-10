@@ -4,6 +4,8 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app_theme.dart';
 
+import 'package:skkumap/app/components/CustomNavigationBar.dart';
+
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 final double dwidth =
@@ -28,50 +30,16 @@ class BusDataScreenDetail extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 50,
-              alignment: Alignment.topCenter,
-              color: AppColors.green_main,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: const Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 22,
-                          ),
-                        ),
-                        Text(
-                          '인사캠 셔틀버스'.tr,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: 'CJKBold',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: AppColors.green_main,
-                          size: 22,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            CustomNavigationBar(
+              title: '인사캠 셔틀버스'.tr,
+              backgroundColor: AppColors.green_main,
+              isDisplayLeftBtn: true,
+              isDisplayRightBtn: false,
+              leftBtnAction: () {
+                Get.back();
+              },
+              rightBtnAction: () {},
+              rightBtnType: CustomNavigationBtnType.info,
             ),
             Flexible(
               child: Scrollbar(

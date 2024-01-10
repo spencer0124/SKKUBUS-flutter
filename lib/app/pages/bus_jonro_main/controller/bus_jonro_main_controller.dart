@@ -4,8 +4,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:skkumap/app/pages/mainpageB/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/mainpageB/data/repositories/jongro_bus_repository.dart';
+import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/homepage/data/repositories/jongro_bus_repository.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
