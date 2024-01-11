@@ -8,9 +8,8 @@ import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_contr
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
-
-import 'package:skkumap/app/components/CustomNavigationBar.dart';
+import 'package:skkumap/app/components/Bus/pulse_animation.dart';
+import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
@@ -285,6 +284,7 @@ class JonroMainScreen extends GetView<JonroMainController> {
                                                     alignment: Alignment.center,
                                                     children: [
                                                       const PulseAnimation(
+                                                        color: Colors.green,
                                                         child: Icon(
                                                           Icons.circle,
                                                           size: 35,

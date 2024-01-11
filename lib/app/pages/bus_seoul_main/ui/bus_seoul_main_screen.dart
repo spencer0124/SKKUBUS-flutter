@@ -5,12 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
+// import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_animation.dart';
 import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app/utils/return_platform.dart';
 import 'package:skkumap/app_theme.dart';
 
-import 'package:skkumap/app/components/CustomNavigationBar.dart';
+import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
+import 'package:skkumap/app/components/Bus/pulse_animation.dart';
+import 'package:skkumap/app/components/Bus/licenseplate.dart';
+import 'package:skkumap/app/components/Bus/buslist_component.dart';
 
 class ArrowShape extends CustomPainter {
   final Paint _paint = Paint()..color = AppColors.green_main;
@@ -65,6 +68,39 @@ class BusDataScreen extends GetView<BusDataController> {
           children: [
             Column(
               children: [
+                SizedBox(
+                  height: 50,
+                  child: Container(
+                    color: Colors.red[300],
+                  ),
+                ),
+                const HSSCBusListComponentView(
+                  stationName: "혜화역1번출구",
+                  stationNumber: "01504",
+                  eta: "1번째 전",
+                  isFirstStation: true,
+                  isLastStation: false,
+                  isRotationStation: false,
+                  color: Colors.green,
+                ),
+                const HSSCBusListComponentView(
+                  stationName: "혜화역2번출구",
+                  stationNumber: "0150",
+                  eta: "2번째 전",
+                  isFirstStation: false,
+                  isLastStation: false,
+                  isRotationStation: true,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  height: 50,
+                  child: Container(
+                    color: Colors.red[300],
+                  ),
+                ),
+                // const LicensePlate(
+                //   plateNumber: '74거 5678',
+                // ),
                 CustomNavigationBar(
                   title: '인사캠 셔틀버스'.tr,
                   backgroundColor: AppColors.green_main,
@@ -427,6 +463,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                 alignment: Alignment.center,
                                 children: [
                                   const PulseAnimation(
+                                    color: AppColors.green_main,
                                     child: Icon(
                                       Icons.circle,
                                       size: 35,
@@ -478,6 +515,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                     alignment: Alignment.center,
                                     children: [
                                       const PulseAnimation(
+                                        color: AppColors.green_main,
                                         child: Icon(
                                           Icons.circle,
                                           size: 35,
@@ -790,6 +828,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                         alignment: Alignment.center,
                                         children: [
                                           PulseAnimation(
+                                            color: AppColors.green_main,
                                             child: Icon(
                                               Icons.circle,
                                               size: 35,
@@ -863,6 +902,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                         alignment: Alignment.center,
                                         children: [
                                           const PulseAnimation(
+                                            color: AppColors.green_main,
                                             child: Icon(
                                               Icons.circle,
                                               size: 35,

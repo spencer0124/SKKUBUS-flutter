@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app_theme.dart';
 
-import 'package:skkumap/app/components/CustomNavigationBar.dart';
+import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
