@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
 
-import 'package:skkumap/app/components/CustomNavigationBar.dart';
+import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 
 class KNewYearBus extends StatelessWidget {

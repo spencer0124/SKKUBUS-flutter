@@ -183,3 +183,5 @@ Temporary Items
 fastlane/
 Appfile
 Fastfile
+*.p8
+skkubus-95723-9dbf7ca1b380.json

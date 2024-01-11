@@ -4,7 +4,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app_theme.dart';
 
-import 'package:skkumap/app/components/CustomNavigationBar.dart';
+import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 
 final double dheight =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
