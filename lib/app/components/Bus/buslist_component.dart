@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class HSSCBusListComponentView extends StatelessWidget {
+class BusListComponent extends StatelessWidget {
   final String stationName;
-  final String stationNumber;
+  final String? stationNumber;
   final String eta;
   final bool isFirstStation;
   final bool isLastStation;
   final bool isRotationStation;
   final Color color;
 
-  const HSSCBusListComponentView({
+  const BusListComponent({
     Key? key,
     required this.stationName,
-    required this.stationNumber,
+    this.stationNumber,
     required this.eta,
     required this.isFirstStation,
     required this.isLastStation,
@@ -96,7 +96,7 @@ class HSSCBusListComponentView extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 23),
+            const SizedBox(width: 15),
             // Right side text UI
             Expanded(
               child: Column(
@@ -133,21 +133,25 @@ class HSSCBusListComponentView extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(stationNumber,
-                          style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey)),
-                      Text(" | ",
-                          style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.withOpacity(0.3))),
-                      Text(eta,
-                          style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey)),
+                      if (stationNumber != null)
+                        Text(stationNumber!,
+                            style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey)),
+                      if (stationNumber != null)
+                        Text(" | ",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.withOpacity(0.3))),
+                      Text(
+                        eta,
+                        style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey),
+                      ),
                     ],
                   ),
                 ],
