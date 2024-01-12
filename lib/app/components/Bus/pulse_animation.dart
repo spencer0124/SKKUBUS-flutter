@@ -70,8 +70,8 @@ class _PulseAnimationState extends State<PulseAnimation>
         ),
         // Circle and Icon in the foreground
         Container(
-          height: 25,
-          width: 25,
+          height: 28,
+          width: 28,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: widget.busType.color,
@@ -79,7 +79,7 @@ class _PulseAnimationState extends State<PulseAnimation>
           alignment: Alignment.center,
           child: const Icon(
             Icons.directions_bus,
-            size: 25 / 2,
+            size: 28 / 2,
             color: Colors.white,
           ),
         ),

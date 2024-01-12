@@ -1,4 +1,4 @@
 class BusConstants {
   static const double busComponentLeftpadding = 70;
-  static const double infoComponentLeftpadding = busComponentLeftpadding - 41;
+  static const double infoComponentLeftpadding = busComponentLeftpadding - 42.5;
 }
