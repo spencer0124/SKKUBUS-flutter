@@ -60,11 +60,11 @@ const double hewa1Lon = 127.001850;
 // 네이버 지도 관련 선언과 초기화
 
 const iconImage = NOverlayImage.fromAssetImage(
-  'assets/locationicon.png',
+  'assets/images/locationicon.png',
 );
 
 const busImage = NOverlayImage.fromAssetImage(
-  'assets/jonrobus.png',
+  'assets/images/jonrobus.png',
 );
 
 NMarker jongrobusMarker1 = NMarker(

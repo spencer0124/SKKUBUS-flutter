@@ -1,0 +1,1 @@
+enum BusStatus { active, inactive }

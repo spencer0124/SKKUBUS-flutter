@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:skkumap/app/components/Bus/bustype.dart';
+import 'package:skkumap/app/types/bus_type.dart';
 
 class RefreshButton extends StatefulWidget {
   final BusType busType;
@@ -28,7 +28,7 @@ class _RefreshButtonState extends State<RefreshButton>
     });
   }
 
-  void refreshAction() {
+  void refreshAction() async {
     print('refresh action!');
     _controller
       ..reset()
@@ -65,9 +65,22 @@ class _RefreshButtonState extends State<RefreshButton>
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const CircleAvatar(
-            radius: 24,
-            backgroundColor: Colors.grey,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: const CircleAvatar(
+              radius: 24,
+              backgroundColor: Colors.grey,
+            ),
           ),
           Container(
             padding: const EdgeInsets.only(
