@@ -167,9 +167,12 @@ class BusListComponent extends StatelessWidget {
           ],
         ),
         if (!isLastStation)
-          Divider(
-            color: Colors.grey.withOpacity(0.4),
-            height: 0,
+          Padding(
+            padding: const EdgeInsets.only(left: 50 + 15),
+            child: Divider(
+              color: Colors.grey.withOpacity(0.4),
+              height: 0,
+            ),
           ),
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skkumap/app/components/Bus/pulse_animation.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
 import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app_theme.dart';
@@ -11,6 +12,7 @@ import 'package:skkumap/app/components/Bus/buslist_component.dart';
 import 'package:skkumap/app/components/Bus/refresh_button.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 import 'package:skkumap/app/components/Bus/bustype.dart';
+import 'package:skkumap/app/components/Bus/licenseplate.dart';
 
 class BusDataScreen extends GetView<BusDataController> {
   const BusDataScreen({super.key});
@@ -40,99 +42,98 @@ class BusDataScreen extends GetView<BusDataController> {
           elevation: 0,
         ),
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              CustomNavigationBar(
-                title: '인사캠 셔틀버스'.tr,
-                backgroundColor: AppColors.green_main,
-                isDisplayLeftBtn: true,
-                isDisplayRightBtn: true,
-                leftBtnAction: () {
-                  Get.back();
-                },
-                rightBtnAction: () {
-                  Get.toNamed('/busDetail');
-                },
-                rightBtnType: CustomNavigationBtnType.info,
-              ),
+          CustomNavigationBar(
+            title: '인사캠 셔틀버스'.tr,
+            backgroundColor: AppColors.green_main,
+            isDisplayLeftBtn: true,
+            isDisplayRightBtn: true,
+            leftBtnAction: () {
+              Get.back();
+            },
+            rightBtnAction: () {
+              Get.toNamed('/busDetail');
+            },
+            rightBtnType: CustomNavigationBtnType.info,
+          ),
 
-              // const LicensePlate(
-              //   plateNumber: '74거 5678',
-              // ),
+          // const LicensePlate(
+          //   plateNumber: '74거 5678',
+          // ),
 
-              Container(
-                height: 0.5,
-                color: Colors.grey[300],
-              ),
-              Container(
-                height: 0.5,
-                color: Colors.grey[300],
-              ),
-              Container(
-                height: 30,
-                color: Colors.grey[100],
-                child: Column(
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
+          Container(
+            height: 30,
+            color: Colors.grey[100],
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-                          child: Obx(
-                            () {
-                              if (controller.currentTime.value.isEmpty ||
-                                  controller.activeBusCount.value == null) {
-                                return Shimmer.fromColors(
-                                  baseColor: Colors.grey[100]!,
-                                  highlightColor: Colors.white,
-                                  child: Container(
-                                    width: 200,
-                                    height: 20,
-                                    color: Colors.grey,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
+                      child: Obx(
+                        () {
+                          if (controller.currentTime.value.isEmpty ||
+                              controller.activeBusCount.value == null) {
+                            return Shimmer.fromColors(
+                              baseColor: Colors.grey[100]!,
+                              highlightColor: Colors.white,
+                              child: Container(
+                                width: 200,
+                                height: 20,
+                                color: Colors.grey,
+                              ),
+                            );
+                          } else {
+                            return Row(
+                              children: [
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(2, 0, 0, 0),
+                                  child: Text(
+                                    '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[800],
+                                      fontFamily: 'CJKRegular',
+                                    ),
                                   ),
-                                );
-                              } else {
-                                return Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(2, 0, 0, 0),
-                                      child: Text(
-                                        '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey[800],
-                                          fontFamily: 'CJKRegular',
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }
-                            },
-                          ),
-                        ),
-                      ],
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Container(
-                height: 0.5,
-                color: Colors.grey[300],
-              ),
+              ],
+            ),
+          ),
+          Container(
+            height: 0.5,
+            color: Colors.grey[300],
+          ),
 
-              const Expanded(
-                child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                  child: Column(
+          const Expanded(
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: Stack(
+                children: [
+                  Column(
                     children: [
                       SizedBox(
                         height: 5,
@@ -223,22 +224,35 @@ class BusDataScreen extends GetView<BusDataController> {
                         stationNumber: null,
                         eta: "도착 정보 없음",
                         isFirstStation: false,
-                        isLastStation: false,
+                        isLastStation: true,
                         isRotationStation: false,
                         color: AppColors.green_main,
                       ),
+                      SizedBox(
+                        height: 5,
+                      ),
                     ],
                   ),
-                ),
+                  Positioned(
+                    top: 26,
+                    left: 5,
+                    child: Row(
+                      children: [
+                        LicensePlate(
+                          plateNumber: '74거 5678',
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        PulseAnimation(
+                          busType: BusType.hsscBus,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-
-              SizedBox(
-                height: 50,
-                child: Container(
-                  color: Colors.red[300],
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
