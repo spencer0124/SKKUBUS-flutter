@@ -130,12 +130,11 @@ class BusDataScreen extends GetView<BusDataController> {
                   ),
                   // 번호판 && 버스 현재 위치 정보 부분
                   const BusInfoComponent(
-                    elapsedSeconds: 0,
-                    currentStationIndex: 4,
-                    lastStationIndex: 9,
-                    plateNumber: '5678',
-                    busType: BusType.hsscBus,
-                  )
+                      elapsedSeconds: 0,
+                      currentStationIndex: 4,
+                      lastStationIndex: 9,
+                      plateNumber: '5678',
+                      busType: BusType.hsscBus)
                 ],
               ),
             ),
