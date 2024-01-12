@@ -6,10 +6,10 @@ import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
 import 'package:skkumap/app/pages/bus_jonro_main/ui/bus_jonro_main_screen.dart';
 import 'package:skkumap/app/pages/webview/view/webview_screen.dart';
-import 'package:skkumap/app/pages/bus_seoul_main/binding/bus_seoul_main_binding.dart';
-import 'package:skkumap/app/pages/bus_seoul_main/ui/bus_seoul_main_screen.dart';
+import 'package:skkumap/app/pages/bus_main/binding/bus_seoul_main_binding.dart';
+import 'package:skkumap/app/pages/bus_main/ui/bus_seoul_main_screen.dart';
 
-import 'package:skkumap/app/pages/bus_seoul_detail/ui/bus_seoul_detail_screen.dart';
+import 'package:skkumap/app/pages/bus_detail/ui/bus_seoul_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
 import 'package:skkumap/app/pages/homepage/ui/mainpage_screen.dart';
 

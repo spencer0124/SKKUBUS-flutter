@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skkumap/app/utils/constants.dart';
+import 'package:skkumap/app/types/bus_type.dart';
 
 class BusListComponent extends StatelessWidget {
   final String stationName;
@@ -8,7 +9,7 @@ class BusListComponent extends StatelessWidget {
   final bool isFirstStation;
   final bool isLastStation;
   final bool isRotationStation;
-  final Color color;
+  final BusType busType;
 
   const BusListComponent({
     Key? key,
@@ -18,7 +19,7 @@ class BusListComponent extends StatelessWidget {
     required this.isFirstStation,
     required this.isLastStation,
     required this.isRotationStation,
-    required this.color,
+    required this.busType,
   }) : super(key: key);
 
   @override
@@ -37,7 +38,7 @@ class BusListComponent extends StatelessWidget {
                   Container(
                     width: 3,
                     height: 26,
-                    color: isFirstStation ? Colors.white : color,
+                    color: isFirstStation ? Colors.white : busType.color,
                   ),
                   if (isRotationStation)
                     Container(
@@ -46,7 +47,7 @@ class BusListComponent extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(7),
-                        border: Border.all(color: color),
+                        border: Border.all(color: busType.color),
                       ),
                       child: Stack(
                         alignment: Alignment.center,
@@ -59,14 +60,14 @@ class BusListComponent extends StatelessWidget {
                               Text(
                                 "회차",
                                 style: TextStyle(
-                                    color: color,
+                                    color: busType.color,
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold),
                               ),
                               Icon(
                                 Icons.u_turn_right_rounded,
                                 size: 12,
-                                color: color,
+                                color: busType.color,
                               ),
                             ],
                           ),
@@ -80,19 +81,19 @@ class BusListComponent extends StatelessWidget {
                       height: 14,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: color),
+                        border: Border.all(color: busType.color),
                         color: Colors.white,
                       ),
                       child: Icon(
                         Icons.keyboard_arrow_down_outlined,
                         size: 12,
-                        color: color,
+                        color: busType.color,
                       ),
                     ),
                   Container(
                     width: 3,
                     height: 26,
-                    color: isLastStation ? Colors.white : color,
+                    color: isLastStation ? Colors.white : busType.color,
                   ),
                 ],
               ),
@@ -111,7 +112,7 @@ class BusListComponent extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.black,
-                          fontFamily: 'CJKRegular',
+                          fontFamily: 'CJKMedium',
                         ),
                       ),
                       if (stationName == "혜화역4번출구" ||

@@ -31,11 +31,11 @@ class LicensePlate extends StatelessWidget {
         ),
 
         Positioned(
-          left: 9,
+          left: 6.5,
           child: Text(
             plateNumber,
             style: TextStyle(
-              fontSize: 8,
+              fontSize: 10,
               fontWeight: FontWeight.w500,
               color: textColor,
             ),
