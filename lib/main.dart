@@ -13,8 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:skkumap/app/data/provider/but_data_provider.dart';
-import 'package:skkumap/app/data/repository/bus_data_repository.dart';
+
 import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
@@ -114,9 +113,7 @@ Future<void> initNaverMapSdk() async {
 }
 
 void registerDependencies() {
-  Get.put(BusDataProvider());
-  Get.put(BusDataRepository(dataProvider: Get.find()));
-  Get.put(BusDataController(repository: Get.find()));
+  Get.put(BusDataController());
   Get.put(SeoulMainLifeCycle());
 
   Get.lazyPut(() => SeoulDetailController());
@@ -130,8 +127,8 @@ void registerDependencies() {
   Get.put(InjaDetailLifeCycle());
   // Get.lazyPut(() => InjaDetailLifeCycle());
 
-  Get.lazyPut(() => MainpageController());
-  Get.lazyPut(() => MainpageLifeCycle());
+  Get.put(MainpageController());
+  Get.put(MainpageLifeCycle());
 
   Get.put(JonroMainController());
   Get.put(JonroMainLifeCycle());

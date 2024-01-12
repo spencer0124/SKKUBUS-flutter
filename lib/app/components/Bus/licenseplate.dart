@@ -9,8 +9,8 @@ class LicensePlate extends StatelessWidget {
   const LicensePlate({
     Key? key,
     required this.plateNumber,
-    this.textColor = Colors.black,
-    this.borderColor = Colors.black,
+    this.textColor = Colors.grey,
+    this.borderColor = Colors.grey,
   }) : super(key: key);
 
   @override
@@ -22,16 +22,25 @@ class LicensePlate extends StatelessWidget {
         SvgPicture.asset(
           'assets/images/LicensePlate.svg', // Update with your actual image asset path
           colorFilter: ColorFilter.mode(borderColor, BlendMode.srcIn),
-          height: 24,
+          // color: Colors.red,
+          // height: 20,
+          width: 44,
+          // height: 20,
+
+          fit: BoxFit.fitWidth,
         ),
+
         Positioned(
           left: 5,
-          child: Text(
-            plateNumber,
-            style: TextStyle(
-              fontSize: 8,
-              fontWeight: FontWeight.w500,
-              color: textColor,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 1),
+            child: Text(
+              plateNumber,
+              style: TextStyle(
+                fontSize: 7,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
             ),
           ),
         ),

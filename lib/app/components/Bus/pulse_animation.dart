@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:skkumap/app/components/Bus/bustype.dart';
 
 class PulseAnimation extends StatefulWidget {
-  final Widget child;
-  final Color color; // Color parameter
+  final BusType busType;
 
-  const PulseAnimation(
-      {Key? key,
-      required this.child,
-      required this.color // Initialize the color
-      })
-      : super(key: key);
+  const PulseAnimation({
+    Key? key,
+    required this.busType,
+  }) : super(key: key);
 
   @override
   _PulseAnimationState createState() => _PulseAnimationState();
@@ -18,7 +16,7 @@ class PulseAnimation extends StatefulWidget {
 class _PulseAnimationState extends State<PulseAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<Color?> _colorAnimation; // Animation for color
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -27,13 +25,9 @@ class _PulseAnimationState extends State<PulseAnimation>
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
 
-    // ColorTween animation from the specified color to a transparent version
-    _colorAnimation = ColorTween(
-            begin: widget.color,
-            end: widget.color.withOpacity(0) // Make color transparent
-            )
-        .animate(_controller)
-      ..addStatusListener((status) {
+    _animation = Tween(begin: 1.0, end: 1.7).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _controller.reset();
           _controller.forward();
@@ -51,17 +45,45 @@ class _PulseAnimationState extends State<PulseAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _colorAnimation,
-      builder: (_, child) {
-        return ColorFiltered(
-          colorFilter: ColorFilter.mode(
-              _colorAnimation.value ?? widget.color, // Apply the animated color
-              BlendMode.srcATop),
-          child: child,
-        );
-      },
-      child: widget.child,
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        // Pulse animation
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (_, child) {
+            return Opacity(
+              opacity: (1 - _animation.value / 1.7),
+              child: Transform.scale(
+                scale: _animation.value,
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: widget.busType.color,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        // Circle and Icon in the foreground
+        Container(
+          height: 25,
+          width: 25,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: widget.busType.color,
+          ),
+          alignment: Alignment.center,
+          child: const Icon(
+            Icons.directions_bus,
+            size: 25 / 2,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

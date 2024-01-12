@@ -79,7 +79,6 @@ class _RefreshButtonState extends State<RefreshButton>
               'assets/lottie/refresh.json',
               controller: _controller,
               onLoaded: (composition) {
-                // Set the animation duration to match the Lottie file's duration
                 _controller
                   ..duration = composition.duration
                   ..forward();
