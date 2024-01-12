@@ -257,7 +257,7 @@ class Mainpage extends GetView<MainpageController> {
               position: element,
               size: const Size(12, 12),
               icon: const NOverlayImage.fromAssetImage(
-                'assets/locationicon.png',
+                'assets/images/locationicon.png',
               ),
             )
               ..setZIndex(10)

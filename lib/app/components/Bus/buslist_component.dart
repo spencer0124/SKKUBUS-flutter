@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skkumap/app/utils/constants.dart';
 
 class BusListComponent extends StatelessWidget {
   final String stationName;
@@ -26,7 +27,7 @@ class BusListComponent extends StatelessWidget {
       children: [
         Row(
           children: [
-            const SizedBox(width: 50),
+            const SizedBox(width: BusConstants.busComponentLeftpadding),
             // Left side shape UI
             SizedBox(
               height: 66,
@@ -34,7 +35,7 @@ class BusListComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 2,
+                    width: 3,
                     height: 26,
                     color: isFirstStation ? Colors.white : color,
                   ),
@@ -89,7 +90,7 @@ class BusListComponent extends StatelessWidget {
                       ),
                     ),
                   Container(
-                    width: 2,
+                    width: 3,
                     height: 26,
                     color: isLastStation ? Colors.white : color,
                   ),
@@ -105,9 +106,14 @@ class BusListComponent extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(stationName,
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500)),
+                      Text(
+                        stationName,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontFamily: 'CJKRegular',
+                        ),
+                      ),
                       if (stationName == "혜화역4번출구" ||
                           stationName == "혜화역1번출구" ||
                           stationName == "혜화역.마로니에공원")
@@ -129,28 +135,35 @@ class BusListComponent extends StatelessWidget {
                         ),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (stationNumber != null)
-                        Text(stationNumber!,
-                            style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey)),
+                        Text(
+                          stationNumber!,
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: 'CJKRegular',
+                            color: Colors.grey[500],
+                          ),
+                        ),
                       if (stationNumber != null)
-                        Text(" | ",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey.withOpacity(0.3))),
+                        Text(
+                          " | ",
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: 'CJKRegular',
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                        ),
                       Text(
                         eta,
-                        style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontFamily: 'CJKMedium',
+                          color: Colors.grey[500],
+                        ),
                       ),
                     ],
                   ),
@@ -168,7 +181,8 @@ class BusListComponent extends StatelessWidget {
         ),
         if (!isLastStation)
           Padding(
-            padding: const EdgeInsets.only(left: 50 + 15),
+            padding: const EdgeInsets.only(
+                left: BusConstants.busComponentLeftpadding + 15),
             child: Divider(
               color: Colors.grey.withOpacity(0.4),
               height: 0,

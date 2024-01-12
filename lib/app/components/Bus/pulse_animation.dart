@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skkumap/app/components/Bus/bustype.dart';
+import 'package:skkumap/app/types/bus_type.dart';
 
 class PulseAnimation extends StatefulWidget {
   final BusType busType;

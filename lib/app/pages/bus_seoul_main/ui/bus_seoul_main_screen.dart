@@ -1,35 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:skkumap/app/components/Bus/pulse_animation.dart';
 import 'package:skkumap/app/pages/bus_seoul_main/controller/bus_seoul_main_controller.dart';
 import 'package:skkumap/app/utils/ad_widget.dart';
 import 'package:skkumap/app_theme.dart';
 
 import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
-import 'package:skkumap/app/components/Bus/buslist_component.dart';
-import 'package:skkumap/app/components/Bus/refresh_button.dart';
-import 'package:skkumap/app/utils/screensize.dart';
-import 'package:skkumap/app/components/Bus/bustype.dart';
-import 'package:skkumap/app/components/Bus/licenseplate.dart';
+import 'package:skkumap/app/components/bus/buslist_component.dart';
+import 'package:skkumap/app/components/bus/refresh_button.dart';
+// import 'package:skkumap/app/utils/screensize.dart';
+import 'package:skkumap/app/types/bus_type.dart';
+import 'package:skkumap/app/components/bus/topinfo.dart';
+
+import 'package:skkumap/app/types/bus_status.dart';
+import 'package:skkumap/app/types/time_format.dart';
+import 'package:skkumap/app/components/bus/businfo_component.dart';
 
 class BusDataScreen extends GetView<BusDataController> {
   const BusDataScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = ScreenSize.height(context);
-    final double screenWidth = ScreenSize.width(context);
+    // final double screenHeight = ScreenSize.height(context);
+    // final double screenWidth = ScreenSize.width(context);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[200],
+        // 화면 하단 광고
         child: Obx(
-          () => AdWidgetContainer(
-              bannerAd: controller.bannerAd,
-              isAdLoaded: controller.isAdLoaded.value,
-              waitAdFail: controller.waitAdFail.value),
+          () => controller.isBannerAdLoaded.value
+              ? SizedBox(
+                  height: 55,
+                  child: AdWidgetContainer(
+                    bannerAd: controller.bannerAd,
+                  ),
+                )
+              : Container(
+                  height: 55,
+                ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
@@ -44,6 +53,7 @@ class BusDataScreen extends GetView<BusDataController> {
       ),
       body: Column(
         children: [
+          // 상단 커스텀 내비게이션 바
           CustomNavigationBar(
             title: '인사캠 셔틀버스'.tr,
             backgroundColor: AppColors.green_main,
@@ -57,77 +67,26 @@ class BusDataScreen extends GetView<BusDataController> {
             },
             rightBtnType: CustomNavigationBtnType.info,
           ),
-
-          // const LicensePlate(
-          //   plateNumber: '74거 5678',
-          // ),
-
+          // 상단 정보 부분
           Container(
             height: 0.5,
             color: Colors.grey[300],
           ),
+          Obx(() {
+            return TopInfo(
+              isLoaded: false,
+              timeFormat: TimeFormat.format12Hour,
+              busCount: controller.activeBusCount.value,
+              busStatus: controller.activeBusCount.value > 0
+                  ? BusStatus.active
+                  : BusStatus.inactive,
+            );
+          }),
           Container(
             height: 0.5,
             color: Colors.grey[300],
           ),
-          Container(
-            height: 30,
-            color: Colors.grey[100],
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-                      child: Obx(
-                        () {
-                          if (controller.currentTime.value.isEmpty ||
-                              controller.activeBusCount.value == null) {
-                            return Shimmer.fromColors(
-                              baseColor: Colors.grey[100]!,
-                              highlightColor: Colors.white,
-                              child: Container(
-                                width: 200,
-                                height: 20,
-                                color: Colors.grey,
-                              ),
-                            );
-                          } else {
-                            return Row(
-                              children: [
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(2, 0, 0, 0),
-                                  child: Text(
-                                    '${controller.currentTime.value}\u{00A0}${'기준'.tr}\u{00A0}·\u{00A0}${controller.activeBusCount.value}${'대 운행 중'.tr}',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey[800],
-                                      fontFamily: 'CJKRegular',
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 0.5,
-            color: Colors.grey[300],
-          ),
-
+          // 버스 정보 부분
           const Expanded(
             child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
@@ -233,23 +192,14 @@ class BusDataScreen extends GetView<BusDataController> {
                       ),
                     ],
                   ),
-                  Positioned(
-                    top: 26,
-                    left: 5,
-                    child: Row(
-                      children: [
-                        LicensePlate(
-                          plateNumber: '74거 5678',
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        PulseAnimation(
-                          busType: BusType.hsscBus,
-                        ),
-                      ],
-                    ),
-                  ),
+                  // 번호판 && 버스 현재 위치 정보 부분
+                  BusInfoComponent(
+                    elapsedSeconds: 550,
+                    currentStationIndex: 0,
+                    lastStationIndex: 10,
+                    plateNumber: '5678',
+                    busType: BusType.hsscBus,
+                  )
                 ],
               ),
             ),

@@ -24,23 +24,20 @@ class LicensePlate extends StatelessWidget {
           colorFilter: ColorFilter.mode(borderColor, BlendMode.srcIn),
           // color: Colors.red,
           // height: 20,
-          width: 44,
+          width: 40,
           // height: 20,
 
           fit: BoxFit.fitWidth,
         ),
 
         Positioned(
-          left: 5,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 1),
-            child: Text(
-              plateNumber,
-              style: TextStyle(
-                fontSize: 7,
-                fontWeight: FontWeight.w500,
-                color: textColor,
-              ),
+          left: 9,
+          child: Text(
+            plateNumber,
+            style: TextStyle(
+              fontSize: 8,
+              fontWeight: FontWeight.w500,
+              color: textColor,
             ),
           ),
         ),
