@@ -28,7 +28,7 @@ class CustomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 45,
+      height: 48,
       color: backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
