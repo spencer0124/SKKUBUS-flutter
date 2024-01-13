@@ -25,8 +25,13 @@ class BusDataScreen extends GetView<BusDataController> {
     // final double screenWidth = ScreenSize.width(context);
 
     return Scaffold(
+      // floating action button
+      floatingActionButton: const RefreshButton(
+        busType: BusType.hsscBus,
+      ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[200],
+
         // 화면 하단 광고
         child: Obx(
           () => controller.isBannerAdLoaded.value
@@ -67,6 +72,7 @@ class BusDataScreen extends GetView<BusDataController> {
             },
             rightBtnType: CustomNavigationBtnType.info,
           ),
+
           // 상단 정보 부분
           Container(
             height: 0.5,
@@ -86,6 +92,7 @@ class BusDataScreen extends GetView<BusDataController> {
             height: 0.5,
             color: Colors.grey[300],
           ),
+
           // 버스 정보 부분
           Expanded(
             child: SingleChildScrollView(
@@ -140,9 +147,6 @@ class BusDataScreen extends GetView<BusDataController> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: const RefreshButton(
-        busType: BusType.hsscBus,
       ),
     );
   }
