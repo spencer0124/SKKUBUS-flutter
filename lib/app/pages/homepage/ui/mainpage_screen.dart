@@ -217,9 +217,38 @@ class Mainpage extends GetView<MainpageController> {
                                 child: _buildMap(),
                               ),
                               Positioned(
+                                left: 10,
+                                right: 10,
+                                top: statusBarHeight,
+                                child: Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    alignment: Alignment.centerLeft,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 5,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(Icons.search),
+                                        Text('성균관대 건물 이름, 건물 번호, 버스 검색'),
+                                      ],
+                                    )),
+                              ),
+                              Positioned(
                                 left: 0.w,
                                 right: 0.w,
-                                top: (statusBarHeight),
+                                top: (statusBarHeight + 45.h),
                                 child: const Center(child: ScrollableRow()),
                               ),
                             ],
