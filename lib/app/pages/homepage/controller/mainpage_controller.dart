@@ -14,6 +14,8 @@ import 'package:snapping_sheet/snapping_sheet.dart';
 import 'hsscbus_controller.dart';
 import 'jongrobus_controller.dart';
 
+import 'package:skkumap/app/model/campusmarker_model.dart';
+
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
 
@@ -103,6 +105,20 @@ NMarker jongrobusMarker5 = NMarker(
 );
 
 class MainpageController extends GetxController {
+  final List<CampusMarker> hsscCampusMarker = [
+    CampusMarker(id: 'line1', position: const NLatLng(37.587361, 126.994479)),
+    CampusMarker(id: 'line2', position: const NLatLng(37.587441, 126.990506)),
+    CampusMarker(id: 'line4', position: const NLatLng(37.588636, 126.993209)),
+    CampusMarker(id: 'line7', position: const NLatLng(37.588353, 126.994262)),
+    CampusMarker(id: 'line8', position: const NLatLng(37.58752, 126.99322)),
+    CampusMarker(id: 'line9', position: const NLatLng(37.586819, 126.995246)),
+    CampusMarker(id: 'line31', position: const NLatLng(37.589184, 126.991539)),
+    CampusMarker(id: 'line32', position: const NLatLng(37.589053, 126.992435)),
+    CampusMarker(id: 'line33', position: const NLatLng(37.588572, 126.992666)),
+    CampusMarker(id: 'line61', position: const NLatLng(37.587882, 126.991079)),
+    CampusMarker(id: 'line62', position: const NLatLng(37.588160, 126.990868)),
+  ];
+
   // 라이브 액티비티 관련
   final LiveActivities _liveActivitiesPlugin = LiveActivities();
 
@@ -153,7 +169,7 @@ class MainpageController extends GetxController {
       snappingSheetController.snapToPosition(
         const SnappingPosition.factor(positionFactor: 0.5),
       );
-      createPizzaActivity();
+      // createPizzaActivity();
 
       // waitForAttachment(); // attach 된 후에 snaptoposition해주기
 
