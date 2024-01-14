@@ -14,10 +14,10 @@ class ScrollableRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            width: 5,
+            width: 10,
           ),
           const ScrollRowContainer(
-            text: '종로07 실시간 위치',
+            text: '인사캠',
             icon: Icons.location_on_rounded,
             ischecked: true,
           ),
@@ -27,10 +27,10 @@ class ScrollableRow extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              Get.toNamed('/injadetail');
+              // Get.toNamed('/injadetail');
             },
             child: const ScrollRowContainer(
-              text: '인자셔틀 탑승',
+              text: '인사캠 건물',
               icon: Icons.location_on_rounded,
               ischecked: false,
             ),
@@ -41,10 +41,24 @@ class ScrollableRow extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              Get.toNamed('/busDetail');
+              // Get.toNamed('/injadetail');
             },
             child: const ScrollRowContainer(
-              text: '인사캠셔틀 노선',
+              text: '자과캠',
+              icon: Icons.location_on_rounded,
+              ischecked: false,
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              // Get.toNamed('/busDetail');
+            },
+            child: const ScrollRowContainer(
+              text: '캠퍼스간 이동',
               icon: Icons.location_on_rounded,
               ischecked: false,
             ),

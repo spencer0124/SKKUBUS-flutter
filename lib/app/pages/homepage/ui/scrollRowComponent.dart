@@ -49,7 +49,7 @@ class ScrollRowContainer extends StatelessWidget {
         children: [
           Icon(icon,
               color: ischecked ? Colors.white : Colors.black, size: 15.sp),
-          SizedBox(width: 8.w),
+          SizedBox(width: 4.w),
           Text(
             text,
             style: TextStyle(
