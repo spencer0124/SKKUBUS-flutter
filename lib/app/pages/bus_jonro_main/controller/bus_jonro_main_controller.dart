@@ -4,8 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
-import 'package:skkumap/app/pages/homepage/data/repositories/jongro_bus_repository.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 
 /*
 라이프사이클 감지 -> 화면이 다시 보일 때마다 데이터 갱신
@@ -129,64 +128,64 @@ class JonroMainController extends GetxController {
 
   // 종로07 정보를 가져오는 api 호출
   Future<void> fetchJonrobusApi() async {
-    try {
-      final items = await getJongroBusArrivalList();
-      items.forEachIndexed((index, element) {
-        arrmsg1[index] = element.arrivals.first.message;
-        arrmsg2[index] = element.arrivals.last.message;
-      });
-      arrmsg1.refresh();
-      arrmsg2.refresh();
-    } on FailedToGetJongroBusListException {
-      // controller.jongro07BusMessage.value = "정보 없음 [4]";
-      // print('error 2');
-      return;
-    } on NoJongroBusListException {
-      // controller.jongro07BusMessage.value = "정보 없음 [3]";
-      // print('error 1');
-      return;
-    }
+    // try {
+    //   final items = await getJongroBusArrivalList();
+    //   items.forEachIndexed((index, element) {
+    //     arrmsg1[index] = element.arrivals.first.message;
+    //     arrmsg2[index] = element.arrivals.last.message;
+    //   });
+    //   arrmsg1.refresh();
+    //   arrmsg2.refresh();
+    // } on FailedToGetJongroBusListException {
+    //   // controller.jongro07BusMessage.value = "정보 없음 [4]";
+    //   // print('error 2');
+    //   return;
+    // } on NoJongroBusListException {
+    //   // controller.jongro07BusMessage.value = "정보 없음 [3]";
+    //   // print('error 1');
+    //   return;
+    // }
 
-    // 두번째 api 호출
-    try {
-      final list = await getJongroBusList();
-      // controller.fetchBusMap(list);
-      int count = 0;
+    // // 두번째 api 호출
+    // try {
+    //   final list = await getJongroBusList();
+    //   // controller.fetchBusMap(list);
+    //   int count = 0;
 
-      flag.value = List.filled(19, 0);
-      for (final bus in list) {
-        count++;
-        int index = stationNodeId.indexWhere((id) => id == bus.lastStationId);
+    //   flag.value = List.filled(19, 0);
+    //   for (final bus in list) {
+    //     count++;
+    //     int index = stationNodeId.indexWhere((id) => id == bus.lastStationId);
 
-        if (index != -1) {
-          flag[index] = 1;
-          busNum[index] = bus.busNumber.substring(2);
-        }
+    //     if (index != -1) {
+    //       flag[index] = 1;
+    //       busNum[index] = bus.busNumber.substring(2);
+    //     }
 
-        // 요거 flag 때문에 에러나는거였다
+    //     // 요거 flag 때문에 에러나는거였다
 
-        // int index = stationNodeId.indexWhere((id) => id == lastStnId);
-        // if (index == -1) {
-        //   flag[index] = 0;
-        // } else if (stopFlag == "1") {
-        //   flag[index] = 2;
-        // } else if (index != -1) {
-        //   flag[index] = 1;
-        // } else {
-        //   flag[index] = 0;
-        // }
+    //     // int index = stationNodeId.indexWhere((id) => id == lastStnId);
+    //     // if (index == -1) {
+    //     //   flag[index] = 0;
+    //     // } else if (stopFlag == "1") {
+    //     //   flag[index] = 2;
+    //     // } else if (index != -1) {
+    //     //   flag[index] = 1;
+    //     // } else {
+    //     //   flag[index] = 0;
+    //     // }
 
-        activeBusCount.value = count;
-      }
-      print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+    //     activeBusCount.value = count;
+    //   }
+    //   print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
 
-      print(flag);
-      print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
-    } on Exception {
-      // controller.fetchBusMap([]);
-      // 기타 예외 처리
-      // controller.jongro07BusMessage.value = "정보 없음 [2]";
-      return;
-    }
+    //   print(flag);
+    //   print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+    // } on Exception {
+    //   // controller.fetchBusMap([]);
+    //   // 기타 예외 처리
+    //   // controller.jongro07BusMessage.value = "정보 없음 [2]";
+    //   return;
+    // }
   }
 }

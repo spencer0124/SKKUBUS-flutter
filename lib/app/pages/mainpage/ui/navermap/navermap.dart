@@ -1,8 +1,8 @@
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter/material.dart';
-import 'package:skkumap/app/pages/homepage/ui/marker_bus.dart';
-import 'package:skkumap/app/pages/homepage/ui/marker_campus.dart';
-import 'package:skkumap/app/pages/homepage/data/map_data.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/marker_bus.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/marker_campus.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/route_jongro07.dart';
 import 'package:skkumap/app/types/campus_type.dart';
 
 const initCameraPosition = NCameraPosition(

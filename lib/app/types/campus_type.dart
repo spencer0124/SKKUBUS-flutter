@@ -1,4 +1,4 @@
-import 'package:skkumap/app/pages/homepage/ui/marker_campus.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/marker_campus.dart';
 import 'package:skkumap/app/model/campusmarker_model.dart';
 
 enum CampusType { hssc, nsc }

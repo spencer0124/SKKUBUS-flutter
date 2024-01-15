@@ -3,8 +3,12 @@ import 'package:skkumap/app/components/mainpage/top_search/searchbar.dart';
 import 'package:skkumap/app/components/mainpage/top_search/filter.dart';
 import 'package:skkumap/app/components/mainpage/top_scrollrow/scrollrow.dart';
 import 'package:skkumap/app/utils/screensize.dart';
-import 'package:skkumap/app/pages/homepage/ui/navermap.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap.dart';
 
+/*
+snappingsheet의 child로 들어갈 background
+상단 검색 창, 옵션, 네이버지도로 구성되어 있음
+ */
 class MainPageBackground extends StatelessWidget {
   const MainPageBackground({Key? key}) : super(key: key);
 
