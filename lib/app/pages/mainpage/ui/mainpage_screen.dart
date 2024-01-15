@@ -3,16 +3,16 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
-import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 
 import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'package:skkumap/app/components/mainpage/bottom/bottomnavigation.dart';
 
 import '../controller/snappingsheet_controller.dart';
-import 'option_bus.dart';
+import 'snappingsheet/option_bus.dart';
 import 'package:skkumap/app/components/mainpage/middle_snappingsheet/grabbing_box.dart';
-import 'package:skkumap/app/pages/homepage/ui/maingpage_background.dart';
+import 'package:skkumap/app/pages/mainpage/ui/maingpage_background.dart';
 
 class Mainpage extends GetView<MainpageController> {
   const Mainpage({Key? key}) : super(key: key);

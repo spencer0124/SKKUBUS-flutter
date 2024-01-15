@@ -11,7 +11,7 @@ import 'package:skkumap/app/pages/bus_main/ui/bus_seoul_main_screen.dart';
 
 import 'package:skkumap/app/pages/bus_detail/ui/bus_seoul_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
-import 'package:skkumap/app/pages/homepage/ui/mainpage_screen.dart';
+import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
 

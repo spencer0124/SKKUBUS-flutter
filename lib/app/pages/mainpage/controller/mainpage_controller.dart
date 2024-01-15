@@ -11,10 +11,6 @@ import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-import 'package:skkumap/app/pages/homepage/data/models/jongro_bus_model.dart';
-
-import 'hsscbus_controller.dart';
-import 'jongrobus_controller.dart';
 import 'package:skkumap/app/model/station_model.dart';
 import 'package:skkumap/app/utils/api_fetch/fetch_station.dart';
 
@@ -38,16 +34,8 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      // mainpageController.fetchIconImage();
-      // mainpageController.checkpermission();
-      mainpageController.jongro07BusMessage.value = "";
-      mainpageController.jonro07BusMessageVisible.value = false;
-      mainpageController.fetchhewaBusData();
-      mainpageController.fetchhewaBusData2();
+      // 여기에 화면에 돌아왔을때 사용할 코드 작성하기
     }
-    if (state == AppLifecycleState.inactive) {}
-    if (state == AppLifecycleState.detached) {}
-    if (state == AppLifecycleState.paused) {}
   }
 }
 
@@ -76,13 +64,6 @@ class MainpageController extends GetxController {
   RxInt hsscBusRemainStation = 0.obs;
   RxString hsscBusMessage = ''.obs;
 
-  // 인사캠 셔틀버스와 종로07 버스 정보 갱신해주는 타이머
-  Timer? _timer10s;
-  Timer? _timer30s;
-
-  // 종로 07 자동 카운트다운해주는 타이머
-  Timer? _countdownTimer;
-
   Future<void> stationDataFetch() async {
     try {
       stationData.value = await fetchStationData('123');
@@ -97,58 +78,7 @@ class MainpageController extends GetxController {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snaptoInitPosition();
-
       stationDataFetch();
-
-      calculateRemainingStationsToHyehwaStation();
-      // calculateRemainingStationsToHyehwaStation2();
-
-      fetchhewaBusData();
-
-      fetchhewaBusData2();
-      _timer10s = Timer.periodic(
-          const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
-      _timer30s = Timer.periodic(
-          const Duration(seconds: 30), (Timer t) => fetchhewaBusData2());
-    });
-  }
-
-  @override
-  void onClose() {
-    _timer10s?.cancel();
-    _timer30s?.cancel();
-    _countdownTimer?.cancel();
-    super.onClose();
-  }
-
-  /// 인사캠 셔틀 정보 갱신
-  Future<void> fetchhewaBusData() async {
-    await calculateRemainingStationsToHyehwaStation();
-  }
-
-  /// 종로 07 정보 갱신
-  Future<void> fetchhewaBusData2() async {
-    jongro07BusMessage.value = "";
-    jonro07BusMessageVisible.value = false;
-    // await calculateRemainingStationsToHyehwaStation2();
-    _startCountdown();
-  }
-
-  // 종로 07 남은 시간 카운트다운
-  void _startCountdown() {
-    // Cancel the existing timer if it's already running
-    if (_countdownTimer?.isActive ?? false) {
-      _countdownTimer?.cancel();
-    }
-
-    // Start a new timer
-    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
-      // print("Timer tick: ${jongro07BusRemainTotalTimeSec.value}");
-      if (jongro07BusRemainTotalTimeSec.value > 0) {
-        jongro07BusRemainTotalTimeSec.value--;
-      } else {
-        t.cancel(); // Stop the timer if the countdown has finished
-      }
     });
   }
 }
