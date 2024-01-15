@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'scrollRowComponent.dart'; // Import the ScrollRowContainer widget
+import 'scrollrow_component.dart'; // Import the ScrollRowContainer widget
 
 class ScrollableRow extends StatelessWidget {
   const ScrollableRow({Key? key}) : super(key: key);
@@ -17,9 +17,9 @@ class ScrollableRow extends StatelessWidget {
             width: 10,
           ),
           const ScrollRowContainer(
-            text: '인사캠',
-            icon: Icons.location_on_rounded,
-            ischecked: true,
+            text: '실내지도',
+            icon: Icons.outbond,
+            ischecked: false,
           ),
           const SizedBox(
             width: 5,
@@ -30,22 +30,8 @@ class ScrollableRow extends StatelessWidget {
               // Get.toNamed('/injadetail');
             },
             child: const ScrollRowContainer(
-              text: '인사캠 건물',
-              icon: Icons.location_on_rounded,
-              ischecked: false,
-            ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              // Get.toNamed('/injadetail');
-            },
-            child: const ScrollRowContainer(
-              text: '자과캠',
-              icon: Icons.location_on_rounded,
+              text: '캠퍼스 이동',
+              icon: Icons.transfer_within_a_station_sharp,
               ischecked: false,
             ),
           ),
@@ -58,25 +44,28 @@ class ScrollableRow extends StatelessWidget {
               // Get.toNamed('/busDetail');
             },
             child: const ScrollRowContainer(
-              text: '캠퍼스간 이동',
-              icon: Icons.location_on_rounded,
+              text: '혜화 맛집',
+              icon: Icons.dining_rounded,
               ischecked: false,
             ),
           ),
           const SizedBox(
             width: 5,
           ),
-          // GestureDetector(
-          //   behavior: HitTestBehavior.translucent,
-          //   onTap: () {
-          //     Get.toNamed('/pageroute');
-          //   },
-          //   child: const ScrollRowContainer(
-          //     text: 'dummy',
-          //     icon: Icons.battery_charging_full_outlined,
-          //     ischecked: false,
-          //   ),
-          // ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              // Get.toNamed('/busDetail');
+            },
+            child: const ScrollRowContainer(
+              text: '버스 분실물',
+              icon: Icons.bus_alert,
+              ischecked: false,
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
         ],
       ),
     );
