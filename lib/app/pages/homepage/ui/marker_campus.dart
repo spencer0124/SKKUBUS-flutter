@@ -1,6 +1,7 @@
 import "package:flutter_naver_map/flutter_naver_map.dart";
 import "package:flutter/material.dart";
 import "package:skkumap/app/model/campusmarker_model.dart";
+import 'package:skkumap/app/types/campus_type.dart';
 
 const icon = NOverlayImage.fromAssetImage('assets/images/line_blank.png');
 
@@ -51,8 +52,15 @@ List<CampusMarker> hsscMarkers = [
   ),
 ];
 
-List<NMarker> buildCampusMarkers() {
-  return hsscMarkers.map((campusmarker) {
+List<CampusMarker> nscMarkers = [
+  CampusMarker(
+    idNumber: "1",
+    position: const NLatLng(37.587361, 126.994479),
+  ),
+];
+
+List<NMarker> buildCampusMarkers(CampusType campusType) {
+  return campusType.markername.map((campusmarker) {
     return NMarker(
         id: "line${campusmarker.idNumber}",
         position: campusmarker.position,

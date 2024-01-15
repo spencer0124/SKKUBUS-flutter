@@ -1,52 +1,44 @@
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter/material.dart';
+import 'package:skkumap/app/pages/homepage/ui/marker_bus.dart';
+import 'package:skkumap/app/pages/homepage/ui/marker_campus.dart';
+import 'package:skkumap/app/pages/homepage/data/map_data.dart';
+import 'package:skkumap/app/types/campus_type.dart';
 
-const seoulCameraPosition = NCameraPosition(
+const initCameraPosition = NCameraPosition(
   target: NLatLng(37.587241, 126.992858),
   zoom: 15.8,
   bearing: 330,
   tilt: 50,
 );
 
-const iconImage = NOverlayImage.fromAssetImage(
-  'assets/images/locationicon.png',
-);
-
-const busImage = NOverlayImage.fromAssetImage(
-  'assets/images/jonrobus.png',
-);
-
-NMarker jongrobusMarker1 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker1',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker2 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker2',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker3 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker3',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker4 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker4',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker5 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker5',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
+NaverMap buildMap() {
+  return NaverMap(
+    options: const NaverMapViewOptions(
+      zoomGesturesEnable: true,
+      locationButtonEnable: false,
+      mapType: NMapType.basic,
+      logoAlign: NLogoAlign.rightBottom,
+      logoClickEnable: true,
+      logoMargin: EdgeInsets.all(1000),
+      activeLayerGroups: [NLayerGroup.building, NLayerGroup.transit],
+      initialCameraPosition: initCameraPosition,
+    ),
+    onMapReady: (mapcontroller) {
+      mapcontroller.addOverlayAll({
+        ...buildCampusMarkers(CampusType.hssc),
+        ...buildJongroBusMarkers(jongroBusPositions),
+        NMultipartPathOverlay(
+          id: "jongroRoute",
+          paths: [
+            const NMultipartPath(
+              color: Colors.green,
+              outlineColor: Colors.white,
+              coords: jongroRoute,
+            ),
+          ],
+        ),
+      });
+    },
+  );
+}

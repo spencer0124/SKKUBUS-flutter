@@ -96,14 +96,12 @@ class MainpageController extends GetxController {
     super.onInit();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      snaptoPosition();
-
-      fetchIconImage();
+      snaptoInitPosition();
 
       stationDataFetch();
 
       calculateRemainingStationsToHyehwaStation();
-      calculateRemainingStationsToHyehwaStation2();
+      // calculateRemainingStationsToHyehwaStation2();
 
       fetchhewaBusData();
 
@@ -132,7 +130,7 @@ class MainpageController extends GetxController {
   Future<void> fetchhewaBusData2() async {
     jongro07BusMessage.value = "";
     jonro07BusMessageVisible.value = false;
-    await calculateRemainingStationsToHyehwaStation2();
+    // await calculateRemainingStationsToHyehwaStation2();
     _startCountdown();
   }
 
@@ -152,62 +150,5 @@ class MainpageController extends GetxController {
         t.cancel(); // Stop the timer if the countdown has finished
       }
     });
-  }
-
-  void fetchBusMap(List<JongroBusModel> itemList) {
-    jongrobusMarker1.setIsVisible(false);
-    jongrobusMarker2.setIsVisible(false);
-    jongrobusMarker3.setIsVisible(false);
-    jongrobusMarker4.setIsVisible(false);
-    jongrobusMarker5.setIsVisible(false);
-
-    List<NMarker> markers = [
-      jongrobusMarker1,
-      jongrobusMarker2,
-      jongrobusMarker3,
-      jongrobusMarker4,
-      jongrobusMarker5
-    ];
-
-    for (int i = 0; i < markers.length; i++) {
-      if (i < itemList.length) {
-        var item = itemList[i];
-        markers[i].setPosition(item.position);
-
-        markers[i].setOnTapListener((overlay) async {
-          await FlutterPlatformAlert.showCustomAlert(
-            windowTitle: '종로07 버스',
-            text: item.busNumber,
-            negativeButtonTitle: "확인",
-            // positiveButtonTitle: "취소",
-          );
-        });
-
-        markers[i].setIsVisible(true);
-      } else {
-        markers[i].setIsVisible(false);
-      }
-    }
-  }
-
-  // 네이버 지도 마커 이미지 초기화
-  Future<void> fetchIconImage() async {
-    jongrobusMarker1.setIsVisible(false);
-    jongrobusMarker2.setIsVisible(false);
-    jongrobusMarker3.setIsVisible(false);
-    jongrobusMarker4.setIsVisible(false);
-    jongrobusMarker5.setIsVisible(false);
-
-    jongrobusMarker1.setZIndex(100);
-    jongrobusMarker2.setZIndex(101);
-    jongrobusMarker3.setZIndex(102);
-    jongrobusMarker4.setZIndex(103);
-    jongrobusMarker5.setZIndex(104);
-
-    jongrobusMarker1.setGlobalZIndex(100);
-    jongrobusMarker2.setGlobalZIndex(101);
-    jongrobusMarker3.setGlobalZIndex(102);
-    jongrobusMarker4.setGlobalZIndex(103);
-    jongrobusMarker5.setGlobalZIndex(104);
   }
 }
