@@ -8,24 +8,19 @@ import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/homepage/data/map_data.dart';
-import 'package:skkumap/app/pages/homepage/ui/customRow1.dart';
-import 'package:skkumap/app/pages/homepage/ui/customRow2.dart';
-import 'package:skkumap/app/pages/homepage/ui/scrollRow.dart';
+import 'package:skkumap/app/components/mainpage/busrow.dart';
+import 'package:skkumap/app/components/mainpage/stationrow.dart';
+import 'package:skkumap/app/components/mainpage/scrollrow.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
-import 'package:skkumap/app/pages/homepage/ui/campusmarker.dart';
+import 'package:skkumap/app/components/mainpage/campusmarker.dart';
 
-const seoulCameraPosition = NCameraPosition(
-  target: NLatLng(37.587241, 126.992858),
-  zoom: 15.8,
-  bearing: 330,
-  tilt: 50,
-);
+import 'package:skkumap/app/components/mainpage/bottomnavigation.dart';
 
-// 혜화역 1번 출구 위도, 경도, 목적지 이름
-const double hewa1Lat = 37.587259;
-const double hewa1Lon = 127.993408;
+import 'navermap.dart';
+
+import '../controller/snappingsheet_controller.dart';
 
 class Mainpage extends GetView<MainpageController> {
   const Mainpage({Key? key}) : super(key: key);
@@ -46,283 +41,299 @@ class Mainpage extends GetView<MainpageController> {
         ),
       ),
       extendBodyBehindAppBar: true,
-      body: SnappingSheet(
-        controller: controller.snappingSheetController,
-        onSheetMoved: (sheetPosition) {
-          // print("onSheetMoved - Current position ${sheetPosition.pixels}");
-        },
-        onSnapCompleted: (sheetPosition, _) {
-          // Predefined snapping positions
-          const List<double> predefinedPositions = [0.11, 0.5, 0.85];
+      body: Stack(
+        children: [
+          SnappingSheet(
+            controller: snappingSheetController,
+            onSheetMoved: (sheetPosition) {
+              // print("onSheetMoved - Current position ${sheetPosition.pixels}");
+            },
+            onSnapCompleted: (sheetPosition, _) {
+              // Predefined snapping positions
+              const List<double> predefinedPositions = [0.11, 0.5, 0.85];
 
-          // Calculate the position factor
-          double grabbingHeight =
-              22; // Adjust this value as per your grabbing height
-          double screenHeight = MediaQuery.of(context).size.height;
-          double totalMovableHeight = screenHeight - grabbingHeight;
-          double positionFactor = sheetPosition.pixels / totalMovableHeight;
+              // Calculate the position factor
+              double grabbingHeight =
+                  22; // Adjust this value as per your grabbing height
+              double screenHeight = MediaQuery.of(context).size.height;
+              double totalMovableHeight = screenHeight - grabbingHeight;
+              double positionFactor = sheetPosition.pixels / totalMovableHeight;
 
-          // Find the closest predefined position
-          double closest = predefinedPositions.reduce((a, b) =>
-              (positionFactor - a).abs() < (positionFactor - b).abs() ? a : b);
+              // Find the closest predefined position
+              double closest = predefinedPositions.reduce((a, b) =>
+                  (positionFactor - a).abs() < (positionFactor - b).abs()
+                      ? a
+                      : b);
 
-          // Print the closest position factor
-          print("Closest predefined position to current: $closest");
+              // Print the closest position factor
+              print("Closest predefined position to current: $closest");
 
-          // Additional: print current position factor for reference
-          print("Current position factor: $positionFactor");
-        },
-        lockOverflowDrag: true,
-        snappingPositions: const [
-          SnappingPosition.factor(
-            positionFactor: 0.5,
-            snappingCurve: Curves.easeOutExpo,
-            snappingDuration: Duration(seconds: 1),
-            grabbingContentOffset: GrabbingContentOffset.top,
-          ),
-          SnappingPosition.factor(
-            positionFactor: 0.11,
-            snappingCurve: Curves.easeOutExpo,
-            snappingDuration: Duration(seconds: 1),
-            grabbingContentOffset: GrabbingContentOffset.top,
-          ),
-          SnappingPosition.factor(
-            positionFactor: 0.85,
-            snappingCurve: Curves.easeOutExpo,
-            snappingDuration: Duration(seconds: 1),
-            grabbingContentOffset: GrabbingContentOffset.top,
-          ),
-        ],
-        grabbingHeight: 22,
-        grabbing: Container(
-          height: 22,
-          width: dwidth,
-          decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 2,
-                  spreadRadius: 2,
-                  color: Colors.white,
-                  offset: Offset(0, 10),
-                ),
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              )),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 10,
+              // Additional: print current position factor for reference
+              print("Current position factor: $positionFactor");
+            },
+            lockOverflowDrag: true,
+            snappingPositions: const [
+              SnappingPosition.factor(
+                positionFactor: 0.5,
+                snappingCurve: Curves.easeOutExpo,
+                snappingDuration: Duration(seconds: 1),
+                grabbingContentOffset: GrabbingContentOffset.top,
               ),
-              Container(
-                height: 5,
-                width: 50,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
+              SnappingPosition.factor(
+                positionFactor: 0.11,
+                snappingCurve: Curves.easeOutExpo,
+                snappingDuration: Duration(seconds: 1),
+                grabbingContentOffset: GrabbingContentOffset.top,
+              ),
+              SnappingPosition.factor(
+                positionFactor: 0.85,
+                snappingCurve: Curves.easeOutExpo,
+                snappingDuration: Duration(seconds: 1),
+                grabbingContentOffset: GrabbingContentOffset.top,
               ),
             ],
-          ),
-        ),
-        sheetBelow: SnappingSheetContent(
-          draggable: true,
-          child: Container(
-            color: Colors.white,
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                children: [
-                  Obx(
-                    () => CustomRow2(
-                      isLoading: controller.jonroLoadingDone.value,
-                      iconData: Icons.stop_circle_rounded,
-                      titleText: '혜화역 1번 출구',
-                      subtitleText1: controller
-                                  .jonro07BusMessageVisible.value ==
-                              true
-                          ? controller.jongro07BusMessage.value
-                          : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
-                      subtitleText2: controller.hsscBusMessage.value,
-                      containerColor: Colors.black,
-                      containerText: '정류장',
-                      routeName: '/busData',
+            grabbingHeight: 22,
+            grabbing: Container(
+              height: 22,
+              width: dwidth,
+              decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 2,
+                      spreadRadius: 2,
+                      color: Colors.white,
+                      offset: Offset(0, 10),
                     ),
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 10,
                   ),
-                  const CustomRow1(
-                    iconData: Icons.directions_bus,
-                    titleText: '설 연휴 귀향/귀경 버스 (자과캠)',
-                    subtitleText: '지역별 왕복 운영',
-                    containerColor: AppColors.green_main,
-                    containerText: '성대',
-                    routeName: '/knewyear',
-                  ),
-                  const CustomRow1(
-                    iconData: Icons.directions_bus,
-                    titleText: '인사캠 셔틀',
-                    subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
-                    containerColor: AppColors.green_main,
-                    containerText: '성대',
-                    routeName: '/busData',
-                  ),
-                  const CustomRow1(
-                    iconData: Icons.directions_bus,
-                    titleText: '인자셔틀',
-                    subtitleText: '인사캠 ↔ 자과캠',
-                    containerColor: AppColors.green_main,
-                    containerText: '성대',
-                    routeName: '/eskara',
-                  ),
-                  CustomRow1(
-                    iconData: Icons.directions_bus,
-                    titleText: '종로 07',
-                    subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-                    containerColor: Colors.green[400]!,
-                    containerText: '마을',
-                    routeName: '/jonromain',
-                  ),
-                  SizedBox(
-                    height: 5.h,
+                  Container(
+                    height: 5,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: dwidth,
-              // height: 350.h, // 이거 주석처리를 안하면 overflow 에러가 난다
-              decoration: const BoxDecoration(
+            sheetBelow: SnappingSheetContent(
+              draggable: true,
+              child: Container(
                 color: Colors.white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Column(
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              SizedBox(
-                                height: dheight - 47.h,
-                                width: dwidth,
-                                child: _buildMap(),
-                              ),
-                              Positioned(
-                                left: 10,
-                                right: 10,
-                                top: statusBarHeight,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 0, 0, 0),
-                                      alignment: Alignment.centerLeft,
-                                      height: 40,
-                                      width: dwidth * 0.82,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 1,
-                                            blurRadius: 5,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.list,
-                                            size: 23,
-                                            color: Colors.grey[600],
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            '성대 건물 이름, 건물 번호, 버스, 정류장 검색',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontFamily: 'CJKMedium',
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      alignment: Alignment.topCenter,
-                                      padding: const EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.green_main,
-                                        borderRadius: BorderRadius.circular(5),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 1,
-                                            blurRadius: 5,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      width: dwidth * 0.1,
-                                      height: dwidth * 0.1,
-                                      child: const Column(
-                                        children: [
-                                          Spacer(),
-                                          Icon(
-                                            Icons.chat,
-                                            color: Colors.white,
-                                            size: 18,
-                                          ),
-                                          Text(
-                                            '게시판',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'CJKMedium',
-                                              fontSize: 8,
-                                            ),
-                                          ),
-                                          Spacer(),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                left: 0.w,
-                                right: 0.w,
-                                top: (statusBarHeight + 50),
-                                child: const Center(child: ScrollableRow()),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
+                      Obx(
+                        () => CustomRow2(
+                          isLoading: controller.jonroLoadingDone.value,
+                          iconData: Icons.stop_circle_rounded,
+                          titleText: '혜화역 1번 출구',
+                          subtitleText1: controller
+                                      .jonro07BusMessageVisible.value ==
+                                  true
+                              ? controller.jongro07BusMessage.value
+                              : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
+                          subtitleText2: controller.hsscBusMessage.value,
+                          containerColor: Colors.black,
+                          containerText: '정류장',
+                          routeName: '/busData',
+                        ),
+                      ),
+                      const CustomRow1(
+                        iconData: Icons.directions_bus,
+                        titleText: '설 연휴 귀향/귀경 버스 (자과캠)',
+                        subtitleText: '지역별 왕복 운영',
+                        containerColor: AppColors.green_main,
+                        containerText: '성대',
+                        routeName: '/knewyear',
+                      ),
+                      const CustomRow1(
+                        iconData: Icons.directions_bus,
+                        titleText: '인사캠 셔틀',
+                        subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
+                        containerColor: AppColors.green_main,
+                        containerText: '성대',
+                        routeName: '/busData',
+                      ),
+                      const CustomRow1(
+                        iconData: Icons.directions_bus,
+                        titleText: '인자셔틀',
+                        subtitleText: '인사캠 ↔ 자과캠',
+                        containerColor: AppColors.green_main,
+                        containerText: '성대',
+                        routeName: '/eskara',
+                      ),
+                      CustomRow1(
+                        iconData: Icons.directions_bus,
+                        titleText: '종로 07',
+                        subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+                        containerColor: Colors.green[400]!,
+                        containerText: '마을',
+                        routeName: '/jonromain',
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
-            )
-          ],
-        ),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: dwidth,
+                  // height: 350.h, // 이거 주석처리를 안하면 overflow 에러가 난다
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                children: [
+                                  SizedBox(
+                                    height: dheight - 47.h,
+                                    width: dwidth,
+                                    child: _buildMap(),
+                                  ),
+                                  Positioned(
+                                    left: 10,
+                                    right: 10,
+                                    top: statusBarHeight + 10,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 0, 0),
+                                          alignment: Alignment.centerLeft,
+                                          height: 49,
+                                          width: dwidth * 0.8,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 5,
+                                                offset: const Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.list,
+                                                size: 23,
+                                                color: Colors.grey[600],
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '장소, 강의실 번호, 버스, 정류장 검색',
+                                                style: TextStyle(
+                                                  color: Colors.grey[400],
+                                                  fontFamily: 'CJKMedium',
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Container(
+                                          alignment: Alignment.topCenter,
+                                          padding: const EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.green_main,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.green_main
+                                                    .withOpacity(0.3),
+                                                spreadRadius: 1,
+                                                blurRadius: 5,
+                                                offset: const Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
+                                          width: 49,
+                                          height: 49,
+                                          child: const Column(
+                                            children: [
+                                              Spacer(),
+                                              Icon(
+                                                Icons.filter_alt,
+                                                color: Colors.white,
+                                                size: 18,
+                                              ),
+                                              Text(
+                                                '필터',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: 'CJKMedium',
+                                                  fontSize: 8,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 0.w,
+                                    right: 0.w,
+                                    top: (statusBarHeight + 10 + 60),
+                                    child: const Center(child: ScrollableRow()),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Bottomnavigation(),
+          )
+        ],
       ),
     );
   }
@@ -340,86 +351,8 @@ class Mainpage extends GetView<MainpageController> {
         initialCameraPosition: seoulCameraPosition,
       ),
       onMapReady: (mapcontroller) {
-        // mapcontroller.addOverlay(buildCampusMarkers()[0]);
-        mapcontroller.addOverlay(buildCampusMarkers()[1]);
-        mapcontroller.addOverlay(buildCampusMarkers()[2]);
-        mapcontroller.addOverlay(buildCampusMarkers()[3]);
-        mapcontroller.addOverlay(buildCampusMarkers()[4]);
-        mapcontroller.addOverlay(buildCampusMarkers()[5]);
-        mapcontroller.addOverlay(buildCampusMarkers()[6]);
-
         mapcontroller.addOverlayAll({
-          // NMarker(
-          //   id: "line1",
-          //   position: const NLatLng(37.587361, 126.994479),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line1.png'),
-          // ),
-          // NMarker(
-          //   id: "line2",
-          //   position: const NLatLng(37.587441, 126.990506),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line2.png'),
-          // ),
-          // NMarker(
-          //   id: "line4",
-          //   position: const NLatLng(37.588636, 126.993209),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line4.png'),
-          // ),
-          // NMarker(
-          //   id: "line7",
-          //   position: const NLatLng(37.588353, 126.994262),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line7.png'),
-          // ),
-          // NMarker(
-          //   id: 'line8',
-          //   position: const NLatLng(37.58752, 126.99322),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line8.png'),
-          // ),
-          // NMarker(
-          //   id: 'line9',
-          //   position: const NLatLng(37.586819, 126.995246),
-          //   size: const Size(25, 25),
-          //   icon: const NOverlayImage.fromAssetImage('assets/images/line9.png'),
-          // ),
-          // NMarker(
-          //   id: 'line31',
-          //   position: const NLatLng(37.589184, 126.991539),
-          //   size: const Size(25, 25),
-          //   icon:
-          //       const NOverlayImage.fromAssetImage('assets/images/line31.png'),
-          // ),
-          // NMarker(
-          //   id: 'line32',
-          //   position: const NLatLng(37.589053, 126.992435),
-          //   size: const Size(25, 25),
-          //   icon:
-          //       const NOverlayImage.fromAssetImage('assets/images/line32.png'),
-          // ),
-          // NMarker(
-          //   id: 'line33',
-          //   position: const NLatLng(37.588572, 126.992666),
-          //   size: const Size(25, 25),
-          //   icon:
-          //       const NOverlayImage.fromAssetImage('assets/images/line33.png'),
-          // ),
-          // NMarker(
-          //   id: 'line61',
-          //   position: const NLatLng(37.587882, 126.991079),
-          //   size: const Size(25, 25),
-          //   icon:
-          //       const NOverlayImage.fromAssetImage('assets/images/line61.png'),
-          // ),
-          // NMarker(
-          //   id: 'line62',
-          //   position: const NLatLng(37.588160, 126.990868),
-          //   size: const Size(25, 25),
-          //   icon:
-          //       const NOverlayImage.fromAssetImage('assets/images/line62.png'),
-          // ),
+          ...buildCampusMarkers(),
           NMultipartPathOverlay(
             id: "jongroRoute",
             paths: [
@@ -440,232 +373,3 @@ class Mainpage extends GetView<MainpageController> {
     );
   }
 }
-
-// drawer: Drawer(
-//   child: Container(
-//     // width: 50,
-//     color: Colors.white,
-//     child: Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children:
-//           // <Widget>
-//           [
-//         SizedBox(
-//           height: 80.h,
-//         ),
-//         Container(
-//           height: 140.h,
-//           color: Colors.white,
-//           child: Center(
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 const SizedBox(
-//                   child: CircleAvatar(
-//                     radius: 45,
-//                     backgroundColor: Colors.white,
-//                     child: Icon(CupertinoIcons.person_alt_circle,
-//                         color: Colors.grey, size: 80),
-//                   ),
-//                 ),
-//                 SizedBox(height: 2.h),
-//                 Obx(
-//                   () => Text(
-//                     controller.name.value,
-//                     style: const TextStyle(
-//                       color: Colors.black,
-//                       fontFamily: 'CJKBold',
-//                       fontSize: 15,
-//                     ),
-//                   ),
-//                 ),
-//                 Obx(
-//                   () => Text(
-//                     controller.subname.value,
-//                     style: TextStyle(
-//                       color: Colors.grey[800],
-//                       fontFamily: 'CJKMedium',
-//                       fontSize: 13,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//         Divider(
-//           color: Colors.grey[100],
-//           thickness: 0.8,
-//           endIndent: 30.w,
-//           indent: 30.w,
-//         ),
-//         SizedBox(
-//           height: 15.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               Get.toNamed('/kingologin');
-//             },
-//             child: const Text(
-//               '킹고 계정 연동하기',
-//               style: TextStyle(
-//                 color: Colors.black,
-//                 fontFamily: 'CJKMedium',
-//                 fontSize: 18,
-//               ),
-//               textAlign: TextAlign.start,
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 12.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               launchUrl(
-//                 Uri.parse(
-//                     'https://brash-distance-4c3.notion.site/2ce3b22006f64d65ae92ea3f01ec4bc2?pvs=4'),
-//               );
-//             },
-//             child: const Text(
-//               '공지사항',
-//               style: TextStyle(
-//                 color: Colors.black,
-//                 fontFamily: 'CJKMedium',
-//                 fontSize: 18,
-//               ),
-//               textAlign: TextAlign.start,
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 12.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               Get.toNamed('/kingologin');
-//             },
-//             child: const Text(
-//               '환경설정',
-//               style: TextStyle(
-//                 color: Colors.black,
-//                 fontFamily: 'CJKMedium',
-//                 fontSize: 18,
-//               ),
-//               textAlign: TextAlign.start,
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 10.h,
-//         ),
-//         Divider(
-//           color: Colors.grey[100],
-//           thickness: 0.8,
-//           endIndent: 30.w,
-//           indent: 30.w,
-//         ),
-//         SizedBox(
-//           height: 10.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 30.w, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               Get.toNamed('/kingologin');
-//             },
-//             child: const Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   '홈화면 설정',
-//                   style: TextStyle(
-//                     color: Colors.black,
-//                     fontFamily: 'CJKMedium',
-//                     fontSize: 18,
-//                   ),
-//                   textAlign: TextAlign.start,
-//                 ),
-//                 Text(
-//                   '지도 화면',
-//                   style: TextStyle(
-//                     color: AppColors.green_main,
-//                     fontFamily: 'CJKMedium',
-//                     fontSize: 18,
-//                   ),
-//                   textAlign: TextAlign.start,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 12.h,
-//         ),
-//         Divider(
-//           color: Colors.grey[100],
-//           thickness: 0.8,
-//           endIndent: 30.w,
-//           indent: 30.w,
-//         ),
-//         SizedBox(
-//           height: 12.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               launchUrl(Uri.parse('https://pf.kakao.com/_cjxexdG'));
-//             },
-//             child: Text(
-//               '고객센터',
-//               style: TextStyle(
-//                 color: Colors.grey[800],
-//                 fontFamily: 'CJKMedium',
-//                 fontSize: 14,
-//               ),
-//               textAlign: TextAlign.start,
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 12.h,
-//         ),
-//         Padding(
-//           padding: EdgeInsets.fromLTRB(30.w, 0, 0, 0),
-//           child: GestureDetector(
-//             onTap: () {
-//               launchUrl(
-//                 Uri.parse(
-//                     'https://brash-distance-4c3.notion.site/17f6a2ae496f4e6e95af6f8148e81f78?pvs=4'),
-//               );
-//             },
-//             child: Text(
-//               '정보수정제안',
-//               style: TextStyle(
-//                 color: Colors.grey[800],
-//                 fontFamily: 'CJKMedium',
-//                 fontSize: 14,
-//               ),
-//               textAlign: TextAlign.start,
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),
-// bottomNavigationBar: BottomAppBar(
-//   color: Colors.grey[200],
-//   child: SizedBox(
-//     height: 30.h,
-//     child: const Text('ad'),
-//   ),
-// ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skkumap/app_theme.dart';
+import 'stationrow_component.dart'; // Import the ScrollRowContainer widget
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -43,16 +45,10 @@ class CustomRow2 extends StatelessWidget {
               ),
               Container(
                 width: dwidth,
-                height: 79.h,
+                height: 100,
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  border: Border(
-                      // top: BorderSide(color: Colors.grey[350]!, width: 1),
-                      // bottom: BorderSide(color: Colors.grey[300]!, width: 1),
-                      // left: BorderSide(color: Colors.grey, width: 1),
-                      // right: BorderSide(color: Colors.grey, width: 1),
-                      ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -98,48 +94,6 @@ class CustomRow2 extends StatelessWidget {
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
-                                // Container(
-                                //   width: 43.w,
-                                //   height: 18.h,
-                                //   padding:
-                                //       const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                                //   alignment: Alignment.center,
-                                //   decoration: BoxDecoration(
-                                //     color: containerColor,
-                                //     borderRadius: BorderRadius.circular(5),
-                                //   ),
-                                //   child: Text(
-                                //     containerText,
-                                //     style: TextStyle(
-                                //       height: 1.3.h,
-                                //       color: Colors.white,
-                                //       fontFamily: 'CJKMedium',
-                                //       fontSize: 11,
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //   ),
-                                // ),
-                                // Container(
-                                //   width: 32.w,
-                                //   height: 18.h,
-                                //   padding:
-                                //       const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                                //   alignment: Alignment.center,
-                                //   decoration: BoxDecoration(
-                                //     color: containerColor,
-                                //     borderRadius: BorderRadius.circular(5),
-                                //   ),
-                                //   child: Text(
-                                //     containerText,
-                                //     style: TextStyle(
-                                //       height: 1.3.h,
-                                //       color: Colors.white,
-                                //       fontFamily: 'CJKMedium',
-                                //       fontSize: 11,
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //   ),
-                                // ),
                               ],
                             ),
                             SizedBox(
@@ -148,27 +102,18 @@ class CustomRow2 extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Column(
+                                const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '[종로07버스]  ',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontFamily: 'CJKMedium',
-                                        fontSize: 11.5.sp,
-                                      ),
-                                      textAlign: TextAlign.start,
+                                    StationRowComponent(
+                                        containerColor: Colors.green,
+                                        containerText: '종로07'),
+                                    SizedBox(
+                                      height: 5,
                                     ),
-                                    Text(
-                                      '[인사캠셔틀]   ',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontFamily: 'CJKMedium',
-                                        fontSize: 11.5.sp,
-                                      ),
-                                      textAlign: TextAlign.start,
-                                    ),
+                                    StationRowComponent(
+                                        containerColor: AppColors.green_main,
+                                        containerText: '인사캠'),
                                   ],
                                 ),
                                 Column(
@@ -259,25 +204,10 @@ class CustomRow2 extends StatelessWidget {
                   SizedBox(
                     width: 8.w,
                   ),
-                  // const Icon(
-                  //   CupertinoIcons.right_chevron,
-                  //   size: 17,
-                  //   color: Colors.black,
-                  // ),
                 ],
               ),
             ),
           ),
-          // Positioned( // lottie 애니메이션 어울리지 않아서 삭제
-          //   top: 20.h,
-          //   left: 2.w,
-          //   child: SizedBox(
-          //     width: 60.w,
-          //     child: Lottie.asset(
-          //       'assets/lottie/locationloading_red.json',
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

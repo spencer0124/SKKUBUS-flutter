@@ -1,20 +1,22 @@
+import 'snappingsheet_controller.dart';
+import 'package:skkumap/app/pages/homepage/ui/navermap.dart';
+
 import 'dart:async';
-import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:live_activities/live_activities.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'package:skkumap/app/pages/homepage/data/models/jongro_bus_model.dart';
-import 'package:snapping_sheet/snapping_sheet.dart';
 
 import 'hsscbus_controller.dart';
 import 'jongrobus_controller.dart';
-
-import 'package:skkumap/app/model/campusmarker_model.dart';
+import 'package:skkumap/app/model/station_model.dart';
+import 'package:skkumap/app/utils/api_fetch/fetch_station.dart';
 
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
@@ -55,75 +57,9 @@ AndroidOptions _getAndroidOptions() => const AndroidOptions(
     );
 final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
-const double hewa1Lat = 37.583427;
-const double hewa1Lon = 127.001850;
-
-// 마커 값 초기화 안넣어주면 에러난다. 초기화 반드시 해주기
-// 네이버 지도 관련 선언과 초기화
-
-const iconImage = NOverlayImage.fromAssetImage(
-  'assets/images/locationicon.png',
-);
-
-const busImage = NOverlayImage.fromAssetImage(
-  'assets/images/jonrobus.png',
-);
-
-NMarker jongrobusMarker1 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker1',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker2 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker2',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker3 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker3',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker4 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker4',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
-NMarker jongrobusMarker5 = NMarker(
-  size: const Size(20, 20),
-  id: 'jongrobusMarker5',
-  position: const NLatLng(37.583427, 127.001850),
-  icon: busImage,
-);
-
 class MainpageController extends GetxController {
-  final List<CampusMarker> hsscCampusMarker = [
-    CampusMarker(id: 'line1', position: const NLatLng(37.587361, 126.994479)),
-    CampusMarker(id: 'line2', position: const NLatLng(37.587441, 126.990506)),
-    CampusMarker(id: 'line4', position: const NLatLng(37.588636, 126.993209)),
-    CampusMarker(id: 'line7', position: const NLatLng(37.588353, 126.994262)),
-    CampusMarker(id: 'line8', position: const NLatLng(37.58752, 126.99322)),
-    CampusMarker(id: 'line9', position: const NLatLng(37.586819, 126.995246)),
-    CampusMarker(id: 'line31', position: const NLatLng(37.589184, 126.991539)),
-    CampusMarker(id: 'line32', position: const NLatLng(37.589053, 126.992435)),
-    CampusMarker(id: 'line33', position: const NLatLng(37.588572, 126.992666)),
-    CampusMarker(id: 'line61', position: const NLatLng(37.587882, 126.991079)),
-    CampusMarker(id: 'line62', position: const NLatLng(37.588160, 126.990868)),
-  ];
-
-  // 라이브 액티비티 관련
-  final LiveActivities _liveActivitiesPlugin = LiveActivities();
-
-  // 메인화면 스크롤 컨트롤러
-  final snappingSheetController = SnappingSheetController();
+  // 내가 만든 api 테스트 우하하
+  var stationData = Rx<StationResponse?>(null);
 
   // 혜화역 1번 출구 - 종로 07 정보
   RxInt jongro07BusRemainTimeMin = 0.obs;
@@ -140,13 +76,6 @@ class MainpageController extends GetxController {
   RxInt hsscBusRemainStation = 0.obs;
   RxString hsscBusMessage = ''.obs;
 
-  // 사이드바에 표출되는 이름과 sub이름
-  RxString name = '로그인해주세요'.obs;
-  RxString subname = ''.obs;
-
-  // 네이버 지도 오버레이 초기화
-  late NOverlayImage iconImage;
-
   // 인사캠 셔틀버스와 종로07 버스 정보 갱신해주는 타이머
   Timer? _timer10s;
   Timer? _timer30s;
@@ -154,37 +83,30 @@ class MainpageController extends GetxController {
   // 종로 07 자동 카운트다운해주는 타이머
   Timer? _countdownTimer;
 
-  // live activity 관련
-  String? activityId;
+  Future<void> stationDataFetch() async {
+    try {
+      stationData.value = await fetchStationData('123');
+    } catch (e) {
+      // print('Error fetching data: $e');
+    }
+  }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
 
-    if (Platform.isIOS) {
-      _liveActivitiesPlugin.init(appGroupId: "group.flutterioswidget1");
-    }
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      snappingSheetController.snapToPosition(
-        const SnappingPosition.factor(positionFactor: 0.5),
-      );
-      // createPizzaActivity();
-
-      // waitForAttachment(); // attach 된 후에 snaptoposition해주기
+      snaptoPosition();
 
       fetchIconImage();
-      // checkpermission();
+
+      stationDataFetch();
+
       calculateRemainingStationsToHyehwaStation();
       calculateRemainingStationsToHyehwaStation2();
-      // WidgetsBinding.instance.addPostFrameCallback((_) async {
-      //   fetchSecureStorage();
-      // }); // 의도한대로 작동 안해서 그냥 사이드바 열때 securestorage fetch하도록 함
-      // fetchIconImage();
-      fetchSecureStorage();
+
       fetchhewaBusData();
-      // jongro07BusMessage.value = "";
-      // jonro07BusMessageVisible.value = false;
+
       fetchhewaBusData2();
       _timer10s = Timer.periodic(
           const Duration(seconds: 10), (Timer t) async => fetchhewaBusData());
@@ -193,70 +115,12 @@ class MainpageController extends GetxController {
     });
   }
 
-  void createPizzaActivity() async {
-    final Map<String, dynamic> activityModel = {
-      'name': 'Margherita',
-      'ingredient': 'tomato, mozzarella, basil',
-      'quantity': 1,
-    };
-
-    _liveActivitiesPlugin.createActivity(activityModel);
-  }
-
-  // void waitForAttachment() {
-  //   Timer.periodic(const Duration(milliseconds: 100), (Timer timer) {
-  //     if (snappingSheetController.isAttached) {
-  //       timer.cancel();
-  //       snapSheetToPosition();
-  //     }
-  //   });
-  // }
-
-  // void snapSheetToPosition() {
-  //   snappingSheetController.snapToPosition(
-  //     const SnappingPosition.factor(positionFactor: 0.5),
-  //   );
-  // }
-
   @override
   void onClose() {
     _timer10s?.cancel();
     _timer30s?.cancel();
     _countdownTimer?.cancel();
     super.onClose();
-  }
-
-  Future<void> checkpermission() async {
-    await Permission.location.request();
-    var locationpermission = await Permission.location.status;
-    if (locationpermission.isDenied) {
-      // await openAppSettings();
-      await FlutterPlatformAlert.showAlert(
-        windowTitle: 'denied',
-        text: '1',
-        alertStyle: AlertButtonStyle.ok,
-      );
-      var result = await Permission.location.request();
-      await FlutterPlatformAlert.showAlert(
-        windowTitle: result.toString(),
-        text: '2',
-        alertStyle: AlertButtonStyle.ok,
-      );
-    }
-    if (locationpermission.isPermanentlyDenied) {
-      await FlutterPlatformAlert.showAlert(
-        windowTitle: 'per-denied',
-        text: '3',
-        alertStyle: AlertButtonStyle.ok,
-      );
-      await openAppSettings();
-    } else {
-      await FlutterPlatformAlert.showAlert(
-        windowTitle: locationpermission.toString(),
-        text: '1',
-        alertStyle: AlertButtonStyle.ok,
-      );
-    }
   }
 
   /// 인사캠 셔틀 정보 갱신
@@ -288,13 +152,6 @@ class MainpageController extends GetxController {
         t.cancel(); // Stop the timer if the countdown has finished
       }
     });
-  }
-
-  Future<void> fetchSecureStorage() async {
-    name.value =
-        await storage.read(key: 'local_name', iOptions: options) ?? '로그인해주세요';
-    subname.value =
-        await storage.read(key: 'local_branchGroup', iOptions: options) ?? '';
   }
 
   void fetchBusMap(List<JongroBusModel> itemList) {
@@ -331,9 +188,6 @@ class MainpageController extends GetxController {
         markers[i].setIsVisible(false);
       }
     }
-
-    // Update the map to reflect changes
-    // Implement the logic to refresh the map view if necessary
   }
 
   // 네이버 지도 마커 이미지 초기화

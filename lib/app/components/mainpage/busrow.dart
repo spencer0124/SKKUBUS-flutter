@@ -37,7 +37,7 @@ class CustomRow1 extends StatelessWidget {
             children: [
               Container(
                 width: dwidth,
-                height: 65.h,
+                height: 65,
                 padding: EdgeInsets.fromLTRB(0, 11.h, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
