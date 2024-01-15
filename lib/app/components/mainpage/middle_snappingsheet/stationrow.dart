@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:skkumap/app_theme.dart';
-import 'stationrow_component.dart'; // Import the ScrollRowContainer widget
+import 'package:skkumap/app/components/mainpage/middle_snappingsheet/stationrow_component.dart'; // Import the ScrollRowContainer widget
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;

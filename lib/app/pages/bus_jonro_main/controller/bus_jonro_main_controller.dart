@@ -150,7 +150,7 @@ class JonroMainController extends GetxController {
     // 두번째 api 호출
     try {
       final list = await getJongroBusList();
-      controller.fetchBusMap(list);
+      // controller.fetchBusMap(list);
       int count = 0;
 
       flag.value = List.filled(19, 0);
@@ -183,7 +183,7 @@ class JonroMainController extends GetxController {
       print(flag);
       print('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
     } on Exception {
-      controller.fetchBusMap([]);
+      // controller.fetchBusMap([]);
       // 기타 예외 처리
       // controller.jongro07BusMessage.value = "정보 없음 [2]";
       return;
