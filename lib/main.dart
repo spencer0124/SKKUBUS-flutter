@@ -21,7 +21,7 @@ import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_contr
 import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
 import 'package:skkumap/app/pages/bus_detail/controller/bus_seoul_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/firebase_options.dart';
 

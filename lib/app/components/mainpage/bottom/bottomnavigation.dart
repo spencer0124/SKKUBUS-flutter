@@ -11,7 +11,7 @@ class Bottomnavigation extends StatelessWidget {
     final double screenWidth = ScreenSize.width(context);
 
     return Container(
-      height: 95,
+      height: 92,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
