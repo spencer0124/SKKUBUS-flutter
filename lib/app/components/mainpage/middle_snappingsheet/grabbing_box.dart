@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skkumap/app/pages/homepage/controller/snappingsheet_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/snappingsheet_controller.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 
 class GrabbingBox extends StatelessWidget {

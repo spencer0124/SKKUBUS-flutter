@@ -1,5 +1,5 @@
 import 'snappingsheet_controller.dart';
-import 'package:skkumap/app/pages/homepage/ui/navermap.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap.dart';
 
 import 'dart:async';
 import 'dart:convert';

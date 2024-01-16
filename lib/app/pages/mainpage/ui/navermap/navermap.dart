@@ -29,12 +29,22 @@ NaverMap buildMap() {
         ...buildCampusMarkers(CampusType.hssc),
         ...buildJongroBusMarkers(jongroBusPositions),
         NMultipartPathOverlay(
-          id: "jongroRoute",
+          id: "jongro07Route",
           paths: [
             const NMultipartPath(
               color: Colors.green,
               outlineColor: Colors.white,
-              coords: jongroRoute,
+              coords: jongro07Route,
+            ),
+          ],
+        ),
+        NMultipartPathOverlay(
+          id: "jongro02Route",
+          paths: [
+            const NMultipartPath(
+              color: Colors.green,
+              outlineColor: Colors.white,
+              coords: jongro02Route,
             ),
           ],
         ),
