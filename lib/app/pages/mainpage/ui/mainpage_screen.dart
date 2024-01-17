@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_campus.dart';
+import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_station.dart';
 
 import 'package:snapping_sheet/snapping_sheet.dart';
 
@@ -46,20 +48,46 @@ class Mainpage extends GetView<MainpageController> {
             grabbingHeight: grabbingHeight,
             grabbing: const GrabbingBox(),
             sheetBelow: SnappingSheetContent(
-              draggable: true,
-              // snappingsheet에 어떤 child가 들어갈지 결정
-              child: const OptionBus(),
-            ),
+                draggable: true,
+                // snappingsheet에 어떤 child가 들어갈지 결정
+                child: Obx(
+                  () {
+                    return _getSnappingSheetContent(
+                        controller.bottomNavigationIndex.value);
+                  },
+                )),
             child: const MainPageBackground(),
           ),
-          const Positioned(
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: Bottomnavigation(),
+            child: Obx(
+              () {
+                return Bottomnavigation(
+                  index: controller.bottomNavigationIndex.value,
+                  onItemTapped: (int index) {
+                    controller.bottomNavigationIndex.value = index;
+                  },
+                );
+              },
+            ),
           )
         ],
       ),
     );
+  }
+}
+
+Widget _getSnappingSheetContent(int index) {
+  switch (index) {
+    case 0:
+      return const OptionBus();
+    case 1:
+      return const OptionStation(); // Replace with your actual widget for index 1
+    case 2:
+      return const OptionCampus(); // Replace with your actual widget for index 2
+    default:
+      return const OptionBus(); // Default case
   }
 }

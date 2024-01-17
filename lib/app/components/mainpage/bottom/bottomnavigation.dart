@@ -3,7 +3,11 @@ import 'package:skkumap/app/utils/screensize.dart';
 import 'package:skkumap/app_theme.dart';
 
 class Bottomnavigation extends StatelessWidget {
-  const Bottomnavigation({Key? key}) : super(key: key);
+  const Bottomnavigation(
+      {Key? key, required this.index, required this.onItemTapped})
+      : super(key: key);
+  final int index;
+  final Function(int) onItemTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -34,44 +38,75 @@ class Bottomnavigation extends StatelessWidget {
             //   ],
             // ),
             // Spacer(),
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/flaticon_bus1.png',
-                  width: 22,
-                  color: AppColors.green_main,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text(
-                  '버스',
-                  style: TextStyle(
-                    color: AppColors.green_main,
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                onItemTapped(0);
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/flaticon_bus1.png',
+                    width: 22,
+                    color: index == 0 ? AppColors.green_main : Colors.grey,
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '버스',
+                    style: TextStyle(
+                      color: index == 0 ? AppColors.green_main : Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Spacer(),
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/flaticon_stop1.png',
-                  width: 22,
-                  color: Colors.black,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text('정류장'),
-              ],
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                onItemTapped(1);
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/flaticon_stop1.png',
+                    width: 22,
+                    color: index == 1 ? AppColors.green_main : Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '정류장',
+                    style: TextStyle(
+                      color: index == 1 ? AppColors.green_main : Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Spacer(),
-            const Column(
-              children: [
-                Icon(Icons.school),
-                Text('캠퍼스'),
-              ],
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                onItemTapped(2);
+              },
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.school,
+                    color: index == 2 ? AppColors.green_main : Colors.grey,
+                  ),
+                  Text(
+                    '캠퍼스',
+                    style: TextStyle(
+                      color: index == 2 ? AppColors.green_main : Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
