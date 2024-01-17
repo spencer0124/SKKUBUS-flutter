@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skkumap/app/components/mainpage/top_search/searchbar.dart';
 import 'package:skkumap/app/components/mainpage/top_search/filter.dart';
 import 'package:skkumap/app/components/mainpage/top_scrollrow/scrollrow.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap.dart';
+import 'package:skkumap/app/pages/mainpage/ui/filter/filter_sheet.dart';
 
 /*
 snappingsheet의 child로 들어갈 background
@@ -47,11 +49,13 @@ class MainPageBackground extends StatelessWidget {
                             left: 10,
                             right: 10,
                             top: statusBarHeight + 10,
-                            child: const Row(
+                            child: Row(
                               children: [
-                                CustomSearchBar(),
-                                Spacer(),
-                                CustomFilter(),
+                                const CustomSearchBar(),
+                                const Spacer(),
+                                CustomFilter(onFilterTap: () {
+                                  Get.bottomSheet(const FilterSheet());
+                                }),
                               ],
                             ),
                           ),

@@ -39,34 +39,39 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   }
 }
 
-const options = IOSOptions(accessibility: KeychainAccessibility.first_unlock);
-AndroidOptions _getAndroidOptions() => const AndroidOptions(
-      encryptedSharedPreferences: true,
-    );
-final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-
 class MainpageController extends GetxController {
-  // 내가 만든 api 테스트 우하하
+  // BottomNavigation 현재 선택된 index 저장
+  var bottomNavigationIndex = 0.obs;
+
+  // 필터에서 선택된 캠퍼스, 필터에서 선택된 캠퍼스 정보
+  // 0: 인사캠, 1: 자과캠
+  var selectedCampus = 0.obs;
+  // 옵션 순서대로 0, 1, ...
+  var selectedCampusInfo = [0, 1].obs;
+  final List<Map<String, dynamic>> campusInfo = [
+    {"text": "버스", "index": 0},
+    {"text": "건물번호", "index": 1},
+    {"text": "교내식당", "index": 2},
+    {"text": "교내매점", "index": 3},
+    {"text": "편의점", "index": 4},
+    {"text": "커피", "index": 5},
+    {"text": "은행", "index": 6},
+    {"text": "ATM", "index": 7},
+    {"text": "우체국", "index": 8},
+    {"text": "프린트", "index": 9},
+    {"text": "자판기", "index": 10},
+    {"text": "제세동기", "index": 11},
+    {"text": "복사실", "index": 12},
+  ];
+
+  // 정류장 정보를 담을 변수
   var stationData = Rx<StationResponse?>(null);
-
-  // 혜화역 1번 출구 - 종로 07 정보
-  RxInt jongro07BusRemainTimeMin = 0.obs;
-  RxInt jongro07BusRemainTimeSec = 0.obs;
-  RxInt jongro07BusRemainTotalTimeSec = 0.obs;
-  RxInt jongro07BusRemainStation = 0.obs;
-  RxString jongro07BusMessage = "".obs;
-  RxBool jonro07BusMessageVisible = false.obs;
-
-  RxBool jonroLoadingDone = false.obs;
-
-  // 혜화역 1번 출구 - 인사캠 셔틀버스 정보
-  // var hsscBusRemainTime = 0.obs;
-  RxInt hsscBusRemainStation = 0.obs;
-  RxString hsscBusMessage = ''.obs;
 
   Future<void> stationDataFetch() async {
     try {
       stationData.value = await fetchStationData('123');
+      print(
+          'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
     } catch (e) {
       // print('Error fetching data: $e');
     }
