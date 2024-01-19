@@ -3,33 +3,54 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
 class CustomRow1 extends StatelessWidget {
-  final IconData iconData;
-  final String titleText;
-  final String subtitleText;
-  final Color containerColor;
-  final String containerText;
-  final String routeName;
+  final String title;
+  final String subtitle;
+  final String busTypeText;
+  final String busTypeBgColor;
+  final String pageLink;
+  final String? altPageLink;
+  final String? animationText;
+  final String? noticeText;
+  final bool useAltPageLink;
+  final bool showAnimation;
+  final bool showAnimationText;
+  final bool showNoticeText;
 
   const CustomRow1({
-    super.key,
-    required this.iconData,
-    required this.titleText,
-    required this.subtitleText,
-    required this.containerColor,
-    required this.containerText,
-    required this.routeName,
-  });
+    Key? key,
+    required this.title,
+    required this.subtitle,
+    required this.busTypeText,
+    required this.busTypeBgColor,
+    required this.pageLink,
+    this.altPageLink,
+    this.animationText,
+    this.noticeText,
+    required this.useAltPageLink,
+    required this.showAnimation,
+    required this.showAnimationText,
+    required this.showNoticeText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(routeName);
+      onTap: () async {
+        if (useAltPageLink) {
+          if (await canLaunchUrl(Uri.parse(altPageLink!))) {
+            await launchUrl(Uri.parse(altPageLink!));
+          } else {
+            Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
+          }
+        } else {
+          Get.toNamed(pageLink);
+        }
       },
       child: Stack(
         children: [
@@ -37,8 +58,8 @@ class CustomRow1 extends StatelessWidget {
             children: [
               Container(
                 width: dwidth,
-                height: 65,
-                padding: EdgeInsets.fromLTRB(0, 11.h, 0, 0),
+                // height: 65,
+                padding: const EdgeInsets.fromLTRB(0, 11, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
@@ -48,19 +69,19 @@ class CustomRow1 extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 5.w,
+                        const SizedBox(
+                          width: 5,
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 0, 10, 0),
                           child: Image.asset(
                             'assets/images/flaticon_bus1.png',
-                            width: 20.w,
+                            width: 20,
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(
-                          width: 12.w,
+                        const SizedBox(
+                          width: 12,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -69,7 +90,7 @@ class CustomRow1 extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  titleText,
+                                  title,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontFamily: 'CJKMedium',
@@ -93,11 +114,12 @@ class CustomRow1 extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(5, 2, 5, 2),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    color: containerColor,
+                                    color:
+                                        Color(int.parse("0xFF$busTypeBgColor")),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Text(
-                                    containerText,
+                                    busTypeText,
                                     style: TextStyle(
                                       height: 1.4.h,
                                       color: Colors.white,
@@ -113,7 +135,7 @@ class CustomRow1 extends StatelessWidget {
                               height: 3.h,
                             ),
                             Text(
-                              subtitleText,
+                              subtitle,
                               style: TextStyle(
                                 color: Colors.grey[600],
                                 fontFamily: 'CJKMedium',
@@ -121,12 +143,44 @@ class CustomRow1 extends StatelessWidget {
                               ),
                               textAlign: TextAlign.start,
                             ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            if (showNoticeText)
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.warning_amber_rounded,
+                                        size: 13,
+                                        color: Colors.red,
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        noticeText!,
+                                        style: TextStyle(
+                                          color: Colors.red[600],
+                                          fontFamily: 'CJKMedium',
+                                          fontSize: 11.5,
+                                        ),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                           ],
                         ),
                       ],
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Divider(
                 color: Colors.grey[300],

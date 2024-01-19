@@ -17,7 +17,7 @@ class ScrollableRow extends StatelessWidget {
             width: 10,
           ),
           const ScrollRowContainer(
-            text: '실내지도',
+            text: '건물지도',
             icon: Icons.outbond,
             ischecked: false,
           ),

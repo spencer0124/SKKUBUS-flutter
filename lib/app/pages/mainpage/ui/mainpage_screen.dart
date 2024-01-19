@@ -82,12 +82,12 @@ class Mainpage extends GetView<MainpageController> {
 Widget _getSnappingSheetContent(int index) {
   switch (index) {
     case 0:
-      return const OptionBus();
+      return OptionBus();
     case 1:
       return const OptionStation(); // Replace with your actual widget for index 1
     case 2:
       return const OptionCampus(); // Replace with your actual widget for index 2
     default:
-      return const OptionBus(); // Default case
+      return OptionBus(); // Default case
   }
 }
