@@ -10,11 +10,11 @@ class OptionCampus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+      child: const SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             // Obx(
@@ -31,39 +31,39 @@ class OptionCampus extends StatelessWidget {
             //     routeName: '/busData',
             //   ),
             // ),
-            const CustomRow1(
-              iconData: Icons.directions_bus,
-              titleText: '설 연휴 귀향/귀경 버스 (자과캠)',
-              subtitleText: '지역별 왕복 운영',
-              containerColor: AppColors.green_main,
-              containerText: '성대',
-              routeName: '/knewyear',
-            ),
-            const CustomRow1(
-              iconData: Icons.directions_bus,
-              titleText: '인사캠 셔틀',
-              subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
-              containerColor: AppColors.green_main,
-              containerText: '성대',
-              routeName: '/busData',
-            ),
-            const CustomRow1(
-              iconData: Icons.directions_bus,
-              titleText: '인자셔틀',
-              subtitleText: '인사캠 ↔ 자과캠',
-              containerColor: AppColors.green_main,
-              containerText: '성대',
-              routeName: '/eskara',
-            ),
-            CustomRow1(
-              iconData: Icons.directions_bus,
-              titleText: '종로 07',
-              subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-              containerColor: Colors.green[400]!,
-              containerText: '마을',
-              routeName: '/jonromain',
-            ),
-            const SizedBox(
+            // const CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '설 연휴 귀향/귀경 버스 (자과캠)',
+            //   subtitleText: '지역별 왕복 운영',
+            //   containerColor: AppColors.green_main,
+            //   containerText: '성대',
+            //   routeName: '/knewyear',
+            // ),
+            // const CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '인사캠 셔틀',
+            //   subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
+            //   containerColor: AppColors.green_main,
+            //   containerText: '성대',
+            //   routeName: '/busData',
+            // ),
+            // const CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '인자셔틀',
+            //   subtitleText: '인사캠 ↔ 자과캠',
+            //   containerColor: AppColors.green_main,
+            //   containerText: '성대',
+            //   routeName: '/eskara',
+            // ),
+            // CustomRow1(
+            //   iconData: Icons.directions_bus,
+            //   titleText: '종로 07',
+            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
+            //   containerColor: Colors.green[400]!,
+            //   containerText: '마을',
+            //   routeName: '/jonromain',
+            // ),
+            SizedBox(
               height: 5,
             ),
           ],

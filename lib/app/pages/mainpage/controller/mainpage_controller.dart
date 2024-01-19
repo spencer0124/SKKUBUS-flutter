@@ -13,6 +13,8 @@ import 'package:get/get.dart';
 
 import 'package:skkumap/app/model/station_model.dart';
 import 'package:skkumap/app/utils/api_fetch/fetch_station.dart';
+import 'package:skkumap/app/utils/api_fetch/mainpage_buslist.dart';
+import 'package:skkumap/app/model/mainpage_buslist_model.dart';
 
 class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   MainpageController mainpageController = Get.find<MainpageController>();
@@ -77,13 +79,25 @@ class MainpageController extends GetxController {
     }
   }
 
+  var mainpageBusList = Rx<MainPageBusListResponse?>(null);
+
+  Future<void> mainPageBusListFetch() async {
+    try {
+      mainpageBusList.value = await fetchMainpageBusList();
+      print(
+          'MainPageBusListFetch, mainpageBusList.value: ${mainpageBusList.value!.busList}');
+    } catch (e) {
+      // print('Error fetching data: $e');
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
-
+    await mainPageBusListFetch();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snaptoInitPosition();
-      stationDataFetch();
+      // stationDataFetch();
     });
   }
 }

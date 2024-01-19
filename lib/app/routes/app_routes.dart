@@ -14,6 +14,7 @@ import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
 import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
+import 'package:skkumap/app/pages/hssc_building/hssc_building_credit.dart';
 
 class AppRoutes {
   static final routes = [
@@ -61,6 +62,10 @@ class AppRoutes {
     GetPage(
       name: '/knewyear',
       page: () => const KNewYearBus(),
+    ),
+    GetPage(
+      name: '/hssccredit',
+      page: () => const HSSCBuildingCredit(),
     )
   ];
 }
