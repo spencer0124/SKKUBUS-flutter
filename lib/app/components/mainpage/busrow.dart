@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:lottie/lottie.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -58,7 +59,6 @@ class CustomRow1 extends StatelessWidget {
             children: [
               Container(
                 width: dwidth,
-                // height: 65,
                 padding: const EdgeInsets.fromLTRB(0, 11, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -191,8 +191,8 @@ class CustomRow1 extends StatelessWidget {
             ],
           ),
           Positioned(
-            right: 10.w,
-            top: 10.5.h,
+            right: 10,
+            top: 10.5,
             // bottom: 0,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,8 +205,8 @@ class CustomRow1 extends StatelessWidget {
                     fontSize: 12.5,
                   ),
                 ),
-                SizedBox(
-                  width: 2.w,
+                const SizedBox(
+                  width: 2,
                 ),
                 const Icon(
                   CupertinoIcons.right_chevron,
@@ -216,6 +216,25 @@ class CustomRow1 extends StatelessWidget {
               ],
             ),
           ),
+          if (showAnimation)
+            Positioned(
+              top: -10,
+              left: 13,
+              child:
+                  // Image.asset(
+                  //   'assets/images/flaticon_star.png',
+                  //   width: 20,
+                  //   // color: const Color(0xFFffb030),
+                  // ),
+                  Lottie.asset(
+                'assets/lottie/shine2.json',
+                reverse: false,
+                repeat: true,
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+              ),
+            ),
         ],
       ),
     );
