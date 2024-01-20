@@ -4,20 +4,20 @@ import 'package:get/get.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
+import 'package:skkumap/app/pages/hssc_building_map/controller/hssc_building_map_controller.dart';
 
 import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 
-class KNewYearBus extends StatelessWidget {
-  const KNewYearBus({Key? key}) : super(key: key);
+class HSSCBuildingMap extends StatelessWidget {
+  const HSSCBuildingMap({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = ScreenSize.height(context);
     final double screenWidth = ScreenSize.width(context);
 
-    final controller = Get.find<KNewYearBusController>();
+    final controller = Get.find<HSSCBuildingMapController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -41,7 +41,7 @@ class KNewYearBus extends StatelessWidget {
                   Get.back();
                 },
                 rightBtnAction: () {
-                  Get.toNamed('/hssccredit');
+                  Get.toNamed('/hsscbuildingcredit');
                 },
                 rightBtnType: CustomNavigationBtnType.info,
               ),

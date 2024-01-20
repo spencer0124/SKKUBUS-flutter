@@ -5,7 +5,7 @@ import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
 import 'package:skkumap/app/pages/bus_jonro_main/ui/bus_jonro_main_screen.dart';
-import 'package:skkumap/app/pages/webview/view/webview_screen.dart';
+import 'package:skkumap/app/pages/hssc_building_map/view/hssc_building_map_screen.dart';
 import 'package:skkumap/app/pages/bus_main/binding/bus_seoul_main_binding.dart';
 import 'package:skkumap/app/pages/bus_main/ui/bus_seoul_main_screen.dart';
 
@@ -14,7 +14,8 @@ import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
 import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
-import 'package:skkumap/app/pages/hssc_building/hssc_building_credit.dart';
+import 'package:skkumap/app/pages/hssc_building_credit/hssc_building_credit.dart';
+import 'package:skkumap/app/pages/webview/ui/webview_screen.dart';
 
 class AppRoutes {
   static final routes = [
@@ -60,12 +61,16 @@ class AppRoutes {
       page: () => const JonroMainScreen(),
     ),
     GetPage(
-      name: '/knewyear',
-      page: () => const KNewYearBus(),
+      name: '/hsscbuildingmap',
+      page: () => const HSSCBuildingMap(),
     ),
     GetPage(
-      name: '/hssccredit',
+      name: '/hsscbuildingcredit',
       page: () => const HSSCBuildingCredit(),
-    )
+    ),
+    GetPage(
+      name: '/customwebview',
+      page: () => const CustomWebViewScreen(),
+    ),
   ];
 }

@@ -28,11 +28,9 @@ class OptionBus extends StatelessWidget {
               busTypeBgColor: bus.busTypeBgColor,
               pageLink: bus.pageLink,
               altPageLink: bus.altPageLink,
-              animationText: bus.animationText,
               noticeText: bus.noticeText,
               useAltPageLink: bus.useAltPageLink,
               showAnimation: bus.showAnimation,
-              showAnimationText: bus.showAnimationText,
               showNoticeText: bus.showNoticeText,
             );
           }).toList();

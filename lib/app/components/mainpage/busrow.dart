@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
+import 'package:chat_bubbles/chat_bubbles.dart';
+
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
 
@@ -16,11 +18,11 @@ class CustomRow1 extends StatelessWidget {
   final String busTypeBgColor;
   final String pageLink;
   final String? altPageLink;
-  final String? animationText;
+
   final String? noticeText;
   final bool useAltPageLink;
   final bool showAnimation;
-  final bool showAnimationText;
+
   final bool showNoticeText;
 
   const CustomRow1({
@@ -31,11 +33,9 @@ class CustomRow1 extends StatelessWidget {
     required this.busTypeBgColor,
     required this.pageLink,
     this.altPageLink,
-    this.animationText,
     this.noticeText,
     required this.useAltPageLink,
     required this.showAnimation,
-    required this.showAnimationText,
     required this.showNoticeText,
   }) : super(key: key);
 
@@ -50,7 +50,14 @@ class CustomRow1 extends StatelessWidget {
             Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
           }
         } else {
-          Get.toNamed(pageLink);
+          if (pageLink == "/customwebview") {
+            Get.toNamed(pageLink, arguments: {
+              'title': title,
+              'color': busTypeBgColor,
+            });
+          } else {
+            Get.toNamed(pageLink);
+          }
         }
       },
       child: Stack(
@@ -108,10 +115,10 @@ class CustomRow1 extends StatelessWidget {
                                   textAlign: TextAlign.start,
                                 ),
                                 Container(
-                                  width: 34,
-                                  height: 18.h,
+                                  // width: 34,
+                                  height: 18,
                                   padding:
-                                      const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                                      const EdgeInsets.fromLTRB(7, 2, 7, 2),
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color:

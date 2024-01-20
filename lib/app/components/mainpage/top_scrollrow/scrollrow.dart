@@ -16,10 +16,16 @@ class ScrollableRow extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          const ScrollRowContainer(
-            text: '건물지도',
-            icon: Icons.outbond,
-            ischecked: false,
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Get.toNamed('/hsscbuildingmap');
+            },
+            child: const ScrollRowContainer(
+              text: '건물지도',
+              icon: Icons.outbond,
+              ischecked: false,
+            ),
           ),
           const SizedBox(
             width: 5,
@@ -27,7 +33,7 @@ class ScrollableRow extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              // Get.toNamed('/injadetail');
+              // Get.toNamed('/hsscbuildingmap');
             },
             child: const ScrollRowContainer(
               text: '캠퍼스 이동',

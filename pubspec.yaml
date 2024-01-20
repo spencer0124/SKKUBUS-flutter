@@ -68,7 +68,7 @@ dependencies:
   webview_flutter: "^4.4.3"
   google_fonts: ^6.1.0
   flutter_svg: ^2.0.9
-  chat_bubbles: ^1.5.0
+  chat_bubbles: ^1.6.0
 
 dev_dependencies:
   flutter_lints: "^1.0.0"
