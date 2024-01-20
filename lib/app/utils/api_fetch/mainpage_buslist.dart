@@ -9,6 +9,7 @@ Future<MainPageBusListResponse> fetchMainpageBusList() async {
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
+    print(response.body);
     return MainPageBusListResponse.fromJson(json.decode(response.body));
   } else {
     // Handle errors

@@ -32,7 +32,7 @@ class MetaData {
 class BusList {
   @override
   String toString() {
-    return 'BusList{title: $title, subtitle: $subtitle, busTypeText: $busTypeText, busTypeBgColor: $busTypeBgColor, pageLink: $pageLink, altPageLink: $altPageLink, animationText: $animationText, noticeText: $noticeText, useAltPageLink:$useAltPageLink, showAnimation: $showAnimation, showAnimationText: $showAnimationText, showNoticeText: $showNoticeText}';
+    return 'BusList{title: $title, subtitle: $subtitle, busTypeText: $busTypeText, busTypeBgColor: $busTypeBgColor, pageLink: $pageLink, altPageLink: $altPageLink, noticeText: $noticeText, useAltPageLink:$useAltPageLink, showAnimation: $showAnimation, showNoticeText: $showNoticeText}';
   }
 
   final String title;
@@ -41,11 +41,11 @@ class BusList {
   final String busTypeBgColor;
   final String pageLink;
   final String? altPageLink;
-  final String? animationText;
+
   final String? noticeText;
   final bool useAltPageLink;
   final bool showAnimation;
-  final bool showAnimationText;
+
   final bool showNoticeText;
 
   BusList({
@@ -55,11 +55,9 @@ class BusList {
     required this.busTypeBgColor,
     required this.pageLink,
     this.altPageLink,
-    this.animationText,
     this.noticeText,
     required this.useAltPageLink,
     required this.showAnimation,
-    required this.showAnimationText,
     required this.showNoticeText,
   });
 
@@ -71,11 +69,9 @@ class BusList {
       busTypeBgColor: json['busTypeBgColor'],
       pageLink: json['pageLink'],
       altPageLink: json['altPageLink'],
-      animationText: json['animationText'],
       noticeText: json['noticeText'],
       useAltPageLink: json['useAltPageLink'],
       showAnimation: json['showAnimation'],
-      showAnimationText: json['showAnimationText'],
       showNoticeText: json['showNoticeText'],
     );
   }
