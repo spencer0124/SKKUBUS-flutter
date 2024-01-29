@@ -28,6 +28,8 @@ import 'package:skkumap/firebase_options.dart';
 
 import 'languages.dart';
 
+import 'package:skkumap/app/pages/nsc_building_map/controller/nsc_building_map_controller.dart';
+
 const storage = FlutterSecureStorage();
 
 Future<void> main() async {
@@ -139,4 +141,6 @@ void registerDependencies() {
 
   Get.put(HSSCBuildingMapController());
   Get.put(CustomWebViewController());
+
+  Get.put(NSCBuildingMapController());
 }

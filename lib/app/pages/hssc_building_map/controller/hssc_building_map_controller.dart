@@ -26,8 +26,9 @@ class HSSCBuildingMapController extends GetxController {
   void setupWebViewController() {
     webcontroller.clearCache();
     webcontroller.loadRequest(
-        Uri.parse("http://127.0.0.1:3001/SKKUBUS_webview/#/map/hssc"));
-    // Uri.parse("http://localhost:3001/SKKUBUS_webview/#/map/hssc"));
+        // Uri.parse("https://skkubus-webview.vercel.app/#/map/hssc"));
+        Uri.parse("http://192.168.45.226:3001/SKKUBUS_webview/#/map/hssc"));
+    // Uri.parse("http://localhost:3001/#/map/hssc"))
     webcontroller.enableZoom(false);
     webcontroller.clearCache();
     webcontroller.setJavaScriptMode(JavaScriptMode.unrestricted);

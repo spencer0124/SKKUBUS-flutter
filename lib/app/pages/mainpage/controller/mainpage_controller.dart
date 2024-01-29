@@ -72,8 +72,8 @@ class MainpageController extends GetxController {
   Future<void> stationDataFetch() async {
     try {
       stationData.value = await fetchStationData('123');
-      print(
-          'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
+      // print(
+      //     'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
     } catch (e) {
       // print('Error fetching data: $e');
     }

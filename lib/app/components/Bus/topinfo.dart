@@ -4,8 +4,9 @@ import 'package:shimmer/shimmer.dart';
 
 import 'package:skkumap/app/types/bus_status.dart';
 import 'package:skkumap/app/types/time_format.dart';
+import 'dart:async';
 
-class TopInfo extends StatelessWidget {
+class TopInfo extends StatefulWidget {
   final TimeFormat timeFormat;
   final int busCount;
   final BusStatus busStatus;
@@ -19,15 +20,42 @@ class TopInfo extends StatelessWidget {
     required this.isLoaded,
   }) : super(key: key);
 
+  @override
+  _TopInfoState createState() => _TopInfoState();
+}
+
+class _TopInfoState extends State<TopInfo> {
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set up a timer that triggers every second.
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        // This empty setState call tells Flutter to rebuild the widget
+        // which will update the time display.
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Always cancel timers to prevent memory leaks.
+    super.dispose();
+  }
+
   String get timeString {
-    DateFormat formatter = timeFormat == TimeFormat.format12Hour
+    DateFormat formatter = widget.timeFormat == TimeFormat.format12Hour
         ? DateFormat('hh:mm a')
         : DateFormat('HH:mm');
     return formatter.format(DateTime.now());
   }
 
   String get busCountString {
-    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행 종료";
+    return widget.busStatus == BusStatus.active
+        ? "${widget.busCount}대 운행 중"
+        : "운행 종료";
   }
 
   @override
@@ -40,7 +68,7 @@ class TopInfo extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-            child: isLoaded
+            child: widget.isLoaded
                 ? Text(
                     "$timeString 기준 · $busCountString",
                     style: TextStyle(

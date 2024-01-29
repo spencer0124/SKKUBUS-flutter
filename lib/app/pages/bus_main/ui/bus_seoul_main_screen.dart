@@ -15,6 +15,7 @@ import 'package:skkumap/app/components/bus/topinfo.dart';
 import 'package:skkumap/app/types/bus_status.dart';
 import 'package:skkumap/app/types/time_format.dart';
 import 'package:skkumap/app/components/bus/businfo_component.dart';
+import 'package:skkumap/app/model/hssc_buslocation.dart';
 
 class BusDataScreen extends GetView<BusDataController> {
   const BusDataScreen({super.key});
@@ -94,58 +95,70 @@ class BusDataScreen extends GetView<BusDataController> {
           ),
 
           // 버스 정보 부분
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Stack(
-                children: [
-                  Obx(
-                    () {
-                      if (controller.loadingdone.value == false) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.green_main,
-                          ),
+          Obx(() {
+            return Expanded(
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Stack(
+                  children: [
+                    Obx(
+                      () {
+                        if (controller.loadingdone.value == false) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.green_main,
+                            ),
+                          );
+                        }
+                        return Column(
+                          children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.busStations.length,
+                              itemBuilder: (context, index) {
+                                final station = controller.busStations[index];
+                                return BusListComponent(
+                                  stationName: station.stationName,
+                                  stationNumber: station.stationNumber,
+                                  eta: station.eta,
+                                  isFirstStation: station.isFirstStation,
+                                  isLastStation: station.isLastStation,
+                                  isRotationStation: station.isRotationStation,
+                                  busType: BusType
+                                      .hsscBus, // Ensure this matches your type
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 55,
+                            )
+                          ],
                         );
-                      }
-                      return Column(
-                        children: [
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.busStations.length,
-                            itemBuilder: (context, index) {
-                              final station = controller.busStations[index];
-                              return BusListComponent(
-                                stationName: station.stationName,
-                                stationNumber: station.stationNumber,
-                                eta: station.eta,
-                                isFirstStation: station.isFirstStation,
-                                isLastStation: station.isLastStation,
-                                isRotationStation: station.isRotationStation,
-                                busType: BusType
-                                    .hsscBus, // Ensure this matches your type
-                              );
+                      },
+                    ),
+                    // 번호판 && 버스 현재 위치 정보 부분
+                    ...controller.hsscBusLocations.value.asMap().entries.map(
+                          (e) => BusInfoComponent(
+                            elapsedSeconds: e.value.estimatedTime,
+                            currentStationIndex:
+                                int.parse(e.value.sequence) - 1,
+                            lastStationIndex: 9,
+                            plateNumber: e.value.carNumber,
+                            busType: BusType.hsscBus,
+                            onDataUpdated: (Function callback) {
+                              callback();
                             },
                           ),
-                        ],
-                      );
-                    },
-                  ),
-                  // 번호판 && 버스 현재 위치 정보 부분
-                  const BusInfoComponent(
-                      elapsedSeconds: 0,
-                      currentStationIndex: 4,
-                      lastStationIndex: 9,
-                      plateNumber: '5678',
-                      busType: BusType.hsscBus)
-                ],
+                        )
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          })
         ],
       ),
     );

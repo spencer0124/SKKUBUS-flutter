@@ -7,6 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:skkumap/admob/ad_helper.dart';
 import 'package:skkumap/app/model/bus_station_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:skkumap/app/model/hssc_buslocation.dart';
+
+import 'package:skkumap/app/utils/api_fetch/hssc_buslocation.dart';
+
+import 'dart:async';
 
 // life cycle
 class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
@@ -34,6 +39,8 @@ class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
 
 // main controller
 class BusDataController extends GetxController {
+  Timer? _timer;
+
   BannerAd? _bannerAd;
   BannerAd? get bannerAd => _bannerAd;
   RxBool isBannerAdLoaded = false.obs;
@@ -43,6 +50,9 @@ class BusDataController extends GetxController {
     super.onInit();
     _initializeBannerAd();
     fetchBusStations();
+    fetchHsscBusLocation();
+    _timer = Timer.periodic(
+        const Duration(seconds: 10), (Timer t) => fetchHsscBusLocation());
   }
 
   void _initializeBannerAd() {
@@ -66,7 +76,7 @@ class BusDataController extends GetxController {
   }
 
   var busStations = <BusStation>[].obs;
-  var activeBusCount = 0.obs;
+  var activeBusCount = 1.obs;
   var loadingdone = false.obs;
 
   void fetchBusStations() async {
@@ -86,8 +96,23 @@ class BusDataController extends GetxController {
     }
   }
 
+  var hsscBusLocations = Rx<List<HSSCBusLocation>>([]);
+  Future<void> fetchHsscBusLocation() async {
+    try {
+      hsscBusLocations.value = await fetchHSSCBusLocation();
+      print("===");
+      print('hsscBusLocations.value: ${hsscBusLocations.value}');
+      print("===");
+    } catch (e) {
+      print("---");
+      print(e);
+      print("---");
+    }
+  }
+
   @override
   void onClose() {
+    _timer?.cancel();
     _bannerAd?.dispose();
     super.onClose();
   }
