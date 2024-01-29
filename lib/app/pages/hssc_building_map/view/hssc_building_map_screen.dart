@@ -223,10 +223,10 @@ class HSSCBuildingMap extends StatelessWidget {
                             Positioned(
                               top: 12,
                               left:
-                                  screenWidth * 0.44 - 60 + screenWidth * 0.06,
+                                  screenWidth * 0.44 - 65 + screenWidth * 0.06,
                               child: Container(
                                 alignment: Alignment.center,
-                                width: 120,
+                                width: 130,
                                 height: 35,
                                 decoration: BoxDecoration(
                                   border: Border.all(

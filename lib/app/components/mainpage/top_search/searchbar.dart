@@ -28,7 +28,7 @@ class CustomSearchBar extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.list,
+            Icons.search,
             size: 23,
             color: Colors.grey[600],
           ),
@@ -36,7 +36,7 @@ class CustomSearchBar extends StatelessWidget {
             width: 8,
           ),
           Text(
-            '장소, 강의실 번호, 버스, 정류장 검색',
+            '성균관대 강의실 검색',
             style: TextStyle(
               color: Colors.grey[400],
               fontFamily: 'CJKMedium',

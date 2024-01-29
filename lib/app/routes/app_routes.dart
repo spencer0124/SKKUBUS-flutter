@@ -16,6 +16,8 @@ import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
 import 'package:skkumap/app/pages/hssc_building_credit/hssc_building_credit.dart';
 import 'package:skkumap/app/pages/webview/ui/webview_screen.dart';
+import 'package:skkumap/app/pages/nsc_building_map/view/nsc_building_map_screen.dart';
+import 'package:skkumap/app/pages/nsc_building_credit/nsc_building_credit.dart';
 
 class AppRoutes {
   static final routes = [
@@ -67,6 +69,14 @@ class AppRoutes {
     GetPage(
       name: '/hsscbuildingcredit',
       page: () => const HSSCBuildingCredit(),
+    ),
+    GetPage(
+      name: '/nscbuildingmap',
+      page: () => const NSCBuildingMap(),
+    ),
+    GetPage(
+      name: '/nscbuildingcredit',
+      page: () => const NSCBuildingCredit(),
     ),
     GetPage(
       name: '/customwebview',
