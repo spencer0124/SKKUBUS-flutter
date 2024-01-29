@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skkumap/app/utils/screensize.dart';
+import 'package:get/get.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({Key? key}) : super(key: key);
@@ -25,25 +26,31 @@ class CustomSearchBar extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.search,
-            size: 23,
-            color: Colors.grey[600],
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            '성균관대 강의실 검색',
-            style: TextStyle(
-              color: Colors.grey[400],
-              fontFamily: 'CJKMedium',
-              fontSize: 15,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          Get.toNamed('/searchlist');
+        },
+        child: Row(
+          children: [
+            Icon(
+              Icons.search,
+              size: 23,
+              color: Colors.grey[600],
             ),
-          ),
-        ],
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              '성균관대 공간명/코드 검색',
+              style: TextStyle(
+                color: Colors.grey[400],
+                fontFamily: 'CJKMedium',
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

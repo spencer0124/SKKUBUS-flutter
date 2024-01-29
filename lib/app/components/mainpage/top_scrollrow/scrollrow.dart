@@ -50,7 +50,7 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/lostandfound');
             },
             child: const ScrollRowContainer(
-              text: '유실물찾기',
+              text: '유실물 찾기',
               icon: Icons.sensor_occupied_sharp,
               ischecked: false,
             ),

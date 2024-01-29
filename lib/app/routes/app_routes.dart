@@ -19,6 +19,7 @@ import 'package:skkumap/app/pages/webview/ui/webview_screen.dart';
 import 'package:skkumap/app/pages/nsc_building_map/view/nsc_building_map_screen.dart';
 import 'package:skkumap/app/pages/nsc_building_credit/nsc_building_credit.dart';
 import 'package:skkumap/app/pages/lostandfound/lostandfound.dart';
+import 'package:skkumap/app/pages/search_list/screen/search_list_screen.dart';
 
 class AppRoutes {
   static final routes = [
@@ -86,6 +87,10 @@ class AppRoutes {
     GetPage(
       name: '/lostandfound',
       page: () => const LostAndFound(),
+    ),
+    GetPage(
+      name: '/searchlist',
+      page: () => SearchList(),
     )
   ];
 }

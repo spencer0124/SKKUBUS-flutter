@@ -29,6 +29,7 @@ import 'package:skkumap/firebase_options.dart';
 import 'languages.dart';
 
 import 'package:skkumap/app/pages/nsc_building_map/controller/nsc_building_map_controller.dart';
+import 'package:skkumap/app/pages/search_list/controller/search_list_controller.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -143,4 +144,6 @@ void registerDependencies() {
   Get.put(CustomWebViewController());
 
   Get.put(NSCBuildingMapController());
+
+  Get.put(SearchListController());
 }
