@@ -27,7 +27,8 @@ NaverMap buildMap() {
     onMapReady: (mapcontroller) {
       mapcontroller.addOverlayAll({
         ...buildCampusMarkers(CampusType.hssc),
-        ...buildJongroBusMarkers(jongroBusPositions),
+        // 종로 07 버스 마커는 일단 후순위로 미뤄두고, 주석처리한 상태!
+        // ...buildJongroBusMarkers(jongroBusPositions),
         NMultipartPathOverlay(
           id: "jongro07Route",
           paths: [

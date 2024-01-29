@@ -100,9 +100,9 @@ class BusDataController extends GetxController {
   Future<void> fetchHsscBusLocation() async {
     try {
       hsscBusLocations.value = await fetchHSSCBusLocation();
-      print("===");
-      print('hsscBusLocations.value: ${hsscBusLocations.value}');
-      print("===");
+      // print("===");
+      // print('hsscBusLocations.value: ${hsscBusLocations.value}');
+      // print("===");
     } catch (e) {
       print("---");
       print(e);

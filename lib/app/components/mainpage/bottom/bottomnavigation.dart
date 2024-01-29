@@ -37,7 +37,7 @@ class Bottomnavigation extends StatelessWidget {
             //     Text('홈'),
             //   ],
             // ),
-            // Spacer(),
+            const Spacer(),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
@@ -62,7 +62,10 @@ class Bottomnavigation extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
+            SizedBox(
+              width: screenWidth * 0.3,
+            ),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
@@ -88,26 +91,26 @@ class Bottomnavigation extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                onItemTapped(2);
-              },
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.school,
-                    color: index == 2 ? AppColors.green_main : Colors.grey,
-                  ),
-                  Text(
-                    '캠퍼스',
-                    style: TextStyle(
-                      color: index == 2 ? AppColors.green_main : Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // GestureDetector(
+            //   behavior: HitTestBehavior.translucent,
+            //   onTap: () {
+            //     onItemTapped(2);
+            //   },
+            //   child: Column(
+            //     children: [
+            //       Icon(
+            //         Icons.school,
+            //         color: index == 2 ? AppColors.green_main : Colors.grey,
+            //       ),
+            //       Text(
+            //         '캠퍼스',
+            //         style: TextStyle(
+            //           color: index == 2 ? AppColors.green_main : Colors.grey,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
