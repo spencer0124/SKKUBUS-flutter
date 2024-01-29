@@ -47,7 +47,7 @@ class ScrollableRow extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              // Get.toNamed('/busDetail');
+              Get.toNamed('/lostandfound');
             },
             child: const ScrollRowContainer(
               text: '유실물찾기',
