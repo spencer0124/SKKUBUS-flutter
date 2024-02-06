@@ -42,8 +42,8 @@ class SearchListController extends GetxController {
 
   Future<void> performSearch(String queryString) async {
     try {
-      print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      print("queryString: $queryString");
+      // print("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // print("queryString: $queryString");
       SearchOption3Model result = await searchOption3(queryString);
       result.option3Items.hssc?.forEach((item) {
         item.category = '인사캠'; // Mark HSSC items

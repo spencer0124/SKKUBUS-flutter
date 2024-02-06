@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:skkumap/admob/ad_helper.dart';
-import 'package:skkumap/app/model/bus_station_model.dart';
+import 'package:skkumap/app/model/hssc_station_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skkumap/app/model/hssc_buslocation.dart';
 
@@ -13,9 +13,11 @@ import 'package:skkumap/app/utils/api_fetch/hssc_buslocation.dart';
 
 import 'dart:async';
 
+import 'package:skkumap/app/utils/api_fetch/hssc_stationlist.dart';
+
 // life cycle
 class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
-  BusDataController busDataController = Get.find<BusDataController>();
+  BusDataController controller = Get.find<BusDataController>();
 
   @override
   void onInit() {
@@ -33,6 +35,8 @@ class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       // 화면 다시 돌아왔을때 할 일 정해주기
+      controller.fetchHsscBusLocation();
+      controller.fetchHSSCBusStations();
     }
   }
 }
@@ -52,7 +56,11 @@ class BusDataController extends GetxController {
     fetchBusStations();
     fetchHsscBusLocation();
     _timer = Timer.periodic(
-        const Duration(seconds: 10), (Timer t) => fetchHsscBusLocation());
+        const Duration(seconds: 10),
+        (Timer t) => {
+              fetchHsscBusLocation(),
+              fetchHSSCBusStations(),
+            });
   }
 
   void _initializeBannerAd() {
@@ -75,31 +83,30 @@ class BusDataController extends GetxController {
     )..load();
   }
 
-  var busStations = <BusStation>[].obs;
   var activeBusCount = 1.obs;
+
+  var hsscStationModel = Rx<HSSCstationModel?>(
+      null); // Note the change from List to a single model
   var loadingdone = false.obs;
 
-  void fetchBusStations() async {
+// This function now correctly awaits the fetchBusStations and assigns its result to hsscStationModel
+  Future<void> fetchHSSCBusStations() async {
     try {
-      final response = await http.get(Uri.parse(dotenv.env['hsscListDev']!));
-
-      if (response.statusCode == 200) {
-        Iterable jsonResponse = json.decode(response.body);
-        busStations.value = List<BusStation>.from(
-            jsonResponse.map((model) => BusStation.fromJson(model)));
-      } else {
-        // Handle error
-      }
+      hsscStationModel.value =
+          await fetchBusStations(); // The awaited result is a HSSCstationModel
+    } catch (e) {
+      print("---");
+      print("Error fetching HSSC bus stations: $e");
+      print("---");
     } finally {
-      // isLoading.value = false;
       loadingdone.value = true;
     }
   }
 
-  var hsscBusLocations = Rx<List<HSSCBusLocation>>([]);
+  var hsscBusLocation = Rx<List<HSSCBusLocation>>([]);
   Future<void> fetchHsscBusLocation() async {
     try {
-      hsscBusLocations.value = await fetchHSSCBusLocation();
+      hsscBusLocation.value = await fetchHSSCBusLocation();
       // print("===");
       // print('hsscBusLocations.value: ${hsscBusLocations.value}');
       // print("===");

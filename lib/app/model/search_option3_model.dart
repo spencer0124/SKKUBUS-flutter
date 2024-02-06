@@ -72,20 +72,29 @@ class Option3Items {
 class BuildingInfo {
   @override
   String toString() {
-    return 'BuildingInfo{buildNmKr: $buildNmKr, buildNmEn: $buildNmEn, buildNo: $buildNo}';
+    return 'BuildingInfo{buildNmKr: $buildNmKr, buildNmEn: $buildNmEn, buildNo: $buildNo, latitude: $latitude, longtitude: $longtitude}';
   }
 
   String? buildNmKr;
   String? buildNmEn;
   String? buildNo;
+  double? latitude;
+  double? longtitude;
 
-  BuildingInfo({this.buildNmKr, this.buildNmEn, this.buildNo});
+  BuildingInfo(
+      {this.buildNmKr,
+      this.buildNmEn,
+      this.buildNo,
+      this.latitude,
+      this.longtitude});
 
   factory BuildingInfo.fromJson(Map<String, dynamic> json) {
     return BuildingInfo(
       buildNmKr: json['buildNm_kr'] as String?,
       buildNmEn: json['buildNm_en'] as String?,
       buildNo: json['buildNo'] as String?,
+      latitude: json['latitude'] as double?,
+      longtitude: json['longtitude'] as double?,
     );
   }
 }
