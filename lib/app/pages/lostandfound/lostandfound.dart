@@ -108,7 +108,7 @@ class LostAndFound extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '인사캠 600주년기념관 1층, 자과캠 학생회관 종합행정실 1층\n운영시간: 평일 09:00~17:30',
+                        '인사캠: 600주년기념관 1층\n자과캠: 학생회관 종합행정실 1층\n운영시간: 평일 09:00~17:30',
                         style: TextStyle(
                             color: Colors.grey[900],
                             fontFamily: 'CJKRegular',

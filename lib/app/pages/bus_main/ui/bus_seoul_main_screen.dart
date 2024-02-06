@@ -27,9 +27,12 @@ class BusDataScreen extends GetView<BusDataController> {
 
     return Scaffold(
       // floating action button
-      floatingActionButton: const RefreshButton(
-        busType: BusType.hsscBus,
-      ),
+      floatingActionButton: RefreshButton(
+          busType: BusType.hsscBus,
+          onRefresh: () {
+            controller.fetchHsscBusLocation();
+            controller.fetchHSSCBusStations();
+          }),
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[200],
 
@@ -82,11 +85,18 @@ class BusDataScreen extends GetView<BusDataController> {
           Obx(() {
             return TopInfo(
               isLoaded: true,
+              currentTime:
+                  controller.hsscStationModel.value?.metadata.currentTime ??
+                      '00:00 AM',
               timeFormat: TimeFormat.format12Hour,
-              busCount: controller.activeBusCount.value,
-              busStatus: controller.activeBusCount.value > 0
-                  ? BusStatus.active
-                  : BusStatus.inactive,
+              busCount:
+                  controller.hsscStationModel.value?.metadata.totalBuses ?? 0,
+              busStatus:
+                  (controller.hsscStationModel.value?.metadata.totalBuses ??
+                              0) >
+                          0
+                      ? BusStatus.active
+                      : BusStatus.inactive,
             );
           }),
           Container(
@@ -118,19 +128,27 @@ class BusDataScreen extends GetView<BusDataController> {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.busStations.length,
+                              itemCount: controller
+                                  .hsscStationModel.value?.stations.length,
                               itemBuilder: (context, index) {
-                                final station = controller.busStations[index];
-                                return BusListComponent(
-                                  stationName: station.stationName,
-                                  stationNumber: station.stationNumber,
-                                  eta: station.eta,
-                                  isFirstStation: station.isFirstStation,
-                                  isLastStation: station.isLastStation,
-                                  isRotationStation: station.isRotationStation,
-                                  busType: BusType
-                                      .hsscBus, // Ensure this matches your type
-                                );
+                                final station = controller
+                                    .hsscStationModel.value?.stations[index];
+                                if (station != null) {
+                                  return BusListComponent(
+                                    stationName: station.stationName,
+                                    stationNumber: station.stationNumber,
+                                    eta: station.eta,
+                                    isFirstStation: station.isFirstStation,
+                                    isLastStation: station.isLastStation,
+                                    isRotationStation:
+                                        station.isRotationStation,
+                                    busType: BusType
+                                        .hsscBus, // Make sure this is the correct enum value or type
+                                  );
+                                } else {
+                                  return const SizedBox
+                                      .shrink(); // Return an empty widget if station is null
+                                }
                               },
                             ),
                             const SizedBox(
@@ -141,7 +159,7 @@ class BusDataScreen extends GetView<BusDataController> {
                       },
                     ),
                     // 번호판 && 버스 현재 위치 정보 부분
-                    ...controller.hsscBusLocations.value.asMap().entries.map(
+                    ...controller.hsscBusLocation.value.asMap().entries.map(
                           (e) => BusInfoComponent(
                             elapsedSeconds: e.value.estimatedTime,
                             currentStationIndex:

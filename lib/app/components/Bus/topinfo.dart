@@ -4,10 +4,10 @@ import 'package:shimmer/shimmer.dart';
 
 import 'package:skkumap/app/types/bus_status.dart';
 import 'package:skkumap/app/types/time_format.dart';
-import 'dart:async';
 
-class TopInfo extends StatefulWidget {
+class TopInfo extends StatelessWidget {
   final TimeFormat timeFormat;
+  final String currentTime;
   final int busCount;
   final BusStatus busStatus;
   final bool isLoaded;
@@ -15,47 +15,14 @@ class TopInfo extends StatefulWidget {
   const TopInfo({
     Key? key,
     required this.timeFormat,
+    required this.currentTime,
     required this.busCount,
     required this.busStatus,
     required this.isLoaded,
   }) : super(key: key);
 
-  @override
-  _TopInfoState createState() => _TopInfoState();
-}
-
-class _TopInfoState extends State<TopInfo> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    // Set up a timer that triggers every second.
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        // This empty setState call tells Flutter to rebuild the widget
-        // which will update the time display.
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel(); // Always cancel timers to prevent memory leaks.
-    super.dispose();
-  }
-
-  String get timeString {
-    DateFormat formatter = widget.timeFormat == TimeFormat.format12Hour
-        ? DateFormat('hh:mm a')
-        : DateFormat('HH:mm');
-    return formatter.format(DateTime.now());
-  }
-
   String get busCountString {
-    return widget.busStatus == BusStatus.active
-        ? "${widget.busCount}대 운행 중"
-        : "운행 종료";
+    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행 종료";
   }
 
   @override
@@ -68,9 +35,9 @@ class _TopInfoState extends State<TopInfo> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
-            child: widget.isLoaded
+            child: isLoaded
                 ? Text(
-                    "$timeString 기준 · $busCountString",
+                    "$currentTime 기준 · $busCountString",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[800],

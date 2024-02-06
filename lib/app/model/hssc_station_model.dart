@@ -1,5 +1,22 @@
 import 'package:skkumap/app/types/bus_type.dart';
 
+class ResponseMetadata {
+  final String currentTime;
+  final int totalBuses;
+
+  ResponseMetadata({
+    required this.currentTime,
+    required this.totalBuses,
+  });
+
+  factory ResponseMetadata.fromJson(Map<String, dynamic> json) {
+    return ResponseMetadata(
+      currentTime: json['currentTime'],
+      totalBuses: json['totalBuses'],
+    );
+  }
+}
+
 class BusStation {
   final String stationName;
   final String? stationNumber;
@@ -28,6 +45,27 @@ class BusStation {
       isLastStation: json['isLastStation'],
       isRotationStation: json['isRotationStation'],
       busType: json['busType'],
+    );
+  }
+}
+
+class HSSCstationModel {
+  final ResponseMetadata metadata;
+  final List<BusStation> stations;
+
+  HSSCstationModel({
+    required this.metadata,
+    required this.stations,
+  });
+
+  factory HSSCstationModel.fromJson(Map<String, dynamic> json) {
+    var stationsList = (json['HSSCStations'] as List)
+        .map((i) => BusStation.fromJson(i))
+        .toList();
+
+    return HSSCstationModel(
+      metadata: ResponseMetadata.fromJson(json['metadata']),
+      stations: stationsList,
     );
   }
 }
