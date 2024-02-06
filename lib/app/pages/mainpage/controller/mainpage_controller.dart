@@ -37,6 +37,7 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
       // 여기에 화면에 돌아왔을때 사용할 코드 작성하기
+      mainpageController.mainPageBusListFetch();
     }
   }
 }

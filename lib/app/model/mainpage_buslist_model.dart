@@ -32,7 +32,7 @@ class MetaData {
 class BusList {
   @override
   String toString() {
-    return 'BusList{title: $title, subtitle: $subtitle, busTypeText: $busTypeText, busTypeBgColor: $busTypeBgColor, pageLink: $pageLink, altPageLink: $altPageLink, noticeText: $noticeText, useAltPageLink:$useAltPageLink, showAnimation: $showAnimation, showNoticeText: $showNoticeText}';
+    return 'BusList{title: $title, subtitle: $subtitle, busTypeText: $busTypeText, busTypeBgColor: $busTypeBgColor, pageLink: $pageLink, pageWebviewLink: $pageWebviewLink, altPageLink: $altPageLink, noticeText: $noticeText, useAltPageLink: $useAltPageLink, showAnimation: $showAnimation, showNoticeText: $showNoticeText}';
   }
 
   final String title;
@@ -40,6 +40,7 @@ class BusList {
   final String busTypeText;
   final String busTypeBgColor;
   final String pageLink;
+  final String? pageWebviewLink;
   final String? altPageLink;
 
   final String? noticeText;
@@ -54,6 +55,7 @@ class BusList {
     required this.busTypeText,
     required this.busTypeBgColor,
     required this.pageLink,
+    this.pageWebviewLink,
     this.altPageLink,
     this.noticeText,
     required this.useAltPageLink,
@@ -68,6 +70,7 @@ class BusList {
       busTypeText: json['busTypeText'],
       busTypeBgColor: json['busTypeBgColor'],
       pageLink: json['pageLink'],
+      pageWebviewLink: json['pageWebviewLink'],
       altPageLink: json['altPageLink'],
       noticeText: json['noticeText'],
       useAltPageLink: json['useAltPageLink'],

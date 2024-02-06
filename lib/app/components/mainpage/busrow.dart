@@ -17,6 +17,7 @@ class CustomRow1 extends StatelessWidget {
   final String busTypeText;
   final String busTypeBgColor;
   final String pageLink;
+  final String? pageWebviewLink;
   final String? altPageLink;
 
   final String? noticeText;
@@ -32,6 +33,7 @@ class CustomRow1 extends StatelessWidget {
     required this.busTypeText,
     required this.busTypeBgColor,
     required this.pageLink,
+    this.pageWebviewLink,
     this.altPageLink,
     this.noticeText,
     required this.useAltPageLink,
@@ -54,6 +56,7 @@ class CustomRow1 extends StatelessWidget {
             Get.toNamed(pageLink, arguments: {
               'title': title,
               'color': busTypeBgColor,
+              'webviewLink': pageWebviewLink,
             });
           } else {
             Get.toNamed(pageLink);
