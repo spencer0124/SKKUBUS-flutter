@@ -49,13 +49,13 @@ class MainPageBackground extends StatelessWidget {
                             left: 10,
                             right: 10,
                             top: statusBarHeight + 10,
-                            child: Row(
+                            child: const Row(
                               children: [
-                                const CustomSearchBar(),
-                                const Spacer(),
-                                CustomFilter(onFilterTap: () {
-                                  Get.bottomSheet(const FilterSheet());
-                                }),
+                                CustomSearchBar(),
+                                // const Spacer(),
+                                // CustomFilter(onFilterTap: () {
+                                //   Get.bottomSheet(const FilterSheet());
+                                // }),
                               ],
                             ),
                           ),

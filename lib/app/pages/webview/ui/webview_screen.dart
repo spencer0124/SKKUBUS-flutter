@@ -15,10 +15,14 @@ class CustomWebViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final String pageTitle = Get.arguments['title'];
     final String pageColor = Get.arguments['color'];
+    final String pageWebviewLink = Get.arguments['webviewLink'];
+
     final double screenHeight = ScreenSize.height(context);
     final double screenWidth = ScreenSize.width(context);
 
     final controller = Get.find<CustomWebViewController>();
+    controller.initializeWebView(pageWebviewLink);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(

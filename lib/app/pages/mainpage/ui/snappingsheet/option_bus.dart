@@ -28,6 +28,7 @@ class OptionBus extends StatelessWidget {
               busTypeBgColor: bus.busTypeBgColor,
               pageLink: bus.pageLink,
               altPageLink: bus.altPageLink,
+              pageWebviewLink: bus.pageWebviewLink,
               noticeText: bus.noticeText,
               useAltPageLink: bus.useAltPageLink,
               showAnimation: bus.showAnimation,
