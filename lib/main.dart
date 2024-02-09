@@ -17,15 +17,18 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:skkumap/app/pages/KingoLogin/controller/KingoLogin_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_detail/controller/bus_inja_detail_controller.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
-import 'package:skkumap/app/pages/bus_jonro_main/controller/bus_jonro_main_controller.dart';
+import 'package:skkumap/app/pages/hssc_building_map/controller/hssc_building_map_controller.dart';
+import 'package:skkumap/app/pages/bus_main_detail/controller/bus_seoul_detail_controller.dart';
+import 'package:skkumap/app/pages/bus_main_main/controller/bus_seoul_main_controller.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
-import 'package:skkumap/app/pages/bus_detail/controller/bus_seoul_detail_controller.dart';
-import 'package:skkumap/app/pages/bus_main/controller/bus_seoul_main_controller.dart';
-import 'package:skkumap/app/pages/homepage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/firebase_options.dart';
 
 import 'languages.dart';
+
+import 'package:skkumap/app/pages/nsc_building_map/controller/nsc_building_map_controller.dart';
+import 'package:skkumap/app/pages/search_list/controller/search_list_controller.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -113,8 +116,8 @@ Future<void> initNaverMapSdk() async {
 }
 
 void registerDependencies() {
-  Get.put(BusDataController());
-  Get.put(SeoulMainLifeCycle());
+  Get.lazyPut(() => BusDataController());
+  Get.lazyPut(() => SeoulMainLifeCycle());
 
   Get.lazyPut(() => SeoulDetailController());
   Get.lazyPut(() => SeoulDetailLifeCycle());
@@ -130,11 +133,13 @@ void registerDependencies() {
   Get.put(MainpageController());
   Get.put(MainpageLifeCycle());
 
-  Get.put(JonroMainController());
-  Get.put(JonroMainLifeCycle());
-
   Get.lazyPut(() => KingoLoginController());
   Get.lazyPut(() => KingoLoginLifeCycle());
 
-  Get.put(KNewYearBusController());
+  Get.put(HSSCBuildingMapController());
+  Get.put(CustomWebViewController());
+
+  Get.put(NSCBuildingMapController());
+
+  Get.put(SearchListController());
 }

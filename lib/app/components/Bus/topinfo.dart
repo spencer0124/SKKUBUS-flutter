@@ -7,6 +7,7 @@ import 'package:skkumap/app/types/time_format.dart';
 
 class TopInfo extends StatelessWidget {
   final TimeFormat timeFormat;
+  final String currentTime;
   final int busCount;
   final BusStatus busStatus;
   final bool isLoaded;
@@ -14,20 +15,14 @@ class TopInfo extends StatelessWidget {
   const TopInfo({
     Key? key,
     required this.timeFormat,
+    required this.currentTime,
     required this.busCount,
     required this.busStatus,
     required this.isLoaded,
   }) : super(key: key);
 
-  String get timeString {
-    DateFormat formatter = timeFormat == TimeFormat.format12Hour
-        ? DateFormat('hh:mm a')
-        : DateFormat('HH:mm');
-    return formatter.format(DateTime.now());
-  }
-
   String get busCountString {
-    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행 종료";
+    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행중인 버스 없음";
   }
 
   @override
@@ -42,7 +37,7 @@ class TopInfo extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
             child: isLoaded
                 ? Text(
-                    "$timeString 기준 · $busCountString",
+                    "$currentTime 기준 · $busCountString",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[800],

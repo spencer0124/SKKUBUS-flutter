@@ -5,8 +5,13 @@ import 'package:skkumap/app/types/bus_type.dart';
 
 class RefreshButton extends StatefulWidget {
   final BusType busType;
+  final VoidCallback onRefresh;
 
-  const RefreshButton({Key? key, required this.busType}) : super(key: key);
+  const RefreshButton({
+    Key? key,
+    required this.busType,
+    required this.onRefresh,
+  }) : super(key: key);
 
   @override
   State<RefreshButton> createState() => _RefreshButtonState();
@@ -34,17 +39,17 @@ class _RefreshButtonState extends State<RefreshButton>
       ..reset()
       ..forward();
 
-    switch (widget.busType) {
-      case BusType.jonroBus:
-        // TODO: Implement refresh logic for Jonro07Bus
-        break;
-      case BusType.hsscBus:
-        // TODO: Implement refresh logic for HSSCBus
-        break;
-      case BusType.campusBus:
-        // TODO: Implement refresh logic for CampusBus
-        break;
-    }
+    // switch (widget.busType) {
+    //   case BusType.jonroBus:
+    //     // TODO: Implement refresh logic for Jonro07Bus
+    //     break;
+    //   case BusType.hsscBus:
+    //     // TODO: Implement refresh logic for HSSCBus
+    //     break;
+    //   case BusType.campusBus:
+    //     // TODO: Implement refresh logic for CampusBus
+    //     break;
+    // }
   }
 
   void resetTimer() {
@@ -61,6 +66,7 @@ class _RefreshButtonState extends State<RefreshButton>
       onTap: () {
         resetTimer();
         refreshAction();
+        widget.onRefresh();
       },
       child: Stack(
         alignment: Alignment.center,

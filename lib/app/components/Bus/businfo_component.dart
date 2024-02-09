@@ -11,6 +11,7 @@ class BusInfoComponent extends StatefulWidget {
   final int lastStationIndex;
   final String plateNumber;
   final BusType busType;
+  final Function onDataUpdated;
 
   const BusInfoComponent({
     Key? key,
@@ -19,6 +20,7 @@ class BusInfoComponent extends StatefulWidget {
     required this.lastStationIndex,
     required this.plateNumber,
     required this.busType,
+    required this.onDataUpdated,
   }) : super(key: key);
 
   @override
@@ -36,8 +38,14 @@ class _BusInfoComponentState extends State<BusInfoComponent> {
         .elapsedSeconds; // Start with the initial elapsed seconds passed in.
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        // elapsedSecondsOverride++; // Increment the elapsed seconds.
+        elapsedSecondsOverride++; // Increment the elapsed seconds.
       });
+    });
+  }
+
+  void updateElapsedSeconds() {
+    setState(() {
+      elapsedSecondsOverride = widget.elapsedSeconds;
     });
   }
 
@@ -49,6 +57,8 @@ class _BusInfoComponentState extends State<BusInfoComponent> {
 
   @override
   Widget build(BuildContext context) {
+    widget.onDataUpdated(updateElapsedSeconds);
+
     return Positioned(
       /*
       얼마나 버스 아이콘을 이동시킬지 결정한다
@@ -57,7 +67,7 @@ class _BusInfoComponentState extends State<BusInfoComponent> {
         2-1. 버스가 출발한지 550초가 지난 경우: 이동시키면 안된다
         2-2. 버스가 출발한지 550초가 지나지 않은 경우: 1초에 1/9씩 이동시킨다
       */
-      top: widget.currentStationIndex == widget.lastStationIndex
+      top: widget.currentStationIndex >= widget.lastStationIndex
           ? 26 + 66.0 * widget.currentStationIndex
           : elapsedSecondsOverride > 200
               ? 26 + 66.0 * widget.currentStationIndex + 40
