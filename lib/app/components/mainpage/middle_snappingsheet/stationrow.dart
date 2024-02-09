@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:skkumap/app_theme.dart';
 import 'package:skkumap/app/components/mainpage/middle_snappingsheet/stationrow_component.dart'; // Import the ScrollRowContainer widget
+import 'package:get/get.dart';
+import 'package:skkumap/app/types/bus_type.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -102,69 +104,69 @@ class CustomRow2 extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Column(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    StationRowComponent(
-                                        containerColor: Colors.green,
-                                        containerText: '종로07'),
-                                    SizedBox(
+                                    GestureDetector(
+                                      behavior: HitTestBehavior.translucent,
+                                      onTap: () {
+                                        Get.toNamed('/MainbusMain', arguments: {
+                                          'bustype': BusType.jongro07Bus,
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const StationRowComponent(
+                                            containerColor: Colors.green,
+                                            containerText: '종로07',
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            subtitleText1,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              // fontFamily: 'CJKMedium',
+                                              fontSize: 13,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    StationRowComponent(
-                                        containerColor: AppColors.green_main,
-                                        containerText: '인사캠'),
+                                    GestureDetector(
+                                      behavior: HitTestBehavior.translucent,
+                                      onTap: () {
+                                        Get.toNamed('/MainbusMain', arguments: {
+                                          'bustype': BusType.hsscBus,
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const StationRowComponent(
+                                            containerColor:
+                                                AppColors.green_main,
+                                            containerText: '인사캠',
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            subtitleText2,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              // fontFamily: 'CJKMedium',
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                Column(
-                                  children: [
-                                    isLoading
-                                        ? Text(
-                                            '$subtitleText1\n$subtitleText2',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontFamily: 'CJKMedium',
-                                              fontSize: 11.5,
-                                            ),
-                                            textAlign: TextAlign.start,
-                                          )
-                                        : Column(
-                                            children: [
-                                              Shimmer.fromColors(
-                                                baseColor: Colors.grey[100]!,
-                                                highlightColor: Colors.white,
-                                                child: Container(
-                                                  width: 100.w,
-                                                  height: 12.h,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Shimmer.fromColors(
-                                                baseColor: Colors.grey[100]!,
-                                                highlightColor: Colors.white,
-                                                child: Container(
-                                                  width: 100.w,
-                                                  height: 12.h,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                  ],
-                                )
-
-                                // Text(
-                                //     'loading..\n$subtitleText2',
-                                //     style: TextStyle(
-                                //       color: Colors.grey[600],
-                                //       fontFamily: 'CJKMedium',
-                                //       fontSize: 11.5,
-                                //     ),
-                                //     textAlign: TextAlign.start,
-                                //   ),
                               ],
                             ),
                           ],

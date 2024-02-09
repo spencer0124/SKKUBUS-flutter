@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:skkumap/app/types/bus_type.dart';
 
 final double dwidth =
     MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
@@ -52,13 +52,36 @@ class CustomRow1 extends StatelessWidget {
             Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
           }
         } else {
+          // 웹뷰로 가는 경우
           if (pageLink == "/customwebview") {
             Get.toNamed(pageLink, arguments: {
               'title': title,
               'color': busTypeBgColor,
               'webviewLink': pageWebviewLink,
             });
-          } else {
+          }
+
+          // 인사캠 셔틀, 종로07, 종로02로 가는 경우
+          // 모두 같은 페이지로 가는데, 각각의 버스타입으로 색과 api 요청을 구분한다.
+          else if (pageLink == "/MainbusMain") {
+            BusType bustype;
+            if (title == "인사캠 셔틀") {
+              bustype = BusType.hsscBus;
+            } else if (title == "종로 07") {
+              bustype = BusType.jongro07Bus;
+            } else if (title == "종로 02") {
+              bustype = BusType.jongro02Bus;
+            } else {
+              bustype = BusType.hsscBus;
+            }
+
+            Get.toNamed(pageLink, arguments: {
+              'bustype': bustype,
+            });
+          }
+
+          // 그 외의 경우
+          else {
             Get.toNamed(pageLink);
           }
         }

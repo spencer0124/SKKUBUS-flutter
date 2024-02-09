@@ -38,11 +38,14 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       // 여기에 화면에 돌아왔을때 사용할 코드 작성하기
       mainpageController.mainPageBusListFetch();
+      mainpageController.stationDataFetch();
     }
   }
 }
 
 class MainpageController extends GetxController {
+  Timer? _timer;
+
   // BottomNavigation 현재 선택된 index 저장
   var bottomNavigationIndex = 0.obs;
 
@@ -72,9 +75,13 @@ class MainpageController extends GetxController {
 
   Future<void> stationDataFetch() async {
     try {
-      stationData.value = await fetchStationData('123');
-      // print(
-      //     'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
+      print('11');
+      stationData.value = await fetchStationData('01592');
+      print('22');
+      print("===================================");
+      print(
+          'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
+      print("===================================");
     } catch (e) {
       // print('Error fetching data: $e');
     }
@@ -85,8 +92,8 @@ class MainpageController extends GetxController {
   Future<void> mainPageBusListFetch() async {
     try {
       mainpageBusList.value = await fetchMainpageBusList();
-      print(
-          'MainPageBusListFetch, mainpageBusList.value: ${mainpageBusList.value!.busList}');
+      // print(
+      // 'MainPageBusListFetch, mainpageBusList.value: ${mainpageBusList.value!.busList}');
     } catch (e) {
       // print('Error fetching data: $e');
     }
@@ -95,10 +102,14 @@ class MainpageController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    stationDataFetch();
     await mainPageBusListFetch();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snaptoInitPosition();
-      // stationDataFetch();
+      _timer = Timer.periodic(
+        const Duration(seconds: 15),
+        (Timer t) => stationDataFetch(),
+      );
     });
   }
 }

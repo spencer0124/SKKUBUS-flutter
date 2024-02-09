@@ -4,12 +4,12 @@ import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
 
 import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
-import 'package:skkumap/app/pages/bus_jonro_main/ui/bus_jonro_main_screen.dart';
-import 'package:skkumap/app/pages/hssc_building_map/view/hssc_building_map_screen.dart';
-import 'package:skkumap/app/pages/bus_main/binding/bus_seoul_main_binding.dart';
-import 'package:skkumap/app/pages/bus_main/ui/bus_seoul_main_screen.dart';
 
-import 'package:skkumap/app/pages/bus_detail/ui/bus_seoul_detail_screen.dart';
+import 'package:skkumap/app/pages/hssc_building_map/view/hssc_building_map_screen.dart';
+import 'package:skkumap/app/pages/bus_main_main/binding/bus_seoul_main_binding.dart';
+import 'package:skkumap/app/pages/bus_main_main/ui/bus_seoul_main_screen.dart';
+
+import 'package:skkumap/app/pages/bus_main_detail/ui/bus_seoul_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
 import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 
@@ -28,11 +28,11 @@ class AppRoutes {
       page: () => const Mainpage(), // Your Home page or initial page
     ),
     GetPage(
-        name: '/busData',
+        name: '/MainbusMain',
         page: () => const BusDataScreen(),
         binding: BusDataBinding()),
     GetPage(
-        name: '/busDetail',
+        name: '/MainbusDetail',
         page: () => const BusDataScreenDetail(),
         binding: BusDataBinding()),
     GetPage(
@@ -61,10 +61,6 @@ class AppRoutes {
       page: () => const KingoInfoView(),
     ),
     GetPage(
-      name: '/jonromain',
-      page: () => const JonroMainScreen(),
-    ),
-    GetPage(
       name: '/hsscbuildingmap',
       page: () => const HSSCBuildingMap(),
     ),
@@ -90,7 +86,7 @@ class AppRoutes {
     ),
     GetPage(
       name: '/searchlist',
-      page: () => SearchList(),
+      page: () => const SearchList(),
     )
   ];
 }

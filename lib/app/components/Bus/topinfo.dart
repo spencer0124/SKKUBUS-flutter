@@ -22,7 +22,7 @@ class TopInfo extends StatelessWidget {
   }) : super(key: key);
 
   String get busCountString {
-    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행 종료";
+    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행중인 버스 없음";
   }
 
   @override
