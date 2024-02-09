@@ -4,16 +4,22 @@ import 'package:skkumap/app/pages/KingoLogin/ui/KingoLogin_view.dart';
 
 import 'package:skkumap/app/pages/bus_inja_detail/ui/bus_inja_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/binding/bus_inja_main_binding.dart';
-import 'package:skkumap/app/pages/bus_jonro_main/ui/bus_jonro_main_screen.dart';
-import 'package:skkumap/app/pages/webview/view/webview_screen.dart';
-import 'package:skkumap/app/pages/bus_main/binding/bus_seoul_main_binding.dart';
-import 'package:skkumap/app/pages/bus_main/ui/bus_seoul_main_screen.dart';
 
-import 'package:skkumap/app/pages/bus_detail/ui/bus_seoul_detail_screen.dart';
+import 'package:skkumap/app/pages/hssc_building_map/view/hssc_building_map_screen.dart';
+import 'package:skkumap/app/pages/bus_main_main/binding/bus_seoul_main_binding.dart';
+import 'package:skkumap/app/pages/bus_main_main/ui/bus_seoul_main_screen.dart';
+
+import 'package:skkumap/app/pages/bus_main_detail/ui/bus_seoul_detail_screen.dart';
 import 'package:skkumap/app/pages/bus_inja_main/ui/bus_inja_main_screen.dart';
-import 'package:skkumap/app/pages/homepage/ui/mainpage_screen.dart';
+import 'package:skkumap/app/pages/mainpage/ui/mainpage_screen.dart';
 
 import 'package:skkumap/app/pages/new_alert/ui/new_alert.dart';
+import 'package:skkumap/app/pages/hssc_building_credit/hssc_building_credit.dart';
+import 'package:skkumap/app/pages/webview/ui/webview_screen.dart';
+import 'package:skkumap/app/pages/nsc_building_map/view/nsc_building_map_screen.dart';
+import 'package:skkumap/app/pages/nsc_building_credit/nsc_building_credit.dart';
+import 'package:skkumap/app/pages/lostandfound/lostandfound.dart';
+import 'package:skkumap/app/pages/search_list/screen/search_list_screen.dart';
 
 class AppRoutes {
   static final routes = [
@@ -22,11 +28,11 @@ class AppRoutes {
       page: () => const Mainpage(), // Your Home page or initial page
     ),
     GetPage(
-        name: '/busData',
+        name: '/MainbusMain',
         page: () => const BusDataScreen(),
         binding: BusDataBinding()),
     GetPage(
-        name: '/busDetail',
+        name: '/MainbusDetail',
         page: () => const BusDataScreenDetail(),
         binding: BusDataBinding()),
     GetPage(
@@ -55,12 +61,32 @@ class AppRoutes {
       page: () => const KingoInfoView(),
     ),
     GetPage(
-      name: '/jonromain',
-      page: () => const JonroMainScreen(),
+      name: '/hsscbuildingmap',
+      page: () => const HSSCBuildingMap(),
     ),
     GetPage(
-      name: '/knewyear',
-      page: () => const KNewYearBus(),
+      name: '/hsscbuildingcredit',
+      page: () => const HSSCBuildingCredit(),
+    ),
+    GetPage(
+      name: '/nscbuildingmap',
+      page: () => const NSCBuildingMap(),
+    ),
+    GetPage(
+      name: '/nscbuildingcredit',
+      page: () => const NSCBuildingCredit(),
+    ),
+    GetPage(
+      name: '/customwebview',
+      page: () => const CustomWebViewScreen(),
+    ),
+    GetPage(
+      name: '/lostandfound',
+      page: () => const LostAndFound(),
+    ),
+    GetPage(
+      name: '/searchlist',
+      page: () => const SearchList(),
     )
   ];
 }

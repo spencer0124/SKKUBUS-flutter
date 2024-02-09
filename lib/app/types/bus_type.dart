@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:skkumap/app_theme.dart';
 
 enum BusType {
-  jonroBus,
+  jongro02Bus,
+  jongro07Bus,
   hsscBus,
   campusBus,
 }
@@ -10,14 +11,31 @@ enum BusType {
 extension BusTypeExtension on BusType {
   Color get color {
     switch (this) {
-      case BusType.jonroBus:
+      case BusType.jongro02Bus:
+        return Colors.green;
+      case BusType.jongro07Bus:
         return Colors.green;
       case BusType.hsscBus:
         return AppColors.green_main;
       case BusType.campusBus:
         return AppColors.green_main;
       default:
-        return AppColors.green_main; // Default color
+        return AppColors.green_main;
+    }
+  }
+
+  String get title {
+    switch (this) {
+      case BusType.jongro02Bus:
+        return "종로 02";
+      case BusType.jongro07Bus:
+        return "종로 07";
+      case BusType.hsscBus:
+        return "인사캠 셔틀";
+      case BusType.campusBus:
+        return "인자셔틀";
+      default:
+        return "인사캠 셔틀";
     }
   }
 }

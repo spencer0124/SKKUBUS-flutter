@@ -115,9 +115,7 @@ class BusListComponent extends StatelessWidget {
                           fontFamily: 'CJKMedium',
                         ),
                       ),
-                      if (stationName == "혜화역4번출구" ||
-                          stationName == "혜화역1번출구" ||
-                          stationName == "혜화역.마로니에공원")
+                      if (stationName == "낙원상가" || stationName == "종각.공평유적전시관")
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),
                           margin: const EdgeInsets.only(left: 2),
@@ -125,9 +123,68 @@ class BusListComponent extends StatelessWidget {
                           width: 13,
                           height: 13,
                           decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.purple),
+                              shape: BoxShape.circle, color: Color(0xFF0052A4)),
+                          child: const Text(
+                            "1",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      if (stationName == "헌법재판소.안국역" ||
+                          stationName == "수운회관" ||
+                          stationName == "낙원상가" ||
+                          stationName == "안국역.인사동" ||
+                          stationName == "안국역2번출구앞")
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),
+                          margin: const EdgeInsets.only(left: 2),
+                          alignment: Alignment.center,
+                          width: 13,
+                          height: 13,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xFFEF7C1C)),
+                          child: const Text(
+                            "3",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      if (stationName == "혜화역4번출구" ||
+                          stationName == "혜화역1번출구" ||
+                          stationName == "혜화역.마로니에공원" ||
+                          stationName == "혜화역(승차장)")
+                        Container(
+                          //
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),
+                          margin: const EdgeInsets.only(left: 2),
+                          alignment: Alignment.center,
+                          width: 13,
+                          height: 13,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xFF00A5DE)),
                           child: const Text(
                             "4",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      if (stationName == "낙원상가")
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),
+                          margin: const EdgeInsets.only(left: 2),
+                          alignment: Alignment.center,
+                          width: 13,
+                          height: 13,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xFF996CAC)),
+                          child: const Text(
+                            "5",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 8,
@@ -171,9 +228,10 @@ class BusListComponent extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.chevron_right,
-              color: Colors.grey.withOpacity(0.5),
+              // color: Colors.grey.withOpacity(0.5),
+              color: Colors.white,
             ),
             const SizedBox(
               width: 3,
