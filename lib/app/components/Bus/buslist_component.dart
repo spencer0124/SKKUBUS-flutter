@@ -107,14 +107,26 @@ class BusListComponent extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        stationName,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontFamily: 'CJKMedium',
+                      if (stationName.contains('미정차') ||
+                          stationName.contains('하차전용'))
+                        Text(
+                          stationName,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[600],
+                            fontFamily: 'CJKBold',
+                          ),
                         ),
-                      ),
+                      if (!(stationName.contains('미정차') ||
+                          stationName.contains('하차전용')))
+                        Text(
+                          stationName,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontFamily: 'CJKBold',
+                          ),
+                        ),
                       if (stationName == "낙원상가" || stationName == "종각.공평유적전시관")
                         Container(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),
@@ -156,7 +168,7 @@ class BusListComponent extends StatelessWidget {
                       if (stationName == "혜화역4번출구" ||
                           stationName == "혜화역1번출구" ||
                           stationName == "혜화역.마로니에공원" ||
-                          stationName == "혜화역(승차장)")
+                          stationName == "혜화역 1번출구")
                         Container(
                           //
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 1),

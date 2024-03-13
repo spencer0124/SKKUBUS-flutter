@@ -21,8 +21,8 @@ class ScrollableRow extends StatelessWidget {
             onTap: () {
               Get.toNamed('/hsscbuildingmap');
             },
-            child: const ScrollRowContainer(
-              text: '인사캠 건물지도',
+            child: ScrollRowContainer(
+              text: '인사캠 건물지도'.tr,
               icon: Icons.outbond,
               ischecked: false,
             ),
@@ -35,8 +35,8 @@ class ScrollableRow extends StatelessWidget {
             onTap: () {
               Get.toNamed('/nscbuildingmap');
             },
-            child: const ScrollRowContainer(
-              text: '자과캠 건물지도',
+            child: ScrollRowContainer(
+              text: '자과캠 건물지도'.tr,
               icon: Icons.outbond,
               ischecked: false,
             ),
@@ -49,8 +49,8 @@ class ScrollableRow extends StatelessWidget {
             onTap: () {
               Get.toNamed('/lostandfound');
             },
-            child: const ScrollRowContainer(
-              text: '유실물 찾기',
+            child: ScrollRowContainer(
+              text: '유실물 찾기'.tr,
               icon: Icons.sensor_occupied_sharp,
               ischecked: false,
             ),

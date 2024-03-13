@@ -100,16 +100,16 @@ class _SearchListState extends State<SearchList> {
                     ),
                     cursorHeight: 19,
                     cursorColor: AppColors.green_main,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "성균관대 공간명/코드 검색",
+                      hintText: "성균관대 공간명/코드 검색".tr,
                       isDense: true,
                       // contentPadding: EdgeInsets.all(20),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide:
                             BorderSide(width: 2, color: Colors.transparent),
                       ),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide:
                             BorderSide(width: 2, color: Colors.transparent),
                       ),
@@ -180,7 +180,7 @@ class _SearchListState extends State<SearchList> {
                       ),
                     ),
                     child: Text(
-                      '전체',
+                      '전체'.tr,
                       style: TextStyle(
                         color: controller.currentTab.value == SearchTab.all
                             ? Colors.white
@@ -214,7 +214,7 @@ class _SearchListState extends State<SearchList> {
                       ),
                     ),
                     child: Text(
-                      '인사캠',
+                      '인사캠'.tr,
                       style: TextStyle(
                         color: controller.currentTab.value == SearchTab.hssc
                             ? Colors.white
@@ -248,7 +248,7 @@ class _SearchListState extends State<SearchList> {
                       ),
                     ),
                     child: Text(
-                      '자과캠',
+                      '자과캠'.tr,
                       style: TextStyle(
                         color: controller.currentTab.value == SearchTab.nsc
                             ? Colors.white
@@ -269,8 +269,8 @@ class _SearchListState extends State<SearchList> {
             // Filtered list based on the current tab
             List<SpaceItem> items = controller.filteredItems;
             if (items.isEmpty) {
-              return const Center(
-                child: Text('검색 결과가 없습니다.'),
+              return Center(
+                child: Text('검색 결과가 없습니다'.tr),
               );
             } else {
               return Expanded(

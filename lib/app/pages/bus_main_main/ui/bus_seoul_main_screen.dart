@@ -172,7 +172,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                 int.parse(e.value.sequence) - 1,
                             lastStationIndex: controller.mainBusStationList
                                     .value?.metadata.lastStationIndex ??
-                                9,
+                                10,
                             plateNumber: e.value.carNumber,
                             busType: busType,
                             onDataUpdated: (Function callback) {

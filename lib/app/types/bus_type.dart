@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skkumap/app_theme.dart';
+import 'package:get/get.dart';
 
 enum BusType {
   jongro02Bus,
@@ -27,15 +28,15 @@ extension BusTypeExtension on BusType {
   String get title {
     switch (this) {
       case BusType.jongro02Bus:
-        return "종로 02";
+        return "종로 02".tr;
       case BusType.jongro07Bus:
-        return "종로 07";
+        return "종로 07".tr;
       case BusType.hsscBus:
-        return "인사캠 셔틀";
+        return "인사캠 셔틀버스".tr;
       case BusType.campusBus:
-        return "인자셔틀";
+        return "인자셔틀".tr;
       default:
-        return "인사캠 셔틀";
+        return "인사캠 셔틀버스".tr;
     }
   }
 }
