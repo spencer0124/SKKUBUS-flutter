@@ -29,18 +29,30 @@ class LicensePlate extends StatelessWidget {
 
           fit: BoxFit.fitWidth,
         ),
-
-        Positioned(
-          left: 6.5,
-          child: Text(
-            plateNumber,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: textColor,
+        if (plateNumber != '0000')
+          Positioned(
+            left: 6.5,
+            child: Text(
+              plateNumber,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
             ),
           ),
-        ),
+        if (plateNumber == '0000')
+          Positioned(
+            left: 2,
+            child: Text(
+              "번호 미제공",
+              style: TextStyle(
+                fontSize: 7.5,
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
+            ),
+          ),
       ],
     );
   }

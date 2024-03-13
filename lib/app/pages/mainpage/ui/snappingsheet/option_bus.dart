@@ -22,7 +22,7 @@ class OptionBus extends StatelessWidget {
 
           final busWidgets = busList.map((bus) {
             return CustomRow1(
-              title: bus.title,
+              title: bus.title.tr,
               subtitle: bus.subtitle,
               busTypeText: bus.busTypeText,
               busTypeBgColor: bus.busTypeBgColor,

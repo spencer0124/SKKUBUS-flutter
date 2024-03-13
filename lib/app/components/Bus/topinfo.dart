@@ -5,6 +5,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:skkumap/app/types/bus_status.dart';
 import 'package:skkumap/app/types/time_format.dart';
 
+import 'package:get/get.dart';
+
 class TopInfo extends StatelessWidget {
   final TimeFormat timeFormat;
   final String currentTime;
@@ -22,7 +24,9 @@ class TopInfo extends StatelessWidget {
   }) : super(key: key);
 
   String get busCountString {
-    return busStatus == BusStatus.active ? "$busCount대 운행 중" : "운행중인 버스 없음";
+    return busStatus == BusStatus.active
+        ? "$busCount${"대 운행 중".tr}"
+        : "운행중인 버스 없음".tr;
   }
 
   @override
@@ -37,7 +41,7 @@ class TopInfo extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
             child: isLoaded
                 ? Text(
-                    "$currentTime 기준 · $busCountString",
+                    "$currentTime ${"기준".tr} · $busCountString",
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[800],
