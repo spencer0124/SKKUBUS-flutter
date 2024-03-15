@@ -142,7 +142,7 @@ class InjaDetailController extends GetxController {
     '13:30',
     '15:00',
     '16:30',
-    '18:00',
+    '18:15',
   ];
 
   final List<String> suwonFridayBusTimes = [
@@ -155,8 +155,8 @@ class InjaDetailController extends GetxController {
     '15:00',
     '16:20',
     '16:30',
-    '18:00',
     '18:10',
+    '18:15',
   ];
 
   // 다음 버스 시간 저장하는 변수

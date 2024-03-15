@@ -29,7 +29,7 @@ class LostAndFound extends StatelessWidget {
       body: Column(
         children: [
           CustomNavigationBar(
-            title: '유실물 찾기',
+            title: '유실물 찾기'.tr,
             backgroundColor: AppColors.green_main,
             isDisplayLeftBtn: true,
             isDisplayRightBtn: false,
@@ -43,28 +43,30 @@ class LostAndFound extends StatelessWidget {
             height: 20,
           ),
           Container(
-            padding: const EdgeInsets.only(left: 10, top: 10),
+            padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
             alignment: Alignment.centerLeft,
             width: screenWidth * 0.92,
-            height: 100,
+            // height: 100,
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Column(
+            child: Column(
               // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "유실물 접수 및 처리 절차",
-                  style: TextStyle(fontSize: 13, fontFamily: 'CJKBold'),
+                  "유실물 접수 및 처리 절차".tr,
+                  style: const TextStyle(fontSize: 13, fontFamily: 'CJKBold'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
                 Text(
-                  "→  최초 발견자 습득 시, 1~2일 내 학생지원팀 이관\n→  학생지원팀: 유실물 게시판에 1개월 동안 공지\n→  1년 보관 후 폐기",
-                  style: TextStyle(fontSize: 13, fontFamily: 'CJKRegular'),
+                  "→  최초 발견자 습득 시, 1~2일 내 학생지원팀 이관\n→  학생지원팀: 유실물 게시판에 1개월 동안 공지\n→  1년 보관 후 폐기"
+                      .tr,
+                  style:
+                      const TextStyle(fontSize: 13, fontFamily: 'CJKRegular'),
                 ),
               ],
             ),
@@ -89,9 +91,9 @@ class LostAndFound extends StatelessWidget {
                     Container(
                       width: 5,
                     ),
-                    const Text(
-                      '학생지원팀',
-                      style: TextStyle(
+                    Text(
+                      '학생지원팀'.tr,
+                      style: const TextStyle(
                         color: AppColors.green_main,
                         fontFamily: 'CJKBold',
                       ),
@@ -108,7 +110,8 @@ class LostAndFound extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '인사캠: 600주년기념관 1층\n자과캠: 학생회관 종합행정실 1층\n운영시간: 평일 09:00~17:30',
+                        '인사캠: 600주년기념관 1층\n자과캠: 학생회관 종합행정실 1층\n운영시간: 평일 09:00~17:30'
+                            .tr,
                         style: TextStyle(
                             color: Colors.grey[900],
                             fontFamily: 'CJKRegular',
@@ -118,7 +121,7 @@ class LostAndFound extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '이메일: ',
+                            '이메일: '.tr,
                             style: TextStyle(
                                 color: Colors.grey[900],
                                 fontFamily: 'CJKRegular',
@@ -132,9 +135,9 @@ class LostAndFound extends StatelessWidget {
                                 text: 'studentaid@skku.edu',
                               ));
                               await FlutterPlatformAlert.showCustomAlert(
-                                windowTitle: '복사 완료!',
-                                text: '이메일 주소 복사가 완료되었습니다',
-                                positiveButtonTitle: "확인",
+                                windowTitle: '복사 완료!'.tr,
+                                text: '이메일 주소 복사가 완료되었습니다'.tr,
+                                positiveButtonTitle: "확인".tr,
                               );
                             },
                             child: const Text(
@@ -162,7 +165,7 @@ class LostAndFound extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '인사캠 학생지원팀  ',
+                      '인사캠 학생지원팀  '.tr,
                       style: TextStyle(
                           color: Colors.grey[900],
                           fontFamily: 'CJKRegular',
@@ -204,7 +207,7 @@ class LostAndFound extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '자과캠 학생지원팀  ',
+                      '자과캠 학생지원팀  '.tr,
                       style: TextStyle(
                           color: Colors.grey[900],
                           fontFamily: 'CJKRegular',
@@ -249,18 +252,18 @@ class LostAndFound extends StatelessWidget {
                     color: Colors.grey[300],
                   ),
                 ),
-                const Row(
+                Row(
                   children: [
                     // Icon(
                     //   Icons.location_on,
                     //   color: AppColors.green_main,
                     // ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      '분실물 게시판',
-                      style: TextStyle(
+                      '분실물 게시판'.tr,
+                      style: const TextStyle(
                         color: AppColors.green_main,
                         fontFamily: 'CJKBold',
                       ),
@@ -282,20 +285,20 @@ class LostAndFound extends StatelessWidget {
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: const Row(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.link_outlined,
                           size: 18,
                           color: Colors.blue,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 4,
                         ),
                         Text(
-                          '물건을 찾습니다',
-                          style: TextStyle(
+                          '물건을 찾습니다'.tr,
+                          style: const TextStyle(
                               color: Colors.blue,
                               fontFamily: 'CJKRegular',
                               fontSize: 13),
@@ -319,20 +322,20 @@ class LostAndFound extends StatelessWidget {
                   },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: const Row(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.link_outlined,
                           size: 18,
                           color: Colors.blue,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 4,
                         ),
                         Text(
-                          '주인을 찾습니다',
-                          style: TextStyle(
+                          '주인을 찾습니다'.tr,
+                          style: const TextStyle(
                               color: Colors.blue,
                               fontFamily: 'CJKRegular',
                               fontSize: 13),

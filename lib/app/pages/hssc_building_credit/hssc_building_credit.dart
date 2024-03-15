@@ -27,7 +27,7 @@ class HSSCBuildingCredit extends StatelessWidget {
       body: Column(
         children: [
           CustomNavigationBar(
-            title: '인사캠 건물지도',
+            title: '인사캠 건물지도'.tr,
             backgroundColor: AppColors.green_main,
             isDisplayLeftBtn: true,
             isDisplayRightBtn: false,

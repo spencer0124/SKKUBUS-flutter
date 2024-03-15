@@ -65,11 +65,11 @@ class CustomRow1 extends StatelessWidget {
           // 모두 같은 페이지로 가는데, 각각의 버스타입으로 색과 api 요청을 구분한다.
           else if (pageLink == "/MainbusMain") {
             BusType bustype;
-            if (title == "인사캠 셔틀") {
+            if (title == "인사캠 셔틀".tr) {
               bustype = BusType.hsscBus;
-            } else if (title == "종로 07") {
+            } else if (title == "종로 07".tr) {
               bustype = BusType.jongro07Bus;
-            } else if (title == "종로 02") {
+            } else if (title == "종로 02".tr) {
               bustype = BusType.jongro02Bus;
             } else {
               bustype = BusType.hsscBus;
@@ -231,7 +231,7 @@ class CustomRow1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '상세정보',
+                  '상세정보'.tr,
                   style: TextStyle(
                     color: Colors.grey[900],
                     fontFamily: 'CJKMedium',

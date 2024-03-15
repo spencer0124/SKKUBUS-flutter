@@ -73,7 +73,7 @@ class InjaDetail extends StatelessWidget {
       body: Column(
         children: [
           CustomNavigationBar(
-            title: '인자셔틀 상세정보',
+            title: '인자셔틀'.tr,
             backgroundColor: AppColors.green_main,
             isDisplayLeftBtn: true,
             isDisplayRightBtn: false,

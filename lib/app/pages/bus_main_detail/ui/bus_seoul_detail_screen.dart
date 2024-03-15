@@ -63,7 +63,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 width: 5,
                               ),
                               const Text(
-                                '[혜화역 → 학교]',
+                                '[인사캠 → 혜화역]',
                                 style: TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'CJKBold',
@@ -78,7 +78,7 @@ class BusDataScreenDetail extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
                             child: Text(
-                              '혜화역 1번 출구 → 학교 진입로 앞  정류소(맥도날드 앞) → 성균관대학교 정문 → 600주년 기념관 → 정차소(농구장 옆)',
+                              '농구장 → 학생회관 → 정문 → 올림핌기념국민생활관 → 혜화동우체국 → 혜화동로터리 → 혜화역 1번출구',
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontFamily: 'CJKRegular',
@@ -109,7 +109,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                '[학교 → 혜화역]',
+                                '[혜화역 → 인사캠]',
                                 style: TextStyle(
                                   color: AppColors.green_main,
                                   fontFamily: 'CJKBold',
@@ -124,7 +124,7 @@ class BusDataScreenDetail extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Text(
-                              '정차소(농구장 옆) → 학생회관 앞 → 학교 정문 → 혜화로터리 → 혜화역 1번 출구',
+                              '혜화역 1번출구 → 혜화동로터리 → 성균관대입구사거리 → 정문 → 600주년기념관',
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontFamily: 'CJKRegular',
