@@ -16,6 +16,7 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		C44A38512ACF04CF00E9AA7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C44A38532ACF04CF00E9AA7A /* InfoPlist.strings */; };
+		C4630A462BA40B220043295D /* buslogo_invert.png in Resources */ = {isa = PBXBuildFile; fileRef = C4630A452BA40B220043295D /* buslogo_invert.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,7 @@
 		C44A38522ACF04CF00E9AA7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C44A38542ACF04D800E9AA7A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C44A38552ACF04D900E9AA7A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C4630A452BA40B220043295D /* buslogo_invert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = buslogo_invert.png; path = ../assets/applogo/buslogo_invert.png; sourceTree = "<group>"; };
 		C4CB8BE82AAA23B300712BDB /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		C4EAFEBE2B273B270026CC31 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C4EAFEC02B273B270026CC31 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -127,6 +129,7 @@
 			children = (
 				C4EAFED62B273BED0026CC31 /* BusLiveWidgetExtension.entitlements */,
 				C44A38532ACF04CF00E9AA7A /* InfoPlist.strings */,
+				C4630A432BA40B040043295D /* Resources */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				C4EAFEC22B273B270026CC31 /* BusLiveWidget */,
@@ -159,6 +162,22 @@
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		C4630A432BA40B040043295D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C4630A442BA40B130043295D /* Splash */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C4630A442BA40B130043295D /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				C4630A452BA40B220043295D /* buslogo_invert.png */,
+			);
+			name = Splash;
 			sourceTree = "<group>";
 		};
 		C4EAFEC22B273B270026CC31 /* BusLiveWidget */ = {
@@ -246,6 +265,7 @@
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				C44A38512ACF04CF00E9AA7A /* InfoPlist.strings in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				C4630A462BA40B220043295D /* buslogo_invert.png in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				8F484BA883CB47E2F2C568C9 /* GoogleService-Info.plist in Resources */,
@@ -469,7 +489,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 95HGXTX76L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -605,7 +625,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 95HGXTX76L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
@@ -633,7 +653,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = 95HGXTX76L;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
