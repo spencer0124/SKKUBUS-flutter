@@ -20,12 +20,17 @@ import 'package:skkumap/app/pages/nsc_building_map/view/nsc_building_map_screen.
 import 'package:skkumap/app/pages/nsc_building_credit/nsc_building_credit.dart';
 import 'package:skkumap/app/pages/lostandfound/lostandfound.dart';
 import 'package:skkumap/app/pages/search_list/screen/search_list_screen.dart';
+import 'package:skkumap/app/pages/splash_ad/screen/splash_ad_screen.dart';
 
 class AppRoutes {
   static final routes = [
+    // GetPage(
+    //   name: '/',
+    //   page: () => const Mainpage(), // Your Home page or initial page
+    // ),
     GetPage(
       name: '/',
-      page: () => const Mainpage(), // Your Home page or initial page
+      page: () => const SplashAd(),
     ),
     GetPage(
         name: '/MainbusMain',
@@ -87,6 +92,10 @@ class AppRoutes {
     GetPage(
       name: '/searchlist',
       page: () => const SearchList(),
+    ),
+    GetPage(
+      name: '/splashad',
+      page: () => const SplashAd(),
     )
   ];
 }
