@@ -29,6 +29,7 @@ import 'languages.dart';
 
 import 'package:skkumap/app/pages/nsc_building_map/controller/nsc_building_map_controller.dart';
 import 'package:skkumap/app/pages/search_list/controller/search_list_controller.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -53,6 +54,10 @@ Future<void> main() async {
   await initMobileAds();
   await initNaverMapSdk();
 
+  WidgetsFlutterBinding.ensureInitialized();
+
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
@@ -130,8 +135,11 @@ void registerDependencies() {
   Get.put(InjaDetailLifeCycle());
   // Get.lazyPut(() => InjaDetailLifeCycle());
 
-  Get.put(MainpageController());
-  Get.put(MainpageLifeCycle());
+  // Get.put(MainpageController());
+  // Get.put(MainpageLifeCycle());
+
+  Get.lazyPut(() => MainpageController());
+  Get.lazyPut(() => MainpageLifeCycle());
 
   Get.lazyPut(() => KingoLoginController());
   Get.lazyPut(() => KingoLoginLifeCycle());

@@ -31,7 +31,7 @@ class NSCBuildingMap extends StatelessWidget {
       body: Column(
         children: [
           CustomNavigationBar(
-            title: '자과캠 벤젠고리관 건물지도',
+            title: '자과캠 건물지도'.tr,
             backgroundColor: AppColors.green_main,
             isDisplayLeftBtn: true,
             isDisplayRightBtn: true,

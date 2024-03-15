@@ -2,7 +2,7 @@
 name: skkumap
 description: A new Flutter project.
 publish_to: none
-version: 3.0.0+18
+version: 3.1.1+20
 environment:
   sdk: "^3.0.0"
 dependencies:
@@ -69,6 +69,7 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_svg: ^2.0.9
   chat_bubbles: ^1.6.0
+  flutter_native_splash: ^2.3.7
 
 dev_dependencies:
   flutter_lints: "^1.0.0"
