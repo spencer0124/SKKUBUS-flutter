@@ -29,12 +29,19 @@ class _SplashAdState extends State<SplashAd> {
   }
 
   Future<Map<String, String?>> fetchImageData() async {
+    Future.delayed(const Duration(milliseconds: 4000), () {
+      Get.toNamed('/mainpage');
+      FlutterNativeSplash.remove();
+    });
+
     try {
       final response = await http.get(Uri.parse(
           'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'));
       FlutterNativeSplash.remove();
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        http.get(Uri.parse(
+            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/view'));
 
         return {
           'image': data['image'],
@@ -56,11 +63,6 @@ class _SplashAdState extends State<SplashAd> {
   void initState() {
     super.initState();
     // Navigate to another page after 3 seconds
-    Future.delayed(const Duration(milliseconds: 3900), () {
-      // Use Get.toNamed to navigate to the desired route
-      Get.toNamed(
-          '/mainpage'); // Replace '/yourRouteName' with your actual route name
-    });
   }
 
   @override
@@ -71,7 +73,6 @@ class _SplashAdState extends State<SplashAd> {
       future: fetchImageData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // While waiting for the data to load, display a minimal Scaffold
           return const Scaffold(
             backgroundColor: Colors.white,
             body: Center(
@@ -86,16 +87,6 @@ class _SplashAdState extends State<SplashAd> {
             body: Center(child: Text('Error fetching data')),
           );
         } else if (snapshot.hasData && snapshot.data!['image'] != null) {
-          // // Convert color string to a Color object
-          // Color backgroundColor = Colors.white; // Default color
-          // if (snapshot.data!['color'] != null) {
-          //   String colorString = snapshot.data!['color']!;
-          //   if (colorString.startsWith('#')) {
-          //     colorString = colorString.substring(1); // Remove '#' if present
-          //   }
-          //   backgroundColor = Color(int.parse('0xFF$colorString'));
-          // }
-
           return Scaffold(
               backgroundColor: Colors.white,
               appBar: PreferredSize(
@@ -127,6 +118,8 @@ class _SplashAdState extends State<SplashAd> {
                                       Uri.parse(snapshot.data!['link']!))) {
                                     await launchUrl(
                                         Uri.parse(snapshot.data!['link']!));
+                                    http.get(Uri.parse(
+                                        'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/click'));
                                   } else {
                                     Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
                                   }

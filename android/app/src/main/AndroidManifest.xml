@@ -34,6 +34,31 @@
         <data android:scheme="kakaomap" />
     </intent>
 
+     <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="instagram" />
+    </intent>
+
+     <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="facebook" />
+    </intent>
+
+     <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="twitter" />
+    </intent>
+
+
+     <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="naversearchapp" />
+    </intent>
+
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="youtube" />
+    </intent>
 
     </queries>
 

@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>19</string>
+	<string>26</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-5619947536545679~7068085893</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -50,6 +50,13 @@
 		<string>nmap</string>
 		<string>kakaomap</string>
 		<string>map</string>
+		<string>instagram</string>
+		<string>facebook</string>
+		<string>twitter</string>
+		<string>naversearchapp</string>
+		<string>youtube</string>
+
+
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
