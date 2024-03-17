@@ -13,6 +13,10 @@ import 'dart:async';
 import 'package:skkumap/app/utils/api_fetch/bus_stationlist.dart';
 import 'package:skkumap/app/types/bus_type.dart';
 
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 // life cycle
 class SeoulMainLifeCycle extends GetxController with WidgetsBindingObserver {
   BusDataController controller = Get.find<BusDataController>();
@@ -62,6 +66,8 @@ class BusDataController extends GetxController {
               localfetchBusStations(),
             });
     update();
+
+    fetchMainpageAd();
   }
 
   void setBusType(BusType type) {
@@ -113,6 +119,32 @@ class BusDataController extends GetxController {
       // print('BusLocations.value: ${BusLocations.value}');
     } catch (e) {
       print("Error fetchMainBusLocation: $e");
+    }
+  }
+
+// 하단 이미지 광고
+  var belowAdLink = ''.obs;
+  var belowAdImage = ''.obs;
+
+  void fetchMainpageAd() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'
+          // 'http://localhost:3000/ad/v1/addetail'
+          ));
+
+      if (response.statusCode == 200) {
+        http.get(Uri.parse(
+            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/view'));
+        final data = jsonDecode(response.body);
+
+        belowAdLink.value = data['link'];
+        belowAdImage.value = data['image2'];
+      } else {
+        print('Server error');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
