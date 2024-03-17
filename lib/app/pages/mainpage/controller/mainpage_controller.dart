@@ -39,6 +39,7 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
       // 여기에 화면에 돌아왔을때 사용할 코드 작성하기
       mainpageController.mainPageBusListFetch();
       mainpageController.stationDataFetch();
+      mainpageController.fetchMainpageAd();
     }
   }
 }
@@ -75,13 +76,12 @@ class MainpageController extends GetxController {
 
   Future<void> stationDataFetch() async {
     try {
-      print('11');
       stationData.value = await fetchStationData('01592');
-      print('22');
-      print("===================================");
-      print(
-          'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
-      print("===================================");
+
+      // print("===================================");
+      // print(
+      // 'stationDataFetch, stationData.value: ${stationData.value!.stationData}');
+      // print("===================================");
     } catch (e) {
       // print('Error fetching data: $e');
     }
@@ -99,16 +99,45 @@ class MainpageController extends GetxController {
     }
   }
 
+  // 메인화면 광고 텍스트 불러오기
+  var mainpageAdText = ''.obs;
+  var mainpageAdLink = ''.obs;
+
+  void fetchMainpageAd() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'
+          // 'http://localhost:3000/ad/v1/addetail'
+          ));
+
+      if (response.statusCode == 200) {
+        http.get(Uri.parse(
+            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu2/view'));
+        final data = jsonDecode(response.body);
+        mainpageAdText.value = data['text'];
+        mainpageAdLink.value = data['link'];
+      } else {
+        print('Server error');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
+    fetchMainpageAd();
     stationDataFetch();
     await mainPageBusListFetch();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       snaptoInitPosition();
       _timer = Timer.periodic(
         const Duration(seconds: 15),
-        (Timer t) => stationDataFetch(),
+        (Timer t) {
+          stationDataFetch();
+          fetchMainpageAd();
+        },
       );
     });
   }

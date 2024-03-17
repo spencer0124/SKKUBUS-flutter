@@ -19,12 +19,17 @@ import 'package:skkumap/app/components/bus/businfo_component.dart';
 import 'package:skkumap/app/model/main_bus_location.dart';
 
 import 'package:skkumap/app/types/bus_type.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:skkumap/app/utils/screensize.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class BusDataScreen extends GetView<BusDataController> {
   const BusDataScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = ScreenSize.width(context);
     // final double screenHeight = ScreenSize.height(context);
     // final double screenWidth = ScreenSize.width(context);
     controller.setBusType(Get.arguments['bustype']);
@@ -46,12 +51,40 @@ class BusDataScreen extends GetView<BusDataController> {
         // 화면 하단 광고
         child: Obx(
           () => controller.isBannerAdLoaded.value
-              ? SizedBox(
-                  height: 55,
-                  child: AdWidgetContainer(
-                    bannerAd: controller.bannerAd,
-                  ),
-                )
+              ? ((controller.belowAdImage.value) != '')
+                  ? SizedBox(
+                      height: 55,
+                      child: (controller.belowAdImage.value) != ''
+                          ? GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () async {
+                                if (await canLaunchUrl(
+                                    Uri.parse(controller.belowAdLink.value))) {
+                                  await launchUrl(
+                                      Uri.parse(controller.belowAdLink.value));
+                                  http.get(Uri.parse(
+                                      'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/click'));
+                                } else {
+                                  Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
+                                }
+                              },
+                              child:
+                                  Image.network(controller.belowAdImage.value))
+                          : Shimmer.fromColors(
+                              baseColor: Colors.grey[100]!,
+                              highlightColor: Colors.white,
+                              child: Container(
+                                width: screenWidth * 0.75,
+                                height: 20,
+                                color: Colors.grey,
+                              ),
+                            ))
+                  : SizedBox(
+                      height: 55,
+                      child: AdWidgetContainer(
+                        bannerAd: controller.bannerAd,
+                      ),
+                    )
               : Container(
                   height: 55,
                 ),
