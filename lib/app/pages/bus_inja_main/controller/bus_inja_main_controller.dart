@@ -8,6 +8,8 @@ import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 /*
 LifeCycleGetx2, WidgetsBindingObserver
@@ -34,7 +36,16 @@ class InjaMainLifeCycle extends GetxController with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      injaMainController.determineNextBus();
+      injaMainController.today = InjaMainController.getCurrentWeekday().obs;
+      injaMainController.selectedEnglishDay = injaMainController
+          .translateDayToEnglish(injaMainController.selectedDay.value ?? '월요일')
+          .obs;
+
+      injaMainController.fetchinjaBusSchedule(
+          injaMainController.selectedEnglishDay.value ?? 'monday');
+      injaMainController.fetchjainBusSchedule(
+          injaMainController.selectedEnglishDay.value ?? 'monday');
+      // injaMainController.determineNextBus();
     }
   }
 }
@@ -44,11 +55,18 @@ ESKARAController
 메인 컨트롤러
 */
 class InjaMainController extends GetxController {
-  // currentTime
+  var injaBusSchedule = <BusSchedule>[].obs;
+  var jainBusSchedule = <BusSchedule>[].obs;
 
   @override
   void onInit() async {
-    getDrivingDuration();
+    // getDrivingDuration();
+    today = getCurrentWeekday().obs;
+    selectedDay = getCurrentWeekday().obs;
+    selectedEnglishDay = translateDayToEnglish(selectedDay.value ?? '월요일').obs;
+
+    fetchinjaBusSchedule(selectedEnglishDay.value ?? 'monday');
+    fetchjainBusSchedule(selectedEnglishDay.value ?? 'monday');
     try {
       await FirebaseAnalytics.instance
           .setCurrentScreen(screenName: 'injashuttle_screen');
@@ -56,7 +74,7 @@ class InjaMainController extends GetxController {
       print(e);
     }
     super.onInit();
-    determineNextBus();
+    // determineNextBus();
   }
 
   var duration = ''.obs;
@@ -146,100 +164,116 @@ class InjaMainController extends GetxController {
     }
   }
 
-  // 인자셔틀 시간표 (가능한 시간 목록). 금요일과 금요일이 아닌 경우 분리
-  // 인사캠 -> 자과캠
-  final List<String> seoulBasicBusTimes = [
-    '07:00',
-    '10:00',
-    '12:00',
-    '15:00',
-    '16:30',
-    '18:00',
-    '19:00'
+  static String getCurrentWeekday() {
+    DateTime now = DateTime.now();
+    int weekday = now
+        .weekday; // Dart's DateTime class treats Monday as 1 and Sunday as 7.
+
+    // Map Dart's weekday to Korean weekdays
+    Map<int, String> weekdayMap = {
+      1: '월요일',
+      2: '화요일',
+      3: '수요일',
+      4: '목요일',
+      5: '금요일',
+      6: '토요일',
+      7: '일요일'
+    };
+
+    return weekdayMap[weekday] ??
+        '월요일'; // Default to '월요일' if something unexpected happens
+  }
+
+  String translateDayToEnglish(String koreanDay) {
+    Map<String, String> translationMap = {
+      '월요일': 'monday',
+      '화요일': 'tuesday',
+      '수요일': 'wednesday',
+      '목요일': 'thursday',
+      '금요일': 'friday',
+      '토요일': 'saturday',
+      '일요일': 'sunday'
+    };
+
+    return translationMap[koreanDay] ??
+        'Monday'; // Default to 'Monday' if there is no match
+  }
+
+  final List<String> dateitems = [
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+    '일요일'
   ];
 
-  final List<String> seoulFridayBusTimes = [
-    '08:00',
-    '10:00',
-    '12:00',
-    '14:00',
-    '15:00',
-    '16:20',
-    '16:30',
-    '18:00',
-    '18:10',
-    '19:00',
-  ];
+// 선택된 요일 저장하는 변수
+  Rx<String?> today = '월요일'.obs;
+  Rx<String?> selectedDay = '월요일'.obs;
+  Rx<String?> selectedEnglishDay = 'monday'.obs;
+// 인자셔틀 정보 가져와서 변수에 담아주기
 
-  // 자과캠 -> 인사캠
-  final List<String> suwonBasicBusTimes = [
-    '07:00',
-    '10:30',
-    '12:00',
-    '13:30',
-    '15:00',
-    '16:30',
-    '18:15',
-  ];
+  // Function to fetch bus schedules from the API
+  void fetchinjaBusSchedule(String type) async {
+    try {
+      var url = Uri.parse('http://localhost:3000/campus/v1/campus/INJA_$type');
+      var response = await http.get(url);
 
-  final List<String> suwonFridayBusTimes = [
-    '08:00',
-    '10:00',
-    '10:30',
-    '12:00',
-    '13:30',
-    '14:00',
-    '15:00',
-    '16:20',
-    '16:30',
-    '18:10',
-    '18:15',
-  ];
+      if (response.statusCode == 200) {
+        injaBusSchedule.clear();
+        var jsonData = json.decode(response.body)['result'];
+        for (var item in jsonData) {
+          injaBusSchedule.add(BusSchedule.fromJson(item));
+        }
+      } else {
+        Get.snackbar('Error', 'Failed to load bus schedules');
+      }
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
 
-  // 다음 버스 시간 저장하는 변수
-  var seoulNextBusTime = ''.obs;
-  var suwonNextBusTime = ''.obs;
+  void fetchjainBusSchedule(String type) async {
+    try {
+      var url = Uri.parse('http://localhost:3000/campus/v1/campus/JAIN_$type');
+      var response = await http.get(url);
 
-  // 탑승 가능한 가장 빠른 시간을 찾아주는 함수
-  String determineNextTime(String currentTime, List<String> busTimes) {
-    return busTimes.firstWhere(
-      (busTime) => busTime.compareTo(currentTime) > 0,
-      orElse: () => 'No more buses available today',
+      if (response.statusCode == 200) {
+        jainBusSchedule.clear();
+        var jsonData = json.decode(response.body)['result'];
+        for (var item in jsonData) {
+          jainBusSchedule.add(BusSchedule.fromJson(item));
+        }
+      } else {
+        Get.snackbar('Error', 'Failed to load bus schedules');
+      }
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+}
+
+class BusSchedule {
+  String operatingHours;
+  int busCount;
+  String? specialNotes;
+  bool isFastestBus;
+
+  BusSchedule({
+    required this.operatingHours,
+    required this.busCount,
+    this.specialNotes,
+    required this.isFastestBus,
+  });
+
+  factory BusSchedule.fromJson(Map<String, dynamic> json) {
+    return BusSchedule(
+      operatingHours: json['operatingHours'],
+      busCount: json['busCount'],
+      specialNotes: json['specialNotes'],
+      isFastestBus: json['isFastestBus'],
     );
-  }
-
-  // 금요일인지 아닌지에 따라 분기처리 후 determineNextTime 함수 호출
-  void determineNextBus() {
-    DateTime now = DateTime.now().toLocal();
-    String formattedTime = DateFormat('HH:mm').format(now);
-    if (now.weekday == DateTime.saturday || now.weekday == DateTime.sunday) {
-    } else if (now.weekday == DateTime.friday) {
-      seoulNextBusTime.value =
-          determineNextTime(formattedTime, seoulFridayBusTimes);
-      suwonNextBusTime.value =
-          determineNextTime(formattedTime, suwonFridayBusTimes);
-    } else {
-      seoulNextBusTime.value =
-          determineNextTime(formattedTime, seoulBasicBusTimes);
-      suwonNextBusTime.value =
-          determineNextTime(formattedTime, suwonBasicBusTimes);
-    }
-  }
-
-  List<String> schedule(String location) {
-    DateTime now = DateTime.now().toLocal();
-    if (location == 'seoul') {
-      if (now.weekday != DateTime.friday) {
-        return seoulBasicBusTimes;
-      } else {
-        return seoulFridayBusTimes;
-      }
-    } else {
-      if (now.weekday != DateTime.friday) {
-        return suwonBasicBusTimes;
-      } else {
-        return suwonFridayBusTimes;
-      }
-    }
   }
 }

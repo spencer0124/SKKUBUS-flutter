@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 
 const positionTop = 0.15;
-const positionMiddle = 0.4;
+const positionMiddle = 0.5;
 const positionBottom = 0.828;
 const List<double> positionFactor = [
   positionTop,
@@ -42,7 +42,7 @@ final snappingSheetController = SnappingSheetController();
 
 void snaptoInitPosition() {
   snappingSheetController.snapToPosition(
-    const SnappingPosition.factor(positionFactor: 0.4),
+    const SnappingPosition.factor(positionFactor: 0.5),
   );
 }
 

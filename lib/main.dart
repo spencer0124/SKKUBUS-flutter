@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -42,11 +44,11 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  try {
-    await FirebaseMessaging.instance.subscribeToTopic("necessaryupdate");
-  } catch (e) {
-    print(e);
-  }
+  // try {
+  //   await FirebaseMessaging.instance.subscribeToTopic("necessaryupdate");
+  // } catch (e) {
+  //   print(e);
+  // }
 
   await initEnvironmentVariables();
   registerDependencies();
@@ -69,6 +71,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   @override
   void initState() {
     super.initState();
@@ -79,6 +82,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => GetMaterialApp(
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: analytics),
+        ],
         debugShowCheckedModeBanner: false,
         getPages: AppRoutes.routes,
         initialRoute: '/',
