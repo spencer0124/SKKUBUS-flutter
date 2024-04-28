@@ -59,11 +59,17 @@ class OptionBus extends StatelessWidget {
                           Uri.parse(controller.mainpageAdLink.value))) {
                         await launchUrl(
                             Uri.parse(controller.mainpageAdLink.value));
-                        http.get(Uri.parse(
-                            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu2/click'));
+                        try {
+                          http.get(Uri.parse(
+                              'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu2/click'));
+                        } catch (e) {
+                          print('Error: $e');
+                        }
                       } else {
                         Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
                       }
+                    } else {
+                      Get.snackbar('오류2', '해당 링크를 열 수 없습니다.');
                     }
                   },
                   child: Container(
@@ -138,6 +144,123 @@ class OptionBus extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 8,
+                ),
+                Obx(
+                  () {
+                    if (controller.showmainpageNoticeText.value == true) {
+                      return Column(
+                        children: [
+                          Divider(
+                            color: Colors.grey[300],
+                            height: 0,
+                            thickness: 0.7,
+                            endIndent: 0,
+                            indent: screenWidth * 0.145,
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: () async {
+                              if (controller.mainpageNoticeLink.value != '') {
+                                if (await canLaunchUrl(Uri.parse(
+                                    controller.mainpageNoticeLink.value))) {
+                                  await launchUrl(Uri.parse(
+                                      controller.mainpageNoticeLink.value));
+                                } else {
+                                  Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
+                                }
+                              } else {
+                                Get.snackbar('오류2', '해당 링크를 열 수 없습니다.');
+                              }
+                            },
+                            child: Container(
+                              width: screenWidth * 0.95,
+                              height: 33,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 14,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/flaticon_megaphone.png',
+                                    width: 18,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    width: 19,
+                                  ),
+                                  Obx(() =>
+                                      controller.mainpageNoticeText.value == ''
+                                          ? Shimmer.fromColors(
+                                              baseColor: Colors.grey[100]!,
+                                              highlightColor: Colors.white,
+                                              child: Container(
+                                                width: screenWidth * 0.75,
+                                                height: 20,
+                                                color: Colors.grey,
+                                              ),
+                                            )
+                                          : Text(
+                                              controller
+                                                  .mainpageNoticeText.value,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'CJKMedium',
+                                                fontSize: 12.5,
+                                              ),
+                                            )),
+                                  const Spacer(),
+                                  Obx(() =>
+                                      controller.mainpageAdText.value == ''
+                                          ? const SizedBox(
+                                              width: 1,
+                                              height: 1,
+                                            )
+                                          : const Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                // Text(
+                                                //   '상세정보'.tr,
+                                                //   style: TextStyle(
+                                                //     color: Colors.grey[900],
+                                                //     fontFamily: 'CJKMedium',
+                                                //     fontSize: 12.5,
+                                                //   ),
+                                                // ),
+                                                SizedBox(
+                                                  width: 2,
+                                                ),
+                                                Icon(
+                                                  CupertinoIcons.right_chevron,
+                                                  size: 12,
+                                                  color: Colors.black,
+                                                ),
+                                              ],
+                                            )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return const SizedBox(
+                      width: 0.1,
+                    );
+                  },
+                ),
+
+                const SizedBox(
+                  height: 5,
                 ),
                 Divider(
                   color: Colors.grey[300],
