@@ -62,8 +62,12 @@ class BusDataScreen extends GetView<BusDataController> {
                                     Uri.parse(controller.belowAdLink.value))) {
                                   await launchUrl(
                                       Uri.parse(controller.belowAdLink.value));
-                                  http.get(Uri.parse(
-                                      'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/click'));
+                                  try {
+                                    http.get(Uri.parse(
+                                        'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/click'));
+                                  } catch (e) {
+                                    print('Error: $e');
+                                  }
                                 } else {
                                   Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
                                 }

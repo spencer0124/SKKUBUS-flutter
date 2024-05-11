@@ -6,6 +6,7 @@ import 'package:skkumap/app/utils/api_fetch/mainpage_buslist.dart';
 
 Future<MainPageBusListResponse> fetchMainpageBusList() async {
   // const url = 'http://localhost:3000/mobile/v1/mainpage/buslist';
+  // const url = 'http://10.0.2.2:3000/mobile/v1/mainpage/buslist';
   const url =
       'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/mobile/v1/mainpage/buslist';
 

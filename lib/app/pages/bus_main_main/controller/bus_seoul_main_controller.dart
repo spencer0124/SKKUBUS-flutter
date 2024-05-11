@@ -134,14 +134,19 @@ class BusDataController extends GetxController {
           ));
 
       if (response.statusCode == 200) {
-        http.get(Uri.parse(
-            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/view'));
+        try {
+          http.get(Uri.parse(
+              'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/view'));
+        } catch (e) {
+          print('Error: $e');
+        }
+
         final data = jsonDecode(response.body);
 
         belowAdLink.value = data['link'];
         belowAdImage.value = data['image2'];
       } else {
-        print('Server error');
+        print('Server error1');
       }
     } catch (e) {
       print('Error: $e');

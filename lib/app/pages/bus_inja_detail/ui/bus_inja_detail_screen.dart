@@ -127,7 +127,57 @@ class InjaDetail extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '요금 무료\n매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
+                                '요금 무료\n금요일에는 기존 인자셔틀 버스와 별도로\n학부대학 셔틀버스가 추가운영됩니다'
+                                    .tr,
+                                style: TextStyle(
+                                    color: Colors.grey[900],
+                                    fontFamily: 'CJKRegular',
+                                    fontSize: 13),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                          child: Divider(
+                            color: Colors.grey[300],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 5,
+                            ),
+                            Text(
+                              '운행시간'.tr,
+                              style: const TextStyle(
+                                color: AppColors.green_main,
+                                fontFamily: 'CJKBold',
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다\n토요일/일요일/공휴일/학교휴일 운행없음'
+                                    .tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
                                     fontFamily: 'CJKRegular',

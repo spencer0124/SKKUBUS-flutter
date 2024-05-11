@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_localization
   flutter_platform_alert
   flutter_secure_storage_linux
+  flutter_udid
   url_launcher_linux
 )
 

@@ -134,6 +134,9 @@ PODS:
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
+  - flutter_udid (0.0.1):
+    - Flutter
+    - SAMKeychain
   - flutter_vibrate (0.0.1):
     - Flutter
   - geocoding_ios (1.0.5):
@@ -228,6 +231,7 @@ PODS:
   - PromisesSwift (2.3.1):
     - PromisesObjC (= 2.3.1)
   - RecaptchaInterop (100.0.0)
+  - SAMKeychain (1.5.3)
   - SDWebImage (5.18.7):
     - SDWebImage/Core (= 5.18.7)
   - SDWebImage/Core (5.18.7)
@@ -265,6 +269,7 @@ DEPENDENCIES:
   - flutter_phone_direct_caller (from `.symlinks/plugins/flutter_phone_direct_caller/ios`)
   - flutter_platform_alert (from `.symlinks/plugins/flutter_platform_alert/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - flutter_udid (from `.symlinks/plugins/flutter_udid/ios`)
   - flutter_vibrate (from `.symlinks/plugins/flutter_vibrate/ios`)
   - geocoding_ios (from `.symlinks/plugins/geocoding_ios/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
@@ -307,6 +312,7 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - RecaptchaInterop
+    - SAMKeychain
     - SDWebImage
     - SDWebImageWebPCoder
 
@@ -347,6 +353,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_platform_alert/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  flutter_udid:
+    :path: ".symlinks/plugins/flutter_udid/ios"
   flutter_vibrate:
     :path: ".symlinks/plugins/flutter_vibrate/ios"
   geocoding_ios:
@@ -405,6 +413,7 @@ SPEC CHECKSUMS:
   flutter_phone_direct_caller: bd2ffd297f371a8a6c7bfbba0196964ffe3c4358
   flutter_platform_alert: 6a241c90f3cc350d0286deeefee9f52bee957019
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  flutter_udid: a2482c67a61b9c806ef59dd82ed8d007f1b7ac04
   flutter_vibrate: 9f4c2ab57008965f78969472367c329dd77eb801
   geocoding_ios: a389ea40f6f548de6e63006a2e31bf66ff80769a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
@@ -427,6 +436,7 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SDWebImage: f9258c58221ed854cfa0e2b80ee4033710b1c6d3
   SDWebImageWebPCoder: 633b813fca24f1de5e076bcd7f720c038b23892b
   sf_symbols: 84365e389895263a28c58be12a5ddedb7182cc4e
@@ -437,4 +447,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8e07a61c004920fe10fdf77c5a5480cee80f5139
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
