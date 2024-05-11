@@ -3,10 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:skkumap/app/components/mainpage/middle_snappingsheet/stationrow.dart';
 import 'package:skkumap/app/pages/bus_inja_main/controller/bus_inja_main_controller.dart';
 import 'package:skkumap/app_theme.dart';
 
 import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
+import 'package:skkumap/app/utils/screensize.dart';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
+
+final List<String> dateitems = [
+  '월요일',
+  '화요일',
+  '수요일',
+  '목요일',
+  '금요일',
+  '토요일',
+  '일요일'
+];
 
 // 인사캠 셔틀 탑승 장소 위도, 경도, 목적지 이름
 const double seoulLat = 37.587308;
@@ -59,6 +73,8 @@ class ESKARA extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = ScreenSize.height(context);
+    final double screenWidth = ScreenSize.width(context);
     final controller = Get.find<InjaMainController>();
     return Scaffold(
       backgroundColor: Colors.white,
@@ -116,17 +132,71 @@ class ESKARA extends StatelessWidget {
                         //     color: Colors.grey[300],
                         //   ),
                         // ),
-                        Text(
-                          '${'인자셔틀'.tr} ${'[인사캠 → 자과캠]'.tr}',
-                          style: const TextStyle(
-                            color: AppColors.green_main,
-                            fontFamily: 'CJKBold',
-                          ),
-                          textAlign: TextAlign.start,
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${'인자셔틀'.tr} ${'[인사캠 → 자과캠]'.tr}',
+                              style: const TextStyle(
+                                color: AppColors.green_main,
+                                fontFamily: 'CJKBold',
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            const Spacer(),
+                            Obx(() => SizedBox(
+                                  width: 100,
+                                  height: 50,
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton2<String>(
+                                      isExpanded: true,
+                                      value: controller.selectedDay.value,
+                                      onChanged: (String? value) {
+                                        controller.selectedDay.value = value;
+
+                                        controller.selectedEnglishDay =
+                                            controller
+                                                .translateDayToEnglish(
+                                                    controller.selectedDay
+                                                            .value ??
+                                                        '월요일')
+                                                .obs;
+                                        controller.fetchinjaBusSchedule(
+                                            controller
+                                                    .selectedEnglishDay.value ??
+                                                'monday');
+                                        controller.fetchjainBusSchedule(
+                                            controller
+                                                    .selectedEnglishDay.value ??
+                                                'monday');
+                                      },
+                                      hint: Text(
+                                        '요일 선택',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context).hintColor,
+                                        ),
+                                      ),
+                                      items: dateitems
+                                          .map((String item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item,
+                                                child: Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ),
+                                )),
+                          ],
                         ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
+
                         // Obx(
                         //   () => Text(
                         //     '예상 소요시간 : ${controller.duration.value}',
@@ -138,16 +208,15 @@ class ESKARA extends StatelessWidget {
                         //     textAlign: TextAlign.start,
                         //   ),
                         // ),
-                        // SizedBox(
-                        //   height: 20.h,
+                        // const SizedBox(
+                        //   height: 15,
                         // ),
                         // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //   children: [
                         //     Container(
                         //       padding: const EdgeInsets.all(10.0),
-                        //       width: 170.w,
-                        //       height: 90.h,
+                        //       height: 90,
+                        //       width: dwidth / 2 - 5 - 20,
                         //       decoration: BoxDecoration(
                         //         borderRadius: BorderRadius.circular(10),
                         //         color: Colors.grey[100],
@@ -164,7 +233,7 @@ class ESKARA extends StatelessWidget {
                         //                 MainAxisAlignment.spaceBetween,
                         //             children: [
                         //               Text(
-                        //                 '승차알림 설정하기',
+                        //                 '다음 셔틀',
                         //                 style: TextStyle(
                         //                   fontSize: 13,
                         //                   color: Colors.black,
@@ -172,17 +241,13 @@ class ESKARA extends StatelessWidget {
                         //                 ),
                         //                 textAlign: TextAlign.start,
                         //               ),
-                        //               Icon(
-                        //                 Icons.alarm,
-                        //                 size: 18,
-                        //               ),
                         //             ],
                         //           ),
                         //           SizedBox(
                         //             height: 5.h,
                         //           ),
                         //           const Text(
-                        //             '선택한 셔틀이 출발하기\n15분 전에 알려드릴게요',
+                        //             '12:00 셔틀\n(1시간 15분 후)',
                         //             style: TextStyle(
                         //               fontSize: 12,
                         //               color: Colors.black,
@@ -193,10 +258,13 @@ class ESKARA extends StatelessWidget {
                         //         ],
                         //       ),
                         //     ),
+                        //     const SizedBox(
+                        //       width: 10,
+                        //     ),
                         //     Container(
                         //       padding: const EdgeInsets.all(10.0),
-                        //       width: 170.w,
-                        //       height: 90.h,
+                        //       height: 90,
+                        //       width: dwidth / 2 - 5 - 20,
                         //       decoration: BoxDecoration(
                         //         borderRadius: BorderRadius.circular(10),
                         //         color: Colors.grey[100],
@@ -213,7 +281,7 @@ class ESKARA extends StatelessWidget {
                         //                 MainAxisAlignment.spaceBetween,
                         //             children: [
                         //               Text(
-                        //                 '하차알림 설정하기',
+                        //                 '예상 소요시간',
                         //                 style: TextStyle(
                         //                   fontSize: 13,
                         //                   color: Colors.black,
@@ -221,17 +289,13 @@ class ESKARA extends StatelessWidget {
                         //                 ),
                         //                 textAlign: TextAlign.start,
                         //               ),
-                        //               Icon(
-                        //                 Icons.alarm,
-                        //                 size: 18,
-                        //               ),
                         //             ],
                         //           ),
                         //           SizedBox(
                         //             height: 5.h,
                         //           ),
                         //           const Text(
-                        //             '선택한 셔틀이 도착하기\n10분 전에 알려드릴게요',
+                        //             '1시간 45분\n(실시간 교통정보 반영)',
                         //             style: TextStyle(
                         //               fontSize: 12,
                         //               color: Colors.black,
@@ -251,63 +315,85 @@ class ESKARA extends StatelessWidget {
                           child: Obx(
                             () {
                               return DataTable(
-                                columnSpacing: 90.w,
+                                columnSpacing: 35,
                                 columns: [
                                   DataColumn(
-                                    label: Text('운행시간'.tr),
+                                    label: Text('운영시간'.tr),
                                   ),
-                                  DataColumn(
-                                    label: Text('비고'.tr),
+                                  const DataColumn(
+                                    label: Text('운영대수'),
+                                  ),
+                                  const DataColumn(
+                                    label: Text('특이사항'),
                                   ),
                                 ],
                                 rows:
-                                    controller.schedule('seoul').map((busTime) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(
-                                        Builder(
-                                          builder: (BuildContext context) {
-                                            String displayText;
-                                            displayText = busTime;
-                                            return Text(
-                                              displayText,
-                                              style: TextStyle(
-                                                fontWeight: busTime ==
-                                                        controller
-                                                            .seoulNextBusTime
-                                                            .value
-                                                    ? FontWeight.bold
-                                                    : FontWeight.normal,
-                                                color: busTime ==
-                                                        controller
-                                                            .seoulNextBusTime
-                                                            .value
-                                                    ? AppColors.green_main
-                                                    : Colors.black,
-                                              ),
-                                            );
-                                          },
+                                    controller.injaBusSchedule.map((schedule) {
+                                  return DataRow(cells: [
+                                    DataCell(Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      DataCell(
                                         Text(
-                                          busTime ==
-                                                  controller
-                                                      .seoulNextBusTime.value
-                                              ? '탑승 가능한 가장 빠른 셔틀'.tr
-                                              : ' ',
+                                          schedule.operatingHours,
                                           style: TextStyle(
-                                              color: busTime ==
-                                                      controller
-                                                          .seoulNextBusTime
-                                                          .value
+                                              fontWeight: (schedule
+                                                          .isFastestBus &&
+                                                      controller.selectedDay ==
+                                                          controller.today)
+                                                  ? FontWeight.bold
+                                                  : FontWeight.normal,
+                                              color: (schedule.isFastestBus &&
+                                                      controller.selectedDay ==
+                                                          controller.today)
                                                   ? AppColors.green_main
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                                  : Colors.black),
                                         ),
-                                      )
-                                    ],
-                                  );
+                                      ],
+                                    )),
+                                    DataCell(Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Text(
+                                          schedule.busCount.toString(),
+                                          style: TextStyle(
+                                              fontWeight: (schedule
+                                                          .isFastestBus &&
+                                                      controller.selectedDay ==
+                                                          controller.today)
+                                                  ? FontWeight.bold
+                                                  : FontWeight.normal,
+                                              color: (schedule.isFastestBus &&
+                                                      controller.selectedDay ==
+                                                          controller.today)
+                                                  ? AppColors.green_main
+                                                  : Colors.black),
+                                        ),
+                                      ],
+                                    )),
+                                    DataCell(
+                                      Text(
+                                        schedule.specialNotes
+                                                ?.replaceAll(r'\n', '\n') ??
+                                            ' ',
+                                        style: TextStyle(
+                                            fontWeight: (schedule
+                                                        .isFastestBus &&
+                                                    controller.selectedDay ==
+                                                        controller.today)
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                            color: (schedule.isFastestBus &&
+                                                    controller.selectedDay ==
+                                                        controller.today)
+                                                ? AppColors.green_main
+                                                : Colors.black),
+                                      ),
+                                    ),
+                                  ]);
                                 }).toList(),
                               );
                             },
@@ -315,6 +401,9 @@ class ESKARA extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
@@ -333,7 +422,7 @@ class ESKARA extends StatelessWidget {
                               width: 5,
                             ),
                             Text(
-                              '${'인자셔틀'.tr} ${'[자과캠 → 인사캠]'.tr}',
+                              '${'자인셔틀'.tr} ${'[자과캠 → 인사캠]'.tr}',
                               style: const TextStyle(
                                 color: AppColors.green_main,
                                 fontFamily: 'CJKBold',
@@ -342,77 +431,98 @@ class ESKARA extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
-                          child: Obx(
-                            () {
-                              return DataTable(
-                                columnSpacing: 90.w,
-                                columns: [
-                                  DataColumn(
-                                    label: Text('운행시간'.tr),
-                                  ),
-                                  DataColumn(
-                                    label: Text('비고'.tr),
-                                  ),
-                                ],
-                                rows:
-                                    controller.schedule('suwon').map((busTime) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(
-                                        Builder(
-                                          builder: (BuildContext context) {
-                                            String displayText;
-                                            displayText = busTime;
-                                            return Text(
-                                              displayText,
-                                              style: TextStyle(
-                                                fontWeight: busTime ==
-                                                        controller
-                                                            .suwonNextBusTime
-                                                            .value
-                                                    ? FontWeight.bold
-                                                    : FontWeight.normal,
-                                                color: busTime ==
-                                                        controller
-                                                            .suwonNextBusTime
-                                                            .value
-                                                    ? AppColors.green_main
-                                                    : Colors.black,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      DataCell(
-                                        Text(
-                                          busTime ==
-                                                  controller
-                                                      .suwonNextBusTime.value
-                                              ? '탑승 가능한 가장 빠른 셔틀'.tr
-                                              : ' ',
-                                          style: TextStyle(
-                                              color: busTime ==
-                                                      controller
-                                                          .suwonNextBusTime
-                                                          .value
-                                                  ? AppColors.green_main
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                }).toList(),
-                              );
-                            },
-                          ),
-                        ),
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 3, 20, 0),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
+                      child: Obx(
+                        () {
+                          return DataTable(
+                            columnSpacing: 35,
+                            columns: [
+                              DataColumn(
+                                label: Text('운영시간'.tr),
+                              ),
+                              const DataColumn(
+                                label: Text('운영대수'),
+                              ),
+                              const DataColumn(
+                                label: Text('특이사항'),
+                              ),
+                            ],
+                            rows: controller.jainBusSchedule.map((schedule) {
+                              return DataRow(cells: [
+                                DataCell(Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      schedule.operatingHours,
+                                      style: TextStyle(
+                                          fontWeight: (schedule.isFastestBus &&
+                                                  controller.selectedDay ==
+                                                      controller.today)
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: (schedule.isFastestBus &&
+                                                  controller.selectedDay ==
+                                                      controller.today)
+                                              ? AppColors.green_main
+                                              : Colors.black),
+                                    ),
+                                  ],
+                                )),
+                                DataCell(Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      schedule.busCount.toString(),
+                                      style: TextStyle(
+                                          fontWeight: (schedule.isFastestBus &&
+                                                  controller.selectedDay ==
+                                                      controller.today)
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: (schedule.isFastestBus &&
+                                                  controller.selectedDay ==
+                                                      controller.today)
+                                              ? AppColors.green_main
+                                              : Colors.black),
+                                    ),
+                                  ],
+                                )),
+                                DataCell(SizedBox(
+                                  child: Text(
+                                    schedule.specialNotes
+                                            ?.replaceAll(r'\n', '\n') ??
+                                        ' ',
+                                    style: TextStyle(
+                                        fontWeight: (schedule.isFastestBus &&
+                                                controller.selectedDay ==
+                                                    controller.today)
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
+                                        color: (schedule.isFastestBus &&
+                                                controller.selectedDay ==
+                                                    controller.today)
+                                            ? AppColors.green_main
+                                            : Colors.black),
+                                  ),
+                                )),
+                              ]);
+                            }).toList(),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

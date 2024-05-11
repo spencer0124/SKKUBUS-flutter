@@ -30,7 +30,7 @@ class _SplashAdState extends State<SplashAd> {
 
   Future<Map<String, String?>> fetchImageData() async {
     Future.delayed(const Duration(milliseconds: 4000), () {
-      Get.toNamed('/mainpage');
+      Get.offNamed('/mainpage');
       FlutterNativeSplash.remove();
     });
 
@@ -40,15 +40,19 @@ class _SplashAdState extends State<SplashAd> {
       FlutterNativeSplash.remove();
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        http.get(Uri.parse(
-            'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/view'));
+        try {
+          http.get(Uri.parse(
+              'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/view'));
+        } catch (e) {
+          print('Error: $e');
+        }
 
         return {
           'image': data['image'],
           'link': data['link'],
         };
       } else {
-        print('Server error');
+        print('Server error4');
       }
     } catch (e) {
       print('Error: $e');
@@ -118,8 +122,12 @@ class _SplashAdState extends State<SplashAd> {
                                       Uri.parse(snapshot.data!['link']!))) {
                                     await launchUrl(
                                         Uri.parse(snapshot.data!['link']!));
-                                    http.get(Uri.parse(
-                                        'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/click'));
+                                    try {
+                                      http.get(Uri.parse(
+                                          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/click'));
+                                    } catch (e) {
+                                      print('Error: $e');
+                                    }
                                   } else {
                                     Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
                                   }
