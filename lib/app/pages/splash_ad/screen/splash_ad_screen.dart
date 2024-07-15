@@ -35,14 +35,14 @@ class _SplashAdState extends State<SplashAd> {
     });
 
     try {
-      final response = await http.get(Uri.parse(
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'));
+      final response =
+          await http.get(Uri.parse('http://43.200.90.214:3000/ad/v1/addetail'));
       FlutterNativeSplash.remove();
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         try {
           http.get(Uri.parse(
-              'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/view'));
+              'http://43.200.90.214:3000/ad/v1/statistics/menu1/view'));
         } catch (e) {
           print('Error: $e');
         }
@@ -124,7 +124,7 @@ class _SplashAdState extends State<SplashAd> {
                                         Uri.parse(snapshot.data!['link']!));
                                     try {
                                       http.get(Uri.parse(
-                                          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu1/click'));
+                                          'http://43.200.90.214:3000/ad/v1/statistics/menu1/click'));
                                     } catch (e) {
                                       print('Error: $e');
                                     }

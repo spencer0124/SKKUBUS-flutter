@@ -78,7 +78,7 @@ class BusDataScreenDetail extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 16),
                             child: Text(
-                              '농구장 → 학생회관 → 정문 → 올림핌기념국민생활관 → 혜화동우체국 → 혜화동로터리 → 혜화역 1번출구',
+                              '농구장 → 학생회관 → 정문 → 올림픽기념국민생활관 → 혜화동우체국 → 혜화동로터리 → 혜화역 1번출구',
                               style: TextStyle(
                                   color: Colors.grey[900],
                                   fontFamily: 'CJKRegular',

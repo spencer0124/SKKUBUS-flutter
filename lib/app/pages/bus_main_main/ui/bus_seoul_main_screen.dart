@@ -64,7 +64,7 @@ class BusDataScreen extends GetView<BusDataController> {
                                       Uri.parse(controller.belowAdLink.value));
                                   try {
                                     http.get(Uri.parse(
-                                        'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/click'));
+                                        'http://43.200.90.214:3000/ad/v1/statistics/menu3/click'));
                                   } catch (e) {
                                     print('Error: $e');
                                   }

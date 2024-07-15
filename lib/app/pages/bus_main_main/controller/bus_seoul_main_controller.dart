@@ -128,15 +128,15 @@ class BusDataController extends GetxController {
 
   void fetchMainpageAd() async {
     try {
-      final response = await http.get(Uri.parse(
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'
-          // 'http://localhost:3000/ad/v1/addetail'
-          ));
+      final response =
+          await http.get(Uri.parse('http://43.200.90.214:3000/ad/v1/addetail'
+              // 'http://localhost:3000/ad/v1/addetail'
+              ));
 
       if (response.statusCode == 200) {
         try {
           http.get(Uri.parse(
-              'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu3/view'));
+              'http://43.200.90.214:3000/ad/v1/statistics/menu3/view'));
         } catch (e) {
           print('Error: $e');
         }
