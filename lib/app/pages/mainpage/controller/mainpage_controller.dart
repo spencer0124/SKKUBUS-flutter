@@ -112,8 +112,8 @@ class MainpageController extends GetxController {
 
   void fetchMainpageAd() async {
     try {
-      final response = await http.get(Uri.parse(
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail'));
+      final response =
+          await http.get(Uri.parse('http://43.200.90.214:3000/ad/v1/addetail'));
       // 'http://localhost:3000/ad/v1/addetail'));
       // 'http://10.0.2.2:3000/ad/v1/addetail'));
 
@@ -121,7 +121,7 @@ class MainpageController extends GetxController {
         if (fetchMainpageAdbool == false) {
           try {
             http.get(Uri.parse(
-                'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/statistics/menu2/view'));
+                'http://43.200.90.214:3000/ad/v1/statistics/menu2/view'));
           } catch (e) {
             print('Error: $e');
           }
@@ -153,7 +153,7 @@ class MainpageController extends GetxController {
     try {
       final response = await http.get(Uri.parse(
           // 'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/ad/v1/addetail/$udid'
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/poll/v1/register/$udid'));
+          'http://43.200.90.214:3000/poll/v1/register/$udid'));
       // 'http://10.0.2.2:3000/poll/v1/register/$udid'));
       // 'http://localhost:3000/poll/v1/register/$udid'));
       // ));
