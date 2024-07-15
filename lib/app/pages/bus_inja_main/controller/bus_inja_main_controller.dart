@@ -219,8 +219,8 @@ class InjaMainController extends GetxController {
   void fetchinjaBusSchedule(String type) async {
     try {
       // var url = Uri.parse('http://localhost:3000/campus/v1/campus/INJA_$type');
-      var url = Uri.parse(
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/campus/v1/campus/INJA_$type');
+      var url =
+          Uri.parse('http://43.200.90.214:3000/campus/v1/campus/INJA_$type');
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -240,8 +240,8 @@ class InjaMainController extends GetxController {
   void fetchjainBusSchedule(String type) async {
     try {
       // var url = Uri.parse('http://localhost:3000/campus/v1/campus/JAIN_$type');
-      var url = Uri.parse(
-          'http://ec2-13-209-48-107.ap-northeast-2.compute.amazonaws.com/campus/v1/campus/JAIN_$type');
+      var url =
+          Uri.parse('http://43.200.90.214:3000/campus/v1/campus/JAIN_$type');
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
