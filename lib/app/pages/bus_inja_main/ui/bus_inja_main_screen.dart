@@ -11,6 +11,36 @@ import 'package:skkumap/app/components/NavigationBar/custom_navigation.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:skkumap/app/components/liveactivitiy/liveactivity_bus_eta.dart';
+import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+
+// 인사캠 위도, 경도, 목적지 이름
+const double seoulCampusLat = 37.587347;
+const double seoulCampusLon = 126.994140;
+const String seoulCampusDestnameEncode =
+    '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9D%B8%EC%82%AC%EC%BA%A0';
+
+// 자과캠 위도, 경도, 목적지 이름
+const double suwonCampusLat = 37.296362;
+const double suwonCampusLon = 126.970565;
+const String suwonCampusDestnameEncode =
+    '%EC%8A%A4%EA%BE%B8%EB%B2%84%EC%8A%A4%20%7C%20%EC%9E%90%EA%B3%BC%EC%BA%A0';
+
+// 인사캠 (600주년 기념관 앞) 대중교통 길찾기 바로가기 링크
+final Uri seoulCampusMapNaver = Uri.parse(
+    'nmap://route/public?dlat=$seoulCampusLat&dlng=$seoulCampusLon&dname=$seoulCampusDestnameEncode');
+final Uri seoulCampusMapKakao = Uri.parse(
+    'kakaomap://route?ep=$seoulCampusLat,$seoulCampusLon&by=PUBLICTRANSIT&eName=$seoulCampusDestnameEncode');
+final Uri seoulCampusMapApple =
+    Uri.parse('maps://?t=r&daddr=$seoulCampusLat,$seoulCampusLon&dirflg=2');
+
+// 자과캠 (후문 앞)대중교통 길찾기 바로가기 링크
+final Uri suwonCampusMapNaver = Uri.parse(
+    'nmap://route/public?dlat=$suwonCampusLat&dlng=$suwonCampusLon&dname=$suwonCampusDestnameEncode');
+final Uri suwonCampusMapKakao = Uri.parse(
+    'kakaomap://route?ep=$suwonCampusLat,$suwonCampusLon&by=PUBLICTRANSIT&eName=$suwonCampusDestnameEncode');
+final Uri suwonCampusMapApple =
+    Uri.parse('maps://?t=r&daddr=$suwonCampusLat,$suwonCampusLon&dirflg=2');
 
 final List<String> dateitems = [
   '월요일',
@@ -113,6 +143,78 @@ class ESKARA extends StatelessWidget {
             height: 0.5,
             color: Colors.grey[300],
           ),
+          Container(
+            height: 30,
+            color: Colors.grey[100],
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              children: [
+                // 현재 날짜
+                Text(
+                  "2025-04-27", // 자동으로 업데이트 되는 날짜
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Text(
+                  "일", // 자동으로 업데이트 되는 요일
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[800],
+                  ),
+                ),
+
+                const Spacer(),
+
+                // 날짜 선택
+                Obx(() => SizedBox(
+                      width: 125,
+                      height: 50,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          isExpanded: true,
+                          value: controller.selectedDay.value,
+                          onChanged: (String? value) {
+                            controller.selectedDay.value = value;
+
+                            controller.selectedEnglishDay = controller
+                                .translateDayToEnglish(
+                                    controller.selectedDay.value ?? '월요일')
+                                .obs;
+                            controller.fetchinjaBusSchedule(
+                                controller.selectedEnglishDay.value ??
+                                    'monday');
+                            controller.fetchjainBusSchedule(
+                                controller.selectedEnglishDay.value ??
+                                    'monday');
+                          },
+                          hint: Text(
+                            '요일 선택',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                          items: dateitems
+                              .map((String item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      "$item 시간표",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey[800],
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+          ),
           Flexible(
             child: Scrollbar(
               child: ListView(
@@ -126,12 +228,6 @@ class ESKARA extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-                        //   child: Divider(
-                        //     color: Colors.grey[300],
-                        //   ),
-                        // ),
                         Row(
                           children: [
                             const SizedBox(
@@ -146,169 +242,105 @@ class ESKARA extends StatelessWidget {
                               textAlign: TextAlign.start,
                             ),
                             const Spacer(),
-                            Obx(() => SizedBox(
-                                  width: 100,
-                                  height: 50,
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton2<String>(
-                                      isExpanded: true,
-                                      value: controller.selectedDay.value,
-                                      onChanged: (String? value) {
-                                        controller.selectedDay.value = value;
-
-                                        controller.selectedEnglishDay =
-                                            controller
-                                                .translateDayToEnglish(
-                                                    controller.selectedDay
-                                                            .value ??
-                                                        '월요일')
-                                                .obs;
-                                        controller.fetchinjaBusSchedule(
-                                            controller
-                                                    .selectedEnglishDay.value ??
-                                                'monday');
-                                        controller.fetchjainBusSchedule(
-                                            controller
-                                                    .selectedEnglishDay.value ??
-                                                'monday');
-                                      },
-                                      hint: Text(
-                                        '요일 선택',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Theme.of(context).hintColor,
-                                        ),
-                                      ),
-                                      items: dateitems
-                                          .map((String item) =>
-                                              DropdownMenuItem<String>(
-                                                value: item,
-                                                child: Text(
-                                                  item,
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ))
-                                          .toList(),
+                            InkWell(
+                              onTap: () {
+                                print("승하차 장소 클릭됨");
+                                print("네이버지도: $seoulCampusMapNaver");
+                                print("카카오맵: $seoulCampusMapKakao");
+                                print("애플지도: $seoulCampusMapApple");
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.place_rounded,
+                                      color: Colors.grey[800], size: 15),
+                                  const SizedBox(width: 1),
+                                  Text(
+                                    '승하차 장소',
+                                    style: TextStyle(
+                                      color: Colors.grey[800],
+                                      fontFamily: 'CJKBold',
                                     ),
+                                    textAlign: TextAlign.start,
                                   ),
-                                )),
+                                ],
+                              ),
+                            )
                           ],
                         ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        Row(
+                          children: [
+                            // live activity bus eta
+                            LiveActivityBusETA(
+                              screenWidth: MediaQuery.of(context).size.width,
+                              title: '인사캠 → 자과캠 셔틀',
+                              duration: '1시간 30분',
+                              distance: '131.1km',
+                              timeRange: '17:00 ~ 18:30',
+                              isAvailable: false,
+                            ),
 
-                        // Obx(
-                        //   () => Text(
-                        //     '예상 소요시간 : ${controller.duration.value}',
-                        //     style: const TextStyle(
-                        //       color: Colors.black,
-                        //       fontFamily: 'CJKRegular',
-                        //       fontSize: 12,
-                        //     ),
-                        //     textAlign: TextAlign.start,
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 15,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Container(
-                        //       padding: const EdgeInsets.all(10.0),
-                        //       height: 90,
-                        //       width: dwidth / 2 - 5 - 20,
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(10),
-                        //         color: Colors.grey[100],
-                        //         border: Border.all(
-                        //           color: Colors.grey[300]!,
-                        //           width: 1,
-                        //         ),
-                        //       ),
-                        //       child: Column(
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           const Row(
-                        //             mainAxisAlignment:
-                        //                 MainAxisAlignment.spaceBetween,
-                        //             children: [
-                        //               Text(
-                        //                 '다음 셔틀',
-                        //                 style: TextStyle(
-                        //                   fontSize: 13,
-                        //                   color: Colors.black,
-                        //                   fontFamily: 'CJKBold',
-                        //                 ),
-                        //                 textAlign: TextAlign.start,
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           SizedBox(
-                        //             height: 5.h,
-                        //           ),
-                        //           const Text(
-                        //             '12:00 셔틀\n(1시간 15분 후)',
-                        //             style: TextStyle(
-                        //               fontSize: 12,
-                        //               color: Colors.black,
-                        //               fontFamily: 'CJKRegular',
-                        //             ),
-                        //             textAlign: TextAlign.start,
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //     const SizedBox(
-                        //       width: 10,
-                        //     ),
-                        //     Container(
-                        //       padding: const EdgeInsets.all(10.0),
-                        //       height: 90,
-                        //       width: dwidth / 2 - 5 - 20,
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(10),
-                        //         color: Colors.grey[100],
-                        //         border: Border.all(
-                        //           color: Colors.grey[300]!,
-                        //           width: 1,
-                        //         ),
-                        //       ),
-                        //       child: Column(
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           const Row(
-                        //             mainAxisAlignment:
-                        //                 MainAxisAlignment.spaceBetween,
-                        //             children: [
-                        //               Text(
-                        //                 '예상 소요시간',
-                        //                 style: TextStyle(
-                        //                   fontSize: 13,
-                        //                   color: Colors.black,
-                        //                   fontFamily: 'CJKBold',
-                        //                 ),
-                        //                 textAlign: TextAlign.start,
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           SizedBox(
-                        //             height: 5.h,
-                        //           ),
-                        //           const Text(
-                        //             '1시간 45분\n(실시간 교통정보 반영)',
-                        //             style: TextStyle(
-                        //               fontSize: 12,
-                        //               color: Colors.black,
-                        //               fontFamily: 'CJKRegular',
-                        //             ),
-                        //             textAlign: TextAlign.start,
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                            const Spacer(),
 
+                            InkWell(
+                              onTap: () async {
+                                var result =
+                                    await FlutterPlatformAlert.showCustomAlert(
+                                  windowTitle: "대중교통 길찾기",
+                                  text: "원하는 지도 앱을 선택해주세요",
+                                  positiveButtonTitle: "네이버지도",
+                                  neutralButtonTitle: "카카오맵",
+                                  negativeButtonTitle: "애플지도",
+                                );
+
+                                // 네이버지도 선택
+                                if (result == CustomButton.positiveButton) {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'naver_map',
+                                      mapNameKr: '네이버 지도',
+                                      mapUri: seoulCampusMapNaver,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                                }
+                                // 카카오맵 선택
+                                else if (result == CustomButton.neutralButton) {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'kakao_map',
+                                      mapNameKr: '카카오맵',
+                                      mapUri: seoulCampusMapKakao,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                                } else {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'apple_map',
+                                      mapNameKr: '애플 지도',
+                                      mapUri: seoulCampusMapApple,
+                                      playStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                                }
+                              },
+                              child: LiveActivityBusETA(
+                                screenWidth: MediaQuery.of(context).size.width,
+                                title: '대중교통',
+                                duration: '1시간 32분',
+                                distance: '150.1km',
+                                timeRange: '15:00 ~ 16:32',
+                                isAvailable: true,
+                              ),
+                            ),
+                          ],
+                        ),
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
@@ -403,10 +435,10 @@ class ESKARA extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 25,
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(15, 3, 15, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 3, 20, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -428,6 +460,107 @@ class ESKARA extends StatelessWidget {
                                 fontFamily: 'CJKBold',
                               ),
                               textAlign: TextAlign.start,
+                            ),
+                            const Spacer(),
+                            InkWell(
+                              onTap: () {
+                                print("자인 승하차 장소 클릭됨");
+                                print("네이버지도: $suwonCampusMapNaver");
+                                print("카카오맵: $suwonCampusMapKakao");
+                                print("애플지도: $suwonCampusMapApple");
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(Icons.place_rounded,
+                                      color: Colors.grey[800], size: 15),
+                                  const SizedBox(width: 1),
+                                  Text(
+                                    '승하차 장소',
+                                    style: TextStyle(
+                                      color: Colors.grey[800],
+                                      fontFamily: 'CJKBold',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            // live activity bus eta
+                            LiveActivityBusETA(
+                              screenWidth: MediaQuery.of(context).size.width,
+                              title: '인사캠 → 자과캠 셔틀',
+                              duration: '1시간 30분',
+                              distance: '131.1km',
+                              timeRange: '17:00 ~ 18:30',
+                              isAvailable: false,
+                            ),
+
+                            const Spacer(),
+
+                            InkWell(
+                              onTap: () async {
+                                var result =
+                                    await FlutterPlatformAlert.showCustomAlert(
+                                  windowTitle: "대중교통 길찾기",
+                                  text: "원하는 지도 앱을 선택해주세요",
+                                  positiveButtonTitle: "네이버지도",
+                                  neutralButtonTitle: "카카오맵",
+                                  negativeButtonTitle: "애플지도",
+                                );
+
+                                // 네이버지도 선택
+                                if (result == CustomButton.positiveButton) {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'naver_map',
+                                      mapNameKr: '네이버 지도',
+                                      mapUri: suwonCampusMapNaver,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                                }
+                                // 카카오맵 선택
+                                else if (result == CustomButton.neutralButton) {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'kakao_map',
+                                      mapNameKr: '카카오맵',
+                                      mapUri: suwonCampusMapKakao,
+                                      playStoreLink:
+                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                                } else {
+                                  controller.executeMap(
+                                      type: 'seoul',
+                                      mapNameEn: 'apple_map',
+                                      mapNameKr: '애플 지도',
+                                      mapUri: suwonCampusMapApple,
+                                      playStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                                      appStoreLink:
+                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                                }
+                              },
+                              child: LiveActivityBusETA(
+                                screenWidth: MediaQuery.of(context).size.width,
+                                title: '대중교통',
+                                duration: '1시간 32분',
+                                distance: '150.1km',
+                                timeRange: '15:00 ~ 16:32',
+                                isAvailable: true,
+                              ),
                             ),
                           ],
                         ),

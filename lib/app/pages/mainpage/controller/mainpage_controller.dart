@@ -112,10 +112,9 @@ class MainpageController extends GetxController {
 
   void fetchMainpageAd() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://43.200.90.214:3000/ad/v1/addetail'));
-      // 'http://localhost:3000/ad/v1/addetail'));
-      // 'http://10.0.2.2:3000/ad/v1/addetail'));
+      final response = await http.get(Uri.parse(
+          // 'http://localhost:3000/ad/v1/addetail'));
+          'http://43.200.90.214:3000/ad/v1/addetail'));
 
       if (response.statusCode == 200) {
         if (fetchMainpageAdbool == false) {

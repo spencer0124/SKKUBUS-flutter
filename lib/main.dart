@@ -26,12 +26,13 @@ import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/webview/controller/webview_controller.dart';
 import 'package:skkumap/app/routes/app_routes.dart';
 import 'package:skkumap/firebase_options.dart';
-
 import 'languages.dart';
-
 import 'package:skkumap/app/pages/nsc_building_map/controller/nsc_building_map_controller.dart';
 import 'package:skkumap/app/pages/search_list/controller/search_list_controller.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tzData;
+import 'package:intl/date_symbol_data_local.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -41,6 +42,7 @@ Future<void> main() async {
     SystemUiMode.manual,
     overlays: SystemUiOverlay.values,
   );
+  // await initializeDateFormatting('ko_KR');
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -133,8 +135,12 @@ void registerDependencies() {
   Get.lazyPut(() => SeoulDetailController());
   Get.lazyPut(() => SeoulDetailLifeCycle());
 
-  Get.put(InjaMainController());
-  Get.put(InjaMainLifeCycle());
+  Get.lazyPut(() => InjaMainController());
+
+  // Get.put(InjaMainController());
+
+  Get.lazyPut(() => InjaMainLifeCycle());
+  // Get.put(InjaMainLifeCycle());
 
   Get.put(InjaDetailController());
   // Get.lazyPut(() => InjaDetailController());

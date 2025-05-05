@@ -33,20 +33,27 @@ class CustomNavigationBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          SizedBox(
-            width: 45,
-            height: 45,
-            child: isDisplayLeftBtn
-                ? IconButton(
-                    icon: const Icon(
-                      Icons.chevron_left,
-                      size: 30.0,
-                    ),
-                    onPressed: leftBtnAction,
-                    color: Colors.white,
-                  )
-                : null,
+          Row(
+            children: [
+              SizedBox(
+                // width: 45,
+                height: 45,
+                child: isDisplayLeftBtn
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.chevron_left,
+                          size: 30.0,
+                        ),
+                        onPressed: leftBtnAction,
+                        color: Colors.white,
+                      )
+                    : null,
+              ),
+              if (rightBtnType == CustomNavigationBtnType.info)
+                const SizedBox(width: 35)
+            ],
           ),
+          const Spacer(),
           Text(
             title,
             style: const TextStyle(
@@ -55,19 +62,39 @@ class CustomNavigationBar extends StatelessWidget {
               fontFamily: 'CJKBold',
             ),
           ),
+          const Spacer(),
           SizedBox(
-            width: 45,
+            // width: 45,
             height: 45,
             child: isDisplayRightBtn
-                ? IconButton(
-                    icon: Icon(
-                      _getRightBtnIcon(),
-                      size: 23,
+                ? GestureDetector(
+                    onTap: rightBtnAction,
+                    child: Row(
+                      children: [
+                        Icon(
+                          _getRightBtnIcon(),
+                          size: 23,
+                          color: Colors.white,
+                        ),
+                        if (rightBtnType == CustomNavigationBtnType.info)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 4.0, right: 14.0),
+                            child: SizedBox(
+                              width: 30,
+                              child: Text(
+                                "정보",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontFamily: 'CJKBold',
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                    onPressed: rightBtnAction,
-                    color: Colors.white,
                   )
-                : null,
+                : const SizedBox(width: 45 + 27, height: 45),
           ),
         ],
       ),

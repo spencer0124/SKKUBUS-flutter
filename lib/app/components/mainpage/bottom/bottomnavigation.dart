@@ -62,10 +62,8 @@ class Bottomnavigation extends StatelessWidget {
                 ],
               ),
             ),
-            // const Spacer(),
-            SizedBox(
-              width: screenWidth * 0.3,
-            ),
+            const SizedBox(width: 25),
+            const Spacer(),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
@@ -90,27 +88,33 @@ class Bottomnavigation extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 25),
             const Spacer(),
-            // GestureDetector(
-            //   behavior: HitTestBehavior.translucent,
-            //   onTap: () {
-            //     onItemTapped(2);
-            //   },
-            //   child: Column(
-            //     children: [
-            //       Icon(
-            //         Icons.school,
-            //         color: index == 2 ? AppColors.green_main : Colors.grey,
-            //       ),
-            //       Text(
-            //         '캠퍼스',
-            //         style: TextStyle(
-            //           color: index == 2 ? AppColors.green_main : Colors.grey,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                onItemTapped(2);
+              },
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/flaticon_stop1.png',
+                    width: 22,
+                    color: index == 2 ? AppColors.green_main : Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    '공지',
+                    style: TextStyle(
+                      color: index == 2 ? AppColors.green_main : Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
           ],
         ),
       ),
