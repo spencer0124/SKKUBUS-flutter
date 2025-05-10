@@ -43,10 +43,10 @@ class CustomSearchBar extends StatelessWidget {
               width: 8,
             ),
             Text(
-              '성균관대 공간명/코드 검색'.tr,
+              '장소, 대학교, 건물코드 검색'.tr,
               style: TextStyle(
                 color: Colors.grey[400],
-                fontFamily: 'CJKMedium',
+                fontFamily: 'ProductSansMedium',
                 fontSize: 15,
               ),
             ),

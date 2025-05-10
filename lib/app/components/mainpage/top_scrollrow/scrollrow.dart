@@ -22,7 +22,7 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/hsscbuildingmap');
             },
             child: ScrollRowContainer(
-              text: '인사캠 건물지도'.tr,
+              text: '음식점'.tr,
               icon: Icons.outbond,
               ischecked: false,
             ),
@@ -36,7 +36,7 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/nscbuildingmap');
             },
             child: ScrollRowContainer(
-              text: '자과캠 건물지도'.tr,
+              text: '카페'.tr,
               icon: Icons.outbond,
               ischecked: false,
             ),
@@ -50,13 +50,38 @@ class ScrollableRow extends StatelessWidget {
               Get.toNamed('/lostandfound');
             },
             child: ScrollRowContainer(
-              text: '유실물 찾기'.tr,
+              text: '술집'.tr,
               icon: Icons.sensor_occupied_sharp,
               ischecked: false,
             ),
           ),
           const SizedBox(
             width: 5,
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Get.toNamed('/lostandfound');
+            },
+            child: ScrollRowContainer(
+              text: '새로오픈'.tr,
+              icon: Icons.sensor_occupied_sharp,
+              ischecked: false,
+            ),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Get.toNamed('/lostandfound');
+            },
+            child: ScrollRowContainer(
+              text: '더보기'.tr,
+              icon: Icons.sensor_occupied_sharp,
+              ischecked: false,
+            ),
           ),
         ],
       ),

@@ -91,20 +91,18 @@ flutter:
     - assets/images/
     - assets/lottie/
     - assets/SKKU/
+    - assets/tossface/
   uses-material-design: true
   fonts:
     - family: ProductBold
       fonts:
         - asset: assets/fonts/Product_Sans_Bold.ttf
-    - family: CJKBold
+    - family: ProductSansBold
       fonts:
-        - asset: assets/fonts/NotoSansCJKkr-Bold.otf
-    - family: CJKRegular
+        - asset: assets/fonts/WantedSans-Bold.otf
+    - family: ProductSansRegular
       fonts:
-        - asset: assets/fonts/NotoSansCJKkr-Regular.otf
-    - family: CJKMedium
+        - asset: assets/fonts/WantedSans-Regular.otf
+    - family: ProductSansMedium
       fonts:
-        - asset: assets/fonts/NotoSansCJKkr-Medium.otf
-    - family: toss
-      fonts:
-        - asset: assets/fonts/TossFaceFontMac.ttf
+        - asset: assets/fonts/WantedSans-Medium.otf

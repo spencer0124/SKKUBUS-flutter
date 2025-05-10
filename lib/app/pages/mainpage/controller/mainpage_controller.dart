@@ -144,9 +144,9 @@ class MainpageController extends GetxController {
     }
 
     String udid = await FlutterUdid.consistentUdid;
-    print("===================================");
-    print(udid);
-    print("===================================");
+    // print("===================================");
+    // print(udid);
+    // print("===================================");
 
     // print('http://10.0.2.2:3000/poll/v1/register/$udid');
     try {
@@ -158,7 +158,7 @@ class MainpageController extends GetxController {
       // ));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print("data:${jsonEncode(data)}");
+        // print("data:${jsonEncode(data)}");
 
         mainpageNoticeLink.value = data['link2'];
       } else {

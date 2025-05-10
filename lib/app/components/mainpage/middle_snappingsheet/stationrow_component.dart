@@ -33,7 +33,7 @@ class StationRowComponent extends StatelessWidget {
               containerText,
               style: TextStyle(
                 color: Colors.grey[800],
-                // fontFamily: 'CJKMedium',
+                // fontFamily: 'ProductSansMedium',
                 fontSize: 10,
               ),
               textAlign: TextAlign.start,
