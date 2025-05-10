@@ -126,7 +126,7 @@ class CustomRow1 extends StatelessWidget {
                                   title,
                                   style: const TextStyle(
                                     color: Colors.black,
-                                    fontFamily: 'CJKMedium',
+                                    fontFamily: 'ProductSansMedium',
                                     fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
@@ -135,7 +135,7 @@ class CustomRow1 extends StatelessWidget {
                                   '  ',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontFamily: 'CJKBold',
+                                    fontFamily: 'ProductSansBold',
                                     fontSize: 15,
                                   ),
                                   textAlign: TextAlign.start,
@@ -156,7 +156,7 @@ class CustomRow1 extends StatelessWidget {
                                     style: TextStyle(
                                       height: 1.4.h,
                                       color: Colors.white,
-                                      fontFamily: 'CJKMedium',
+                                      fontFamily: 'ProductSansMedium',
                                       fontSize: 10.sp,
                                     ),
                                     textAlign: TextAlign.start,
@@ -171,7 +171,7 @@ class CustomRow1 extends StatelessWidget {
                               subtitle,
                               style: TextStyle(
                                 color: Colors.grey[600],
-                                fontFamily: 'CJKMedium',
+                                fontFamily: 'ProductSansMedium',
                                 fontSize: 11.5,
                               ),
                               textAlign: TextAlign.start,
@@ -196,7 +196,7 @@ class CustomRow1 extends StatelessWidget {
                                         noticeText!,
                                         style: TextStyle(
                                           color: Colors.red[600],
-                                          fontFamily: 'CJKMedium',
+                                          fontFamily: 'ProductSansMedium',
                                           fontSize: 11.5,
                                         ),
                                         textAlign: TextAlign.start,
@@ -234,7 +234,7 @@ class CustomRow1 extends StatelessWidget {
                   '상세정보'.tr,
                   style: TextStyle(
                     color: Colors.grey[900],
-                    fontFamily: 'CJKMedium',
+                    fontFamily: 'ProductSansMedium',
                     fontSize: 12.5,
                   ),
                 ),

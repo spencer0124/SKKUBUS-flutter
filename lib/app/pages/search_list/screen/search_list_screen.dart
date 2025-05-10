@@ -96,7 +96,7 @@ class _SearchListState extends State<SearchList> {
                     // keyboardType: TextInputType.,
                     style: const TextStyle(
                       color: Colors.black,
-                      fontFamily: 'CJKMedium',
+                      fontFamily: 'ProductSansMedium',
                     ),
                     cursorHeight: 19,
                     cursorColor: AppColors.green_main,
@@ -120,7 +120,7 @@ class _SearchListState extends State<SearchList> {
                 //   '성균관대 공간명/코드 검색',
                 //   style: TextStyle(
                 //     color: Colors.grey[400],
-                //     fontFamily: 'CJKMedium',
+                //     fontFamily: 'ProductSansMedium',
                 //     fontSize: 15,
                 //   ),
                 // ),
@@ -143,7 +143,7 @@ class _SearchListState extends State<SearchList> {
                   Text(
                     '총 ${controller.searchResult.value?.metaData.option3TotalCount ?? 0}건의 검색결과 (인사캠 ${controller.searchResult.value?.metaData.option3HsscCount ?? 0}건, 자과캠 ${controller.searchResult.value?.metaData.option3NscCount ?? 0}건)',
                     style: const TextStyle(
-                      fontFamily: 'CJKMedium',
+                      fontFamily: 'ProductSansMedium',
                       fontSize: 11,
                     ),
                   ),
@@ -185,7 +185,7 @@ class _SearchListState extends State<SearchList> {
                         color: controller.currentTab.value == SearchTab.all
                             ? Colors.white
                             : Colors.black,
-                        fontFamily: 'CJKMedium',
+                        fontFamily: 'ProductSansMedium',
                         fontSize: 13,
                       ),
                     ),
@@ -219,7 +219,7 @@ class _SearchListState extends State<SearchList> {
                         color: controller.currentTab.value == SearchTab.hssc
                             ? Colors.white
                             : Colors.black,
-                        fontFamily: 'CJKMedium',
+                        fontFamily: 'ProductSansMedium',
                         fontSize: 13,
                       ),
                     ),
@@ -253,7 +253,7 @@ class _SearchListState extends State<SearchList> {
                         color: controller.currentTab.value == SearchTab.nsc
                             ? Colors.white
                             : Colors.black,
-                        fontFamily: 'CJKMedium',
+                        fontFamily: 'ProductSansMedium',
                         fontSize: 13,
                       ),
                     ),
@@ -308,7 +308,7 @@ class _SearchListState extends State<SearchList> {
                                       item.spaceInfo!.spaceNmKr!,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
-                                        fontFamily: 'CJKMedium',
+                                        fontFamily: 'ProductSansMedium',
                                         fontSize: 15,
                                       ),
                                     ),
@@ -338,7 +338,7 @@ class _SearchListState extends State<SearchList> {
                                 item.spaceInfo!.spaceCd!,
                                 style: TextStyle(
                                   color: Colors.grey[500],
-                                  fontFamily: 'CJKMedium',
+                                  fontFamily: 'ProductSansMedium',
                                   fontSize: 15,
                                 ),
                               ),
@@ -371,7 +371,7 @@ class _SearchListState extends State<SearchList> {
                     //           Text(item.spaceInfo!.spaceCd!,
                     //               style: TextStyle(
                     //                 color: Colors.grey[500],
-                    //                 fontFamily: 'CJKMedium',
+                    //                 fontFamily: 'ProductSansMedium',
                     //                 fontSize: 15,
                     //               )),
                     //         ],

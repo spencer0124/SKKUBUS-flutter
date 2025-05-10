@@ -37,6 +37,7 @@ class Bottomnavigation extends StatelessWidget {
             //     Text('홈'),
             //   ],
             // ),
+
             const Spacer(),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
@@ -46,7 +47,7 @@ class Bottomnavigation extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/flaticon_bus1.png',
+                    'assets/images/flaticon_two_point.png',
                     width: 22,
                     color: index == 0 ? AppColors.green_main : Colors.grey,
                   ),
@@ -54,7 +55,7 @@ class Bottomnavigation extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    '버스',
+                    '주변',
                     style: TextStyle(
                       color: index == 0 ? AppColors.green_main : Colors.grey,
                     ),
@@ -62,7 +63,6 @@ class Bottomnavigation extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 25),
             const Spacer(),
             GestureDetector(
               behavior: HitTestBehavior.translucent,
@@ -72,7 +72,7 @@ class Bottomnavigation extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/flaticon_stop1.png',
+                    'assets/images/flaticon_campus.png',
                     width: 22,
                     color: index == 1 ? AppColors.green_main : Colors.grey,
                   ),
@@ -80,7 +80,7 @@ class Bottomnavigation extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    '정류장',
+                    '캠퍼스',
                     style: TextStyle(
                       color: index == 1 ? AppColors.green_main : Colors.grey,
                     ),
@@ -88,33 +88,32 @@ class Bottomnavigation extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 25),
             const Spacer(),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                onItemTapped(2);
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/flaticon_stop1.png',
-                    width: 22,
-                    color: index == 2 ? AppColors.green_main : Colors.grey,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '공지',
-                    style: TextStyle(
-                      color: index == 2 ? AppColors.green_main : Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
+            // const Spacer(),
+            // GestureDetector(
+            //   behavior: HitTestBehavior.translucent,
+            //   onTap: () {
+            //     onItemTapped(2);
+            //   },
+            //   child: Column(
+            //     children: [
+            //       Image.asset(
+            //         'assets/images/flaticon_stop1.png',
+            //         width: 22,
+            //         color: index == 2 ? AppColors.green_main : Colors.grey,
+            //       ),
+            //       const SizedBox(
+            //         height: 5,
+            //       ),
+            //       Text(
+            //         '공지',
+            //         style: TextStyle(
+            //           color: index == 2 ? AppColors.green_main : Colors.grey,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

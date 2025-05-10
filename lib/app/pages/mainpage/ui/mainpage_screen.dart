@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:skkumap/app/pages/KingoInfo/ui/kingoinfo_view.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_campus.dart';
-import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_station.dart';
+import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_around.dart';
 
 import 'package:snapping_sheet/snapping_sheet.dart';
 
@@ -82,11 +81,11 @@ class Mainpage extends GetView<MainpageController> {
 Widget _getSnappingSheetContent(int index) {
   switch (index) {
     case 0:
-      return OptionBus();
+      return OptionAround();
     case 1:
-      return OptionStation(); // Replace with your actual widget for index 1
+      return OptionCampus(); // Replace with your actual widget for index 1
     case 2:
-      return const OptionCampus(); // Replace with your actual widget for index 2
+      return OptionCampus(); // Replace with your actual widget for index 2
     default:
       return OptionBus(); // Default case
   }

@@ -1,69 +1,140 @@
 import 'package:flutter/material.dart';
-import 'package:skkumap/app/components/mainpage/busrow.dart';
-import 'package:skkumap/app/components/mainpage/middle_snappingsheet/stationrow.dart';
-import 'package:skkumap/app_theme.dart';
+import 'package:get/get.dart';
+import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
+import 'package:skkumap/app/utils/screensize.dart';
+import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_bus.dart';
+
+// '캠퍼스' 탭
+// 현재 위치를 기준으로, (지원하는 목록에서) 가장 가까운 대학교 캠퍼스 정보를 불러옴
 
 class OptionCampus extends StatelessWidget {
-  const OptionCampus({Key? key}) : super(key: key);
+  OptionCampus({Key? key}) : super(key: key);
+
+  final controller = Get.find<MainpageController>();
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = ScreenSize.width(context);
+
     return Container(
       color: Colors.white,
-      child: const SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(
-              height: 10,
+            const SizedBox(
+              height: 4,
             ),
-            // Obx(
-            //   () => CustomRow2(
-            //     isLoading: controller.jonroLoadingDone.value,
-            //     iconData: Icons.stop_circle_rounded,
-            //     titleText: '혜화역 1번 출구',
-            //     subtitleText1: controller.jonro07BusMessageVisible.value == true
-            //         ? controller.jongro07BusMessage.value
-            //         : '${controller.jongro07BusRemainStation.value}번째 전 (${controller.jongro07BusRemainTotalTimeSec.value ~/ 60}분 ${controller.jongro07BusRemainTotalTimeSec.value % 60}초)',
-            //     subtitleText2: controller.hsscBusMessage.value,
-            //     containerColor: Colors.black,
-            //     containerText: '정류장',
-            //     routeName: '/busData',
-            //   ),
-            // ),
-            // const CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '설 연휴 귀향/귀경 버스 (자과캠)',
-            //   subtitleText: '지역별 왕복 운영',
-            //   containerColor: AppColors.green_main,
-            //   containerText: '성대',
-            //   routeName: '/knewyear',
-            // ),
-            // const CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '인사캠 셔틀',
-            //   subtitleText: '정차소(인문.농구장) ↔ 600주년 기념관',
-            //   containerColor: AppColors.green_main,
-            //   containerText: '성대',
-            //   routeName: '/busData',
-            // ),
-            // const CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '인자셔틀',
-            //   subtitleText: '인사캠 ↔ 자과캠',
-            //   containerColor: AppColors.green_main,
-            //   containerText: '성대',
-            //   routeName: '/eskara',
-            // ),
-            // CustomRow1(
-            //   iconData: Icons.directions_bus,
-            //   titleText: '종로 07',
-            //   subtitleText: '명륜새마을금고 ↔ 명륜새마을금고',
-            //   containerColor: Colors.green[400]!,
-            //   containerText: '마을',
-            //   routeName: '/jonromain',
-            // ),
-            SizedBox(
+
+            // 여기서부터 메인 컨텐츠 화면
+            Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: 3, right: 3, top: 2, bottom: 2),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    // borderRadius: const BorderRadius.all(Radius.circular(10)),
+
+                    // border: Border.all(
+                    //   color: Colors.grey,
+                    //   width: 0.5,
+                    // )
+                  ),
+                  // 대학교 목록 선택 화면
+                  child: const Row(
+                    children: [
+                      Text("성균관대학교 (인사캠)"),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 15,
+                ),
+
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: 3, right: 3, top: 2, bottom: 2),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      Container(
+                          width: screenWidth / 3 - 30,
+                          height: screenWidth / 3 - 30,
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("인사캠\n건물지도",
+                                  style: TextStyle(
+                                    fontFamily: "ProductSansBold",
+                                  )),
+                            ],
+                          )),
+                      const Spacer(),
+                      Container(
+                          width: screenWidth / 3 - 30,
+                          height: screenWidth / 3 - 30,
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: const Text("공간코드 검색")),
+                      const Spacer(),
+                      Container(
+                          width: screenWidth / 3 - 30,
+                          height: screenWidth / 3 - 30,
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10))),
+                          child: const Text("공간코드 검색")),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 15,
+                ),
+                // 하단 컨텐츠
+                // 1. 학교 셔틀 정보
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: 3, right: 3, top: 2, bottom: 2),
+                  child: Column(
+                    children: [
+                      const Row(
+                        children: [
+                          Text("주변 버스/지하철 정보"),
+                          Spacer(),
+                        ],
+                      ),
+                      OptionBus(),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 15,
+                ),
+
+                // 2. 학교 특화 정보
+                // ex: 성균관대: 인사캠 건물지도, 자과캠 건물지도, 공간명 코드 검색
+              ],
+            ),
+            const SizedBox(
               height: 5,
             ),
           ],

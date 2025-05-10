@@ -55,14 +55,15 @@ class NSCBuildingCredit extends StatelessWidget {
               children: [
                 const Text(
                   "자과캠 벤젠고리관 건물지도 제공",
-                  style: TextStyle(fontSize: 13, fontFamily: 'CJKBold'),
+                  style: TextStyle(fontSize: 13, fontFamily: 'ProductSansBold'),
                 ),
                 const SizedBox(
                   height: 3,
                 ),
                 const Text(
                   "@고소림",
-                  style: TextStyle(fontSize: 13, fontFamily: 'CJKRegular'),
+                  style:
+                      TextStyle(fontSize: 13, fontFamily: 'ProductSansRegular'),
                 ),
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
@@ -76,7 +77,7 @@ class NSCBuildingCredit extends StatelessWidget {
                     "https://linktr.ee/gosolim",
                     style: TextStyle(
                       fontSize: 13,
-                      fontFamily: 'CJKRegular',
+                      fontFamily: 'ProductSansRegular',
                       color: Colors.blue,
                     ),
                   ),

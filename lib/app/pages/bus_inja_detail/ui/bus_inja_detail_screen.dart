@@ -111,7 +111,7 @@ class InjaDetail extends StatelessWidget {
                               '안내사항'.tr,
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
+                                fontFamily: 'ProductSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -130,7 +130,7 @@ class InjaDetail extends StatelessWidget {
                                 '요금: 무료'.tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
-                                    fontFamily: 'CJKRegular',
+                                    fontFamily: 'ProductSansRegular',
                                     fontSize: 13),
                                 textAlign: TextAlign.start,
                               ),
@@ -138,7 +138,7 @@ class InjaDetail extends StatelessWidget {
                                 '금요일에는 기존 인자셔틀 버스와 별도로\n학부대학 셔틀버스가 추가운영됩니다'.tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
-                                    fontFamily: 'CJKRegular',
+                                    fontFamily: 'ProductSansRegular',
                                     fontSize: 13),
                                 textAlign: TextAlign.start,
                               ),
@@ -146,7 +146,7 @@ class InjaDetail extends StatelessWidget {
                                 '스꾸버스 시간표는 모든 버스 통합 시간표입니다'.tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
-                                    fontFamily: 'CJKBold',
+                                    fontFamily: 'ProductSansBold',
                                     fontSize: 13),
                                 textAlign: TextAlign.start,
                               ),
@@ -175,7 +175,7 @@ class InjaDetail extends StatelessWidget {
                               '운행시간'.tr,
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
+                                fontFamily: 'ProductSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -194,7 +194,7 @@ class InjaDetail extends StatelessWidget {
                                 '매주 금요일 출발 7시 버스는 8시 출발로 대체됩니다'.tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
-                                    fontFamily: 'CJKRegular',
+                                    fontFamily: 'ProductSansRegular',
                                     fontSize: 13),
                                 textAlign: TextAlign.start,
                               ),
@@ -202,7 +202,7 @@ class InjaDetail extends StatelessWidget {
                                 '토요일/일요일/공휴일/학교휴일 운행없음'.tr,
                                 style: TextStyle(
                                     color: Colors.grey[900],
-                                    fontFamily: 'CJKBold',
+                                    fontFamily: 'ProductSansBold',
                                     fontSize: 13),
                                 textAlign: TextAlign.start,
                               ),
@@ -232,7 +232,7 @@ class InjaDetail extends StatelessWidget {
                               '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[인사캠 → 자과캠]'.tr}',
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
+                                fontFamily: 'ProductSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -247,7 +247,7 @@ class InjaDetail extends StatelessWidget {
                             '${'탑승장소'.tr} : ${'600주년 기념관 건너편'.tr}',
                             style: TextStyle(
                                 color: Colors.grey[900],
-                                fontFamily: 'CJKRegular',
+                                fontFamily: 'ProductSansRegular',
                                 fontSize: 13),
                             textAlign: TextAlign.start,
                           ),
@@ -301,7 +301,7 @@ class InjaDetail extends StatelessWidget {
                                     '네이버 지도로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),
@@ -337,7 +337,7 @@ class InjaDetail extends StatelessWidget {
                                     '카카오맵으로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.black,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),
@@ -379,7 +379,7 @@ class InjaDetail extends StatelessWidget {
                                     '애플 지도로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),
@@ -414,7 +414,7 @@ class InjaDetail extends StatelessWidget {
                               '${'인자셔틀'.tr}\u{00A0}${'위치'.tr}\u{00A0}${'[자과캠 → 인사캠]'.tr}',
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'CJKBold',
+                                fontFamily: 'ProductSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -429,7 +429,7 @@ class InjaDetail extends StatelessWidget {
                             '${'탑승장소'.tr} : ${'N센터 앞'.tr}',
                             style: TextStyle(
                                 color: Colors.grey[900],
-                                fontFamily: 'CJKRegular',
+                                fontFamily: 'ProductSansRegular',
                                 fontSize: 13),
                             textAlign: TextAlign.start,
                           ),
@@ -483,7 +483,7 @@ class InjaDetail extends StatelessWidget {
                                     '네이버 지도로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),
@@ -519,7 +519,7 @@ class InjaDetail extends StatelessWidget {
                                     '카카오맵으로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.black,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),
@@ -561,7 +561,7 @@ class InjaDetail extends StatelessWidget {
                                     '애플 지도로 길찾기'.tr,
                                     style: const TextStyle(
                                         color: Colors.white,
-                                        fontFamily: 'CJKBold',
+                                        fontFamily: 'ProductSansBold',
                                         fontSize: 13),
                                     textAlign: TextAlign.start,
                                   ),

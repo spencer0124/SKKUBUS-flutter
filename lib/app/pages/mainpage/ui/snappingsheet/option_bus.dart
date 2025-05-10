@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skkumap/app/components/mainpage/busrow.dart';
-import 'package:skkumap/app/components/mainpage/middle_snappingsheet/stationrow.dart';
-import 'package:skkumap/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/utils/screensize.dart';
@@ -51,97 +49,99 @@ class OptionBus extends StatelessWidget {
                 const SizedBox(
                   height: 4,
                 ),
-                GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () async {
-                    if (controller.mainpageAdLink.value != '') {
-                      if (await canLaunchUrl(
-                          Uri.parse(controller.mainpageAdLink.value))) {
-                        await launchUrl(
-                            Uri.parse(controller.mainpageAdLink.value));
-                        try {
-                          http.get(Uri.parse(
-                              'http://43.200.90.214:3000/ad/v1/statistics/menu2/click'));
-                        } catch (e) {
-                          print('Error: $e');
+                // 공지 부분 비활성화 처리 (GestureDetector)
+                if (1 == 0)
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () async {
+                      if (controller.mainpageAdLink.value != '') {
+                        if (await canLaunchUrl(
+                            Uri.parse(controller.mainpageAdLink.value))) {
+                          await launchUrl(
+                              Uri.parse(controller.mainpageAdLink.value));
+                          try {
+                            http.get(Uri.parse(
+                                'http://43.200.90.214:3000/ad/v1/statistics/menu2/click'));
+                          } catch (e) {
+                            print('Error: $e');
+                          }
+                        } else {
+                          Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
                         }
                       } else {
-                        Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
+                        Get.snackbar('오류2', '해당 링크를 열 수 없습니다.');
                       }
-                    } else {
-                      Get.snackbar('오류2', '해당 링크를 열 수 없습니다.');
-                    }
-                  },
-                  child: Container(
-                    width: screenWidth * 0.95,
-                    height: 33,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 14,
-                        ),
-                        Image.asset(
-                          'assets/images/flaticon_megaphone.png',
-                          width: 18,
-                          color: Colors.grey,
-                        ),
-                        const SizedBox(
-                          width: 19,
-                        ),
-                        Obx(() => controller.mainpageAdText.value == ''
-                            ? Shimmer.fromColors(
-                                baseColor: Colors.grey[100]!,
-                                highlightColor: Colors.white,
-                                child: Container(
-                                  width: screenWidth * 0.75,
-                                  height: 20,
-                                  color: Colors.grey,
-                                ),
-                              )
-                            : Text(
-                                controller.mainpageAdText.value,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'CJKMedium',
-                                  fontSize: 12.5,
-                                ),
-                              )),
-                        const Spacer(),
-                        Obx(() => controller.mainpageAdText.value == ''
-                            ? const SizedBox(
-                                width: 1,
-                                height: 1,
-                              )
-                            : const Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  // Text(
-                                  //   '상세정보'.tr,
-                                  //   style: TextStyle(
-                                  //     color: Colors.grey[900],
-                                  //     fontFamily: 'CJKMedium',
-                                  //     fontSize: 12.5,
-                                  //   ),
-                                  // ),
-                                  SizedBox(
-                                    width: 2,
+                    },
+                    child: Container(
+                      width: screenWidth * 0.95,
+                      height: 33,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 14,
+                          ),
+                          Image.asset(
+                            'assets/images/flaticon_megaphone.png',
+                            width: 18,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(
+                            width: 19,
+                          ),
+                          Obx(() => controller.mainpageAdText.value == ''
+                              ? Shimmer.fromColors(
+                                  baseColor: Colors.grey[100]!,
+                                  highlightColor: Colors.white,
+                                  child: Container(
+                                    width: screenWidth * 0.75,
+                                    height: 20,
+                                    color: Colors.grey,
                                   ),
-                                  Icon(
-                                    CupertinoIcons.right_chevron,
-                                    size: 12,
+                                )
+                              : Text(
+                                  controller.mainpageAdText.value,
+                                  style: const TextStyle(
                                     color: Colors.black,
+                                    fontFamily: 'ProductSansMedium',
+                                    fontSize: 12.5,
                                   ),
-                                ],
-                              )),
-                      ],
+                                )),
+                          const Spacer(),
+                          Obx(() => controller.mainpageAdText.value == ''
+                              ? const SizedBox(
+                                  width: 1,
+                                  height: 1,
+                                )
+                              : const Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    // Text(
+                                    //   '상세정보'.tr,
+                                    //   style: TextStyle(
+                                    //     color: Colors.grey[900],
+                                    //     fontFamily: 'ProductSansMedium',
+                                    //     fontSize: 12.5,
+                                    //   ),
+                                    // ),
+                                    SizedBox(
+                                      width: 2,
+                                    ),
+                                    Icon(
+                                      CupertinoIcons.right_chevron,
+                                      size: 12,
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                )),
+                        ],
+                      ),
                     ),
                   ),
-                ),
                 const SizedBox(
                   height: 8,
                 ),
@@ -213,7 +213,7 @@ class OptionBus extends StatelessWidget {
                                                   .mainpageNoticeText.value,
                                               style: const TextStyle(
                                                 color: Colors.black,
-                                                fontFamily: 'CJKMedium',
+                                                fontFamily: 'ProductSansMedium',
                                                 fontSize: 12.5,
                                               ),
                                             )),
@@ -232,7 +232,7 @@ class OptionBus extends StatelessWidget {
                                                 //   '상세정보'.tr,
                                                 //   style: TextStyle(
                                                 //     color: Colors.grey[900],
-                                                //     fontFamily: 'CJKMedium',
+                                                //     fontFamily: 'ProductSansMedium',
                                                 //     fontSize: 12.5,
                                                 //   ),
                                                 // ),

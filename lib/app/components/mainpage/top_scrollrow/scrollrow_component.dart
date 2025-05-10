@@ -54,7 +54,7 @@ class ScrollRowContainer extends StatelessWidget {
             text,
             style: TextStyle(
               color: ischecked ? Colors.white : Colors.black,
-              fontFamily: 'CJKMedium',
+              fontFamily: 'ProductSansMedium',
               fontSize: 14.sp,
             ),
           ),
