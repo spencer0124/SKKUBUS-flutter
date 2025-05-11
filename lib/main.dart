@@ -34,6 +34,8 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzData;
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap_controller.dart';
+
 const storage = FlutterSecureStorage();
 
 Future<void> main() async {
@@ -162,4 +164,6 @@ void registerDependencies() {
   Get.put(NSCBuildingMapController());
 
   Get.put(SearchListController());
+
+  Get.lazyPut(() => UltimateNMapController());
 }
