@@ -4,6 +4,8 @@ import 'package:skkumap/app/pages/mainpage/ui/navermap/marker_campus.dart';
 import "package:skkumap/app/model/campusmarker_model.dart";
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:skkumap/app/utils/geolocator.dart';
+import 'package:geolocator/geolocator.dart';
 
 class UltimateNMapController extends GetxController {
   final markers = <NMarker>[].obs;
@@ -11,8 +13,8 @@ class UltimateNMapController extends GetxController {
   final cameraPosition = const NCameraPosition(
     target: NLatLng(37.587241, 126.992858),
     zoom: 15.8,
-    bearing: 330,
-    tilt: 50,
+    // bearing: 330,
+    // tilt: 50,
   ).obs;
 
   void updateMarkers(List<CampusMarker> campusMarkers,
@@ -60,6 +62,26 @@ class UltimateNMapController extends GetxController {
       tilt: 0,
     );
     cameraPosition.value = newPosition;
+  }
+
+  Future<void> moveToCurrentLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return;
+      }
+    }
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    cameraPosition.value = NCameraPosition(
+      target: NLatLng(position.latitude, position.longitude),
+      zoom: cameraPosition.value.zoom,
+      bearing: cameraPosition.value.bearing,
+      tilt: cameraPosition.value.tilt,
+    );
   }
 
   void updateOverlay(List<NLatLng> coords, String id) {

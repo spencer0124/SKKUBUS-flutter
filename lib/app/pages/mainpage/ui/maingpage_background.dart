@@ -6,6 +6,7 @@ import 'package:skkumap/app/components/mainpage/top_scrollrow/scrollrow.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap.dart';
 import 'package:skkumap/app/pages/mainpage/ui/filter/filter_sheet.dart';
+import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap_controller.dart';
 
 /*
 snappingsheet의 child로 들어갈 background
@@ -19,6 +20,7 @@ class MainPageBackground extends StatelessWidget {
     final double screenHeight = ScreenSize.height(context);
     final double screenWidth = ScreenSize.width(context);
     final double statusBarHeight = ScreenSize.statusBarHeight(context);
+    final ultimateController = Get.find<UltimateNMapController>();
 
     return Column(
       children: [
@@ -64,6 +66,56 @@ class MainPageBackground extends StatelessWidget {
                             right: 0,
                             top: (statusBarHeight + 10 + 60),
                             child: const Center(child: ScrollableRow()),
+                          ),
+                          Positioned(
+                            top: statusBarHeight + 10 + 100,
+                            right: 10,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                ultimateController.moveToCurrentLocation();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.my_location),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: statusBarHeight + 10 + 150,
+                            right: 10,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTap: () {
+                                ultimateController.moveToCurrentLocation();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.my_location),
+                              ),
+                            ),
                           ),
                         ],
                       ),
