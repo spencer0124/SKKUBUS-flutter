@@ -23,6 +23,8 @@ class Mainpage extends GetView<MainpageController> {
   Widget build(BuildContext context) {
     final double screenHeight = ScreenSize.height(context);
     final double screenWidth = ScreenSize.width(context);
+    final ScrollController sheetChildScrollController = ScrollController();
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: PreferredSize(
@@ -38,7 +40,10 @@ class Mainpage extends GetView<MainpageController> {
         children: [
           SnappingSheet(
             controller: snappingSheetController,
-            onSheetMoved: (sheetPosition) {},
+            onSheetMoved: (sheetPosition) {
+              final isExpanded = sheetPosition.pixels > screenHeight * 0.7;
+              controller.snappingSheetIsExpanded.value = isExpanded;
+            },
             onSnapCompleted: (sheetPosition, snappingPosition) {
               // checkCurrentPosition(screenHeight, sheetPosition, snappingPosition);
             },
@@ -47,12 +52,15 @@ class Mainpage extends GetView<MainpageController> {
             grabbingHeight: grabbingHeight,
             grabbing: const GrabbingBox(),
             sheetBelow: SnappingSheetContent(
+                childScrollController: sheetChildScrollController,
                 draggable: true,
                 // snappingsheet에 어떤 child가 들어갈지 결정
                 child: Obx(
                   () {
                     return _getSnappingSheetContent(
-                        controller.bottomNavigationIndex.value);
+                        controller.bottomNavigationIndex.value,
+                        sheetChildScrollController,
+                        controller.snappingSheetIsExpanded.value);
                   },
                 )),
             child: const MainPageBackground(),
@@ -78,12 +86,24 @@ class Mainpage extends GetView<MainpageController> {
   }
 }
 
-Widget _getSnappingSheetContent(int index) {
+Widget _getSnappingSheetContent(
+    int index, ScrollController scrollController, bool scrollEnabled) {
+  ScrollPhysics physics = scrollEnabled
+      ? const ClampingScrollPhysics()
+      : const NeverScrollableScrollPhysics();
+
   switch (index) {
     case 0:
       return OptionAround();
     case 1:
-      return OptionCampus(); // Replace with your actual widget for index 1
+      return ListView(
+        controller: scrollController,
+        physics: physics,
+        padding: EdgeInsets.zero,
+        children: [
+          OptionCampus(),
+        ],
+      );
     case 2:
       return OptionCampus(); // Replace with your actual widget for index 2
     default:

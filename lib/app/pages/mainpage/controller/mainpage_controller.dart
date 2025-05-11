@@ -46,6 +46,8 @@ class MainpageLifeCycle extends GetxController with WidgetsBindingObserver {
 }
 
 class MainpageController extends GetxController {
+  var snappingSheetIsExpanded = false.obs;
+
   Timer? _timer;
 
   // BottomNavigation 현재 선택된 index 저장

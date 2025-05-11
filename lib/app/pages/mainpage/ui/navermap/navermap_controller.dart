@@ -15,20 +15,6 @@ class UltimateNMapController extends GetxController {
     tilt: 50,
   ).obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-
-    // 3초 뒤에 fetchMarkersFromServer 호출
-    Future.delayed(const Duration(seconds: 3), () {
-      fetchMarkersFromServer();
-    });
-
-    Future.delayed(const Duration(seconds: 6), () {
-      fetchCameraPositionFromServer();
-    });
-  }
-
   void updateMarkers(List<CampusMarker> campusMarkers,
       {bool clearBefore = true}) {
     final newMarkers = campusMarkers.map((m) {

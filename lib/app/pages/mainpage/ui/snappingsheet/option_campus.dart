@@ -147,6 +147,8 @@ class OptionCampus extends StatelessWidget {
                         ],
                       ),
                       OptionBus(),
+                      OptionBus(),
+                      OptionBus(),
                     ],
                   ),
                 ),
