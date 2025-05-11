@@ -92,6 +92,7 @@ flutter:
     - assets/lottie/
     - assets/SKKU/
     - assets/tossface/
+
   uses-material-design: true
   fonts:
     - family: ProductBold
