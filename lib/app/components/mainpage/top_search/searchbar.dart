@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({Key? key}) : super(key: key);
@@ -34,10 +35,9 @@ class CustomSearchBar extends StatelessWidget {
         },
         child: Row(
           children: [
-            Icon(
-              Icons.search,
-              size: 23,
-              color: Colors.grey[600],
+            SvgPicture.asset(
+              'assets/tossface/toss_search_left.svg',
+              width: 20,
             ),
             const SizedBox(
               width: 8,

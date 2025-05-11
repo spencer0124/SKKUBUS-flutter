@@ -29,7 +29,7 @@ class LostAndFound extends StatelessWidget {
       body: Column(
         children: [
           CustomNavigationBar(
-            title: '유실물 찾기'.tr,
+            title: '분실물'.tr,
             backgroundColor: AppColors.green_main,
             isDisplayLeftBtn: true,
             isDisplayRightBtn: false,

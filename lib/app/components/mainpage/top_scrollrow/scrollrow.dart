@@ -23,7 +23,7 @@ class ScrollableRow extends StatelessWidget {
             },
             child: ScrollRowContainer(
               text: '음식점'.tr,
-              icon: Icons.outbond,
+              svgPath: 'assets/tossface/toss_forkandknife.svg',
               ischecked: false,
             ),
           ),
@@ -37,7 +37,7 @@ class ScrollableRow extends StatelessWidget {
             },
             child: ScrollRowContainer(
               text: '카페'.tr,
-              icon: Icons.outbond,
+              svgPath: 'assets/tossface/toss_coffee.svg',
               ischecked: false,
             ),
           ),
@@ -51,7 +51,7 @@ class ScrollableRow extends StatelessWidget {
             },
             child: ScrollRowContainer(
               text: '술집'.tr,
-              icon: Icons.sensor_occupied_sharp,
+              svgPath: 'assets/tossface/toss_beer.svg',
               ischecked: false,
             ),
           ),
@@ -65,7 +65,7 @@ class ScrollableRow extends StatelessWidget {
             },
             child: ScrollRowContainer(
               text: '새로오픈'.tr,
-              icon: Icons.sensor_occupied_sharp,
+              svgPath: 'assets/tossface/toss_arrow2_up.svg',
               ischecked: false,
             ),
           ),
@@ -79,7 +79,7 @@ class ScrollableRow extends StatelessWidget {
             },
             child: ScrollRowContainer(
               text: '더보기'.tr,
-              icon: Icons.sensor_occupied_sharp,
+              svgPath: 'assets/tossface/toss_plus.svg',
               ischecked: false,
             ),
           ),
