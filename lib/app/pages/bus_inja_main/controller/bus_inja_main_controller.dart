@@ -92,8 +92,8 @@ class InjaMainController extends GetxController {
         'https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving?start=126.993688,37.587308&goal=126.975532,37.292345',
         options: Options(
           headers: {
-            'X-NCP-APIGW-API-KEY-ID': dotenv.env['naverClientId'],
-            'X-NCP-APIGW-API-KEY': dotenv.env['naverClientSecret'],
+            'X-NCP-APIGW-API-KEY-ID': dotenv.env['navernewClientId'],
+            'X-NCP-APIGW-API-KEY': dotenv.env['navernewClientSecret'],
           },
         ),
       );

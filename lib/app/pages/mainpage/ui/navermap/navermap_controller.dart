@@ -65,23 +65,33 @@ class UltimateNMapController extends GetxController {
   }
 
   Future<void> moveToCurrentLocation() async {
+    final locCtrl = Get.find<LocationController>();
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        await locCtrl.showPermissionAlert();
         return;
       }
     }
-    Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
-    cameraPosition.value = NCameraPosition(
-      target: NLatLng(position.latitude, position.longitude),
-      zoom: cameraPosition.value.zoom,
-      bearing: cameraPosition.value.bearing,
-      tilt: cameraPosition.value.tilt,
-    );
+    if (permission == LocationPermission.deniedForever) {
+      await locCtrl.showPermissionAlert();
+      return;
+    }
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      cameraPosition.value = NCameraPosition(
+        target: NLatLng(position.latitude, position.longitude),
+        zoom: cameraPosition.value.zoom,
+        bearing: cameraPosition.value.bearing,
+        tilt: cameraPosition.value.tilt,
+      );
+    } catch (_) {
+      await locCtrl.showPermissionAlert();
+    }
   }
 
   void updateOverlay(List<NLatLng> coords, String id) {

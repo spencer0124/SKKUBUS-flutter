@@ -126,9 +126,9 @@ PODS:
     - Flutter
   - flutter_native_splash (0.0.1):
     - Flutter
-  - flutter_naver_map (1.3.0):
+  - flutter_naver_map (1.3.1):
     - Flutter
-    - NMapsMap (= 3.19.0)
+    - NMapsMap (= 3.21.0)
   - flutter_phone_direct_caller (0.0.1):
     - Flutter
   - flutter_platform_alert (0.0.1):
@@ -213,7 +213,7 @@ PODS:
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
   - NMapsGeometry (1.0.2)
-  - NMapsMap (3.19.0):
+  - NMapsMap (3.21.0):
     - NMapsGeometry
   - path_provider_foundation (0.0.1):
     - Flutter
@@ -392,7 +392,7 @@ SPEC CHECKSUMS:
   flutter_localization: f43b18844a2b3d2c71fd64f04ffd6b1e64dd54d4
   flutter_native_image: 9c0b7451838484458e5b0fae007b86a4c2d4bdfe
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
-  flutter_naver_map: d31b1884517151e7b3121e3b24c18733ef4e4387
+  flutter_naver_map: efcc30f2bb0eaacdb14f41b5a26696b3ca1e3319
   flutter_phone_direct_caller: bd2ffd297f371a8a6c7bfbba0196964ffe3c4358
   flutter_platform_alert: f507baf17889a38794d3cf16b98b637fb69479bd
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
@@ -411,7 +411,7 @@ SPEC CHECKSUMS:
   local_auth_darwin: 66e40372f1c29f383a314c738c7446e2f7fdadc3
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   NMapsGeometry: 4e02554fa9880ef02ed96b075dc84355d6352479
-  NMapsMap: 99c10429d93340780b6f88d3fc7c0a3850b43664
+  NMapsMap: 8e7e35c2446e7c4a88d6dd0d64aa0d1de903e4f0
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
@@ -424,6 +424,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   webview_flutter_wkwebview: 2a23822e9039b7b1bc52e5add778e5d89ad488d1
 
-PODFILE CHECKSUM: 88a1d20af77af4cf273feba59745e80899f3981c
+PODFILE CHECKSUM: 2295ca04372c1142a41ebce498b5b7bb370c8134
 
 COCOAPODS: 1.15.2

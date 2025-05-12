@@ -35,6 +35,7 @@ import 'package:timezone/data/latest.dart' as tzData;
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:skkumap/app/pages/mainpage/ui/navermap/navermap_controller.dart';
+import 'package:skkumap/app/utils/geolocator.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -58,7 +59,7 @@ Future<void> main() async {
   registerDependencies();
   await initFirebase();
   await initMobileAds();
-  await initNaverMapSdk();
+  await initNaverMapSdk_v2();
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -126,8 +127,27 @@ Future<void> initEnvironmentVariables() async {
   await dotenv.load(fileName: ".env");
 }
 
-Future<void> initNaverMapSdk() async {
-  await NaverMapSdk.instance.initialize(clientId: dotenv.env['naverClientId']!);
+// Future<void> initNaverMapSdk() async {
+//   await NaverMapSdk.instance
+//       .initialize(clientId: dotenv.env['navernewClientId']!);
+// }
+
+// deprecated된 initNaverMapSdk() 대체
+Future<void> initNaverMapSdk_v2() async {
+  await FlutterNaverMap().init(
+      clientId: dotenv.env['navernewClientId']!,
+      onAuthFailed: (ex) {
+        switch (ex) {
+          case NQuotaExceededException(:final message):
+            print("사용량 초과 (message: $message)");
+            break;
+          case NUnauthorizedClientException() ||
+                NClientUnspecifiedException() ||
+                NAnotherAuthFailedException():
+            print("인증 실패: $ex");
+            break;
+        }
+      });
 }
 
 void registerDependencies() {
@@ -166,4 +186,5 @@ void registerDependencies() {
   Get.put(SearchListController());
 
   Get.lazyPut(() => UltimateNMapController());
+  Get.lazyPut(() => LocationController());
 }

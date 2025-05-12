@@ -43,10 +43,10 @@ Widget buildMap() {
       final locationOverlay = mapcontroller.getLocationOverlay();
       // locationOverlay.setIcon(const NOverlayImage.fromAssetImage(
       //     'assets/images/location_marker.png'));
-      // locationOverlay.setIconSize(const Size.fromRadius(50));
-      // locationOverlay.setCircleRadius(100.0);
+      // locationOverlay.setIconSize(const Size.fromRadius(5));
+      locationOverlay.setCircleRadius(10.0);
       // locationOverlay.setCircleColor(Colors.yellow.withOpacity(0.25));
-      // locationOverlay.setIsVisible(true);
+      locationOverlay.setIsVisible(true);
 
       // 사용자 현재 위치 초기화 (앱 시작시 1번만 호출)
       // 추후 업데이트는 위치 버튼 클릭으로 처리
