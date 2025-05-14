@@ -94,7 +94,14 @@ Widget _getSnappingSheetContent(
 
   switch (index) {
     case 0:
-      return OptionAround();
+      return ListView(
+        controller: scrollController,
+        physics: physics,
+        padding: EdgeInsets.zero,
+        children: [
+          OptionAround(),
+        ],
+      );
     case 1:
       return ListView(
         controller: scrollController,
