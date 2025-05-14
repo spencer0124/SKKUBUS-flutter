@@ -38,19 +38,24 @@ Widget buildMap() {
       // noFollow: 사용자의 위치가 변경되어도 카메라가 따라가지 않음
       mapcontroller.setLocationTrackingMode(NLocationTrackingMode.noFollow);
 
-      // 위치 오버레이 커스터마이징
+      // 위치 오버레이 커스터마이징 > 위치값 얻고 나서로 위치 변경
       // 아이콘 변경, 크기 변경, 원형 반경 설정 등
-      final locationOverlay = mapcontroller.getLocationOverlay();
+      // final locationOverlay = mapcontroller.getLocationOverlay();
       // locationOverlay.setIcon(const NOverlayImage.fromAssetImage(
       //     'assets/images/location_marker.png'));
       // locationOverlay.setIconSize(const Size.fromRadius(5));
-      locationOverlay.setCircleRadius(10.0);
+      // locationOverlay.setCircleRadius(10.0);
       // locationOverlay.setCircleColor(Colors.yellow.withOpacity(0.25));
-      locationOverlay.setIsVisible(true);
+      // locationOverlay.setIsVisible(true);
 
       // 사용자 현재 위치 초기화 (앱 시작시 1번만 호출)
       // 추후 업데이트는 위치 버튼 클릭으로 처리
-      ultimateNampController.moveToCurrentLocation();
+      ultimateNampController.moveToCurrentLocation().then((_) {
+        mapcontroller.setLocationTrackingMode(NLocationTrackingMode.noFollow);
+        final locationOverlay = mapcontroller.getLocationOverlay();
+        locationOverlay.setCircleRadius(10.0);
+        locationOverlay.setIsVisible(true);
+      });
 
       // 마커 갱신
       // ever를 이용한 자동 갱
