@@ -8,6 +8,7 @@ class ScrollableRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      clipBehavior: Clip.none, // 그림자가 제대로 표시되지 않는 문제 해결
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
