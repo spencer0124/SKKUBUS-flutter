@@ -37,12 +37,19 @@ class ScrollRowContainer extends StatelessWidget {
               )
             : null,
         borderRadius: BorderRadius.circular(25.r),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.withOpacity(0.1),
+        //     spreadRadius: 1,
+        //     blurRadius: 3,
+        //     offset: const Offset(0, 1),
+        //   ),
+        // ],
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, 1),
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),

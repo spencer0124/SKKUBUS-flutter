@@ -92,31 +92,31 @@ class MainPageBackground extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Positioned(
-                            top: statusBarHeight + 10 + 150,
-                            right: 10,
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {
-                                ultimateController.moveToCurrentLocation();
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(Icons.my_location),
-                              ),
-                            ),
-                          ),
+                          // Positioned(
+                          //   top: statusBarHeight + 10 + 150,
+                          //   right: 10,
+                          //   child: GestureDetector(
+                          //     behavior: HitTestBehavior.translucent,
+                          //     onTap: () {
+                          //       ultimateController.moveToCurrentLocation();
+                          //     },
+                          //     child: Container(
+                          //       padding: const EdgeInsets.all(10),
+                          //       decoration: BoxDecoration(
+                          //         color: Colors.white,
+                          //         borderRadius: BorderRadius.circular(10),
+                          //         boxShadow: [
+                          //           BoxShadow(
+                          //             color: Colors.black.withOpacity(0.2),
+                          //             blurRadius: 4,
+                          //             offset: const Offset(0, 2),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       child: const Icon(Icons.my_location),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],
