@@ -88,31 +88,31 @@ class Mainpage extends GetView<MainpageController> {
 
 Widget _getSnappingSheetContent(
     int index, ScrollController scrollController, bool scrollEnabled) {
-  ScrollPhysics physics = scrollEnabled
+  final physics = scrollEnabled
       ? const ClampingScrollPhysics()
       : const NeverScrollableScrollPhysics();
 
   switch (index) {
     case 0:
-      return ListView(
+      return SingleChildScrollView(
         controller: scrollController,
         physics: physics,
         padding: EdgeInsets.zero,
-        children: [
-          OptionAround(),
-        ],
+        child: Column(
+          children: [OptionAround()],
+        ),
       );
     case 1:
-      return ListView(
+      return SingleChildScrollView(
         controller: scrollController,
         physics: physics,
         padding: EdgeInsets.zero,
-        children: [
-          OptionCampus(),
-        ],
+        child: Column(
+          children: [OptionCampus()],
+        ),
       );
     case 2:
-      return OptionCampus(); // Replace with your actual widget for index 2
+      return OptionCampus();
     default:
       return OptionBus(); // Default case
   }

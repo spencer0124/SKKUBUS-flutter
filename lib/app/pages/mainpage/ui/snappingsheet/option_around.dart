@@ -14,16 +14,17 @@ class OptionAround extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = ScreenSize.width(context);
+    final double screenHeight = ScreenSize.height(context);
 
     return Container(
       color: Colors.white,
+      width: double.infinity,
+      constraints: BoxConstraints(minHeight: screenHeight * 0.9),
       child: const SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(
-              height: 4,
-            ),
+            // Text("hi"),
             // 여기서부터 메인 컨텐츠 화면
           ],
         ),

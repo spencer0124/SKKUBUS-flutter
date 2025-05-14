@@ -17,9 +17,12 @@ class OptionCampus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = ScreenSize.width(context);
+    final double screenHeight = ScreenSize.height(context);
 
     return Container(
       color: Colors.white,
+      width: double.infinity,
+      constraints: BoxConstraints(minHeight: screenHeight * 0.9),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Column(
