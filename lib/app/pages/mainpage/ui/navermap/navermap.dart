@@ -29,6 +29,8 @@ Widget buildMap() {
       initialCameraPosition: initCameraPosition,
     ),
     onMapReady: (mapcontroller) {
+      // save native controller for later bounds queries
+      ultimateNampController.mapController.value = mapcontroller;
       mapcontroller.addOverlayAll({
         // 초기 마커 세팅
         ...ultimateNampController.markers,
