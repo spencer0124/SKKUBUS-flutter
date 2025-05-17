@@ -8,6 +8,8 @@ import 'package:skkumap/app/utils/geolocator.dart';
 import 'package:geolocator/geolocator.dart';
 
 class UltimateNMapController extends GetxController {
+  // store the native map controller for bounds queries
+  final mapController = Rx<NaverMapController?>(null);
   final markers = <NMarker>[].obs;
   final overlays = <NOverlay>[].obs;
   final cameraPosition = const NCameraPosition(
@@ -30,6 +32,11 @@ class UltimateNMapController extends GetxController {
         caption: NOverlayCaption(
           textSize: 7,
           text: m.idNumber,
+          color: Colors.black,
+        ),
+        subCaption: NOverlayCaption(
+          textSize: 10,
+          text: m.name ?? "",
           color: Colors.black,
         ),
       );
@@ -94,18 +101,18 @@ class UltimateNMapController extends GetxController {
     }
   }
 
-  void updateOverlay(List<NLatLng> coords, String id) {
-    overlays.value = [
-      NMultipartPathOverlay(
-        id: id,
-        paths: [
-          NMultipartPath(
-            coords: coords,
-            color: Colors.green,
-            outlineColor: Colors.white,
-          )
-        ],
-      ),
-    ];
-  }
+  // void updateOverlay(List<NLatLng> coords, String id) {
+  //   overlays.value = [
+  //     NMultipartPathOverlay(
+  //       id: id,
+  //       paths: [
+  //         NMultipartPath(
+  //           coords: coords,
+  //           color: Colors.green,
+  //           outlineColor: Colors.white,
+  //         )
+  //       ],
+  //     ),
+  //   ];
+  // }
 }
