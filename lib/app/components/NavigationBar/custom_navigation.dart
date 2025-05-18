@@ -59,7 +59,7 @@ class CustomNavigationBar extends StatelessWidget {
             style: const TextStyle(
               fontSize: 17,
               color: Colors.white,
-              fontFamily: 'ProductSansBold',
+              fontFamily: 'WantedSansBold',
             ),
           ),
           const Spacer(),
@@ -86,7 +86,7 @@ class CustomNavigationBar extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                               ),
                             ),

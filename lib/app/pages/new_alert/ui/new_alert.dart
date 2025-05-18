@@ -46,7 +46,7 @@ class NewAlert extends StatelessWidget {
               //         style: TextStyle(
               //           fontSize: 20,
               //           color: Colors.white,
-              //           fontFamily: 'ProductSansBold',
+              //           fontFamily: 'WantedSansBold',
               //         ),
               //         textAlign: TextAlign.center,
               //       ),
@@ -73,7 +73,7 @@ class NewAlert extends StatelessWidget {
                 '에스카라 인자셔틀 정보를 추가했어요',
                 style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'ProductSansBold',
+                    fontFamily: 'WantedSansBold',
                     fontSize: 16),
                 textAlign: TextAlign.start,
               ),
@@ -82,7 +82,7 @@ class NewAlert extends StatelessWidget {
                 '화면 상단의 \'에스카라 인자셔틀\'을 클릭해보세요',
                 style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'ProductSansBold',
+                    fontFamily: 'WantedSansBold',
                     fontSize: 16),
                 textAlign: TextAlign.start,
               ),
@@ -125,7 +125,7 @@ class NewAlert extends StatelessWidget {
                   '지금 확인해보기',
                   style: TextStyle(
                       color: Colors.black,
-                      fontFamily: 'ProductSansBold',
+                      fontFamily: 'WantedSansBold',
                       fontSize: 14),
                   // textAlign: TextAlign.start,
                 ),

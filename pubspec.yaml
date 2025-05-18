@@ -95,15 +95,12 @@ flutter:
 
   uses-material-design: true
   fonts:
-    - family: ProductBold
-      fonts:
-        - asset: assets/fonts/Product_Sans_Bold.ttf
-    - family: ProductSansBold
+    - family: WantedSansBold
       fonts:
         - asset: assets/fonts/WantedSans-Bold.otf
-    - family: ProductSansRegular
+    - family: WantedSansRegular
       fonts:
         - asset: assets/fonts/WantedSans-Regular.otf
-    - family: ProductSansMedium
+    - family: WantedSansMedium
       fonts:
         - asset: assets/fonts/WantedSans-Medium.otf

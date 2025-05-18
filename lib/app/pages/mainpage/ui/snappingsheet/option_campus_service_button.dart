@@ -45,7 +45,7 @@ class CustomServiceBtn extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontFamily: "ProductSansRegular",
+                fontFamily: "WantedSansRegular",
               ),
             ),
           ],

@@ -54,7 +54,7 @@ class HSSCBuildingCredit extends StatelessWidget {
               children: [
                 Text(
                   "인사캠 건물지도 '빠를지도' 제공",
-                  style: TextStyle(fontSize: 13, fontFamily: 'ProductSansBold'),
+                  style: TextStyle(fontSize: 13, fontFamily: 'WantedSansBold'),
                 ),
                 SizedBox(
                   height: 3,
@@ -62,7 +62,7 @@ class HSSCBuildingCredit extends StatelessWidget {
                 Text(
                   "@문화예술캡스톤디자인 2조\n김찬호 김서연 전윤아 왕희문 손주연 신해령",
                   style:
-                      TextStyle(fontSize: 13, fontFamily: 'ProductSansRegular'),
+                      TextStyle(fontSize: 13, fontFamily: 'WantedSansRegular'),
                 ),
               ],
             ),

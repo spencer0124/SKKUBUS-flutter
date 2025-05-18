@@ -29,6 +29,7 @@ class AroundPlaceController extends GetxController {
       final response = await http.get(uri);
       if (response.statusCode == 200) {
         final decoded = jsonDecode(response.body);
+        print('decoded: $decoded');
         final list = decoded['result'] as List?;
         if (list == null || list.isEmpty) {
           await FlutterPlatformAlert.showCustomAlert(
@@ -41,12 +42,18 @@ class AroundPlaceController extends GetxController {
         final ultimateCtrl = Get.find<UltimateNMapController>();
         // convert API results into CampusMarker list and update via controller
         final campusMarkers = list.map((item) {
-          final lat = (item['latitude'] as num).toDouble();
-          final lon = (item['longitude'] as num).toDouble();
+          final dataMeta = item['data_metadata'] as Map<String, dynamic>;
+          final placeMeta = item['place_metadata'] as Map<String, dynamic>;
+          final interactionmeta =
+              item['interaction_metadata'] as Map<String, dynamic>;
+          final lat = (placeMeta['latitude'] as num).toDouble();
+          final lon = (placeMeta['longitude'] as num).toDouble();
           return CampusMarker(
-            idNumber: item['place_id'].toString(),
+            idNumber: dataMeta['uniqueid'] as String,
             position: NLatLng(lat, lon),
-            name: item['place_nm'] as String,
+            name: placeMeta['place_nm'] as String,
+            // todo: has_rank로 api 바꾸고 여기서도 바꾸기.
+            hasrank: interactionmeta['hasrank'] as bool,
           );
         }).toList();
         ultimateCtrl.updateMarkers(campusMarkers);

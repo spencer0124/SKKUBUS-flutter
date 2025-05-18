@@ -8,6 +8,8 @@ import 'package:skkumap/app/utils/geolocator.dart';
 import 'package:geolocator/geolocator.dart';
 
 class UltimateNMapController extends GetxController {
+  // ensure marker asset is precached once
+  bool _markerIconPrecached = false;
   // store the native map controller for bounds queries
   final mapController = Rx<NaverMapController?>(null);
   final markers = <NMarker>[].obs;
@@ -19,28 +21,131 @@ class UltimateNMapController extends GetxController {
     // tilt: 50,
   ).obs;
 
-  void updateMarkers(List<CampusMarker> campusMarkers,
-      {bool clearBefore = true}) {
-    final newMarkers = campusMarkers.map((m) {
-      return NMarker(
-        id: "line${m.idNumber}",
-        position: m.position,
-        size: const Size(25, 25),
-        icon:
-            const NOverlayImage.fromAssetImage('assets/images/line_blank.png'),
-        captionOffset: -22,
-        caption: NOverlayCaption(
-          textSize: 7,
-          text: m.idNumber,
-          color: Colors.black,
-        ),
-        subCaption: NOverlayCaption(
-          textSize: 10,
-          text: m.name ?? "",
-          color: Colors.black,
+  @override
+  void onInit() {
+    super.onInit();
+    // Precache marker asset once when controller initializes
+    final ctx = Get.context;
+    if (ctx != null) {
+      precacheImage(const AssetImage('assets/images/line_blank.png'), ctx);
+      _markerIconPrecached = true;
+    }
+  }
+
+  Future<void> updateMarkers(List<CampusMarker> campusMarkers,
+      {bool clearBefore = true, BuildContext? context}) async {
+    // preload marker asset once to avoid missing texture
+    if (!_markerIconPrecached) {
+      final ctx = Get.context;
+      if (ctx != null) {
+        precacheImage(const AssetImage('assets/images/line_blank.png'), ctx);
+        _markerIconPrecached = true;
+      }
+    }
+    const size = Size(25, 25);
+    final newMarkers = <NMarker>[];
+    for (var m in campusMarkers) {
+      final iconImage = await NOverlayImage.fromWidget(
+        size: size,
+        context: Get.context!,
+        widget: SizedBox(
+          width: size.width,
+          height: size.height,
+          child: Stack(
+            children: [
+              Image.asset('assets/images/line_blank.png',
+                  width: size.width, height: size.height),
+              if (m.hasrank)
+                Positioned(
+                  top: 3,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Text(
+                      m.rank.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 7,
+                        fontFamily: 'WantedSansBold',
+                      ),
+                    ),
+                  ),
+                ),
+              if (!m.hasrank)
+                // todo: asset logo 넣기 & preload
+                if (m.hasStaticLogo == true)
+                  const Positioned(
+                    top: 3,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Text(
+                        "static logo",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 7,
+                          fontFamily: 'WantedSansBold',
+                        ),
+                      ),
+                    ),
+                  )
+                // todo: networkimage & preload
+                else if (m.hasDynamicLogo == true)
+                  const Positioned(
+                    top: 3,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Text(
+                        "dynamic logo",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 7,
+                          fontFamily: 'WantedSansBold',
+                        ),
+                      ),
+                    ),
+                  )
+                // rank, staticLogo, dynamicLogo 모두 없는 경우
+                else
+                  const Positioned(
+                    top: 3,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Text(
+                        "else1",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 7,
+                          fontFamily: 'WantedSansBold',
+                        ),
+                      ),
+                    ),
+                  ),
+            ],
+          ),
         ),
       );
-    }).toList();
+
+      newMarkers.add(NMarker(
+        id: 'line${m.idNumber}',
+        position: m.position,
+        size: size,
+        icon: iconImage,
+        captionOffset: 0,
+        caption: NOverlayCaption(
+          textSize: 10,
+          text: m.name ?? '',
+          color: Colors.black,
+          requestWidth: 40,
+        ),
+      ));
+    }
 
     if (clearBefore) {
       markers.value = newMarkers;
@@ -49,17 +154,26 @@ class UltimateNMapController extends GetxController {
     }
   }
 
+// 예시구현
   Future<void> fetchMarkersFromServer() async {
     // TODO: 서버에서 CampusMarker 데이터 가져오기
     // 예시
     final fetchedMarkers = <CampusMarker>[
       CampusMarker(
-          idNumber: "1", position: const NLatLng(37.587361, 126.994479)),
-      CampusMarker(idNumber: "10", position: const NLatLng(37.59, 126.99)),
+        idNumber: "1",
+        position: const NLatLng(37.587361, 126.994479),
+        hasrank: false,
+      ),
+      CampusMarker(
+        idNumber: "10",
+        position: const NLatLng(37.59, 126.99),
+        hasrank: false,
+      ),
     ];
     updateMarkers(fetchedMarkers);
   }
 
+// 예시구현
   Future<void> fetchCameraPositionFromServer() async {
     // 예시 위치: 중앙도서관 근처
     const newPosition = NCameraPosition(
@@ -100,6 +214,44 @@ class UltimateNMapController extends GetxController {
       await locCtrl.showPermissionAlert();
     }
   }
+
+  /// Create markers with custom widget icon (image + text)
+  // Future<void> updateMarkersWithWidgetIcon(
+  //     BuildContext context, List<CampusMarker> campusMarkers,
+  //     {bool clearBefore = true}) async {
+  //   const size = Size(25, 25);
+  //   final iconImage = await NOverlayImage.fromWidget(
+  //     size: size,
+  //     context: context,
+  //     widget: SizedBox(
+  //       width: size.width,
+  //       height: size.height,
+  //       child: Stack(
+  //         children: [
+  //           Image.asset('assets/images/line_blank.png',
+  //               width: size.width, height: size.height),
+  //           // replace with m.idNumber inside loop if needed
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  //   final newMarkers = campusMarkers.map((m) {
+  //     return NMarker(
+  //       id: 'line${m.idNumber}',
+  //       position: m.position,
+  //       size: size,
+  //       icon: iconImage,
+  //       captionOffset: 0,
+  //       caption:
+  //           NOverlayCaption(textSize: 7, text: m.idNumber, color: Colors.black),
+  //     );
+  //   }).toList();
+  //   if (clearBefore) {
+  //     markers.value = newMarkers;
+  //   } else {
+  //     markers.addAll(newMarkers);
+  //   }
+  // }
 
   // void updateOverlay(List<NLatLng> coords, String id) {
   //   overlays.value = [

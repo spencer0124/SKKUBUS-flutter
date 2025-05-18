@@ -114,7 +114,7 @@ class BusListComponent extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
-                            fontFamily: 'ProductSansBold',
+                            fontFamily: 'WantedSansBold',
                           ),
                         ),
                       if (!(stationName.contains('미정차') ||
@@ -124,7 +124,7 @@ class BusListComponent extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 15,
                             color: Colors.black,
-                            fontFamily: 'ProductSansBold',
+                            fontFamily: 'WantedSansBold',
                           ),
                         ),
                       if (stationName == "낙원상가" || stationName == "종각.공평유적전시관")
@@ -214,7 +214,7 @@ class BusListComponent extends StatelessWidget {
                           stationNumber!,
                           style: TextStyle(
                             fontSize: 11,
-                            fontFamily: 'ProductSansRegular',
+                            fontFamily: 'WantedSansRegular',
                             color: Colors.grey[500],
                           ),
                         ),
@@ -223,7 +223,7 @@ class BusListComponent extends StatelessWidget {
                           " | ",
                           style: TextStyle(
                             fontSize: 11,
-                            fontFamily: 'ProductSansRegular',
+                            fontFamily: 'WantedSansRegular',
                             color: Colors.grey.withOpacity(0.3),
                           ),
                         ),
@@ -231,7 +231,7 @@ class BusListComponent extends StatelessWidget {
                         eta,
                         style: TextStyle(
                           fontSize: 11,
-                          fontFamily: 'ProductSansMedium',
+                          fontFamily: 'WantedSansMedium',
                           color: Colors.grey[500],
                         ),
                       ),
