@@ -237,7 +237,7 @@ class ESKARA extends StatelessWidget {
                               '${'인자셔틀'.tr} ${'[인사캠 → 자과캠]'.tr}',
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'ProductSansBold',
+                                fontFamily: 'WantedSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -258,7 +258,7 @@ class ESKARA extends StatelessWidget {
                                     '승하차 장소',
                                     style: TextStyle(
                                       color: Colors.grey[800],
-                                      fontFamily: 'ProductSansBold',
+                                      fontFamily: 'WantedSansBold',
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
@@ -457,7 +457,7 @@ class ESKARA extends StatelessWidget {
                               '${'자인셔틀'.tr} ${'[자과캠 → 인사캠]'.tr}',
                               style: const TextStyle(
                                 color: AppColors.green_main,
-                                fontFamily: 'ProductSansBold',
+                                fontFamily: 'WantedSansBold',
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -478,7 +478,7 @@ class ESKARA extends StatelessWidget {
                                     '승하차 장소',
                                     style: TextStyle(
                                       color: Colors.grey[800],
-                                      fontFamily: 'ProductSansBold',
+                                      fontFamily: 'WantedSansBold',
                                     ),
                                     textAlign: TextAlign.start,
                                   ),

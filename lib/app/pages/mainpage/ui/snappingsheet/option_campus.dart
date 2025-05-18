@@ -65,7 +65,7 @@ class OptionCampus extends StatelessWidget {
                           children: [
                             const Text("성균관대학교 (인사캠)",
                                 style: TextStyle(
-                                  fontFamily: "ProductSansBold",
+                                  fontFamily: "WantedSansBold",
                                   fontSize: 15,
                                 )),
                             const SizedBox(width: 5),
@@ -143,7 +143,7 @@ class OptionCampus extends StatelessWidget {
                           SizedBox(width: 15),
                           Text("셔틀버스 / 대중교통",
                               style: TextStyle(
-                                fontFamily: "ProductSansBold",
+                                fontFamily: "WantedSansBold",
                                 fontSize: 15,
                               )),
                           Spacer(),

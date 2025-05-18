@@ -51,7 +51,7 @@ class CustomSearchBar extends StatelessWidget {
               '장소, 대학교, 건물코드 검색'.tr,
               style: TextStyle(
                 color: Colors.grey[400],
-                fontFamily: 'ProductSansMedium',
+                fontFamily: 'WantedSansMedium',
                 fontSize: 15,
               ),
             ),

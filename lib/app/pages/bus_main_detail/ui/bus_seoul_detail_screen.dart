@@ -66,7 +66,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 '[인사캠 → 혜화역]',
                                 style: TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -81,7 +81,7 @@ class BusDataScreenDetail extends StatelessWidget {
                               '농구장 → 학생회관 → 정문 → 올림픽기념국민생활관 → 혜화동우체국 → 혜화동로터리 → 혜화역 1번출구',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'ProductSansRegular',
+                                  fontFamily: 'WantedSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -112,7 +112,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 '[혜화역 → 인사캠]',
                                 style: TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -127,7 +127,7 @@ class BusDataScreenDetail extends StatelessWidget {
                               '혜화역 1번출구 → 혜화동로터리 → 성균관대입구사거리 → 정문 → 600주년기념관',
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'ProductSansRegular',
+                                  fontFamily: 'WantedSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -158,7 +158,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 '요금 및 결제수단'.tr,
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -175,7 +175,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                   .tr,
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'ProductSansRegular',
+                                  fontFamily: 'WantedSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -202,7 +202,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 '운행시간'.tr,
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -219,7 +219,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                   .tr,
                               style: TextStyle(
                                   color: Colors.grey[900],
-                                  fontFamily: 'ProductSansRegular',
+                                  fontFamily: 'WantedSansRegular',
                                   fontSize: 13),
                               textAlign: TextAlign.start,
                             ),
@@ -246,7 +246,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                 '연락처 (클릭시 전화연결)'.tr,
                                 style: const TextStyle(
                                   color: AppColors.green_main,
-                                  fontFamily: 'ProductSansBold',
+                                  fontFamily: 'WantedSansBold',
                                 ),
                                 textAlign: TextAlign.start,
                               ),
@@ -266,7 +266,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                       '학생지원팀  '.tr,
                                       style: TextStyle(
                                           color: Colors.grey[900],
-                                          fontFamily: 'ProductSansRegular',
+                                          fontFamily: 'WantedSansRegular',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -286,7 +286,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                             '02-760-1073',
                                             style: TextStyle(
                                                 color: AppColors.green_main,
-                                                fontFamily: 'ProductSansBold',
+                                                fontFamily: 'WantedSansBold',
                                                 fontSize: 13),
                                             textAlign: TextAlign.start,
                                           ),
@@ -309,7 +309,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                       '인사캠 관리팀  '.tr,
                                       style: TextStyle(
                                           color: Colors.grey[900],
-                                          fontFamily: 'ProductSansRegular',
+                                          fontFamily: 'WantedSansRegular',
                                           fontSize: 13),
                                       textAlign: TextAlign.start,
                                     ),
@@ -329,7 +329,7 @@ class BusDataScreenDetail extends StatelessWidget {
                                             '02-760-0110',
                                             style: TextStyle(
                                                 color: AppColors.green_main,
-                                                fontFamily: 'ProductSansBold',
+                                                fontFamily: 'WantedSansBold',
                                                 fontSize: 13),
                                             textAlign: TextAlign.start,
                                           ),

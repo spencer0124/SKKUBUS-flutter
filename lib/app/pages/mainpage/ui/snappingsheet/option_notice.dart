@@ -107,7 +107,7 @@ class OptionBus extends StatelessWidget {
                                 controller.mainpageAdText.value,
                                 style: const TextStyle(
                                   color: Colors.black,
-                                  fontFamily: 'ProductSansMedium',
+                                  fontFamily: 'WantedSansMedium',
                                   fontSize: 12.5,
                                 ),
                               )),
@@ -124,7 +124,7 @@ class OptionBus extends StatelessWidget {
                                   //   '상세정보'.tr,
                                   //   style: TextStyle(
                                   //     color: Colors.grey[900],
-                                  //     fontFamily: 'ProductSansMedium',
+                                  //     fontFamily: 'WantedSansMedium',
                                   //     fontSize: 12.5,
                                   //   ),
                                   // ),
@@ -213,7 +213,7 @@ class OptionBus extends StatelessWidget {
                                                   .mainpageNoticeText.value,
                                               style: const TextStyle(
                                                 color: Colors.black,
-                                                fontFamily: 'ProductSansMedium',
+                                                fontFamily: 'WantedSansMedium',
                                                 fontSize: 12.5,
                                               ),
                                             )),
@@ -232,7 +232,7 @@ class OptionBus extends StatelessWidget {
                                                 //   '상세정보'.tr,
                                                 //   style: TextStyle(
                                                 //     color: Colors.grey[900],
-                                                //     fontFamily: 'ProductSansMedium',
+                                                //     fontFamily: 'WantedSansMedium',
                                                 //     fontSize: 12.5,
                                                 //   ),
                                                 // ),

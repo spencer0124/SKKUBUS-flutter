@@ -188,7 +188,7 @@ class Languages extends Translations {
           '연락처 (클릭시 전화연결)': '联系方式（点击后可拨打电话)',
           '학생지원팀  ': '学生支援团队  ',
           '인사캠 관리팀  ': '人文校区 管理团队   ',
-          'ProductBold': 'ProductSansBold',
+          'ProductBold': 'WantedSansBold',
           '전 출발\n': '前出发\n',
           '인사캠 셔틀버스 실시간 위치': '人文校区校車 实时位置',
           '스꾸버스 앱에서 편하게 정보를 받아보세요!': '成均館 公交 通过应用程序方便地获取信息',

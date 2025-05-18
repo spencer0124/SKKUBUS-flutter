@@ -35,7 +35,7 @@ class FilterCampusComponent extends StatelessWidget {
           text,
           style: TextStyle(
             color: selected ? Colors.white : Colors.black,
-            fontFamily: 'ProductSansMedium',
+            fontFamily: 'WantedSansMedium',
             fontSize: 13,
           ),
         ),

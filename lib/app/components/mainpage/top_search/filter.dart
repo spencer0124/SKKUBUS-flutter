@@ -40,7 +40,7 @@ class CustomFilter extends StatelessWidget {
               '필터',
               style: TextStyle(
                 color: Colors.white,
-                fontFamily: 'ProductSansMedium',
+                fontFamily: 'WantedSansMedium',
                 fontSize: 8,
               ),
             ),
