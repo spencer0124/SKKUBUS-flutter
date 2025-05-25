@@ -61,14 +61,16 @@ class MainPageBackground extends StatelessWidget {
                               ],
                             ),
                           ),
+                          // scrollableRow 임시 비활성화
+                          // Positioned(
+                          //   left: 0,
+                          //   right: 0,
+                          //   top: (statusBarHeight + 10 + 60),
+                          //   child: const Center(child: ScrollableRow()),
+                          // ),
+                          // scrollableRow 임시 비활성화에 따른 현재위치 버튼 위치 임시 조정 (-40)
                           Positioned(
-                            left: 0,
-                            right: 0,
-                            top: (statusBarHeight + 10 + 60),
-                            child: const Center(child: ScrollableRow()),
-                          ),
-                          Positioned(
-                            top: statusBarHeight + 10 + 100,
+                            top: statusBarHeight + 10 + 100 - 40,
                             right: 10,
                             child: GestureDetector(
                               behavior: HitTestBehavior.translucent,
