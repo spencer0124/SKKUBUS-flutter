@@ -5,6 +5,7 @@ import 'package:skkumap/app/pages/mainpage/controller/mainpage_controller.dart';
 import 'package:skkumap/app/utils/screensize.dart';
 import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_bus.dart';
 import 'package:skkumap/app/pages/mainpage/ui/snappingsheet/option_campus_service_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // '캠퍼스' 탭
 // 현재 위치를 기준으로, (지원하는 목록에서) 가장 가까운 대학교 캠퍼스 정보를 불러옴
@@ -61,18 +62,18 @@ class OptionCampus extends StatelessWidget {
                           //   width: 0.5,
                           // ),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
-                            const Text("성균관대학교 (인사캠)",
+                            Text("성균관대학교",
                                 style: TextStyle(
                                   fontFamily: "WantedSansBold",
                                   fontSize: 15,
                                 )),
-                            const SizedBox(width: 5),
-                            SvgPicture.asset(
-                                "assets/tossface/toss_arrow_down.svg",
-                                width: 20,
-                                height: 20),
+                            // const SizedBox(width: 5),
+                            // SvgPicture.asset(
+                            //     "assets/tossface/toss_arrow_down.svg",
+                            //     width: 20,
+                            //     height: 20),
                           ],
                         ),
                       ),
@@ -95,12 +96,6 @@ class OptionCampus extends StatelessWidget {
                     children: [
                       const SizedBox(width: 15),
                       CustomServiceBtn(
-                        title: "스꾸패스",
-                        iconPath: "assets/tossface/toss_ticket_yellow.svg",
-                        onTap: () {},
-                      ),
-                      const Spacer(),
-                      CustomServiceBtn(
                         title: "건물지도",
                         iconPath: "assets/tossface/toss_building.svg",
                         onTap: () {
@@ -121,6 +116,20 @@ class OptionCampus extends StatelessWidget {
                         iconPath: "assets/tossface/toss_luggage.svg",
                         onTap: () {
                           Get.toNamed('/lostandfound');
+                        },
+                      ),
+                      const Spacer(),
+                      CustomServiceBtn(
+                        title: "문의하기",
+                        iconPath: "assets/tossface/toss_chat_bubble.svg",
+                        onTap: () async {
+                          String kakaoChatLink =
+                              "http://pf.kakao.com/_cjxexdG/chat"; // 카카오톡 채널 링크
+                          if (await canLaunchUrl(Uri.parse(kakaoChatLink))) {
+                            await launchUrl(Uri.parse(kakaoChatLink));
+                          } else {
+                            Get.snackbar('오류', '해당 링크를 열 수 없습니다.');
+                          }
                         },
                       ),
                       const SizedBox(width: 15),
@@ -150,8 +159,8 @@ class OptionCampus extends StatelessWidget {
                         ],
                       ),
                       OptionBus(),
-                      OptionBus(),
-                      OptionBus(),
+                      // OptionBus(),
+                      // OptionBus(),
                     ],
                   ),
                 ),

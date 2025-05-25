@@ -51,7 +51,7 @@ class MainpageController extends GetxController {
   Timer? _timer;
 
   // BottomNavigation 현재 선택된 index 저장
-  var bottomNavigationIndex = 0.obs;
+  var bottomNavigationIndex = 1.obs;
 
   // 필터에서 선택된 캠퍼스, 필터에서 선택된 캠퍼스 정보
   // 0: 인사캠, 1: 자과캠

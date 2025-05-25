@@ -38,31 +38,31 @@ class Bottomnavigation extends StatelessWidget {
             //   ],
             // ),
 
-            const Spacer(),
-            GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                onItemTapped(0);
-              },
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/flaticon_two_point.png',
-                    width: 22,
-                    color: index == 0 ? AppColors.green_main : Colors.grey,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '주변',
-                    style: TextStyle(
-                      color: index == 0 ? AppColors.green_main : Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // const Spacer(),
+            // GestureDetector(
+            //   behavior: HitTestBehavior.translucent,
+            //   onTap: () {
+            //     onItemTapped(0);
+            //   },
+            //   child: Column(
+            //     children: [
+            //       Image.asset(
+            //         'assets/images/flaticon_two_point.png',
+            //         width: 22,
+            //         color: index == 0 ? AppColors.green_main : Colors.grey,
+            //       ),
+            //       const SizedBox(
+            //         height: 5,
+            //       ),
+            //       Text(
+            //         '주변',
+            //         style: TextStyle(
+            //           color: index == 0 ? AppColors.green_main : Colors.grey,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const Spacer(),
             GestureDetector(
               behavior: HitTestBehavior.translucent,

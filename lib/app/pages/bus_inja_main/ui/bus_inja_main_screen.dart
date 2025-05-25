@@ -150,21 +150,21 @@ class ESKARA extends StatelessWidget {
             child: Row(
               children: [
                 // 현재 날짜
-                Text(
-                  "2025-04-27", // 자동으로 업데이트 되는 날짜
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[800],
-                  ),
-                ),
-                const SizedBox(width: 3),
-                Text(
-                  "일", // 자동으로 업데이트 되는 요일
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[800],
-                  ),
-                ),
+                // Text(
+                //   "2025-04-27", // 자동으로 업데이트 되는 날짜
+                //   style: TextStyle(
+                //     fontSize: 12,
+                //     color: Colors.grey[800],
+                //   ),
+                // ),
+                // const SizedBox(width: 3),
+                // Text(
+                //   "일", // 자동으로 업데이트 되는 요일
+                //   style: TextStyle(
+                //     fontSize: 12,
+                //     color: Colors.grey[800],
+                //   ),
+                // ),
 
                 const Spacer(),
 
@@ -242,105 +242,105 @@ class ESKARA extends StatelessWidget {
                               textAlign: TextAlign.start,
                             ),
                             const Spacer(),
-                            InkWell(
-                              onTap: () {
-                                print("승하차 장소 클릭됨");
-                                print("네이버지도: $seoulCampusMapNaver");
-                                print("카카오맵: $seoulCampusMapKakao");
-                                print("애플지도: $seoulCampusMapApple");
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.place_rounded,
-                                      color: Colors.grey[800], size: 15),
-                                  const SizedBox(width: 1),
-                                  Text(
-                                    '승하차 장소',
-                                    style: TextStyle(
-                                      color: Colors.grey[800],
-                                      fontFamily: 'WantedSansBold',
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              ),
-                            )
+                            // InkWell(
+                            //   onTap: () {
+                            //     print("승하차 장소 클릭됨");
+                            //     print("네이버지도: $seoulCampusMapNaver");
+                            //     print("카카오맵: $seoulCampusMapKakao");
+                            //     print("애플지도: $seoulCampusMapApple");
+                            //   },
+                            //   child: Row(
+                            //     children: [
+                            //       Icon(Icons.place_rounded,
+                            //           color: Colors.grey[800], size: 15),
+                            //       const SizedBox(width: 1),
+                            //       Text(
+                            //         '승하차 장소',
+                            //         style: TextStyle(
+                            //           color: Colors.grey[800],
+                            //           fontFamily: 'WantedSansBold',
+                            //         ),
+                            //         textAlign: TextAlign.start,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         ),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        Row(
-                          children: [
-                            // live activity bus eta
-                            LiveActivityBusETA(
-                              screenWidth: MediaQuery.of(context).size.width,
-                              title: '인사캠 → 자과캠 셔틀',
-                              duration: '1시간 30분',
-                              distance: '131.1km',
-                              timeRange: '17:00 ~ 18:30',
-                              isAvailable: false,
-                            ),
+                        // const SizedBox(
+                        //   height: 18,
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     // live activity bus eta
+                        //     LiveActivityBusETA(
+                        //       screenWidth: MediaQuery.of(context).size.width,
+                        //       title: '인사캠 → 자과캠 셔틀',
+                        //       duration: '1시간 30분',
+                        //       distance: '131.1km',
+                        //       timeRange: '17:00 ~ 18:30',
+                        //       isAvailable: false,
+                        //     ),
 
-                            const Spacer(),
+                        //     const Spacer(),
 
-                            InkWell(
-                              onTap: () async {
-                                var result =
-                                    await FlutterPlatformAlert.showCustomAlert(
-                                  windowTitle: "대중교통 길찾기",
-                                  text: "원하는 지도 앱을 선택해주세요",
-                                  positiveButtonTitle: "네이버지도",
-                                  neutralButtonTitle: "카카오맵",
-                                  negativeButtonTitle: "애플지도",
-                                );
+                        //     InkWell(
+                        //       onTap: () async {
+                        //         var result =
+                        //             await FlutterPlatformAlert.showCustomAlert(
+                        //           windowTitle: "대중교통 길찾기",
+                        //           text: "원하는 지도 앱을 선택해주세요",
+                        //           positiveButtonTitle: "네이버지도",
+                        //           neutralButtonTitle: "카카오맵",
+                        //           negativeButtonTitle: "애플지도",
+                        //         );
 
-                                // 네이버지도 선택
-                                if (result == CustomButton.positiveButton) {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'naver_map',
-                                      mapNameKr: '네이버 지도',
-                                      mapUri: seoulCampusMapNaver,
-                                      playStoreLink:
-                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
-                                }
-                                // 카카오맵 선택
-                                else if (result == CustomButton.neutralButton) {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'kakao_map',
-                                      mapNameKr: '카카오맵',
-                                      mapUri: seoulCampusMapKakao,
-                                      playStoreLink:
-                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
-                                } else {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'apple_map',
-                                      mapNameKr: '애플 지도',
-                                      mapUri: seoulCampusMapApple,
-                                      playStoreLink:
-                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
-                                }
-                              },
-                              child: LiveActivityBusETA(
-                                screenWidth: MediaQuery.of(context).size.width,
-                                title: '대중교통',
-                                duration: '1시간 32분',
-                                distance: '150.1km',
-                                timeRange: '15:00 ~ 16:32',
-                                isAvailable: true,
-                              ),
-                            ),
-                          ],
-                        ),
+                        //         // 네이버지도 선택
+                        //         if (result == CustomButton.positiveButton) {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'naver_map',
+                        //               mapNameKr: '네이버 지도',
+                        //               mapUri: seoulCampusMapNaver,
+                        //               playStoreLink:
+                        //                   'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                        //         }
+                        //         // 카카오맵 선택
+                        //         else if (result == CustomButton.neutralButton) {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'kakao_map',
+                        //               mapNameKr: '카카오맵',
+                        //               mapUri: seoulCampusMapKakao,
+                        //               playStoreLink:
+                        //                   'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                        //         } else {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'apple_map',
+                        //               mapNameKr: '애플 지도',
+                        //               mapUri: seoulCampusMapApple,
+                        //               playStoreLink:
+                        //                   'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                        //         }
+                        //       },
+                        //       child: LiveActivityBusETA(
+                        //         screenWidth: MediaQuery.of(context).size.width,
+                        //         title: '대중교통',
+                        //         duration: '1시간 32분',
+                        //         distance: '150.1km',
+                        //         timeRange: '15:00 ~ 16:32',
+                        //         isAvailable: true,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.fromLTRB(5, 15, 0, 0),
@@ -462,108 +462,108 @@ class ESKARA extends StatelessWidget {
                               textAlign: TextAlign.start,
                             ),
                             const Spacer(),
-                            InkWell(
-                              onTap: () {
-                                print("자인 승하차 장소 클릭됨");
-                                print("네이버지도: $suwonCampusMapNaver");
-                                print("카카오맵: $suwonCampusMapKakao");
-                                print("애플지도: $suwonCampusMapApple");
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.place_rounded,
-                                      color: Colors.grey[800], size: 15),
-                                  const SizedBox(width: 1),
-                                  Text(
-                                    '승하차 장소',
-                                    style: TextStyle(
-                                      color: Colors.grey[800],
-                                      fontFamily: 'WantedSansBold',
-                                    ),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              ),
-                            )
+                            // InkWell(
+                            //   onTap: () {
+                            //     print("자인 승하차 장소 클릭됨");
+                            //     print("네이버지도: $suwonCampusMapNaver");
+                            //     print("카카오맵: $suwonCampusMapKakao");
+                            //     print("애플지도: $suwonCampusMapApple");
+                            //   },
+                            //   child: Row(
+                            //     children: [
+                            //       Icon(Icons.place_rounded,
+                            //           color: Colors.grey[800], size: 15),
+                            //       const SizedBox(width: 1),
+                            //       Text(
+                            //         '승하차 장소',
+                            //         style: TextStyle(
+                            //           color: Colors.grey[800],
+                            //           fontFamily: 'WantedSansBold',
+                            //         ),
+                            //         textAlign: TextAlign.start,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            // live activity bus eta
-                            LiveActivityBusETA(
-                              screenWidth: MediaQuery.of(context).size.width,
-                              title: '인사캠 → 자과캠 셔틀',
-                              duration: '1시간 30분',
-                              distance: '131.1km',
-                              timeRange: '17:00 ~ 18:30',
-                              isAvailable: false,
-                            ),
+                        // const SizedBox(
+                        //   height: 8,
+                        // ),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     // live activity bus eta
+                        //     LiveActivityBusETA(
+                        //       screenWidth: MediaQuery.of(context).size.width,
+                        //       title: '인사캠 → 자과캠 셔틀',
+                        //       duration: '1시간 30분',
+                        //       distance: '131.1km',
+                        //       timeRange: '17:00 ~ 18:30',
+                        //       isAvailable: false,
+                        //     ),
 
-                            const Spacer(),
+                        //     const Spacer(),
 
-                            InkWell(
-                              onTap: () async {
-                                var result =
-                                    await FlutterPlatformAlert.showCustomAlert(
-                                  windowTitle: "대중교통 길찾기",
-                                  text: "원하는 지도 앱을 선택해주세요",
-                                  positiveButtonTitle: "네이버지도",
-                                  neutralButtonTitle: "카카오맵",
-                                  negativeButtonTitle: "애플지도",
-                                );
+                        //     InkWell(
+                        //       onTap: () async {
+                        //         var result =
+                        //             await FlutterPlatformAlert.showCustomAlert(
+                        //           windowTitle: "대중교통 길찾기",
+                        //           text: "원하는 지도 앱을 선택해주세요",
+                        //           positiveButtonTitle: "네이버지도",
+                        //           neutralButtonTitle: "카카오맵",
+                        //           negativeButtonTitle: "애플지도",
+                        //         );
 
-                                // 네이버지도 선택
-                                if (result == CustomButton.positiveButton) {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'naver_map',
-                                      mapNameKr: '네이버 지도',
-                                      mapUri: suwonCampusMapNaver,
-                                      playStoreLink:
-                                          'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
-                                }
-                                // 카카오맵 선택
-                                else if (result == CustomButton.neutralButton) {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'kakao_map',
-                                      mapNameKr: '카카오맵',
-                                      mapUri: suwonCampusMapKakao,
-                                      playStoreLink:
-                                          'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
-                                } else {
-                                  controller.executeMap(
-                                      type: 'seoul',
-                                      mapNameEn: 'apple_map',
-                                      mapNameKr: '애플 지도',
-                                      mapUri: suwonCampusMapApple,
-                                      playStoreLink:
-                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
-                                      appStoreLink:
-                                          'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
-                                }
-                              },
-                              child: LiveActivityBusETA(
-                                screenWidth: MediaQuery.of(context).size.width,
-                                title: '대중교통',
-                                duration: '1시간 32분',
-                                distance: '150.1km',
-                                timeRange: '15:00 ~ 16:32',
-                                isAvailable: true,
-                              ),
-                            ),
-                          ],
-                        ),
+                        //         // 네이버지도 선택
+                        //         if (result == CustomButton.positiveButton) {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'naver_map',
+                        //               mapNameKr: '네이버 지도',
+                        //               mapUri: suwonCampusMapNaver,
+                        //               playStoreLink:
+                        //                   'https://play.google.com/store/apps/details?id=com.nhn.android.nmap&hl=ko&gl=US',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/naver-map-navigation/id311867728?l=en-GB');
+                        //         }
+                        //         // 카카오맵 선택
+                        //         else if (result == CustomButton.neutralButton) {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'kakao_map',
+                        //               mapNameKr: '카카오맵',
+                        //               mapUri: suwonCampusMapKakao,
+                        //               playStoreLink:
+                        //                   'https://play.google.com/store/apps/details?id=net.daum.android.map&hl=ko&gl=US',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/kakaomap-korea-no-1-map/id304608425?l=en-GB');
+                        //         } else {
+                        //           controller.executeMap(
+                        //               type: 'seoul',
+                        //               mapNameEn: 'apple_map',
+                        //               mapNameKr: '애플 지도',
+                        //               mapUri: suwonCampusMapApple,
+                        //               playStoreLink:
+                        //                   'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB',
+                        //               appStoreLink:
+                        //                   'https://apps.apple.com/kr/app/maps/id915056765?l=en-GB');
+                        //         }
+                        //       },
+                        //       child: LiveActivityBusETA(
+                        //         screenWidth: MediaQuery.of(context).size.width,
+                        //         title: '대중교통',
+                        //         duration: '1시간 32분',
+                        //         distance: '150.1km',
+                        //         timeRange: '15:00 ~ 16:32',
+                        //         isAvailable: true,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
